@@ -13,80 +13,27 @@ $ git clone https://github.com/unajpps2018asc/GIDAPPF.git
 
 $ cd GIDAPPF/gidappf
 
-$ tree -L 2
-├── app
-│   ├── assets
-│   ├── channels
-│   ├── controllers
-│   ├── helpers
-│   ├── jobs
-│   ├── mailers
-│   ├── models
-│   └── views
-├── bin
-│   ├── bundle
-│   ├── rails
-│   ├── rake
-│   ├── setup
-│   ├── update
-│   └── yarn
-├── cable
-│   └── config.ru
-├── config
-│   ├── application.rb
-│   ├── boot.rb
-│   ├── cable.yml
-│   ├── database.yml
-│   ├── environment.rb
-│   ├── environments
-│   ├── initializers
-│   ├── locales
-│   ├── puma.rb
-│   ├── routes.rb
-│   ├── secrets.yml
-│   ├── sidekiq.yml.erb
-│   ├── spring.rb
-│   └── storage.yml
-├── config.ru
-├── db
-│   ├── schema.rb
-│   └── seeds.rb
-├── docker-compose.yml
-├── Dockerfile
-├── Gemfile
-├── Gemfile.lock
-├── lib
-│   ├── assets
-│   └── tasks
-├── log
-├── public
-│   ├── 404.html
-│   ├── 422.html
-│   ├── 500.html
-│   ├── apple-touch-icon.png
-│   ├── apple-touch-icon-precomposed.png
-│   ├── favicon.ico
-│   └── robots.txt
-├── Rakefile
-├── README.md
-├── storage
-├── test
-│   ├── application_system_test_case.rb
-│   ├── controllers
-│   ├── fixtures
-│   ├── helpers
-│   ├── integration
-│   ├── mailers
-│   ├── models
-│   ├── system
-│   └── test_helper.rb
-├── tmp
-│   ├── cache
-│   └── miniprofiler
-└── vendor
-    └── assets
-
-35 directories, 36 files
+$ ls -lh
+total 80K
+drwxr-xr-x 10 user users 4,0K oct 30 15:42 app
+drwxr-xr-x  2 user users 4,0K oct 30 15:42 bin
+drwxr-xr-x  2 user users 4,0K oct 30 15:42 cable
+drwxr-xr-x  5 user users 4,0K oct 30 15:42 config
+-rwxr-xr-x  1 user users  130 oct 30 15:42 config.ru
+drwxr-xr-x  2 user users 4,0K oct 30 15:42 db
+-rwxr-xr-x  1 user users  853 oct 30 15:42 docker-compose.yml
+-rwxr-xr-x  1 user users  274 oct 30 16:07 Dockerfile
+-rwxr-xr-x  1 user users 2,4K oct 30 15:42 Gemfile
+-rwxr-xr-x  1 user users 5,0K oct 30 15:42 Gemfile.lock
+drwxr-xr-x  4 user users 4,0K oct 30 15:42 lib
+drwxr-xr-x  2 user users 4,0K oct 30 15:42 log
+drwxr-xr-x  2 user users 4,0K oct 30 15:42 public
+-rwxr-xr-x  1 user users  229 oct 30 15:42 Rakefile
+-rwxr-xr-x  1 user users  374 oct 30 15:42 README.md
+drwxr-xr-x  2 user users 4,0K oct 30 15:42 storage
+drwxr-xr-x  9 user users 4,0K oct 30 15:42 test
+drwxr-xr-x  4 user users 4,0K oct 30 15:42 tmp
+drwxr-xr-x  3 user users 4,0K oct 30 15:42 vendor
 
 $ docker-compose up --build
 

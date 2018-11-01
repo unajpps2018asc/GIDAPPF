@@ -79,6 +79,8 @@ group :development do
   # Use Spring. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  #Seed Dump is a Rails 4 and 5 plugin 
+  gem 'seed_dump'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

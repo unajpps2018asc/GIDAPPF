@@ -1,3 +1,14 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+# 	<<Gestión Integral de Alumnos Para el Proyecto Fines>>            #
+# Tutores:                                                                #
+#	- UNAJ: Dr. Ing. Morales, Martín                                  #
+#	- INSTITUCION: Ing. Cortes Bracho, Oscar                          #
+# 	- TAPTA: Dra. Ferrari, Mariela                                    #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+###########################################################################
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -79,9 +90,12 @@ group :development do
   # Use Spring. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  #Seed Dump is a Rails 4 and 5 plugin 
-  gem 'seed_dump'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data'
+###########################################################################
+# Gemas GIDAFFP:                                                          #
+###########################################################################
+gem 'devise'
+gem 'devise-jwt'

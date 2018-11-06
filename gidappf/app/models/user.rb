@@ -1,4 +1,4 @@
-###########################################################################
+##########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
 # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
@@ -9,20 +9,10 @@
 #       - TAPTA: Dra. Ferrari, Mariela                                    #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 ###########################################################################
-FROM ruby:2.5.3-alpine3.8
 
-RUN apk update && apk upgrade && apk add build-base nodejs postgresql-dev nano tzdata
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 
-RUN mkdir /app
-WORKDIR /app
-
-COPY Gemfile Gemfile.lock ./
-RUN bundle install --binstubs
-
-COPY . .
-
-LABEL maintainer="Daniel Rosatto <danielrosatto@gmail.com>"
-
-EXPOSE 25/tcp 465/tcp 587/tcp
-
-CMD puma -C config/puma.rb
+end

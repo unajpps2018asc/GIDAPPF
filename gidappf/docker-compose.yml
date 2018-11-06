@@ -1,3 +1,14 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#       <<Gestión Integral de Alumnos Para el Proyecto Fines>>            #
+# Tutores:                                                                #
+#       - UNAJ: Dr. Ing. Morales, Martín                                  #
+#       - INSTITUCION: Ing. Cortes Bracho, Oscar                          #
+#       - TAPTA: Dra. Ferrari, Mariela                                    #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+###########################################################################
 version: '2'
 
 services:
@@ -19,8 +30,18 @@ services:
       - 'postgres'
       - 'redis'
     build: .
+
+    dns:
+      - 1.0.0.1
+      - 8.8.8.8
+      - 8.8.4.4
+
     ports:
-      - '3000:3000'
+      - '10.0.0.102:3000:3000/tcp'
+      - '10.0.0.102:25:25/tcp'
+      - '10.0.0.102:465:465/tcp'
+      - '10.0.0.102:587:587/tcp'
+
     volumes:
       - '.:/app'
     env_file:

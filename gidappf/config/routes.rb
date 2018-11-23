@@ -16,6 +16,5 @@ Rails.application.routes.draw do
 end
 #Rails.application.routes.draw do
 #  devise_for :users
-#  resources :roles
-#  root 'pages#home'
+##  root 'pages#home'
 #end

@@ -28,9 +28,9 @@ $ git clone https://github.com/unajpps2018asc/GIDAPPF.git
 
 $ cd GIDAPPF/gidappf
 
-##### Descargar .env dentro de la carpeta GIDAPPF/gidappf descargándolo desde ########
-# https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing #
-######################################################################################
+----- Descargar .env dentro de la carpeta GIDAPPF/gidappf descargándolo desde --------
+| https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing |
+--------------------------------------------------------------------------------------
 
 $ docker-compose up --build
 

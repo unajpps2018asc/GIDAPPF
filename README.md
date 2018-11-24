@@ -28,12 +28,9 @@ $ git clone https://github.com/unajpps2018asc/GIDAPPF.git
 
 $ cd GIDAPPF/gidappf
 
-$ ls
-app     config.ru           Gemfile       public     test
-bin     db                  Gemfile.lock  Rakefile   tmp
-cable   docker-compose.yml  lib           README.md  vendor
-config  Dockerfile          log           storage
-
+##### Descargar .env dentro de la carpeta GIDAPPF/gidappf descargándolo desde ########
+# https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing #
+######################################################################################
 
 $ docker-compose up --build
 

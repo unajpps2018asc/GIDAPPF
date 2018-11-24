@@ -20,4 +20,4 @@
 /vendor/bundle
 /public/assets/*
 #Configuración del entorno docker-compose
-#.env
+.env

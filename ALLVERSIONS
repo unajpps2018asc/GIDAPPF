@@ -1,4 +1,20 @@
-[liderskull@archlinux GIDAPPF]$ gem list .
+#######################################################################
+# Detalle del servidor de desarrollo utilizado en el proyecto GIDAPPF #
+#######################################################################
+$ uname -a
+Linux archlinux 4.19.2-arch1-1-ARCH #1 SMP PREEMPT Tue Nov 13
+21:16:19 UTC 2018 x86_64 GNU/Linux
+
+$ ruby --version
+ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]
+
+$ docker --version
+Docker version 18.09.0-ce, build 4d60db472b
+
+$ docker-compose --version
+docker-compose version 1.23.1, build unknown
+
+$ gem list .
 
 *** LOCAL GEMS ***
 
@@ -16,7 +32,7 @@ io-console (default: 0.4.6)
 ipaddr (default: 1.2.0)
 json (default: 2.1.0)
 openssl (default: 2.1.2)
-orats (5.2.3)
+orats (5.2.3) ## Generadora del proyecto base ##
 psych (default: 3.0.2)
 rake (10.5.0)
 rdoc (6.0.4)
@@ -28,8 +44,131 @@ strscan (default: 1.0.0)
 thor (0.20.0)
 webrick (default: 1.4.2)
 zlib (default: 1.0.0)
-[liderskull@archlinux GIDAPPF]$ ruby --version
-ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]
-[liderskull@archlinux GIDAPPF]$ uname -a
-Linux archlinux 4.19.2-arch1-1-ARCH #1 SMP PREEMPT Tue Nov 13 
-21:16:19 UTC 2018 x86_64 GNU/Linux
+
+##############################################################
+# Detalle de los servicios instalados en el proyecto GIDAPPF #
+##############################################################
+
+Imagen Docker de base: ruby:2.5.3-alpine3.8
+
+##Gemas instaladas dento de la imagen base##
+
+$ docker-compose exec --user "$(id -u):$(id -g)" website gem list .
+
+*** WEBSITE GEMS ***
+
+actioncable (5.2.1)
+actionmailer (5.2.1)
+actionpack (5.2.1)
+actionview (5.2.1)
+activejob (5.2.1)
+activemodel (5.2.1)
+activerecord (5.2.1)
+activestorage (5.2.1)
+activesupport (5.2.1)
+arel (9.0.0)
+autoprefixer-rails (9.3.1)
+bcrypt (3.1.12)
+bigdecimal (default: 1.3.4)
+bootstrap-sass (3.3.7)
+builder (3.2.3)
+bundler (1.17.1, default: 1.16.6
+byebug (10.0.2)
+cmath (default: 1.0.0)
+concurrent-ruby (1.0.5)
+connection_pool (2.2.2)
+crass (1.0.4)
+csv (default: 1.0.0)
+date (default: 1.0.0)
+dbm (default: 1.0.0)
+debug_inspector (0.0.3)
+devise (4.5.0)
+devise-jwt (0.5.8)
+did_you_mean (1.2.0)
+dry-auto_inject (0.4.6)
+dry-configurable (0.7.0)
+dry-container (0.6.0)
+erubi (1.7.1)
+etc (default: 1.0.0)
+execjs (2.7.0)
+fcntl (default: 1.0.0)
+ffi (1.9.25)
+fiddle (default: 1.0.0)
+fileutils (default: 1.0.2)
+font-awesome-rails (4.7.0.4)
+gdbm (default: 2.0.0)
+globalid (0.4.1)
+i18n (1.1.1)
+io-console (default: 0.4.6)
+ipaddr (default: 1.2.0)
+jbuilder (2.7.0)
+jquery-rails (4.3.3)
+json (default: 2.1.0)
+jwt (2.1.0)
+listen (3.1.5)
+loofah (2.2.3)
+mail (2.7.1)
+marcel (0.3.3)
+method_source (0.9.0)
+mimemagic (0.3.2)mini_mime (1.0.1)
+mini_portile2 (2.3.0)
+minitest (5.11.3, 5.10.3)
+multi_json (1.13.1)
+net-telnet (0.1.1)
+nio4r (2.3.1)
+nokogiri (1.8.5)
+openssl (default: 2.1.2)
+orm_adapter (0.5.0)
+pg (1.1.3)
+power_assert (1.1.1)
+psych (default: 3.0.2)
+puma (3.12.0)
+rack (2.0.6)  ## Lanzada November 05, 2018: Actualizado por advertencia de github ##
+rack-mini-profiler (1.0.0)
+rack-protection (2.0.4)
+rack-test (1.1.0)
+rack-timeout (0.5.1)
+rails (5.2.1)
+rails-html-sanitizer (1.0.4)
+railties (5.2.1)
+rake (12.3.1, 12.3.0)
+rb-fsevent (0.10.3)
+rb-inotify (0.9.10)
+rdoc (default: 6.0.1)
+redis (4.0.2)
+responders (2.4.0)
+ruby_dep (1.5.0)
+rubygems-update (2.7.8)
+sass (3.6.0)
+sass-listen (4.0.0)
+sass-rails (5.0.7)
+scanf (default: 1.0.0)
+sdbm (default: 1.0.0)
+sidekiq (5.2.2)
+spring (2.0.2)
+spring-watcher-listen (2.0.1)
+sprockets (3.7.2)
+sprockets-rails (3.2.1)
+stringio (default: 0.0.1)
+strscan (default: 1.0.0)
+test-unit (3.2.7)
+thor (0.20.0)
+thread_safe (0.3.6)
+tilt (2.0.8)
+turbolinks (5.2.0)
+turbolinks-source (5.2.0)
+tzinfo (1.2.5)
+tzinfo-data (1.2018.7)
+uglifier (4.1.19)
+warden (1.2.7)
+warden-jwt_auth (0.3.5)
+web-console (3.3.1)
+webrick (default: 1.4.2)
+websocket-driver (0.7.0)
+websocket-extensions (0.1.3)
+xmlrpc (0.3.0)
+zlib (default: 1.0.0)
+
+## Servidores añadidos a la imagen base de Docker mediante docker-compose ##
+image: 'postgres:10.3-alpine'
+image: 'redis:4.0-alpine'

@@ -7,10 +7,10 @@
 one:
   email: john@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'One_passw0rd!') %>
-  created_at: <%= Time.now %>
-#
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  ## => 2000-01-01 00:00:00 -1000
 two:
   email: johnTwo@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'Two_passw0rd!') %>
-  created_at: <%= Time.now %>
-# column: value
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  ## => 2000-01-01 00:00:00 -1000

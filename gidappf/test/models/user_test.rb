@@ -5,13 +5,17 @@ class UserTest < ActiveSupport::TestCase
     @john = User.new(
       email: 'john@example.com',
       encrypted_password: Devise::Encryptor.digest(User, 'One_passw0rd!'),
-      created_at: Time.rfc3339('1999-12-31T14:00:00-10:00')
+      created_at: Time.rfc3339('1999-12-31T14:00:00-10:00'),
+      updated_at: Time.now
     )
+
     @john2 = User.new(
       email: 'johnTwo@example.com',
       encrypted_password: Devise::Encryptor.digest(User, 'Two_passw0rd!'),
-      created_at: Time.rfc3339('1999-12-31T14:00:00-10:00')
+      created_at: Time.rfc3339('1999-12-31T14:00:00-10:00'),
+      updated_at: Time.now
     )
+
   end
 
   test 'valid users' do
@@ -23,6 +27,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not_equal(users(:one).encrypted_password,@john.encrypted_password,"desigualdad de seguridad: el encPass no es el pass")
     u1 = @john.email.present? && User.find_by(email: @john.email)
     assert u1.valid_password?('One_passw0rd!')
+    # assert @john.valid?
 
     assert @john2.email.present?,"Campo email ok"
     assert_equal(users(:two).email,@john2.email,"Testeo del usuario two del fixture, con datos correctos")
@@ -32,6 +37,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not_equal(users(:two).encrypted_password,@john2.encrypted_password,"desigualdad de seguridad: el encPass no es el pass")
     u2 = @john2.email.present? && User.find_by(email: @john2.email)
     assert u2.valid_password?('Two_passw0rd!')
+    # assert @john.valid?
   end
 
   test 'cross password' do

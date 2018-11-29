@@ -86,23 +86,18 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     sign_out :one
   end
 
-  # test "should destroy role" do
-  #   sign_in users(:one)
-  #   p "Cantidad de relaciones:"
-  #   p Usercommissionrole.count
-  #   @role.created_at= Time.rfc3339('1999-12-31T14:00:00-10:00')
-  #   @role.description= 'Otra descripcion de varias palabras'
-  #   @role.enabled= true
-  #   @role.name= 'Otro nombre lindo'
-  #   r1=Role.find_by(name: 'Otro nombre lindo')
-  #   Usercommissionrole.find(
-  #     Usercommissionrole.where(role_id: r1.id)
-  #   ).destroy
-  #   assert_difference('Role.count', -1) do
-  #     delete role_url(@role), headers: @auth_headers
-  #   end
-  #
-  #   assert_redirected_to roles_url
-  #   sign_out :one
-  # end
+  test "should destroy role" do
+    sign_in users(:one)
+    @role.created_at= Time.rfc3339('1999-12-31T14:00:00-10:00')
+    @role.description= 'Otra descripcion de varias palabras'
+    @role.enabled= true
+    @role.name= 'Otro nombre lindo'
+    r1=Usercommissionrole.joins(:role).find_by(role: @role).destroy
+    assert_difference('Role.count', -1) do
+      delete role_url(@role), headers: @auth_headers
+    end
+
+    assert_response :no_content
+    sign_out :one
+  end
 end

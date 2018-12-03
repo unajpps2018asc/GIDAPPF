@@ -12,10 +12,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    Usercommissionrole.new(
-      role_id: 4,
-      user_id: User.last.id
-    ).save
+    unless !ENV.value?(User.last.email)
+      Usercommissionrole.new(role_id: 4,user_id: User.last.id).save
+    end
   end
 
   # GET /resource/edit

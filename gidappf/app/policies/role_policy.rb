@@ -16,7 +16,8 @@ class RolePolicy < ApplicationPolicy
 
   def update?
     # @user.role?("company.update", record.id) if @user.present?
-    if @user.email === 'john@example.com' then true else false end
+     @user.email.eql?( 'john@example.com')
+    # false
   end
 
   def destroy?
@@ -29,18 +30,10 @@ class RolePolicy < ApplicationPolicy
   end
 
   def create?
-    set_is_sysadmin
-    if @user.email === 'john@example.com' then true else @issysadmin end
+    self.set_is_sysadmin
+    # if @user.email === 'john@example.com' then true else @issysadmin end
+    # if @user.email === 'john@example.com' then true else false end
+    @user.email.eql?( 'john@example.com')||@issysadmin
   end
-
-  private
-    def set_is_sysadmin
-      begin
-        my_record = Usercommissionrole.joins(:users).find_by(user: @user)
-      rescue ActiveRecord::RecordNotFound => e
-        my_record = nil
-      end
-      if my_record === nil then @issysadmin=true else @issysadmin=false end
-    end
 
 end

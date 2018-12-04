@@ -46,4 +46,16 @@ class ApplicationPolicy
       scope.all
     end
   end
+
+  protected
+
+    def set_is_sysadmin
+      begin
+        my_record = Usercommissionrole.joins(:user).find_by(user: @user)
+      rescue ActiveRecord::RecordNotFound => e
+        my_record = nil
+      end
+      if my_record === nil then @issysadmin=true else @issysadmin=false end
+    end
+
 end

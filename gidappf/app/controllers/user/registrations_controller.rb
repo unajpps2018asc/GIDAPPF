@@ -1,3 +1,16 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/app/controllers/user/registrations_controller.rb#
+###########################################################################
 # frozen_string_literal: true
 
 class User::RegistrationsController < Devise::RegistrationsController
@@ -9,6 +22,12 @@ class User::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  #################################################################################
+  # Prerequisitos: 1) Valor de Rol Ingresante cargado en el id 4 de la tabla role #
+  #               2) Setear el valor de la variable de entorno GIDAPPF_SYSADMIN   #
+  # Devolución: Un usuario logueado y una relación de usercommissionrole asociado #
+  #             al valor de ingresante                                            #
+  #################################################################################
   # POST /resource
   def create
     super

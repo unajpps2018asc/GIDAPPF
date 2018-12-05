@@ -1,38 +1,80 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/app/policies/role_policy.rb                     #
+###########################################################################
 class RolePolicy < ApplicationPolicy
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción index definida en RolesController                   #
+  # Devolución: true, todos pueden listar roles                             #
+  ###########################################################################
   def index?
-    # @user.companies.exists? if @user.present?
     true
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción show definida en RolesController                    #
+  # Devolución: true, todos pueden ver en detalle roles                     #
+  ###########################################################################
   def show?
-    # @user.role?("company.show", record.id) if @user.present?
     true
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción edit definida en RolesController                    #
+  # Devolución: delega el valor de update, para editar roles                #
+  ###########################################################################
   def edit?
     update?
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción update definida en RolesController                  #
+  # Devolución: false, salvo para john@example.com de los testings          #
+  ###########################################################################
   def update?
-    # @user.role?("company.update", record.id) if @user.present?
      @user.email.eql?( 'john@example.com')
-    # false
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción destroy definida en RolesController                 #
+  # Devolución: delega el valor de update, para borrar roles                #
+  ###########################################################################
   def destroy?
-    # @user.role?("company.destroy", record.id) if @user.present?
     update?
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción new definida en RolesController                     #
+  # Devolución: delega el valor de create, para nuevos roles                #
+  ###########################################################################
   def new?
     create?
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción create definida en RolesController                  #
+  #           1) Setear el valorde GIDAPPF_SYSADMIN                         #
+  # Devolución: delega el valor de update, para editar roles                #
+  ###########################################################################
   def create?
     self.set_is_sysadmin
-    # if @user.email === 'john@example.com' then true else @issysadmin end
-    # if @user.email === 'john@example.com' then true else false end
     @user.email.eql?( 'john@example.com')||@issysadmin
   end
 

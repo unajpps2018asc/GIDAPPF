@@ -1,3 +1,16 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/app/policies/application_policy.rb              #
+###########################################################################
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -49,6 +62,12 @@ class ApplicationPolicy
 
   protected
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Modelo de datos inicializado                               #
+  # Devolución: variable global @issysadmin en true si el @user no tiene    #
+  #             una relacion en usercommisionrele                           #
+  ###########################################################################
     def set_is_sysadmin
       begin
         my_record = Usercommissionrole.joins(:user).find_by(user: @user)

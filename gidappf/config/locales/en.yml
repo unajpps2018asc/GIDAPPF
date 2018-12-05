@@ -1,3 +1,16 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/config/locales/en.yml                           #
+###########################################################################
 # Files in the config/locales directory are used for internationalization
 # and are automatically loaded by Rails. If you want to use locales other
 # than English, add the necessary files in this directory.
@@ -21,3 +34,12 @@
 
 en:
   hello: 'Hello world'
+###########################################################################
+# Mensajes de manejo de excepciones producidas por intentos de acceso     #
+# no autorizados                                                          #
+###########################################################################
+  pundit:
+   default: 'You cannot perform this action.'
+   post_policy:
+     update?: 'You cannot edit this post!'
+     create?: 'You cannot create posts!'

@@ -32,7 +32,14 @@ class User::RegistrationsController < Devise::RegistrationsController
   def create
     super
     unless ENV.value?(User.last.email)
-      Usercommissionrole.new(role_id: 4,user_id: User.last.id).save
+      u = User.last
+      if u.id == 2 then
+        u.user_admin=true
+      else
+        u.user_admin=false
+      end
+      u.save
+      Usercommissionrole.new(role_id: 4,user_id: u.id).save
     end
   end
 

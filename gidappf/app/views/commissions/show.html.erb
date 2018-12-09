@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @commission.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @commission.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @commission.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @commission.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_commission_path(@commission) %> |
+<%= link_to 'Back', commissions_path %>

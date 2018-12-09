@@ -68,13 +68,47 @@ class ApplicationPolicy
   # Devolución: variable global @issysadmin en true si el @user no tiene    #
   #             una relacion en usercommisionrele                           #
   ###########################################################################
-    def set_is_sysadmin
-      begin
-        my_record = Usercommissionrole.joins(:user).find_by(user: @user)
-      rescue ActiveRecord::RecordNotFound => e
-        my_record = nil
-      end
-      if my_record === nil then @issysadmin=true else @issysadmin=false end
+  def set_is_sysadmin
+    begin
+      my_record = Usercommissionrole.joins(:user).find_by(user: @user)
+    rescue ActiveRecord::RecordNotFound => e
+      my_record = nil
     end
+    if my_record === nil then @issysadmin=true else @issysadmin=false end
+  end
+
+  ######################################################################################################################
+  # Prerequisitos:                                                                                                     #
+  #           1) Modelo de datos inicializado                                                                          #
+  # Devolución: 40 si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 4 al menos una vez #
+  #             30 si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez #
+  #             20 si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 2 al menos una vez #
+  #             10 si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez #
+  #             -10 si el usercommisionrole no relaciona a @user en ninguna comision                                   #
+  ######################################################################################################################
+  # def set_roleaccess
+  #   @roleaccess=-20.0
+  #   begin
+  #     records = Usercommissionrole.joins(:user).find_by(user: @user)
+  #   rescue ActiveRecord::RecordNotFound => e1
+  #     records = nil
+  #   end
+  #   if records === nil then @roleaccess=-10.0
+  #   else
+  #     records.each do |my_record|
+  #       if my_record.role_id == 1 && my_record.role_id*10.0 > @roleaccess
+  #         @roleaccess=10.0
+  #       elsif my_record.role_id == 2 && my_record.role_id*10.0 > @roleaccess
+  #         @roleaccess=20.0
+  #       elsif my_record.role_id == 3 && my_record.role_id*10.0 > @roleaccess
+  #         @roleaccess=30.0
+  #       elsif my_record.role_id*10.0 > @roleaccess
+  #         @roleaccess=40.0
+  #       else
+  #         @roleaccess=-10.0
+  #       end
+  #     end
+  #   end
+  # end
 
 end

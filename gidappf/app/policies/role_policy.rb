@@ -67,12 +67,12 @@ class RolePolicy < ApplicationPolicy
     create?
   end
 
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción create definida en RolesController                  #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                         #
-  # Devolución: delega el valor de update, para editar roles                #
-  ###########################################################################
+  ##############################################################################
+  # Prerequisitos:                                                             #
+  #           1) Acción create definida en RolesController                     #
+  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
+  # Devolución: Crea un nuevo rol si @user el el de testeo o @issadmin es true #
+  ##############################################################################
   def create?
     self.set_is_sysadmin
     @user.email.eql?( 'john@example.com')||@issysadmin

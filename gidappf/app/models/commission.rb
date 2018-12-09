@@ -9,16 +9,19 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/config/routes.rb                                #
+# Archivo GIDAPPF/gidappf/app/models/commission.rb                        #
 ###########################################################################
+class Commission < ApplicationRecord
 
-Rails.application.routes.draw do
-  resources :commissions
-  devise_for :users, controllers: {
-    registrations: 'user/registrations'
-  }
+  ###########################################################################
+  # Asociación muchos a uno:soporta muchas comisiones pertenecientes a un   #
+  #                         usuario                                         #
+  ###########################################################################
+  belongs_to :user
 
-
-  resources :roles
-	root to: "home#index"
+  ###########################################################################
+  # Asociación uno a muchos: soporta que una comision sea asignada muchas   #
+  #                          veces en la relación usercommissionrole        #                                                       #
+  ###########################################################################
+  has_many :usercommissionrole
 end

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Commissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commissions.each do |commission| %>
+      <tr>
+        <td><%= commission.name %></td>
+        <td><%= commission.description %></td>
+        <td><%= commission.start_date %></td>
+        <td><%= commission.end_date %></td>
+        <td><%= link_to 'Show', commission %></td>
+        <td><%= link_to 'Edit', edit_commission_path(commission) %></td>
+        <td><%= link_to 'Destroy', commission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Commission', new_commission_path %>

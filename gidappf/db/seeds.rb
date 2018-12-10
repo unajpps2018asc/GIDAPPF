@@ -40,3 +40,16 @@ User.destroy_all
 aux=Devise::Encryptor.digest(User,rand(5..30))
 newuser = User.new({email: 'john@example.com', password: aux, password_confirmation: aux})
 newuser.save
+
+####################################################################################
+# Comision de ingresantes                                                          #
+####################################################################################
+Commission.create!([
+  {
+    name: "Ingresantes",
+    description: "Comision inicial de ingresantes",
+    start_date: Time.rfc3339('1999-12-31T14:00:00-10:00'),
+    end_date: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+    user_id: 1
+    }
+  ])

@@ -39,7 +39,9 @@ class User::RegistrationsController < Devise::RegistrationsController
         u.user_admin=false
       end
       u.save
-      Usercommissionrole.new(role_id: 1,user_id: u.id).save
+      Usercommissionrole.new(
+        role_id: 1,user_id: u.id, commission_id: 1
+      ).save
     end
   end
 

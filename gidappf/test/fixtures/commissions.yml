@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
-  start_date: 2018-12-08 09:01:38
-  end_date: 2018-12-08 09:01:38
+  name: Commission One
+  description: A first commission
+  start_date: <%= Time.rfc3339('2029-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('2030-12-31T14:00:00-10:00') %>
 
 two:
-  name: MyString
-  description: MyText
-  start_date: 2018-12-08 09:01:38
-  end_date: 2018-12-08 09:01:38
+  name: Commission two
+  description: A second commission
+  start_date: <%= Time.rfc3339('2031-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('2032-12-31T14:00:00-10:00') %>

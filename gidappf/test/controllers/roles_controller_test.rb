@@ -1,5 +1,4 @@
-# Libreria que mantiene la sesion
-require 'devise/jwt/test_helpers'
+require 'test_helper'
 
 class RolesControllerTest < ActionDispatch::IntegrationTest
   # Libreria que provee de la autenticacion
@@ -8,14 +7,14 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @role = roles(:one)
     headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    @auth_h_role = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get index" do
-    sign_in users(:one)
-    get roles_url, headers: @auth_headers
+    # sign_in users(:one)
+    get roles_url, headers: @auth_h_role
     assert_response :success
-    sign_out :one
+    # sign_out :one
   end
 
   test "should get index_unlogged" do
@@ -24,7 +23,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get roles_url, headers: @auth_headers
+    get roles_url, headers: @auth_h_role
     assert_response :success
   end
 
@@ -44,12 +43,12 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
                     name: 'un nombre' }
                   }
     end
-    assert_redirected_to role_url(Role.last)
-    sign_out :one
-  end
+      assert_redirected_to role_url(Role.last)
+      sign_out :one
+    end
 
-  test "should show role" do
-    get role_url(@role), headers: @auth_headers
+    test "should show role" do
+    get role_url(@role), headers: @auth_h_role
     assert_response :success
   end
 
@@ -59,10 +58,12 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    get role_url(@role), headers: @auth_headers
+    # sign_in users(:one)
+    get role_url(@role), headers: @auth_h_role
     assert_response :success
-    get "/roles#edit", headers: @auth_headers
+    get "/roles#edit", headers: @auth_h_role
     assert_response :success
+    # sign_out :one
   end
 
   test "should get edit_unlogged" do
@@ -73,7 +74,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
   test "should update role" do
     sign_in users(:one)
     patch role_url(@role,
-      headers: @auth_headers),
+      headers: @auth_h_role),
       params: {
         role: {
           created_at: Time.rfc3339('1999-12-31T14:00:00-10:00'),
@@ -82,7 +83,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
           name: 'Otro nombre lindo'
         }
       }
-    assert_redirected_to  role_url(@role), headers: @auth_headers
+    assert_redirected_to  role_url(@role), headers: @auth_h_role
     sign_out :one
   end
 
@@ -94,7 +95,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     @role.name= 'Otro nombre lindo'
     r1=Usercommissionrole.joins(:role).find_by(role: @role).destroy
     assert_difference('Role.count', -1) do
-      delete role_url(@role), headers: @auth_headers
+      delete role_url(@role), headers: @auth_h_role
     end
 
     assert_response :no_content

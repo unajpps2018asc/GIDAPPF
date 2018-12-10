@@ -66,8 +66,7 @@ class CommissionPolicy < ApplicationPolicy
   def update?
     # self.set_is_sysadmin
     # self.set_roleaccess
-    # @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>30.0
-    false
+    @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>30.0
   end
 
   ###########################################################################
@@ -98,8 +97,8 @@ class CommissionPolicy < ApplicationPolicy
   def create?
     # self.set_is_sysadmin
     # self.set_roleaccess
-    # @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>30.0
-    false
+    @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>30.0
+    # false
   end
 
 end

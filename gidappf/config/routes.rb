@@ -13,12 +13,12 @@
 ###########################################################################
 
 Rails.application.routes.draw do
-  resources :commissions
   devise_for :users, controllers: {
     registrations: 'user/registrations'
   }
 
 
+  resources :commissions
   resources :roles
 	root to: "home#index"
 end

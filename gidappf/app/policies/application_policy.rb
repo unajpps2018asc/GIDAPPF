@@ -86,29 +86,21 @@ class ApplicationPolicy
   #             10 si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez #
   #             -10 si el usercommisionrole no relaciona a @user en ninguna comision                                   #
   ######################################################################################################################
-  # def set_roleaccess
-  #   @roleaccess=-20.0
-  #   begin
-  #     records = Usercommissionrole.joins(:user).find_by(user: @user)
-  #   rescue ActiveRecord::RecordNotFound => e1
-  #     records = nil
-  #   end
-  #   if records === nil then @roleaccess=-10.0
-  #   else
-  #     records.each do |my_record|
-  #       if my_record.role_id == 1 && my_record.role_id*10.0 > @roleaccess
-  #         @roleaccess=10.0
-  #       elsif my_record.role_id == 2 && my_record.role_id*10.0 > @roleaccess
-  #         @roleaccess=20.0
-  #       elsif my_record.role_id == 3 && my_record.role_id*10.0 > @roleaccess
-  #         @roleaccess=30.0
-  #       elsif my_record.role_id*10.0 > @roleaccess
-  #         @roleaccess=40.0
-  #       else
-  #         @roleaccess=-10.0
-  #       end
-  #     end
-  #   end
-  # end
+  def set_roleaccess
+    @roleaccess=-20.0
+    begin
+      records = Usercommissionrole.where(user_id: @user.id)
+    rescue ActiveRecord::RecordNotFound => e1
+      records = nil
+    end
+    if records === nil then @roleaccess=-10.0
+    else
+      records.each do |my_record|
+        if my_record.role.level > @roleaccess
+          @roleaccess=my_record.role.level
+        end
+      end
+    end
+  end
 
 end

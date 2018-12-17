@@ -26,10 +26,30 @@
 ###########################################################################
 Role.destroy_all
 Role.create!([
-  {name: "Ingresante", description: "Usuario que comienza el tramite para participar del Plan Fines", created_at: "2018-10-31 23:21:00", enabled: true},
-  {name: "Estudiante", description: "Usuario que participa de las cursadas y esta asignado al Plan Fines.", created_at: "2018-10-31 23:21:00", enabled: true},
-  {name: "Secretario", description: "Usuario planificador de las cursadas del Plan Fines.", created_at: "2018-10-31 23:21:00", enabled: true},
-  {name: "Administrador", description: "Usuario diseñador de las cursadas del Plan Fines.",created_at: "2018-10-31 23:21:00", enabled: true}
+  {
+    name: "Ingresante",
+    description: "Usuario que comienza el tramite para participar del Plan Fines",
+    created_at: "2018-10-31 23:21:00",
+    enabled: true, level: 10.0
+  },
+  {
+    name: "Estudiante",
+    description: "Usuario que participa de las cursadas y esta asignado al Plan Fines.",
+    created_at: "2018-10-31 23:21:00",
+    enabled: true, level: 20.0
+  },
+  {
+    name: "Secretario",
+    description: "Usuario planificador de las cursadas del Plan Fines.",
+    created_at: "2018-10-31 23:21:00",
+    enabled: true, level: 30.0
+  },
+  {
+    name: "Administrador",
+    description: "Usuario diseñador de las cursadas del Plan Fines.",
+    created_at: "2018-10-31 23:21:00",
+    enabled: true, level: 40.0
+  }
 ])
 p "[GIDAPPF] Creados #{Role.count} Roles"
 

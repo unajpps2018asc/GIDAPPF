@@ -17,6 +17,7 @@ class RolesTest < ApplicationSystemTestCase
     fill_in "Created At", with: @role.created_at
     fill_in "Description", with: @role.description
     fill_in "Enabled", with: @role.enabled
+    fill_in "Level", with: @role.level
     fill_in "Name", with: @role.name
     click_on "Create Role"
 
@@ -31,6 +32,7 @@ class RolesTest < ApplicationSystemTestCase
     fill_in "Created At", with: @role.created_at
     fill_in "Description", with: @role.description
     fill_in "Enabled", with: @role.enabled
+    fill_in "Level", with: @role.level
     fill_in "Name", with: @role.name
     click_on "Update Role"
 

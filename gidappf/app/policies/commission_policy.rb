@@ -27,10 +27,9 @@ class CommissionPolicy < ApplicationPolicy
   #             es true o si @roleaccess es mayor a 10.0                       #
   ##############################################################################
   def index?
-    # self.set_is_sysadmin
-    # self.set_roleaccess
-    # @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>10.0
-    true
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>10.0
   end
 
   ##############################################################################
@@ -41,10 +40,9 @@ class CommissionPolicy < ApplicationPolicy
   #             es true o si @roleaccess es mayor a 10.0                       #
   ##############################################################################
   def show?
-    # self.set_is_sysadmin
-    # self.set_roleaccess
-    # @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>10.0
-    true
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>20.0
   end
 
   ###########################################################################
@@ -64,9 +62,9 @@ class CommissionPolicy < ApplicationPolicy
   #             es true o si @roleaccess es mayor a 30.0                       #
   ##############################################################################
   def update?
-    # self.set_is_sysadmin
-    # self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>30.0
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>20.0
   end
 
   ###########################################################################
@@ -75,7 +73,7 @@ class CommissionPolicy < ApplicationPolicy
   # Devolución: delega el valor de update, para borrar roles                #
   ###########################################################################
   def destroy?
-    update?
+    create?
   end
 
   ###########################################################################
@@ -95,10 +93,9 @@ class CommissionPolicy < ApplicationPolicy
   #             es true o si @roleaccess es mayor a 30.0                       #
   ##############################################################################
   def create?
-    # self.set_is_sysadmin
-    # self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin#||@roleaccess>30.0
-    # false
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
   end
 
 end

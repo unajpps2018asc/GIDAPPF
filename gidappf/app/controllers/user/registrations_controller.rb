@@ -31,7 +31,10 @@ class User::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    unless ENV.value?(User.last.email)
+    key="GIDAPPF_SYSADMIN"
+    value=User.last.email.to_s
+    selEnv=ENV[key]
+    unless selEnv.eql?(value)
       u = User.last
       if u.id == 2 then
         u.user_admin=true

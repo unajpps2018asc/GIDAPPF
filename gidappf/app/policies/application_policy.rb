@@ -93,6 +93,12 @@ class ApplicationPolicy
     rescue ActiveRecord::RecordNotFound => e1
       records = nil
     end
+    # Alternativa:
+    # @user.usercommissionrole.each do |r| if
+    #   r.role.level > @roleaccess
+    #     @roleaccess=r.role.level
+    #   end
+    # end
     if records === nil then @roleaccess=-10.0
     else
       records.each do |my_record|

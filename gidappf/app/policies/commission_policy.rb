@@ -37,7 +37,7 @@ class CommissionPolicy < ApplicationPolicy
   #           1) Acción show definida en RolesController                       #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
   # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 10.0                       #
+  #             es true o si @roleaccess es mayor a 20.0                       #
   ##############################################################################
   def show?
     self.set_is_sysadmin
@@ -59,7 +59,7 @@ class CommissionPolicy < ApplicationPolicy
   #           1) Acción update definida en RolesController                     #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
   # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 30.0                       #
+  #             es true o si @roleaccess es mayor a 20.0                       #
   ##############################################################################
   def update?
     self.set_is_sysadmin

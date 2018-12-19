@@ -26,4 +26,10 @@ class User < ApplicationRecord
   #                          en la commision como el creador de la comision   #
   #############################################################################
   has_many :commission
+
+  ###########################################################################
+  # Asociación uno a muchos: soporta que un usuario sea asignada muchas     #
+  #                          veces en la relación usercommissionrole        #                                                       #
+  ###########################################################################
+  has_many :usercommissionrole
 end

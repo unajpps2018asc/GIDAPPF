@@ -1,71 +1,57 @@
+#############################################################################
+# Universidad Nacional Arturo Jauretche                                     #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática            #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018    #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                 #
+# Tutores:                                                                  #
+#    - UNAJ: Dr. Ing. Morales, Martín                                       #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                              #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                 #
+#    - TAPTA: Dra. Ferrari, Mariela                                         #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                       #
+# Archivo GIDAPPF/gidappf/app/controllers/usercommissionroles_controller.rb #
+#############################################################################
 class UsercommissionrolesController < ApplicationController
-  before_action :set_usercommissionrole, only: [:show, :edit, :update, :destroy]
-
-  # GET /usercommissionroles
-  # GET /usercommissionroles.json
-  def index
-    @usercommissionroles = Usercommissionrole.all
-  end
+  before_action :set_usercommissionrole, only: [:show, :edit, :update]
 
   # GET /usercommissionroles/1
   # GET /usercommissionroles/1.json
   def show
   end
 
-  # GET /usercommissionroles/new
-  def new
-    @usercommissionrole = Usercommissionrole.new
-  end
-
   # GET /usercommissionroles/1/edit
   def edit
-    @usercommissionrole.role_id=params[:radio_selected]
-  end
-
-  # POST /usercommissionroles
-  # POST /usercommissionroles.json
-  def create
-    @usercommissionrole = Usercommissionrole.new(usercommissionrole_params)
-
-    respond_to do |format|
-      if @usercommissionrole.save
-        format.html { redirect_to @usercommissionrole, notice: 'Usercommissionrole was successfully created.' }
-        format.json { render :show, status: :created, location: @usercommissionrole }
-      else
-        format.html { render :new }
-        format.json { render json: @usercommissionrole.errors, status: :unprocessable_entity }
-      end
-    end
+    #############################################################################
+    # Se comenta el algoritmo que redirige al formulario de edición             #
+    #############################################################################
+    # @usercommissionrole.role_id=params[:radio_selected]
+    ################################################################################
+    # Se deben comentar las 2 siguientes líneas en caso de necesitar el formulario #
+    ################################################################################
+    Usercommissionrole.find_by(id: @usercommissionrole.id).update(role_id: params[:radio_selected])
+    redirect_to setsusersaccess_settings_path
   end
 
   # PATCH/PUT /usercommissionroles/1
   # PATCH/PUT /usercommissionroles/1.json
   def update
-    respond_to do |format|
-      if @usercommissionrole.update(usercommissionrole_params)
-        format.html { redirect_to @usercommissionrole, notice: 'Usercommissionrole was successfully updated.' }
-        format.json { render :show, status: :ok, location: @usercommissionrole }
-      else
-        format.html { render :edit }
-        format.json { render json: @usercommissionrole.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /usercommissionroles/1
-  # DELETE /usercommissionroles/1.json
-  def destroy
-    @usercommissionrole.destroy
-    respond_to do |format|
-      format.html { redirect_to usercommissionroles_url, notice: 'Usercommissionrole was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    #############################################################################
+    # Se comenta el algoritmo que redirige al formulario de edición             #
+    #############################################################################
+    # respond_to do |format|
+    #   if @usercommissionrole.update(usercommissionrole_params)
+    #     format.html { redirect_to @usercommissionrole, notice: 'Usercommissionrole was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @usercommissionrole }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @usercommissionrole.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usercommissionrole
-      @roleOpts = nil
       @usercommissionrole = Usercommissionrole.find(params[:id])
     end
 

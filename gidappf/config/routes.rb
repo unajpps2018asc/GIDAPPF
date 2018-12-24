@@ -13,14 +13,14 @@
 ###########################################################################
 
 Rails.application.routes.draw do
-  resources :usercommissionroles
-  get 'setsusersaccess/settings'
-  get 'setsusersaccess/edit'
   devise_for :users, controllers: {
     registrations: 'user/registrations'
   }
 
 
+  resources :usercommissionroles
+  # get 'usercommissionroles'
+  get 'setsusersaccess/settings'
   resources :commissions
   resources :roles
 	root to: "home#index"

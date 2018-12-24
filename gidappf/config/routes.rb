@@ -13,6 +13,9 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  resources :usercommissionroles
+  get 'setsusersaccess/settings'
+  get 'setsusersaccess/edit'
   devise_for :users, controllers: {
     registrations: 'user/registrations'
   }

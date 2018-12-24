@@ -1,0 +1,51 @@
+<h1>Setsusersaccess#settings</h1>
+<p>Find me in app/views/setsusersaccess/settings.html.erb</p>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>User</th>
+      <th>Email</th>
+      <th>Commission</th>
+      <th colspan=".<%= @roleOpts.count.to_s %>." >Role:</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usercommissionroles.each do |u| %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.user_id %></td>
+        <td><%= u.user.email %></td>
+        <td><%= u.commission.name %></td>
+        <% @roleOpts.each do |r| %>
+            <td>
+              <%= msg="Usr:"+u.id.to_s+" Rol:"+r.id.to_s
+                if r.id == u.role_id then
+                  radio_button_tag("u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id, true,
+                    onclick:
+                      "$(document).ready(function() {
+                        alert('"+msg+"');
+                      });"
+                    )
+                else
+                  radio_button_tag("u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id,false,
+                    onclick:"$(document).ready(function() {
+                      window.location.href='"+edit_usercommissionrole_path(id: u.id, radio_selected: r.id.to_s)+"'
+                      });"
+                    # "window.location.href='/usercommissionroles/"+u.id.to_s+"/edit?role_id="+:role_id.to_s+"'"
+                    # "$(document).ready(function() {
+                    #   $.ajax({
+                    #     url: '/usercommissionroles/"+u.id.to_s+"?role_id="+:role_id.to_s+"',
+                    #     type: 'POST'
+                    #   });
+                    # });"
+                  )
+                end %>
+              <%= label_tag(r.name) %>
+            </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

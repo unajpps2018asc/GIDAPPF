@@ -93,7 +93,9 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
     @commission.end_date=Time.rfc3339('2032-12-31T14:00:00-10:00')
     @commission.name="Commission two"
     @commission.start_date=Time.rfc3339('2031-12-31T14:00:00-10:00')
+    @commission.save
 
+    c1=Usercommissionrole.joins(:commission).find_by(commission: @commission).destroy
     assert_difference('Commission.count', -1) do
       delete commission_url(@commission), headers: @auth_h_commission
     end

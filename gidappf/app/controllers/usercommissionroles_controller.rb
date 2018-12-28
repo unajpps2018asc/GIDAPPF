@@ -12,32 +12,29 @@
 # Archivo GIDAPPF/gidappf/app/controllers/usercommissionroles_controller.rb #
 #############################################################################
 class UsercommissionrolesController < ApplicationController
-  before_action :set_usercommissionrole, only: [:show, :edit, :update]
-
-  # GET /usercommissionroles/1
-  # GET /usercommissionroles/1.json
-  def show
-  end
-
+  before_action :set_usercommissionrole, only: [:edit] # agregar ,:update de ser necesario
   # GET /usercommissionroles/1/edit
   def edit
-    #############################################################################
-    # Se comenta el algoritmo que redirige al formulario de edición             #
-    #############################################################################
+    ##############################################################
+    # Se comenta el algoritmo que redirige al update             #
+    ##############################################################
     # @usercommissionrole.role_id=params[:radio_selected]
     ################################################################################
     # Se deben comentar las 2 siguientes líneas en caso de necesitar el formulario #
     ################################################################################
-    Usercommissionrole.find_by(id: @usercommissionrole.id).update(role_id: params[:radio_selected])
+    Usercommissionrole.find_by(id: @usercommissionrole.id).update(
+      role: Role.find_by(id:params[:radio_selected])
+    )
     redirect_to setsusersaccess_settings_path
   end
 
   # PATCH/PUT /usercommissionroles/1
   # PATCH/PUT /usercommissionroles/1.json
-  def update
-    #############################################################################
-    # Se comenta el algoritmo que redirige al formulario de edición             #
-    #############################################################################
+  # def update
+    #####################################################################
+    # Se comenta el algoritmo que redirige al formulario de edición     #
+    # sirve para el caso de una vconfirmación mas detallada             #
+    #####################################################################
     # respond_to do |format|
     #   if @usercommissionrole.update(usercommissionrole_params)
     #     format.html { redirect_to @usercommissionrole, notice: 'Usercommissionrole was successfully updated.' }
@@ -47,7 +44,7 @@ class UsercommissionrolesController < ApplicationController
     #     format.json { render json: @usercommissionrole.errors, status: :unprocessable_entity }
     #   end
     # end
-  end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

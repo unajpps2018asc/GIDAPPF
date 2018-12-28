@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   }
 
 
-  resources :usercommissionroles
+  resources :usercommissionroles,only:[:edit]
   # get 'usercommissionroles'
   get 'setsusersaccess/settings'
   resources :commissions

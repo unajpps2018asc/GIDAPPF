@@ -11,5 +11,5 @@ two:
   name: MyString
   description: MyText
   created_at: 2018-12-16 20:28:12
-  enabled: false
-  level: 1.5
+  enabled: true
+  level: 45.5

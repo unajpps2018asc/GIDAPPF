@@ -3,7 +3,9 @@
 one:
   role: one
   user: one
+  commission: one
 
 two:
   role: two
   user: two
+  commission: two

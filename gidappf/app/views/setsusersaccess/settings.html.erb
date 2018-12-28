@@ -1,5 +1,4 @@
 <h1>Setsusersaccess#settings</h1>
-<p>Find me in app/views/setsusersaccess/settings.html.erb</p>
 <table>
   <thead>
     <tr>
@@ -22,24 +21,17 @@
             <td>
               <%= msg="Usr:"+u.id.to_s+" Rol:"+r.id.to_s
                 if r.id == u.role_id then
-                  radio_button_tag("u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id, true,
+                  radio_button_tag(
+                      "u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id, true,
                     onclick:
-                      "$(document).ready(function() {
-                        alert('"+msg+"');
-                      });"
+                      "$(document).ready(function() {alert('"+msg+"');});"
                     )
                 else
-                  radio_button_tag("u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id,false,
+                  radio_button_tag(
+                      "u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id,false,
                     onclick:"$(document).ready(function() {
                       window.location.href='"+edit_usercommissionrole_path(id: u.id, radio_selected: r.id.to_s)+"'
                       });"
-                    # "window.location.href='/usercommissionroles/"+u.id.to_s+"/edit?role_id="+:role_id.to_s+"'"
-                    # "$(document).ready(function() {
-                    #   $.ajax({
-                    #     url: '/usercommissionroles/"+u.id.to_s+"?role_id="+:role_id.to_s+"',
-                    #     type: 'POST'
-                    #   });
-                    # });"
                   )
                 end %>
               <%= label_tag(r.name) %>

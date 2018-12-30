@@ -41,7 +41,6 @@ class User::RegistrationsController < Devise::RegistrationsController
       else
         rid=1
       end
-      u.save
       Usercommissionrole.new(
         role_id: rid,user_id: u.id, commission_id: 1
       ).save

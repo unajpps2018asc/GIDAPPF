@@ -2,7 +2,6 @@
 <table>
   <thead>
     <tr>
-      <th>Id</th>
       <th>User</th>
       <th>Email</th>
       <th>Commission</th>
@@ -13,7 +12,6 @@
   <tbody>
     <% @usercommissionroles.each do |u| %>
       <tr>
-        <td><%= u.id %></td>
         <td><%= u.user_id %></td>
         <td><%= u.user.email %></td>
         <td><%= u.commission.name %></td>

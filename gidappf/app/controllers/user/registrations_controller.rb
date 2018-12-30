@@ -37,13 +37,13 @@ class User::RegistrationsController < Devise::RegistrationsController
     unless selEnv.eql?(value)
       u = User.last
       if u.id == 2 then
-        u.user_admin=true
+        rid=4
       else
-        u.user_admin=false
+        rid=1
       end
       u.save
       Usercommissionrole.new(
-        role_id: 1,user_id: u.id, commission_id: 1
+        role_id: rid,user_id: u.id, commission_id: 1
       ).save
     end
   end

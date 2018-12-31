@@ -20,12 +20,16 @@ class UsercommissionrolesController < ApplicationController
     ##############################################################
     # @usercommissionrole.role_id=params[:radio_selected]
     ################################################################################
-    # Se deben comentar las 2 siguientes líneas en caso de necesitar el formulario #
+    # Se deben comentar las 8 siguientes líneas en caso de necesitar el formulario #
     ################################################################################
-    Usercommissionrole.find_by(id: @usercommissionrole.id).update(
-      role: Role.find_by(id:params[:radio_selected])
-    )
-    redirect_to setsusersaccess_settings_path
+    u=Usercommissionrole.find_by(id: @usercommissionrole.id)
+    r=params[:radio_selected]
+    unless u.role.id.to_s.eql?(r.to_s) then
+      u.update(role: Role.find_by(id:r))
+      redirect_to setsusersaccess_settings_path, notice: "Role was successfully updated..."
+    else
+      redirect_to setsusersaccess_settings_path, notice: "Same role!"
+    end
   end
 
   # PATCH/PUT /usercommissionroles/1

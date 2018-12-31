@@ -9,7 +9,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody remote="true">
     <% @usercommissionroles.each do |u| %>
       <tr>
         <td><%= u.user_id %></td>
@@ -17,21 +17,16 @@
         <td><%= u.commission.name %></td>
         <% @roleOpts.each do |r| %>
             <td>
-              <%= msg="Usr:"+u.id.to_s+" Rol:"+r.id.to_s
-                if r.id == u.role_id then
-                  radio_button_tag(
-                      "u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id, true,
-                    onclick:
-                      "$(document).ready(function() {alert('"+msg+"');});"
-                    )
-                else
-                  radio_button_tag(
-                      "u_"+u.id.to_s+"_"+:radio_selected.to_s, r.id,false,
-                    onclick:"$(document).ready(function() {
+              <%=
+                radio_button_tag(
+                  "u_"+u.id.to_s+"_"+:radio_selected.to_s,
+                  r.id,
+                  (r.id == u.role_id),
+                  onclick:
+                    "$(document).ready(function() {
                       window.location.href='"+edit_usercommissionrole_path(id: u.id, radio_selected: r.id.to_s)+"'
-                      });"
-                  )
-                end %>
+                    });"
+                )%>
               <%= label_tag(r.name) %>
             </td>
         <% end %>

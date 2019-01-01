@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Class Room Institutes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ubication</th>
+      <th>Available monday</th>
+      <th>Available tuesday</th>
+      <th>Available wednesday</th>
+      <th>Available thursday</th>
+      <th>Available friday</th>
+      <th>Available saturday</th>
+      <th>Available sunday</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @class_room_institutes.each do |class_room_institute| %>
+      <tr>
+        <td><%= class_room_institute.name %></td>
+        <td><%= class_room_institute.ubication %></td>
+        <td><%= class_room_institute.available_monday %></td>
+        <td><%= class_room_institute.available_tuesday %></td>
+        <td><%= class_room_institute.available_wednesday %></td>
+        <td><%= class_room_institute.available_thursday %></td>
+        <td><%= class_room_institute.available_friday %></td>
+        <td><%= class_room_institute.available_saturday %></td>
+        <td><%= class_room_institute.available_sunday %></td>
+        <td><%= link_to 'Show', class_room_institute %></td>
+        <td><%= link_to 'Edit', edit_class_room_institute_path(class_room_institute) %></td>
+        <td><%= link_to 'Destroy', class_room_institute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Class Room Institute', new_class_room_institute_path %>

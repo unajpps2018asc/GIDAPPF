@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_16_223145) do
+ActiveRecord::Schema.define(version: 2018_12_31_213309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "class_room_institutes", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.text "ubication"
+    t.datetime "available_from"
+    t.datetime "available_to"
+    t.boolean "available_monday"
+    t.boolean "available_tuesday"
+    t.boolean "available_wednesday"
+    t.boolean "available_thursday"
+    t.boolean "available_friday"
+    t.boolean "available_saturday"
+    t.boolean "available_sunday"
+    t.integer "available_time"
+    t.integer "capacity"
+    t.boolean "enabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "commissions", force: :cascade do |t|
     t.string "name"

@@ -1,0 +1,92 @@
+<%= form_with(model: class_room_institute, local: true) do |form| %>
+  <% if class_room_institute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(class_room_institute.errors.count, "error") %> prohibited this class_room_institute from being saved:</h2>
+
+      <ul>
+      <% class_room_institute.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ubication %>
+    <%= form.text_area :ubication %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_from %>
+    <%= form.datetime_select :available_from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_to %>
+    <%= form.datetime_select :available_to %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_monday %>
+    <%= form.check_box :available_monday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_tuesday %>
+    <%= form.check_box :available_tuesday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_wednesday %>
+    <%= form.check_box :available_wednesday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_thursday %>
+    <%= form.check_box :available_thursday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_friday %>
+    <%= form.check_box :available_friday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_saturday %>
+    <%= form.check_box :available_saturday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_sunday %>
+    <%= form.check_box :available_sunday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_time %>
+    <%= form.number_field :available_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :capacity %>
+    <%= form.number_field :capacity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enabled %>
+    <%= form.check_box :enabled %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

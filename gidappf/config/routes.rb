@@ -13,6 +13,7 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  resources :class_room_institutes
   devise_for :users, controllers: {
     registrations: 'user/registrations'
   }

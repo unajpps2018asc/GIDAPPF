@@ -97,7 +97,6 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Role.count', -1) do
       delete role_url(@role), headers: @auth_h_role
     end
-
     assert_response :no_content
     sign_out :one
   end

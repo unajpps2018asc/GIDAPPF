@@ -64,6 +64,7 @@ newuser.save
 ####################################################################################
 # Comision de ingresantes                                                          #
 ####################################################################################
+Commission.destroy_all
 Commission.create!([
   {
     name: "Ingresantes",
@@ -71,5 +72,80 @@ Commission.create!([
     start_date: Time.rfc3339('1999-12-31T14:00:00-10:00'),
     end_date: Time.rfc3339('3000-12-31T14:00:00-10:00'),
     user_id: 1
+    }
+  ])
+
+####################################################################################
+# Aulas iniciales                                                                  #
+####################################################################################
+  ClassRoomInstitute.destroy_all
+  ClassRoomInstitute.create!([
+    {
+      name: "Aula 1",
+      description: "Descripción del aula 1",
+      ubication: "Av. Ubicación Nº 1234",
+      available_from: Time.now,
+      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+      available_monday: true,
+      available_tuesday: true,
+      available_wednesday: true,
+      available_thursday: true,
+      available_friday: true,
+      available_saturday: false,
+      available_sunday: false,
+      available_time: 24,
+      capacity: 50,
+      enabled: true,
+    },
+    {
+      name: "Aula 2",
+      description: "Descripción del aula 2",
+      ubication: "Av. Ubicación Nº 1234",
+      available_from: Time.rfc3339('1999-12-31T14:00:00-10:00'),
+      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+      available_monday: true,
+      available_tuesday: true,
+      available_wednesday: true,
+      available_thursday: true,
+      available_friday: true,
+      available_saturday: false,
+      available_sunday: false,
+      available_time: 24,
+      capacity: 50,
+      enabled: true,
+    },
+    {
+      name: "Aula 3",
+      description: "Descripción del aula 3",
+      ubication: "Av. Ubicación Nº 1234",
+      available_from: Time.rfc3339('1999-12-31T14:00:00-10:00'),
+      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+      available_monday: true,
+      available_tuesday: true,
+      available_wednesday: true,
+      available_thursday: true,
+      available_friday: true,
+      available_saturday: false,
+      available_sunday: false,
+      available_time: 24,
+      capacity: 50,
+      enabled: true,
+    },
+    {
+      name: "Aula 4",
+      description: "Descripción del aula 4",
+      ubication: "Av. Ubicación Nº 1234",
+      available_from: Time.rfc3339('1999-12-31T14:00:00-10:00'),
+      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+      available_monday: true,
+      available_tuesday: true,
+      available_wednesday: true,
+      available_thursday: true,
+      available_friday: true,
+      available_saturday: false,
+      available_sunday: false,
+      available_time: 24,
+      capacity: 50,
+      enabled: true,
     }
   ])

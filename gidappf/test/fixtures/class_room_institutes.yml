@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  ubication: MyText
+  available_from: 2018-12-31 18:33:09
+  available_to: 2018-12-31 18:33:09
+  available_monday: false
+  available_tuesday: false
+  available_wednesday: false
+  available_thursday: false
+  available_friday: false
+  available_saturday: false
+  available_sunday: false
+  available_time: 1
+  capacity: 1
+  enabled: false
+
+two:
+  name: MyString
+  description: MyText
+  ubication: MyText
+  available_from: 2018-12-31 18:33:09
+  available_to: 2018-12-31 18:33:09
+  available_monday: false
+  available_tuesday: false
+  available_wednesday: false
+  available_thursday: false
+  available_friday: false
+  available_saturday: false
+  available_sunday: false
+  available_time: 1
+  capacity: 1
+  enabled: false

@@ -73,14 +73,14 @@
 
   <div class="field">
     <%= form.label :available_time %>
-    <%= form.number_field :available_time %>
+    <%= form.collection_select :available_time, EnuHoursAvail.hours_avails.map{ |a| [a.second,a.first] }, :first, :second %>
   </div>
 
   <div class="field">
     <%= form.label :capacity %>
     <%= form.number_field :capacity %>
   </div>
-
+t
   <div class="field">
     <%= form.label :enabled %>
     <%= form.check_box :enabled %>

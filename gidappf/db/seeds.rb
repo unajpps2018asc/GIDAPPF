@@ -74,6 +74,7 @@ Commission.create!([
     user_id: 1
     }
   ])
+p "[GIDAPPF] Creada Comision de ingresantes"
 
 ####################################################################################
 # Aulas iniciales                                                                  #
@@ -149,3 +150,4 @@ Commission.create!([
       enabled: true,
     }
   ])
+  p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"

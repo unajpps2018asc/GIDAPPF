@@ -76,7 +76,7 @@ class ClassRoomInstitutePolicy < ApplicationPolicy
   #           1) Acción create definida en ClassRoomInsituteController      #
   #           2) Setear el valorde GIDAPPF_SYSADMIN                         #
   # Devolución: Crea una nueva aula si @user el el de testeo o @issadmin es #
-  #             true                                                        #
+  #             true  o si @roleaccess es mayor a 30                        #
   ###########################################################################
   def create?
     self.set_is_sysadmin

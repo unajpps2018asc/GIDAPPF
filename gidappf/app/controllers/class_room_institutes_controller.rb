@@ -1,3 +1,16 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/app/controllers/class_room_institutes_controller.rb #
+###########################################################################
 class ClassRoomInstitutesController < ApplicationController
   before_action :set_class_room_institute, only: [:show, :edit, :update, :destroy]
 
@@ -14,6 +27,7 @@ class ClassRoomInstitutesController < ApplicationController
 
   # GET /class_room_institutes/new
   def new
+    set_new
     @class_room_institute = ClassRoomInstitute.new
   end
 
@@ -67,10 +81,43 @@ class ClassRoomInstitutesController < ApplicationController
     def set_class_room_institute
       @class_room_institute = ClassRoomInstitute.find(params[:id])
       authorize @class_room_institute
+      set_new
+      set_ctl_opt
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def class_room_institute_params
       params.require(:class_room_institute).permit(:name, :description, :ubication, :available_from, :available_to, :available_monday, :available_tuesday, :available_wednesday, :available_thursday, :available_friday, :available_saturday, :available_sunday, :available_time, :capacity, :enabled)
     end
+
+    def set_ctl_opt
+      x=@class_room_institute.capacity
+      case x
+        when 812 @ctl_capacity='Máximo 12 personas.'
+        when 1315 @ctl_capacity='Máximo 15 personas.'
+        when 1620 @ctl_capacity='Máximo 20 personas.'
+        when 2132 @ctl_capacity='Máximo 32 personas.'
+        when 3300 @ctl_capacity='Máximo 50 personas.'
+        else @ctl_capacity="Sin frase en la opción: #{x}."
+      end
+      x=@class_room_institute.available_time
+      case x
+        when 812 @ctl_available_time='Disponible de 8 a 12 hs.'
+        when 12 @ctl_available_time="Disponible de 0 a 12 hs."
+        when 24 @ctl_available_time="Disponible las 24 hs."
+        when 1022 @ctl_available_time="Disponible de 10 a 22 hs."
+        when 1624 @ctl_available_time="Disponible de 16 a 24 hs."
+        else @ctl_available_time="Sin frase en la opción: #{x}."
+      end
+    end
+
+  def set_new
+    @selection_capacity=[
+      ['8 a 12 personas', 812],['13 a 15 personas', 1315],['16 a 20 personas', 1620],['21 a 32 personas', 2132],
+      ['mas de 33 personas', 3300]
+    ]
+    @selection_available_time=[
+      ['Desde 8 a 12 hs.', 812],['De 0 a 12 hs.', 12],['De 0 a 24 hs.', 24],['De 10 a 22 hs.', 1022],['De 16 a 24 hs.', 1624]
+    ]
+  end
 end

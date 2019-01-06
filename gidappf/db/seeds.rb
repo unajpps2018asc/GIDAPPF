@@ -95,7 +95,7 @@ p "[GIDAPPF] Creada Comision de ingresantes"
       available_saturday: false,
       available_sunday: false,
       available_time: 24,
-      capacity: 50,
+      capacity: 812,
       enabled: true,
     },
     {
@@ -112,7 +112,7 @@ p "[GIDAPPF] Creada Comision de ingresantes"
       available_saturday: false,
       available_sunday: false,
       available_time: 24,
-      capacity: 50,
+      capacity: 812,
       enabled: true,
     },
     {
@@ -129,7 +129,7 @@ p "[GIDAPPF] Creada Comision de ingresantes"
       available_saturday: false,
       available_sunday: false,
       available_time: 24,
-      capacity: 50,
+      capacity: 812,
       enabled: true,
     },
     {
@@ -146,7 +146,7 @@ p "[GIDAPPF] Creada Comision de ingresantes"
       available_saturday: false,
       available_sunday: false,
       available_time: 24,
-      capacity: 50,
+      capacity: 812,
       enabled: true,
     }
   ])

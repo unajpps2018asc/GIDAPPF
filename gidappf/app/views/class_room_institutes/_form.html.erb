@@ -73,12 +73,12 @@
 
   <div class="field">
     <%= form.label "Disponibilidad" %>
-    <%= form.select :available_time, [['horrible', 1], ['poor', 2], ['mediocre', 3], ['good', 4], ['great', 5]] %>
+    <%= form.select :available_time, @selection_available_time %>
   </div>
 
   <div class="field">
     <%= form.label :capacity %>
-    <%= form.number_field :capacity %>
+    <%= form.select :capacity, @selection_capacity %>
   </div>
 
   <div class="field">

@@ -93,21 +93,33 @@ class ClassRoomInstitutesController < ApplicationController
     def set_ctl_opt
       x=@class_room_institute.capacity
       case x
-        when 812 @ctl_capacity='Máximo 12 personas.'
-        when 1315 @ctl_capacity='Máximo 15 personas.'
-        when 1620 @ctl_capacity='Máximo 20 personas.'
-        when 2132 @ctl_capacity='Máximo 32 personas.'
-        when 3300 @ctl_capacity='Máximo 50 personas.'
-        else @ctl_capacity="Sin frase en la opción: #{x}."
+        when 812
+          @ctl_capacity='Máximo 12 personas.'
+        when 1315
+          @ctl_capacity='Máximo 15 personas.'
+        when 1620
+          @ctl_capacity='Máximo 20 personas.'
+        when 2132
+          @ctl_capacity='Máximo 32 personas.'
+        when 3300
+          @ctl_capacity='Máximo 50 personas.'
+        else
+          @ctl_capacity="Sin frase en la opción: #{x}."
       end
       x=@class_room_institute.available_time
       case x
-        when 812 @ctl_available_time='Disponible de 8 a 12 hs.'
-        when 12 @ctl_available_time="Disponible de 0 a 12 hs."
-        when 24 @ctl_available_time="Disponible las 24 hs."
-        when 1022 @ctl_available_time="Disponible de 10 a 22 hs."
-        when 1624 @ctl_available_time="Disponible de 16 a 24 hs."
-        else @ctl_available_time="Sin frase en la opción: #{x}."
+        when 812
+          @ctl_available_time='Disponible de 8 a 12 hs.'
+        when 12
+          @ctl_available_time="Disponible de 0 a 12 hs."
+        when 24
+          @ctl_available_time="Disponible las 24 hs."
+        when 1022
+          @ctl_available_time="Disponible de 10 a 22 hs."
+        when 1624
+          @ctl_available_time="Disponible de 16 a 24 hs."
+        else
+          @ctl_available_time="Sin frase en la opción: #{x}."
       end
     end
 

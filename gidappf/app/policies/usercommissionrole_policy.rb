@@ -9,7 +9,7 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/app/policies/usercommissioonroles_policy.rb           #
+# Archivo GIDAPPF/gidappf/app/policies/usercommissioonroles_policy.rb     #
 ###########################################################################
 
 ###########################################################################
@@ -18,6 +18,7 @@
 # que estén asignados por la relación usercommisionrole.
 ###########################################################################
 class UsercommissionrolePolicy < ApplicationPolicy
+
   def edit?
     self.set_is_sysadmin
     self.set_roleaccess

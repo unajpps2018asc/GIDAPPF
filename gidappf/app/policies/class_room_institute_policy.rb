@@ -12,7 +12,6 @@
 # Archivo GIDAPPF/gidappf/app/policies/class_room_institute_policy.rb     #
 ###########################################################################
 class ClassRoomInstitutePolicy < ApplicationPolicy
-
   ###########################################################################
   # Prerequisitos:                                                          #
   #           1) Acción index definida en ClassRoomInsituteController       #

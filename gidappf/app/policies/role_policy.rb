@@ -12,7 +12,7 @@
 # Archivo GIDAPPF/gidappf/app/policies/role_policy.rb                     #
 ###########################################################################
 class RolePolicy < ApplicationPolicy
-
+  
   ###########################################################################
   # Prerequisitos:                                                          #
   #           1) Acción index definida en RolesController                   #

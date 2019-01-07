@@ -18,7 +18,6 @@
 # que estén asignados por la relación usercommisionrole.
 ###########################################################################
 class CommissionPolicy < ApplicationPolicy
-
   ##############################################################################
   # Prerequisitos:                                                             #
   #           1) Acción index definida en RolesController                      #

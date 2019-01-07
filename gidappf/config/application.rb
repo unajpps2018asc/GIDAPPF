@@ -63,6 +63,12 @@ module Gidappf
     origins = ENV['ACTION_CABLE_ALLOWED_REQUEST_ORIGINS'].split(',')
     origins.map! { |url| /#{url}/ }
     config.action_cable.allowed_request_origins = origins
+    ###########################################################################
+    # Cargador de módulos en lib                                              #
+    ###########################################################################
+    config.autoload_paths << "#{Rails.root}/lib"
+    config.eager_load_paths << "#{Rails.root}/lib"
+
   end
 end
 

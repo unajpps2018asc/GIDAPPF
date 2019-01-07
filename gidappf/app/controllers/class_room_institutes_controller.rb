@@ -1,3 +1,4 @@
+require 'role_access'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -12,12 +13,17 @@
 # Archivo GIDAPPF/gidappf/app/controllers/class_room_institutes_controller.rb #
 ###########################################################################
 class ClassRoomInstitutesController < ApplicationController
+  include RoleAccess
   before_action :set_class_room_institute, only: [:show, :edit, :update, :destroy]
 
   # GET /class_room_institutes
   # GET /class_room_institutes.json
   def index
-    @class_room_institutes = ClassRoomInstitute.all
+    if get_role_access > 30.0
+      @class_room_institutes = ClassRoomInstitute.all
+    else
+      @class_room_institutes = ClassRoomInstitute.where(enabled: true)
+    end
   end
 
   # GET /class_room_institutes/1

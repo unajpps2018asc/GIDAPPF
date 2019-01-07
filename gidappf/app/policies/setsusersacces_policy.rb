@@ -18,6 +18,7 @@
 # que estén asignados por la relación usercommisionrole.
 ###########################################################################
 class SetsusersaccesPolicy < ApplicationPolicy
+  
   def settings?
     self.set_is_sysadmin
     self.set_roleaccess

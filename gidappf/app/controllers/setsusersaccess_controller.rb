@@ -16,7 +16,7 @@ class SetsusersaccessController < ApplicationController
   def settings
     @usercommissionroles=Usercommissionrole.all
     authorize @usercommissionroles
-    @roleOpts=Role.all
+    @roleOpts=Role.where(enabled: true)
     ############################################################################
     # devolucion del controlador, respond_to                                   #
     ############################################################################

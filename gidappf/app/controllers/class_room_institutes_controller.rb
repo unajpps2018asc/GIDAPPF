@@ -1,23 +1,26 @@
 require 'role_access'
-###########################################################################
-# Universidad Nacional Arturo Jauretche                                   #
-# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
-# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
-#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
-# Tutores:                                                                #
-#    - UNAJ: Dr. Ing. Morales, Martín                                     #
-#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
-#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
-#    - TAPTA: Dra. Ferrari, Mariela                                       #
-# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+###############################################################################
+# Universidad Nacional Arturo Jauretche                                       #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática              #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018      #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                   #
+# Tutores:                                                                    #
+#    - UNAJ: Dr. Ing. Morales, Martín                                         #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                                #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                   #
+#    - TAPTA: Dra. Ferrari, Mariela                                           #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                         #
 # Archivo GIDAPPF/gidappf/app/controllers/class_room_institutes_controller.rb #
-###########################################################################
+###############################################################################
 class ClassRoomInstitutesController < ApplicationController
   include RoleAccess
   before_action :set_class_room_institute, only: [:show, :edit, :update, :destroy]
 
   # GET /class_room_institutes
   # GET /class_room_institutes.json
+  ##############################################################################
+  # Acción diferenciada por get_role_access si es o no mayor a 30              #
+  ##############################################################################
   def index
     if get_role_access > 30.0
       @class_room_institutes = ClassRoomInstitute.all
@@ -46,6 +49,7 @@ class ClassRoomInstitutesController < ApplicationController
   def create
     @class_room_institute = ClassRoomInstitute.new(class_room_institute_params)
     authorize @class_room_institute
+    set_vacancies
 
     respond_to do |format|
       if @class_room_institute.save
@@ -75,7 +79,12 @@ class ClassRoomInstitutesController < ApplicationController
   # DELETE /class_room_institutes/1
   # DELETE /class_room_institutes/1.json
   def destroy
-    @class_room_institute.destroy
+    begin
+      @class_room_institute.destroy
+    rescue ActiveRecord::InvalidForeignKey
+      @class_room_institute.vacancy.destroy_all
+      @class_room_institute.destroy
+    end
     respond_to do |format|
       format.html { redirect_to class_room_institutes_url, notice: 'Class room institute was successfully destroyed.' }
       format.json { head :no_content }
@@ -132,10 +141,43 @@ class ClassRoomInstitutesController < ApplicationController
   def set_new
     @selection_capacity=[
       ['8 a 12 personas', 812],['13 a 15 personas', 1315],['16 a 20 personas', 1620],['21 a 32 personas', 2132],
-      ['mas de 33 personas', 3300]
+      ['mas de 50 personas', 3300]
     ]
     @selection_available_time=[
       ['Desde 8 a 12 hs.', 812],['De 0 a 12 hs.', 12],['De 0 a 24 hs.', 24],['De 10 a 22 hs.', 1022],['De 16 a 24 hs.', 1624]
     ]
+  end
+
+  def set_vacancies
+    x=@class_room_institute.capacity
+    case x
+      when 812
+        12.times {|i|
+          Vacancy.new(class_room_institute: @class_room_institute,
+          user: current_user, commission: Commission.first,
+          enabled: @class_room_institute.enabled).save}
+      when 1315
+        15.times {|i|
+          Vacancy.new(class_room_institute: @class_room_institute,
+          user: current_user, commission: Commission.first,
+          enabled: @class_room_institute.enabled).save}
+      when 1620
+        20.times {|i|
+          Vacancy.new(class_room_institute: @class_room_institute,
+          user: current_user, commission: Commission.first,
+          enabled: @class_room_institute.enabled).save}
+      when 2132
+        32.times {|i|
+          Vacancy.new(class_room_institute: @class_room_institute,
+          user: current_user, commission: Commission.first,
+          enabled: @class_room_institute.enabled).save}
+      when 3300
+        60.times {|i|
+          Vacancy.new(class_room_institute: @class_room_institute,
+          user: current_user, commission: Commission.first,
+          enabled: @class_room_institute.enabled).save}
+      else
+          flash.now[:alert] = "Vacancy error option: #{x.to_s}."
+    end
   end
 end

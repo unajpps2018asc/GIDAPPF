@@ -151,3 +151,21 @@ p "[GIDAPPF] Creada Comision de ingresantes"
     }
   ])
   p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
+
+  ####################################################################################
+  # Vacantes de Aulas                                                                #
+  ####################################################################################
+  Vacancy.destroy_all
+  12.times {|i|
+    Vacancy.create!([{class_room_institute_id: 1, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
+  }
+  12.times {|i|
+    Vacancy.create!([{class_room_institute_id: 2, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
+  }
+  12.times {|i|
+    Vacancy.create!([{class_room_institute_id: 3, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
+  }
+  12.times {|i|
+    Vacancy.create!([{class_room_institute_id: 4, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
+  }
+  p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes"

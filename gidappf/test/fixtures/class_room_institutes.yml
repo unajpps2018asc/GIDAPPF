@@ -14,7 +14,7 @@ one:
   available_saturday: false
   available_sunday: false
   available_time: 1
-  capacity: 1
+  capacity: 5
   enabled: false
 
 two:
@@ -31,5 +31,5 @@ two:
   available_saturday: false
   available_sunday: false
   available_time: 1
-  capacity: 1
+  capacity: 10
   enabled: false

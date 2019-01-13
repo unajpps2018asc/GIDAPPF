@@ -24,4 +24,10 @@ class Commission < ApplicationRecord
   #                          veces en la relación usercommissionrole        #                                                       #
   ###########################################################################
   has_many :usercommissionrole
+
+  ###########################################################################
+  # Asociación uno a muchos: soporta que una comision sea asignada muchas   #
+  #                          veces en la relación vacancy                   #                                                       #
+  ###########################################################################
+  has_many :vacancy
 end

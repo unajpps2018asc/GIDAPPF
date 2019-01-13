@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_141247) do
+ActiveRecord::Schema.define(version: 2019_01_10_233154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,8 +78,24 @@ ActiveRecord::Schema.define(version: 2019_01_02_141247) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vacancies", force: :cascade do |t|
+    t.bigint "class_room_institute_id"
+    t.bigint "user_id"
+    t.bigint "commission_id"
+    t.integer "occupant"
+    t.boolean "enabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["class_room_institute_id"], name: "index_vacancies_on_class_room_institute_id"
+    t.index ["commission_id"], name: "index_vacancies_on_commission_id"
+    t.index ["user_id"], name: "index_vacancies_on_user_id"
+  end
+
   add_foreign_key "commissions", "users"
   add_foreign_key "usercommissionroles", "commissions"
   add_foreign_key "usercommissionroles", "roles"
   add_foreign_key "usercommissionroles", "users"
+  add_foreign_key "vacancies", "class_room_institutes"
+  add_foreign_key "vacancies", "commissions"
+  add_foreign_key "vacancies", "users"
 end

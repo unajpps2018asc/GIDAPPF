@@ -74,6 +74,7 @@ class ClassRoomInstitutesController < ApplicationController
         format.json { render json: @class_room_institute.errors, status: :unprocessable_entity }
       end
     end
+    set_vacancies
   end
 
   # DELETE /class_room_institutes/1
@@ -149,35 +150,30 @@ class ClassRoomInstitutesController < ApplicationController
   end
 
   def set_vacancies
-    x=@class_room_institute.capacity
+    x = @class_room_institute.capacity
+    c=Vacancy.where(class_room_institute: @class_room_institute).count
+    if c === nil then c = 0 end
     case x
       when 812
-        12.times {|i|
-          Vacancy.new(class_room_institute: @class_room_institute,
-          user: current_user, commission: Commission.first,
-          enabled: @class_room_institute.enabled).save}
+        y=12 - c
       when 1315
-        15.times {|i|
-          Vacancy.new(class_room_institute: @class_room_institute,
-          user: current_user, commission: Commission.first,
-          enabled: @class_room_institute.enabled).save}
+        y=15 - c
       when 1620
-        20.times {|i|
-          Vacancy.new(class_room_institute: @class_room_institute,
-          user: current_user, commission: Commission.first,
-          enabled: @class_room_institute.enabled).save}
+        y=20 - c
       when 2132
-        32.times {|i|
-          Vacancy.new(class_room_institute: @class_room_institute,
-          user: current_user, commission: Commission.first,
-          enabled: @class_room_institute.enabled).save}
+        y=32 - c
       when 3300
-        60.times {|i|
-          Vacancy.new(class_room_institute: @class_room_institute,
-          user: current_user, commission: Commission.first,
-          enabled: @class_room_institute.enabled).save}
+        y=60 - c
       else
-          flash.now[:alert] = "Vacancy error option: #{x.to_s}."
+        y=0
+        flash.now[:alert] = "Vacancy error option: #{x.to_s}."
+    end
+    if y > 0 then y.times {|i|
+      Vacancy.new(class_room_institute: @class_room_institute,
+        user: current_user, commission: Commission.first,
+        enabled: @class_room_institute.enabled).save}
+    elsif y < 0
+      Vacancy.where(class_room_institute: @class_room_institute).limit(y.abs).destroy_all
     end
   end
 end

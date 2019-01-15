@@ -106,6 +106,11 @@ class ClassRoomInstitutesController < ApplicationController
       params.require(:class_room_institute).permit(:name, :description, :ubication, :available_from, :available_to, :available_monday, :available_tuesday, :available_wednesday, :available_thursday, :available_friday, :available_saturday, :available_sunday, :available_time, :capacity, :enabled)
     end
 
+    #############################################################################
+    # Metodo privado para decodificar vacantes y disponibilidad en la acc. show #
+    # Devuelve: @ctl_capacity y @ctl_available_time con las frases asignadas    #
+    #           segun el codigo interno de Vacancy y TimeSheet                  #
+    #############################################################################
     def set_ctl_opt
       x=@class_room_institute.capacity
       case x
@@ -139,16 +144,27 @@ class ClassRoomInstitutesController < ApplicationController
       end
     end
 
+  #############################################################################
+  # Metodo privado para decodificar vacantes y disponibilidad en select       #
+  # Devuelve: @selection_capacity y @selection_available_time con las         #
+  #           frases asignadas segun el codigo interno de Vacancy y TimeSheet #
+  #############################################################################
   def set_new
     @selection_capacity=[
-      ['8 a 12 personas', 812],['13 a 15 personas', 1315],['16 a 20 personas', 1620],['21 a 32 personas', 2132],
-      ['mas de 50 personas', 3300]
+      ['8 a 12 personas', 812],['13 a 15 personas', 1315],['16 a 20 personas', 1620],
+      ['21 a 32 personas', 2132],['mas de 50 personas', 3300]
     ]
     @selection_available_time=[
-      ['Desde 8 a 12 hs.', 812],['De 0 a 12 hs.', 12],['De 0 a 24 hs.', 24],['De 10 a 22 hs.', 1022],['De 16 a 24 hs.', 1624]
+      ['Desde 8 a 12 hs.', 812],['De 0 a 12 hs.', 12],['De 0 a 24 hs.', 24],
+      ['De 10 a 22 hs.', 1022],['De 16 a 24 hs.', 1624]
     ]
   end
 
+  ###############################################################################
+  # Metodo privado para controlar el modelo Vacancy                             #
+  # Devuelve: Cantidad de instancias de vacantes asociadas con el aula segun el #
+  #           codigo de la capacidad guardado en la relacion                    #
+  ###############################################################################
   def set_vacancies
     x = @class_room_institute.capacity
     c=Vacancy.where(class_room_institute: @class_room_institute).count

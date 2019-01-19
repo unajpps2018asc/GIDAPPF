@@ -23,12 +23,22 @@
 
   <div class="field">
     <%= form.label :start_date %>
-    <%= form.datetime_select :start_date %>
+    <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :end_date %>
-    <%= form.datetime_select :end_date %>
+    <%= form.date_field :end_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Time Sheet Start" %>
+    <%= form.date_field :ts_start, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Time Sheet End" %>
+    <%= form.date_field :ts_end, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
   </div>
 
   <div class="actions">

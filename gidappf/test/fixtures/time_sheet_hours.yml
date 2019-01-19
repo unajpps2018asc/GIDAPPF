@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time_sheet: one
+  hs_from: MyString
+  hs_to: MyString
+
+two:
+  time_sheet: two
+  hs_from: MyString
+  hs_to: MyString

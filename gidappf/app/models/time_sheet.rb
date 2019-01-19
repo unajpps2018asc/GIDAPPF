@@ -9,12 +9,18 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/app/models/class_room_institute.rb              #
+# Archivo GIDAPPF/gidappf/app/models/time_sheet.rb                        #
 ###########################################################################
-class ClassRoomInstitute < ApplicationRecord
-  #####################################################################
-  # Asociación uno a muchos: soporta que un Aula sea asignada muchas  #
-  #                          veces en la relación vacancy             #
-  #####################################################################
-  has_many :vacancy, dependent: :delete_all
+class TimeSheet < ApplicationRecord
+  ############################################################################
+  # Asociación muchos a uno:soporta muchos periodos pertenecientes a una     #
+  #                        comision, para el caso de los periodos anteriores #
+  ############################################################################
+  belongs_to :commission
+
+  ############################################################################
+  # Asociación uno a muchos: soporta que un periodo de comision sea asignado #
+  #                          muchas veces en la relación time_sheet_hour     #                                                       #
+  ############################################################################
+  has_many :time_sheet_hour, dependent: :delete_all
 end

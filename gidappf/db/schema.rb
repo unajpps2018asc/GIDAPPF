@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_233154) do
+ActiveRecord::Schema.define(version: 2019_01_15_174708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,24 @@ ActiveRecord::Schema.define(version: 2019_01_10_233154) do
     t.float "level", default: 10.0
   end
 
+  create_table "time_sheet_hours", force: :cascade do |t|
+    t.bigint "time_sheet_id"
+    t.string "hs_from"
+    t.string "hs_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["time_sheet_id"], name: "index_time_sheet_hours_on_time_sheet_id"
+  end
+
+  create_table "time_sheets", force: :cascade do |t|
+    t.bigint "commission_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commission_id"], name: "index_time_sheets_on_commission_id"
+  end
+
   create_table "usercommissionroles", force: :cascade do |t|
     t.bigint "role_id"
     t.bigint "user_id"
@@ -92,6 +110,8 @@ ActiveRecord::Schema.define(version: 2019_01_10_233154) do
   end
 
   add_foreign_key "commissions", "users"
+  add_foreign_key "time_sheet_hours", "time_sheets"
+  add_foreign_key "time_sheets", "commissions"
   add_foreign_key "usercommissionroles", "commissions"
   add_foreign_key "usercommissionroles", "roles"
   add_foreign_key "usercommissionroles", "users"

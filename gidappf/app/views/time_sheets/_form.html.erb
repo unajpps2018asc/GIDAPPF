@@ -1,10 +1,10 @@
-<%= form_with(model: commission, local: true) do |form| %>
-  <% if commission.errors.any? %>
+<%= form_with(model: time_sheet, local: true) do |form| %>
+  <% if time_sheet.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(commission.errors.count, "error") %> prohibited this commission from being saved:</h2>
+      <h2><%= pluralize(time_sheet.errors.count, "error") %> prohibited this time_sheet from being saved:</h2>
 
       <ul>
-      <% commission.errors.full_messages.each do |message| %>
+      <% time_sheet.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,13 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.label :commission_id %>
+    <%= form.text_field :commission_id %>
   </div>
 
   <div class="field">
@@ -29,6 +24,11 @@
   <div class="field">
     <%= form.label :end_date %>
     <%= form.date_field :end_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enabled %>
+    <%= form.check_box :enabled %>
   </div>
 
   <div class="actions">

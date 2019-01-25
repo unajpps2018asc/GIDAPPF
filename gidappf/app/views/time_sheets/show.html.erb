@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Commission:</strong>
+  <%= @time_sheet.commission %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @time_sheet.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @time_sheet.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_time_sheet_path(@time_sheet) %> |
+<%= link_to 'Back', time_sheets_path %>

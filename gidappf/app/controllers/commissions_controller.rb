@@ -51,8 +51,10 @@ class CommissionsController < ApplicationController
 
     respond_to do |format|
       if @commission.save
-        format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
-        format.json { render :show, status: :created, location: @commission }
+        # format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
+        # format.json { render :show, status: :created, location: @commission }
+        format.html { redirect_to time_sheets_associate_path commission_id: @commission.id.to_s, notice: 'Commission was successfully created.' }
+        format.json { head :no_content }
       else
         format.html { render :new }
         format.json { render json: @commission.errors, status: :unprocessable_entity }
@@ -103,7 +105,6 @@ class CommissionsController < ApplicationController
     @commission = Commission.find(params[:id])
     authorize @commission #inicialización del nivel de acceso
     @commission.update(user: current_user)
-    set_time_sheet
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

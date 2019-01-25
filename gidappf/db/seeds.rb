@@ -61,6 +61,17 @@ aux=Devise::Encryptor.digest(User,rand(5..30))
 newuser = User.new({email: 'john@example.com', password: aux, password_confirmation: aux})
 newuser.save
 
+###########################################################################
+# Array auxiliar Array.new(4) {|i| i.to_s } #=> ["0", "1", "2", "3"]
+###########################################################################
+aulas=Array.new
+j=1
+4.times {|i|
+  e=[j+1,"Aula #{j}","Descripción del aula #{j}"]
+  aulas.push(e)
+  j+=1
+}
+
 ####################################################################################
 # Comision de ingresantes                                                          #
 ####################################################################################
@@ -76,85 +87,70 @@ Commission.create!([
   ])
 p "[GIDAPPF] Creada Comision de ingresantes"
 
+###############################################################################
+# Comisiones de prueba por cada aula                                          #
+###############################################################################
+aulas.each do |a|
+  Commission.create!([
+    {
+      name: "C. #{a[1]}",
+      description: "Comision del #{a[2]}",
+      start_date: Time.rfc3339('1999-12-31T14:00:00-10:00'),
+      end_date: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+      user_id: 1
+      }
+    ])
+end
+
+p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
+
 ####################################################################################
 # Aulas iniciales                                                                  #
 ####################################################################################
   ClassRoomInstitute.destroy_all
-  ClassRoomInstitute.create!([
-    {
-      name: "Aula 1",
-      description: "Descripción del aula 1",
-      ubication: "Av. Ubicación Nº 1234",
-      available_from: Time.now,
-      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
-      available_monday: true,
-      available_tuesday: true,
-      available_wednesday: true,
-      available_thursday: true,
-      available_friday: true,
-      available_saturday: false,
-      available_sunday: false,
-      available_time: 24,
-      capacity: 812,
-      enabled: true,
-    },
-    {
-      name: "Aula 2",
-      description: "Descripción del aula 2",
-      ubication: "Av. Ubicación Nº 1234",
-      available_from: Time.rfc3339('1999-12-31T14:00:00-10:00'),
-      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
-      available_monday: true,
-      available_tuesday: true,
-      available_wednesday: true,
-      available_thursday: true,
-      available_friday: true,
-      available_saturday: false,
-      available_sunday: false,
-      available_time: 24,
-      capacity: 812,
-      enabled: true,
-    },
-    {
-      name: "Aula 3",
-      description: "Descripción del aula 3",
-      ubication: "Av. Ubicación Nº 1234",
-      available_from: Time.rfc3339('1999-12-31T14:00:00-10:00'),
-      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
-      available_monday: true,
-      available_tuesday: true,
-      available_wednesday: true,
-      available_thursday: true,
-      available_friday: true,
-      available_saturday: false,
-      available_sunday: false,
-      available_time: 24,
-      capacity: 812,
-      enabled: true,
-    },
-    {
-      name: "Aula 4",
-      description: "Descripción del aula 4",
-      ubication: "Av. Ubicación Nº 1234",
-      available_from: Time.rfc3339('1999-12-31T14:00:00-10:00'),
-      available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
-      available_monday: true,
-      available_tuesday: true,
-      available_wednesday: true,
-      available_thursday: true,
-      available_friday: true,
-      available_saturday: false,
-      available_sunday: false,
-      available_time: 24,
-      capacity: 812,
-      enabled: true,
-    }
-  ])
+  aulas.each do |a|
+    ClassRoomInstitute.create!([
+      {
+        name: a[1],
+        description: a[2],
+        ubication: "Av. Ubicación Nº 1234",
+        available_from: Time.now,
+        available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+        available_monday: true,
+        available_tuesday: true,
+        available_wednesday: true,
+        available_thursday: true,
+        available_friday: true,
+        available_saturday: false,
+        available_sunday: false,
+        available_time: 24,
+        capacity: 812,
+        enabled: true,
+      }])
+  end
+
   p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
 
-  ####################################################################################
-  # Vacantes de Aulas                                                                #
-  ####################################################################################
+  ##########################################################################
+  # Períodos de prueba                                                     #
+  ##########################################################################
+  TimeSheet.destroy_all
+  aulas.each do |a|
+    TimeSheet.create!([
+      {
+        commission_id: a[0],
+        start_date: Date.today,
+        end_date: 13.month.after,
+        enabled: true
+        }
+      ])
+  end
+
+  p "[GIDAPPF] Creadas #{TimeSheet.count} Aulas"
+
+  ############################################################################
+  # Vacantes de Aulas                                                        #
+  ############################################################################
   Vacancy.destroy_all
   12.times {|i|
     Vacancy.create!([{class_room_institute_id: 1, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])

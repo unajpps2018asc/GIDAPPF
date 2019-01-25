@@ -13,6 +13,9 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  get 'time_sheets/renew_all'
+  post 'time_sheets/renew_all'
+  get 'time_sheets/associate'
   resources :time_sheets
   resources :vacancies
   resources :class_room_institutes
@@ -22,7 +25,6 @@ Rails.application.routes.draw do
 
 
   resources :usercommissionroles,only:[:edit]
-  # get 'usercommissionroles'
   get 'setsusersaccess/settings'
   resources :commissions
   resources :roles

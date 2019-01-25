@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_15_174708) do
+ActiveRecord::Schema.define(version: 2019_01_23_003715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,10 +66,11 @@ ActiveRecord::Schema.define(version: 2019_01_15_174708) do
 
   create_table "time_sheets", force: :cascade do |t|
     t.bigint "commission_id"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled"
     t.index ["commission_id"], name: "index_time_sheets_on_commission_id"
   end
 

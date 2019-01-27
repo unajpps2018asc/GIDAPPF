@@ -11,10 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :commission_id %>
-    <%= form.text_field :commission_id %>
-  </div>
+  <%= form.hidden_field :commission_id, value: params[:commission_id] %>
 
   <div class="field">
     <%= form.label :start_date %>

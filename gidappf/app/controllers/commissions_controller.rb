@@ -53,7 +53,7 @@ class CommissionsController < ApplicationController
       if @commission.save
         # format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
         # format.json { render :show, status: :created, location: @commission }
-        format.html { redirect_to time_sheets_associate_path commission_id: @commission.id.to_s, notice: 'Commission was successfully created.' }
+        format.html { redirect_to time_sheets_associate_path commission_id: @commission.id.to_s, commission_name: @commission.name, notice: 'Commission was successfully created.' }
         format.json { head :no_content }
       else
         format.html { render :new }

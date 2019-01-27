@@ -27,12 +27,13 @@ class TimeSheetsController < ApplicationController
   end
 
   # GET /time_sheets/new
-  def new
-    authorize @time_sheet = TimeSheet.new
-  end
+  # def new
+  #   authorize @time_sheet = TimeSheet.new
+  # end
 
   # GET /time_sheets/1/edit
   def edit
+    params[:commission_id]=@time_sheet.commission_id.to_s
   end
 
   # POST /time_sheets

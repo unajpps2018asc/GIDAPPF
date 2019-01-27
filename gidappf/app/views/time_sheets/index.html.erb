@@ -15,7 +15,7 @@
   <tbody>
     <% @time_sheets.each do |time_sheet| %>
       <tr>
-        <td><%= time_sheet.commission_id %></td>
+        <td><%= time_sheet.commission.name %></td>
         <td><%= time_sheet.start_date %></td>
         <td><%= time_sheet.end_date %></td>
         <td><%= link_to 'Show', time_sheet %></td>
@@ -41,7 +41,7 @@
   <tbody>
     <% @time_sheets1.each do |time_sheet| %>
       <tr>
-        <td><%= time_sheet.commission_id %></td>
+        <td><%= time_sheet.commission.name %></td>
         <td><%= time_sheet.start_date %></td>
         <td><%= time_sheet.end_date %></td>
         <td><%= link_to 'Show', time_sheet %></td>

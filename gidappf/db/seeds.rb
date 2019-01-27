@@ -20,7 +20,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'LoTR' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+gidappf_start_time = Time.rfc3339('1999-12-31T14:00:00-10:00')
+gidappf_end_time = Time.rfc3339('3000-12-31T14:00:00-10:00')
 ###########################################################################
 # Valores de Roles. Se debe jerarquizar a mayor id, mayor jerarquia       #
 ###########################################################################
@@ -29,25 +30,25 @@ Role.create!([
   {
     name: "Ingresante",
     description: "Usuario que comienza el tramite para participar del Plan Fines",
-    created_at: "2018-10-31 23:21:00",
+    created_at: gidappf_start_time,
     enabled: true, level: 10.0
   },
   {
     name: "Estudiante",
     description: "Usuario que participa de las cursadas y esta asignado al Plan Fines.",
-    created_at: "2018-10-31 23:21:00",
+    created_at: gidappf_start_time,
     enabled: true, level: 20.0
   },
   {
     name: "Secretario",
     description: "Usuario planificador de las cursadas del Plan Fines.",
-    created_at: "2018-10-31 23:21:00",
+    created_at: gidappf_start_time,
     enabled: true, level: 30.0
   },
   {
     name: "Administrador",
     description: "Usuario diseñador de las cursadas del Plan Fines.",
-    created_at: "2018-10-31 23:21:00",
+    created_at: gidappf_start_time,
     enabled: true, level: 40.0
   }
 ])
@@ -65,11 +66,9 @@ newuser.save
 # Array auxiliar Array.new(4) {|i| i.to_s } #=> ["0", "1", "2", "3"]
 ###########################################################################
 aulas=Array.new
-j=1
 4.times {|i|
-  e=[j+1,"Aula #{j}","Descripción del aula #{j}"]
+  e=[i+1,"Aula #{i+1}","Descripción del aula #{i+1}"]
   aulas.push(e)
-  j+=1
 }
 
 ####################################################################################
@@ -80,8 +79,8 @@ Commission.create!([
   {
     name: "Ingresantes",
     description: "Comision inicial de ingresantes",
-    start_date: Time.rfc3339('1999-12-31T14:00:00-10:00'),
-    end_date: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+    start_date: gidappf_start_time,
+    end_date: gidappf_end_time,
     user_id: 1
     }
   ])
@@ -95,8 +94,8 @@ aulas.each do |a|
     {
       name: "C. #{a[1]}",
       description: "Comision del #{a[2]}",
-      start_date: Time.rfc3339('1999-12-31T14:00:00-10:00'),
-      end_date: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+      start_date: gidappf_start_time,
+      end_date: gidappf_end_time,
       user_id: 1
       }
     ])
@@ -115,7 +114,7 @@ p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
         description: a[2],
         ubication: "Av. Ubicación Nº 1234",
         available_from: Time.now,
-        available_to: Time.rfc3339('3000-12-31T14:00:00-10:00'),
+        available_to: gidappf_end_time,
         available_monday: true,
         available_tuesday: true,
         available_wednesday: true,
@@ -135,10 +134,10 @@ p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
   # Períodos de prueba                                                     #
   ##########################################################################
   TimeSheet.destroy_all
-  aulas.each do |a|
+  Commission.all.each do |a|
     TimeSheet.create!([
       {
-        commission_id: a[0],
+        commission_id: a.id,
         start_date: Date.today,
         end_date: 13.month.after,
         enabled: true
@@ -152,16 +151,9 @@ p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
   # Vacantes de Aulas                                                        #
   ############################################################################
   Vacancy.destroy_all
-  12.times {|i|
-    Vacancy.create!([{class_room_institute_id: 1, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
-  }
-  12.times {|i|
-    Vacancy.create!([{class_room_institute_id: 2, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
-  }
-  12.times {|i|
-    Vacancy.create!([{class_room_institute_id: 3, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
-  }
-  12.times {|i|
-    Vacancy.create!([{class_room_institute_id: 4, user_id: 1, commission_id: 1, occupant: nil, enabled: true}])
-  }
+  ClassRoomInstitute.all.each do |a|
+    12.times {|i|
+      Vacancy.create!([{class_room_institute_id: a.id, user_id: 1, commission_id: a.id+1, occupant: nil, enabled: true}])
+    }
+  end
   p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes"

@@ -13,10 +13,10 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  get 'time_sheets/associate'
   get 'time_sheets/renew_all'
   post 'time_sheets/renew_all'
-  get 'time_sheets/associate'
-  resources :time_sheets
+  resources :time_sheets,only:[:create, :index, :show, :edit, :destroy, :update]
   resources :vacancies
   resources :class_room_institutes
   devise_for :users, controllers: {

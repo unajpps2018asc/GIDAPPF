@@ -47,8 +47,8 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
             }
           }
       end
-#format.html { redirect_to "/time_sheets/associate?commission_id=#{@commission.id.to_s}" }
-    assert_redirected_to time_sheets_associate_path commission_id: Commission.last.id.to_s, notice: 'Commission was successfully created.' 
+    com=Commission.last
+    assert_redirected_to time_sheets_associate_path commission_id: com.id.to_s, commission_name: com.name, notice: 'Commission was successfully created.'
     sign_out :one
   end
 

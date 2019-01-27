@@ -67,7 +67,7 @@ newuser.save
 ###########################################################################
 aulas=Array.new
 4.times {|i|
-  e=[i+1,"Aula #{i+1}","Descripción del aula #{i+1}"]
+  e=[i+1,"Aula #{i+1}","Descripción nro. #{i+1} generada automáticamente"]
   aulas.push(e)
 }
 
@@ -93,7 +93,7 @@ aulas.each do |a|
   Commission.create!([
     {
       name: "C. #{a[1]}",
-      description: "Comision del #{a[2]}",
+      description: "#{a[2]} para la comisión.",
       start_date: gidappf_start_time,
       end_date: gidappf_end_time,
       user_id: 1
@@ -103,15 +103,15 @@ end
 
 p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
 
-####################################################################################
-# Aulas iniciales                                                                  #
-####################################################################################
+#############################################################################
+# Aulas iniciales                                                           #
+#############################################################################
   ClassRoomInstitute.destroy_all
   aulas.each do |a|
     ClassRoomInstitute.create!([
       {
         name: a[1],
-        description: a[2],
+        description: "#{a[2]} para el aula.",
         ubication: "Av. Ubicación Nº 1234",
         available_from: Time.now,
         available_to: gidappf_end_time,

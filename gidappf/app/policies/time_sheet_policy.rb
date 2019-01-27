@@ -131,22 +131,13 @@ class TimeSheetPolicy < ApplicationPolicy
     create?
   end
 
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción new definida en CommissionsController               #
-  # Devolución: delega el valor de create, para nuevos roles                #
-  ###########################################################################
-  def new?
-    create?
-  end
-
-  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción create definida en RolesController                     #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 30.0                       #
-  ##############################################################################
+  #############################################################################
+  # Prerequisitos:                                                            #
+  #           1) Acción create definida en RolesController                    #
+  #           1) Setear el valorde GIDAPPF_SYSADMIN                           #
+  # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin  #
+  #             es true o si @roleaccess es mayor a 30.0                      #
+  #############################################################################
   def create?
     self.set_is_sysadmin
     self.set_roleaccess

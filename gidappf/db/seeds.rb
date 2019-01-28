@@ -100,7 +100,6 @@ aulas.each do |a|
       }
     ])
 end
-
 p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
 
 #############################################################################
@@ -127,7 +126,6 @@ p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
         enabled: true,
       }])
   end
-
   p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
 
   ##########################################################################
@@ -144,7 +142,6 @@ p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
         }
       ])
   end
-
   p "[GIDAPPF] Creadas #{TimeSheet.count} Aulas"
 
   ############################################################################

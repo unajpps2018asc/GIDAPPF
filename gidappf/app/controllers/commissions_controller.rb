@@ -40,7 +40,8 @@ class CommissionsController < ApplicationController
   #           2)Asociacion un usuario a muchas comisiones registrada         #
   #             en el modelo.                                                #
   # Devolución: Nuevo registro de comision con los parametros del formulario #
-  #             y relacionado con el usuario actual como su creador.         #
+  #             y relacionado con el usuario actual como su creador, también #
+  #             entrega la redirección a la acción time_sheets_associate.    #
   ############################################################################
   # POST /commissions
   # POST /commissions.json

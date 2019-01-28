@@ -26,11 +26,15 @@ class TimeSheetsController < ApplicationController
   def show
   end
 
-  # GET /time_sheets/new
-  # def new
-  #   authorize @time_sheet = TimeSheet.new
-  # end
-
+  ##############################################################################
+  # Prerequisitos:                                                             #
+  #           1) Modelo de datos inicializado.                                 #
+  #           2)Asociacion un Commission a muchos TimeSheet registrada en el   #
+  #             modelo.                                                        #
+  #           3) Recepción de datos de Commission por parámetros url.          #
+  # Devolución: Registro de TimeSheet creado segun parametros del formulario,o #
+  #             sino el mensaje de error con detalles de validación.           #
+  ##############################################################################
   # GET /time_sheets/1/edit
   def edit
     params[:commission_id]=@time_sheet.commission_id.to_s
@@ -76,6 +80,14 @@ class TimeSheetsController < ApplicationController
     end
   end
 
+  ############################################################################
+  # Prerequisitos:                                                           #
+  #           1) Modelo de datos inicializado.                               #
+  #           2)Asociacion un Commission a muchos TimeSheet registrada en el #
+  #             modelo.                                                      #
+  # Devolución: Registro de TimeSheet creado segun parametros del formulario #
+  #             ,o sino el mensaje de error con detalles de validación.      #
+  ############################################################################
   def associate
     c=params[:commission_id]
     unless c.nil?
@@ -97,6 +109,14 @@ class TimeSheetsController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # Prerequisitos:                                                             #
+  #           1) Modelo de datos inicializado.                                 #
+  #           2)Asociacion un usuario a muchas comisiones registrada           #
+  #             en el modelo.                                                  #
+  # Devolución: Nuevos registro de TimeSheet con los parametros del formulario #
+  #             y relacionado con commissions encontradas por el algoritmo.    #
+  ##############################################################################
   def renew_all
     @sd=params[:sd]
     @ed=params[:ed]
@@ -129,6 +149,11 @@ class TimeSheetsController < ApplicationController
       params.require(:time_sheet).permit(:commission_id, :start_date, :end_date, :enabled)
     end
 
+    ###############################################################################
+    # Prerequisitos:                                                              #
+    #           1) Modelo de datos inicializado.                                  #
+    # Devolución: True si la sentencia es  cumplida por los registros, sino false #
+    ###############################################################################
     def create_period?(commission)
       x=TimeSheet.where(commission_id: commission, end_date:  1.month.after .. 10.years.after).where(enabled: true)
       x.nil? || x.empty?

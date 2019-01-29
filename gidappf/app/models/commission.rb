@@ -36,4 +36,12 @@ class Commission < ApplicationRecord
   #                          veces en la relación time_sheet                   #                                                       #
   ###########################################################################
   has_many :time_sheet, dependent: :delete_all
+
+  validate :check_date_interval
+
+  private
+
+  def check_date_interval
+    errors.add(:end_date, 'must be a valid datetime') unless Date.parse(end_date.to_s) > Date.parse(start_date.to_s)
+  end
 end

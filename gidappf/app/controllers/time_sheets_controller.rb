@@ -50,7 +50,9 @@ class TimeSheetsController < ApplicationController
         format.html { redirect_to @time_sheet, notice: 'Time sheet was successfully created.' }
         format.json { render :show, status: :created, location: @time_sheet }
       else
-        format.html { render :new }
+        params[:commission_id]=@time_sheet.commission_id.to_s
+        params[:commission_name]=Commission.find(params[:commission_id].to_i).name
+        format.html { render :associate, params}
         format.json { render json: @time_sheet.errors, status: :unprocessable_entity }
       end
     end
@@ -92,9 +94,10 @@ class TimeSheetsController < ApplicationController
     c=params[:commission_id]
     unless c.nil?
       if create_period?(c) then
+        @commission=Commission.find(c)
         authorize @time_sheet = TimeSheet.new(
           commission_id: c,
-          end_date: Commission.find(c).end_date,
+          end_date: @commission.end_date,
           enabled: true
         )
       else

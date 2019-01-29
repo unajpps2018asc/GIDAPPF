@@ -38,6 +38,7 @@ class TimeSheetsController < ApplicationController
   # GET /time_sheets/1/edit
   def edit
     params[:commission_id]=@time_sheet.commission_id.to_s
+    params[:commission_name]=Commission.find(@time_sheet.commission_id).name
   end
 
   # POST /time_sheets

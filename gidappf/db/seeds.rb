@@ -105,52 +105,52 @@ p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
 #############################################################################
 # Aulas iniciales                                                           #
 #############################################################################
-  ClassRoomInstitute.destroy_all
-  aulas.each do |a|
-    ClassRoomInstitute.create!([
-      {
-        name: a[1],
-        description: "#{a[2]} para el aula.",
-        ubication: "Av. Ubicación Nº 1234",
-        available_from: Time.now,
-        available_to: gidappf_end_time,
-        available_monday: true,
-        available_tuesday: true,
-        available_wednesday: true,
-        available_thursday: true,
-        available_friday: true,
-        available_saturday: false,
-        available_sunday: false,
-        available_time: 24,
-        capacity: 812,
-        enabled: true,
-      }])
-  end
-  p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
+ClassRoomInstitute.destroy_all
+aulas.each do |a|
+  ClassRoomInstitute.create!([
+    {
+      name: a[1],
+      description: "#{a[2]} para el aula.",
+      ubication: "Av. Ubicación Nº 1234",
+      available_from: Time.now,
+      available_to: gidappf_end_time,
+      available_monday: true,
+      available_tuesday: true,
+      available_wednesday: true,
+      available_thursday: true,
+      available_friday: true,
+      available_saturday: false,
+      available_sunday: false,
+      available_time: 24,
+      capacity: 812,
+      enabled: true,
+    }])
+end
+p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
 
-  ##########################################################################
-  # Períodos de prueba                                                     #
-  ##########################################################################
-  TimeSheet.destroy_all
-  Commission.all.each do |a|
-    TimeSheet.create!([
-      {
-        commission_id: a.id,
-        start_date: Date.today,
-        end_date: 13.month.after,
-        enabled: true
-        }
-      ])
-  end
-  p "[GIDAPPF] Creadas #{TimeSheet.count} Aulas"
+##########################################################################
+# Períodos de prueba                                                     #
+##########################################################################
+TimeSheet.destroy_all
+Commission.all.each do |a|
+  TimeSheet.create!([
+    {
+      commission_id: a.id,
+      start_date: Date.today,
+      end_date: 13.month.after,
+      enabled: true
+      }
+    ])
+end
+p "[GIDAPPF] Creadas #{TimeSheet.count} Aulas"
 
-  ############################################################################
-  # Vacantes de Aulas                                                        #
-  ############################################################################
-  Vacancy.destroy_all
-  ClassRoomInstitute.all.each do |a|
-    12.times {|i|
-      Vacancy.create!([{class_room_institute_id: a.id, user_id: 1, commission_id: a.id+1, occupant: nil, enabled: true}])
-    }
-  end
-  p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes"
+############################################################################
+# Vacantes de Aulas                                                        #
+############################################################################
+Vacancy.destroy_all
+ClassRoomInstitute.all.each do |a|
+  12.times {|i|
+    Vacancy.create!([{class_room_institute_id: a.id, user_id: 1, occupant: nil, enabled: true}])
+  }
+end
+p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes"

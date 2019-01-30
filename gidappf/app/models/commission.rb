@@ -27,12 +27,6 @@ class Commission < ApplicationRecord
 
   ###########################################################################
   # Asociación uno a muchos: soporta que una comision sea asignada muchas   #
-  #                          veces en la relación vacancy                   #                                                       #
-  ###########################################################################
-  has_many :vacancy, dependent: :delete_all
-
-  ###########################################################################
-  # Asociación uno a muchos: soporta que una comision sea asignada muchas   #
   #                          veces en la relación time_sheet                   #                                                       #
   ###########################################################################
   has_many :time_sheet, dependent: :delete_all

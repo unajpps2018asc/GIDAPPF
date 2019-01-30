@@ -127,13 +127,16 @@ class TimeSheetsController < ApplicationController
     authorize @time_sheets=TimeSheet.where(start_date: 13.months.ago .. Date.today, end_date: 1.month.ago .. Date.today).where(enabled:true)
     respond_to do |format|
       unless @time_sheets.empty?||@sd.nil?||@ed.nil?||@sd>@ed
+        msg = 'Time sheets was successfully renewed.'
         @time_sheets.each do |e|
           if create_period?(e.commission_id) then
-            e.update(enabled: false)
             TimeSheet.new(commission_id: e.commission_id, start_date: @sd, end_date: @ed, enabled: true).save
+          else
+            msg << "Renewed previusly in #{e.commission.name}."
           end
+          e.update(enabled: false)
         end
-        format.html { redirect_to time_sheets_path, notice: 'Time sheets was successfully renewed.' }
+        format.html { redirect_to time_sheets_path, notice: msg }
         format.json { render :renew_all, status: :ok}
       else
         format.html { render :renew_all}

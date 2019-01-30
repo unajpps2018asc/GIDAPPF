@@ -186,8 +186,7 @@ class ClassRoomInstitutesController < ApplicationController
     end
     if y > 0 then y.times {|i|
       Vacancy.new(class_room_institute: @class_room_institute,
-        user: current_user, commission: Commission.first,
-        enabled: @class_room_institute.enabled).save}
+        user: current_user, enabled: @class_room_institute.enabled).save}
     elsif y < 0
       Vacancy.where(class_room_institute: @class_room_institute).limit(y.abs).destroy_all
     end

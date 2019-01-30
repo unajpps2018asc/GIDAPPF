@@ -3,13 +3,11 @@
 one:
   class_room_institute: one
   user: one
-  commission: one
   occupant: 1
   enabled: false
 
 two:
   class_room_institute: two
   user: two
-  commission: two
   occupant: 1
   enabled: false

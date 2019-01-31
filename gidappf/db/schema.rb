@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_150903) do
+ActiveRecord::Schema.define(version: 2019_01_30_212116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,17 @@ ActiveRecord::Schema.define(version: 2019_01_30_150903) do
 
   create_table "time_sheet_hours", force: :cascade do |t|
     t.bigint "time_sheet_id"
-    t.string "hs_from"
-    t.string "hs_to"
+    t.integer "from_hour"
+    t.integer "from_min"
+    t.integer "to_hour"
+    t.integer "to_min"
+    t.boolean "monday"
+    t.boolean "tuesday"
+    t.boolean "wednesday"
+    t.boolean "thursday"
+    t.boolean "friday"
+    t.boolean "saturday"
+    t.boolean "sunday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["time_sheet_id"], name: "index_time_sheet_hours_on_time_sheet_id"
@@ -110,10 +119,4 @@ ActiveRecord::Schema.define(version: 2019_01_30_150903) do
 
   add_foreign_key "commissions", "users"
   add_foreign_key "time_sheet_hours", "time_sheets"
-  add_foreign_key "time_sheets", "commissions"
-  add_foreign_key "usercommissionroles", "commissions"
-  add_foreign_key "usercommissionroles", "roles"
-  add_foreign_key "usercommissionroles", "users"
-  add_foreign_key "vacancies", "class_room_institutes"
-  add_foreign_key "vacancies", "users"
 end

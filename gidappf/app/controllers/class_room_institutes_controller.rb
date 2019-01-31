@@ -38,10 +38,18 @@ class ClassRoomInstitutesController < ApplicationController
   def new
     set_new
     @class_room_institute = ClassRoomInstitute.new
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+    end
   end
 
   # GET /class_room_institutes/1/edit
   def edit
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+    end
   end
 
   # POST /class_room_institutes

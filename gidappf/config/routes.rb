@@ -13,6 +13,7 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  resources :time_sheet_hours
   get 'time_sheets/associate'
   get 'time_sheets/renew_all'
   post 'time_sheets/renew_all'

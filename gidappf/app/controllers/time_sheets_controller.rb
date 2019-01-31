@@ -13,6 +13,7 @@
 ###########################################################################
 class TimeSheetsController < ApplicationController
   before_action :set_time_sheet, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, :with => :no_commission
 
   # GET /time_sheets
   # GET /time_sheets.json
@@ -83,14 +84,14 @@ class TimeSheetsController < ApplicationController
     end
   end
 
-  ############################################################################
-  # Prerequisitos:                                                           #
-  #           1) Modelo de datos inicializado.                               #
-  #           2)Asociacion un Commission a muchos TimeSheet registrada en el #
-  #             modelo.                                                      #
-  # Devolución: Registro de TimeSheet creado segun parametros del formulario #
-  #             ,o sino el mensaje de error con detalles de validación.      #
-  ############################################################################
+  #############################################################################
+  # Prerequisitos:                                                            #
+  #           1) Modelo de datos inicializado.                                #
+  #           2)Asociacion un Commission a muchos TimeSheet registrada en el  #
+  #             modelo.                                                       #
+  # Devolución: Registro de TimeSheet creado segun parametros del formulario, #
+  #             o sino el mensaje de error con detalles de validación.        #
+  #############################################################################
   def associate
     c=params[:commission_id]
     unless c.nil?
@@ -165,4 +166,14 @@ class TimeSheetsController < ApplicationController
       x=TimeSheet.where(commission_id: commission, end_date:  1.month.after .. 10.years.after).where(enabled: true)
       x.nil? || x.empty?
     end
+
+    #####################################################################
+    # Prerequisitos:                                                    #
+    #           1) Modelo de datos inicializado.                        #
+    # Devolución: Mensaje de Bootstrap con la redireccion a commissions #
+    #####################################################################
+    def no_commission
+      redirect_back fallback_location: '/commissions', allow_other_host: false, alert: 'Commission not exist'
+    end
+
 end

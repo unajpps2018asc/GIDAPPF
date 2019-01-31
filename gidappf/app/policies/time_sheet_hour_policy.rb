@@ -9,22 +9,21 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/app/policies/time_sheet_policy.rb               #
+# Archivo GIDAPPF/gidappf/app/policies/time_sheet_hour_policy.rb          #
 ###########################################################################
 
 ###########################################################################
-# Políticas de acceso pundit para que los períodos sean creados solo por  #
+# Políticas de acceso pundit para que los horarios sean creados solo por  #
 # los administradores y vistos por los secretarios, no por docentes y ni  #
 # estudiantes que estén asignados por la relación usercommisionrole.      #
 ###########################################################################
-class TimeSheetPolicy < ApplicationPolicy
-  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción index definida en TimeSheetController                  #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 30.0                       #
-  ##############################################################################
+class TimeSheetHourPolicy < ApplicationPolicy
+  #####################################################################
+  # Prerequisitos:                                                    #
+  #           1) Acción index definida en TimeSheetHourController     #
+  #           1) Setear el valorde GIDAPPF_SYSADMIN                   #
+  # Devolución: idem show                                             #
+  #####################################################################
   def index?
     show?
   end
@@ -100,7 +99,7 @@ class TimeSheetPolicy < ApplicationPolicy
 
   ##############################################################################
   # Prerequisitos:                                                             #
-  #           1) Acción update definida en RolesController                     #
+  #           1) Acción update definida en TimeSheetHourController             #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
   # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
   #             es true o si @roleaccess es mayor a 20.0                       #
@@ -111,7 +110,7 @@ class TimeSheetPolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción destroy definida en CommissionsController           #
+  #           1) Acción destroy definida en TimeSheetHourController         #
   # Devolución: delega el valor de update, para borrar roles                #
   ###########################################################################
   def destroy?
@@ -120,7 +119,7 @@ class TimeSheetPolicy < ApplicationPolicy
 
   #############################################################################
   # Prerequisitos:                                                            #
-  #           1) Acción create definida en RolesController                    #
+  #           1) Acción create definida en TimeSheetHourController            #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                           #
   # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin  #
   #             es true o si @roleaccess es mayor a 30.0                      #
@@ -129,14 +128,6 @@ class TimeSheetPolicy < ApplicationPolicy
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
-  end
-
-  def associate?
-    create?
-  end
-
-  def renew_all?
-    create?
   end
 
 end

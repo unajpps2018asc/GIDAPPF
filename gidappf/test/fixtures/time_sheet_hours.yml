@@ -2,10 +2,28 @@
 
 one:
   time_sheet: one
-  hs_from: MyString
-  hs_to: MyString
+  from_hour: 1
+  from_min: 1
+  to_hour: 1
+  to_min: 1
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  sunday: false
 
 two:
   time_sheet: two
-  hs_from: MyString
-  hs_to: MyString
+  from_hour: 1
+  from_min: 1
+  to_hour: 1
+  to_min: 1
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  sunday: false

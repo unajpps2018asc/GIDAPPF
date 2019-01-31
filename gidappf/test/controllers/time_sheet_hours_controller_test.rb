@@ -1,0 +1,87 @@
+require 'test_helper'
+
+class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
+  # Libreria que provee de la autenticacion
+  include Devise::Test::IntegrationHelpers
+
+  setup do
+    @time_sheet_hour = time_sheet_hours(:one)
+    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    @auth_h_tsh = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+  end
+
+  test "should get index" do
+    get time_sheet_hours_url, headers: @auth_h_tsh
+    assert_response :success
+  end
+
+  test "should get new" do
+    get new_time_sheet_hour_url, headers: @auth_h_tsh
+    assert_response :success
+  end
+
+  test "should create time_sheet_hour" do
+    sign_in users(:one)
+    assert_difference('TimeSheetHour.count') do
+      post time_sheet_hours_url, params: {
+        time_sheet_hour: {
+          friday: @time_sheet_hour.friday,
+          from_hour: @time_sheet_hour.from_hour,
+          to_hour: @time_sheet_hour.to_hour,
+          from_min: @time_sheet_hour.from_min,
+          to_min: @time_sheet_hour.to_min,
+          monday: @time_sheet_hour.monday,
+          saturday: @time_sheet_hour.saturday,
+          sunday: @time_sheet_hour.sunday,
+          thursday: @time_sheet_hour.thursday,
+          time_sheet_id: @time_sheet_hour.time_sheet_id,
+          tuesday: @time_sheet_hour.tuesday,
+          wednesday: @time_sheet_hour.wednesday
+          } }
+    end
+    assert_redirected_to time_sheet_hour_url(TimeSheetHour.last), headers: @auth_h_tsh
+    sign_out :one
+  end
+
+  test "should show time_sheet_hour" do
+    get time_sheet_hour_url(@time_sheet_hour), headers: @auth_h_tsh
+    assert_response :success
+  end
+
+  test "should get edit" do
+    get edit_time_sheet_hour_url(@time_sheet_hour), headers: @auth_h_tsh
+    assert_response :success
+  end
+
+  test "should update time_sheet_hour" do
+    sign_in users(:one)
+    patch time_sheet_hour_url(@time_sheet_hour),
+    params: {
+      time_sheet_hour: {
+        friday: @time_sheet_hour.friday,
+        from_hour: @time_sheet_hour.from_hour,
+        from_min: @time_sheet_hour.from_min,
+        monday: @time_sheet_hour.monday,
+        saturday: @time_sheet_hour.saturday,
+        sunday: @time_sheet_hour.sunday,
+        thursday: @time_sheet_hour.thursday,
+        time_sheet_id: @time_sheet_hour.time_sheet_id,
+        to_hour: @time_sheet_hour.to_hour,
+        to_min: @time_sheet_hour.to_min,
+        tuesday: @time_sheet_hour.tuesday,
+        wednesday: @time_sheet_hour.wednesday
+        } }
+    assert_redirected_to time_sheet_hour_url(@time_sheet_hour)
+    sign_out :one
+  end
+
+  test "should destroy time_sheet_hour" do
+    sign_in users(:one)
+    assert_difference('TimeSheetHour.count', -1) do
+      delete time_sheet_hour_url(@time_sheet_hour), headers: @auth_h_tsh
+    end
+
+    assert_response :no_content
+    sign_out :one
+  end
+end

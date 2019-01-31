@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Time sheet:</strong>
+  <%= @time_sheet_hour.time_sheet %>
+</p>
+
+<p>
+  <strong>From hour:</strong>
+  <%= @time_sheet_hour.from_hour %>
+</p>
+
+<p>
+  <strong>From min:</strong>
+  <%= @time_sheet_hour.from_min %>
+</p>
+
+<p>
+  <strong>To hour:</strong>
+  <%= @time_sheet_hour.to_hour %>
+</p>
+
+<p>
+  <strong>To min:</strong>
+  <%= @time_sheet_hour.to_min %>
+</p>
+
+<p>
+  <strong>Monday:</strong>
+  <%= @time_sheet_hour.monday %>
+</p>
+
+<p>
+  <strong>Tuesday:</strong>
+  <%= @time_sheet_hour.tuesday %>
+</p>
+
+<p>
+  <strong>Wednesday:</strong>
+  <%= @time_sheet_hour.wednesday %>
+</p>
+
+<p>
+  <strong>Thursday:</strong>
+  <%= @time_sheet_hour.thursday %>
+</p>
+
+<p>
+  <strong>Friday:</strong>
+  <%= @time_sheet_hour.friday %>
+</p>
+
+<p>
+  <strong>Saturday:</strong>
+  <%= @time_sheet_hour.saturday %>
+</p>
+
+<p>
+  <strong>Sunday:</strong>
+  <%= @time_sheet_hour.sunday %>
+</p>
+
+<%= link_to 'Edit', edit_time_sheet_hour_path(@time_sheet_hour) %> |
+<%= link_to 'Back', time_sheet_hours_path %>

@@ -154,3 +154,17 @@ ClassRoomInstitute.all.each do |a|
   }
 end
 p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes"
+
+##########################################################################
+# Horario de la comision inicial                                         #
+##########################################################################
+TimeSheetHour.destroy_all
+TimeSheetHour.create!([
+  {
+    time_sheet_id: TimeSheet.first.id,
+    from_hour: 0, from_min: 0, to_hour: 0, to_min: 0,
+    monday: true, tuesday: true, wednesday: true, thursday: true,
+    friday: true, saturday: true, sunday: true
+  }
+])
+p "[GIDAPPF] Creado #{TimeSheetHour.count} Horario de ingresantes"

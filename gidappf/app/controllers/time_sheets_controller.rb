@@ -40,6 +40,10 @@ class TimeSheetsController < ApplicationController
   def edit
     params[:commission_id]=@time_sheet.commission_id.to_s
     params[:commission_name]=Commission.find(@time_sheet.commission_id).name
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+    end
   end
 
   # POST /time_sheets

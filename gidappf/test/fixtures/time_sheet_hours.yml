@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  vacancy: one
   time_sheet: one
   from_hour: 1
   from_min: 1
@@ -16,6 +17,7 @@ one:
 
 two:
   time_sheet: two
+  vacancy: two
   from_hour: 1
   from_min: 1
   to_hour: 1

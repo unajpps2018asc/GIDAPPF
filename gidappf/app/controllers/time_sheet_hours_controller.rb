@@ -76,6 +76,6 @@ class TimeSheetHoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_sheet_hour_params
-      params.require(:time_sheet_hour).permit(:time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+      params.require(:time_sheet_hour).permit(:vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
     end
 end

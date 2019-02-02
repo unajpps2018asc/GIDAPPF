@@ -25,16 +25,17 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
     assert_difference('TimeSheetHour.count') do
       post time_sheet_hours_url, params: {
         time_sheet_hour: {
-          friday: @time_sheet_hour.friday,
+          time_sheet_id: @time_sheet_hour.time_sheet_id,
+          vacancy_id: @time_sheet_hour.vacancy_id,
           from_hour: @time_sheet_hour.from_hour,
           to_hour: @time_sheet_hour.to_hour,
           from_min: @time_sheet_hour.from_min,
           to_min: @time_sheet_hour.to_min,
           monday: @time_sheet_hour.monday,
-          saturday: @time_sheet_hour.saturday,
           sunday: @time_sheet_hour.sunday,
           thursday: @time_sheet_hour.thursday,
-          time_sheet_id: @time_sheet_hour.time_sheet_id,
+          friday: @time_sheet_hour.friday,
+          saturday: @time_sheet_hour.saturday,
           tuesday: @time_sheet_hour.tuesday,
           wednesday: @time_sheet_hour.wednesday
           } }

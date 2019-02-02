@@ -5,7 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Time sheet</th>
+      <th>Commission</th>
+      <th>Vacancy</th>
       <th>From hour</th>
       <th>From min</th>
       <th>To hour</th>
@@ -24,7 +25,8 @@
   <tbody>
     <% @time_sheet_hours.each do |time_sheet_hour| %>
       <tr>
-        <td><%= time_sheet_hour.time_sheet %></td>
+        <td><%= time_sheet_hour.time_sheet.commission.name %></td>
+        <td><%= time_sheet_hour.vacancy.occupant %></td>
         <td><%= time_sheet_hour.from_hour %></td>
         <td><%= time_sheet_hour.from_min %></td>
         <td><%= time_sheet_hour.to_hour %></td>

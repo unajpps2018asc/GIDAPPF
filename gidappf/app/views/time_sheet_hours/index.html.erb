@@ -1,5 +1,35 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Commissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Commission</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Select</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @time_sheets.each do |time_sheet| %>
+      <tr>
+        <td><%= time_sheet.commission.name %></td>
+        <td><%= time_sheet.start_date.strftime("%v") %></td>
+        <td><%= time_sheet.end_date.strftime("%v") %></td>
+        <td><%= check_box("puppy", "gooddog", {}, true, false) %></td>
+        <td><%= link_to 'Show', time_sheet %></td>
+        <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
+        <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Time Sheet Hour', nil %>
+<br>
 <h1>Time Sheet Hours</h1>
 
 <table>
@@ -7,10 +37,7 @@
     <tr>
       <th>Commission</th>
       <th>Vacancy</th>
-      <th>From hour</th>
-      <th>From min</th>
-      <th>To hour</th>
-      <th>To min</th>
+      <th>Hour occupied</th>
       <th>Monday</th>
       <th>Tuesday</th>
       <th>Wednesday</th>
@@ -27,17 +54,14 @@
       <tr>
         <td><%= time_sheet_hour.time_sheet.commission.name %></td>
         <td><%= time_sheet_hour.vacancy.occupant %></td>
-        <td><%= time_sheet_hour.from_hour %></td>
-        <td><%= time_sheet_hour.from_min %></td>
-        <td><%= time_sheet_hour.to_hour %></td>
-        <td><%= time_sheet_hour.to_min %></td>
-        <td><%= time_sheet_hour.monday %></td>
-        <td><%= time_sheet_hour.tuesday %></td>
-        <td><%= time_sheet_hour.wednesday %></td>
-        <td><%= time_sheet_hour.thursday %></td>
-        <td><%= time_sheet_hour.friday %></td>
-        <td><%= time_sheet_hour.saturday %></td>
-        <td><%= time_sheet_hour.sunday %></td>
+        <td><%= occupied_hour_fmt(time_sheet_hour) %></td>
+        <td><%= hours_free(time_sheet_hour.vacancy.class_room_institute,0) %></td>
+        <td><%= hours_free(time_sheet_hour.vacancy.class_room_institute,1) %></td>
+        <td><%= hours_free(time_sheet_hour.vacancy.class_room_institute,2) %></td>
+        <td><%= hours_free(time_sheet_hour.vacancy.class_room_institute,3) %></td>
+        <td><%= hours_free(time_sheet_hour.vacancy.class_room_institute,4) %></td>
+        <td><%= hours_free(time_sheet_hour.vacancy.class_room_institute,5) %></td>
+        <td><%= hours_free(time_sheet_hour.vacancy.class_room_institute,6) %></td>
         <td><%= link_to 'Show', time_sheet_hour %></td>
         <td><%= link_to 'Edit', edit_time_sheet_hour_path(time_sheet_hour) %></td>
         <td><%= link_to 'Destroy', time_sheet_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>

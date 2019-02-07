@@ -63,11 +63,11 @@ newuser = User.new({email: 'john@example.com', password: aux, password_confirmat
 newuser.save
 
 ###########################################################################
-# Array auxiliar Array.new(4) {|i| i.to_s } #=> ["0", "1", "2", "3"]
+# Array auxiliar                                                          #
 ###########################################################################
 aulas=Array.new
 4.times {|i|
-  e=[i+1,"Aula #{i+1}","Descripción nro. #{i+1} generada automáticamente"]
+  e=[i+1,"estudiantes#{i+1}","Descripción nro. #{i+1} generada automáticamente"]
   aulas.push(e)
 }
 
@@ -109,7 +109,7 @@ ClassRoomInstitute.destroy_all
 aulas.each do |a|
   ClassRoomInstitute.create!([
     {
-      name: a[1],
+      name: "Aula de #{a[1]}",
       description: "#{a[2]} para el aula.",
       ubication: "Av. Ubicación Nº 1234",
       available_from: Time.now,

@@ -279,10 +279,14 @@ class TimeSheetHoursController < ApplicationController
       end#todos los horarios que ocupan tiempo en cada aula#
       w=days_week_available(class_room_institute)
       if w[day_order] then
-        i=0
-        while i<1440 do
-          hole << nil
-          i+=1
+        k=0
+        while k<1440 do
+          if from_min_day <= k && k < to_min_day then
+            hole << nil
+          else
+            hole << -1
+          end
+          k+=1
         end
         time_sheet_hours.each do |time_sheet_hour|
           tw=hour_week(time_sheet_hour)

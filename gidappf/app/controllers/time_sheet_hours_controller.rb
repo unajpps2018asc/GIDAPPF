@@ -20,8 +20,16 @@ class TimeSheetHoursController < ApplicationController
   # GET /time_sheet_hours.json
   def index
     authorize @time_sheet_hours = TimeSheetHour.all
+    arr=Array.new
+    @time_sheet_hours.each do |t|
+      unless t.from_hour == 0 && t.from_min == 0 && t.to_hour == 0 && t.to_min == 0 then
+        arr << t
+      end
+    end#todos los horarios que ocupan tiempo en cada aula#
+    @time_sheet_hours=arr
     @time_sheets = TimeSheet.where(end_date: Date.today .. 15.month.after).where(enabled:true)
     @class_room_institutes = ClassRoomInstitute.where(enabled:true)
+    @arr=Array.new
   end#index
 
   # GET /time_sheet_hours/1

@@ -19,7 +19,7 @@
         <td><%= time_sheet.commission.name %></td>
         <td><%= time_sheet.start_date.strftime("%v") %></td>
         <td><%= time_sheet.end_date.strftime("%v") %></td>
-        <td><%= check_box("puppy", "gooddog", {}, true, false) %></td>
+        <td><%= check_box_tag 'accept' %></td>
         <td><%= link_to 'Show', time_sheet %></td>
         <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
         <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -53,13 +53,9 @@
       <tr>
         <td><%= class_room_institute.name %></td>
         <td><%= class_room_institute.ubication %></td>
-        <td><%= hours_free(class_room_institute,0) %></td>
-        <td><%= hours_free(class_room_institute,1) %></td>
-        <td><%= hours_free(class_room_institute,2) %></td>
-        <td><%= hours_free(class_room_institute,3) %></td>
-        <td><%= hours_free(class_room_institute,4) %></td>
-        <td><%= hours_free(class_room_institute,5) %></td>
-        <td><%= hours_free(class_room_institute,6) %></td>
+        <% 7.times do |i_day|%>
+          <td><%= hours_free(class_room_institute,i_day) %></td>
+        <% end %>
         <td><%= link_to 'Show', class_room_institute %></td>
         <td><%= link_to 'Edit', edit_class_room_institute_path(class_room_institute) %></td>
         <td><%= link_to 'Destroy', class_room_institute, method: :delete, data: { confirm: 'Are you sure?' } %></td>

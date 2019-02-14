@@ -1,42 +1,10 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Commissions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Commission</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th>Select</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @time_sheets.each do |time_sheet| %>
-      <tr>
-        <td><%= time_sheet.commission.name %></td>
-        <td><%= time_sheet.start_date.strftime("%v") %></td>
-        <td><%= time_sheet.end_date.strftime("%v") %></td>
-        <td><%= check_box_tag 'accept' %></td>
-        <td><%= link_to 'Show', time_sheet %></td>
-        <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
-        <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-<%= link_to 'New Time Sheet Hour', nil %>
-<br>
 <h1>Class Room Institutes</h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Ubication</th>
       <th>Monday</th>
       <th>Tuesday</th>
       <th>Wednesday</th>
@@ -52,9 +20,8 @@
     <% @class_room_institutes.each do |class_room_institute| %>
       <tr>
         <td><%= class_room_institute.name %></td>
-        <td><%= class_room_institute.ubication %></td>
         <% 7.times do |i_day|%>
-          <td><%= hours_free(class_room_institute,i_day) %></td>
+          <td><%= class_room_institute.free_time(i_day) %></td>
         <% end %>
         <td><%= link_to 'Show', class_room_institute %></td>
         <td><%= link_to 'Edit', edit_class_room_institute_path(class_room_institute) %></td>
@@ -65,6 +32,21 @@
 </table>
 
 <br>
+<%= form_with url: time_sheet_hours_path do |form| %>
+  <div class="field">
+    <%= form.label "Class room institutes" %>
+    <%= form.collection_check_boxes :class_room_institutes_chk, @class_room_institutes, :id, :to_list do |b|%>
+      <div> <%= b.check_box %><%= b.label { b.text } %></div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Commissions" %>
+    <%= form.collection_check_boxes :commissions_chk, @time_sheets, :id, :to_list do |b| %>
+      <div> <%= b.check_box %><%= b.label { b.text } %></div>
+    <% end %>
+  </div>
+<% end %>
 
 <h1>Time Sheet Hours</h1>
 
@@ -90,7 +72,7 @@
       <tr>
         <td><%= time_sheet_hour.time_sheet.commission.name %></td>
         <td><%= time_sheet_hour.vacancy.occupant %></td>
-        <td><%= occupied_hour_fmt(time_sheet_hour) %></td>
+        <td><%= time_sheet_hour.occupied_hour_fmt %></td>
         <td><%= if time_sheet_hour.monday then '✓' end %></td>
         <td><%= if time_sheet_hour.tuesday then '✓' end %></td>
         <td><%= if time_sheet_hour.wednesday then '✓' end %></td>

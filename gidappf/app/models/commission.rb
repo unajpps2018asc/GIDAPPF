@@ -27,7 +27,7 @@ class Commission < ApplicationRecord
 
   ###########################################################################
   # Asociación uno a muchos: soporta que una comision sea asignada muchas   #
-  #                          veces en la relación time_sheet                   #                                                       #
+  #                          veces en la relación time_sheet                #                                                       #
   ###########################################################################
   has_many :time_sheet, dependent: :delete_all
 
@@ -35,6 +35,9 @@ class Commission < ApplicationRecord
 
   private
 
+  #######################################################################
+  # Usado en la validacion.                                             #
+  #######################################################################
   def check_date_interval
     errors.add(:end_date, 'must be a valid datetime') unless Date.parse(end_date.to_s) > Date.parse(start_date.to_s)
   end

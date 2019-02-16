@@ -21,14 +21,14 @@ class TimeSheetHoursController < ApplicationController
     @time_sheet_hours -= @time_sheet_hours.where(from_hour: 0, from_min: 0, to_hour: 0, to_min: 0)
     @time_sheets = TimeSheet.where(end_date: Date.today .. 15.month.after).where(enabled:true)
     @class_room_institutes = ClassRoomInstitute.where(enabled:true)
-    if !params[:ids_cri].nil? then
-      TimeSheetHourObject.instance.elements << params[:ids_cri].to_i
-    elsif params[:ids_cri].nil? then
+    if !params[:map_sel].nil? then
+      array_to_hash
+    elsif params[:map_sel].nil? then
       unless TimeSheetHourObject.instance.nil? || TimeSheetHourObject.instance.elements.nil?
         TimeSheetHourObject.instance.elements.clear
       end
     end
-    @ids_cri=TimeSheetHourObject.instance
+    @map_sel=TimeSheetHourObject.instance
   end#index
 
   # GET /time_sheet_hours/1
@@ -93,13 +93,24 @@ class TimeSheetHoursController < ApplicationController
   end#destroy
 
   def multiple_new
-    @class_room_institutes_chk = params[:class_room_institutes_chk]
-    @commissions_chk = params[:commissions_chk]
-    # respond_to do |format|
-    #   format.html { redirect_to time_sheet_hours_url, notice: 'Multiple new.' }
-    #   format.json { head :no_content }
-    # end
+    # @class_room_institutes_chk = params[:class_room_institutes_chk]
+    # @commissions_chk = params[:commissions_chk]
+    respond_to do |format|
+      format.html {
+        # redirect_to time_sheet_hours_url, notice: 'Multiple new.' 
+      }
+      format.json { head :no_content }
+    end
   end
+
+  def disable_cri(cri_id)
+    unless @map_sel.nil?||@map_sel.elements.nil? then
+      !@map_sel.elements["id_cri#{cri_id}"].nil?
+    else
+      false
+    end
+  end
+  helper_method :disable_cri
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -110,6 +121,15 @@ class TimeSheetHoursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_sheet_hour_params
       params.require(:time_sheet_hour).permit(:vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+    end
+
+    def array_to_hash
+      unless params[:map_sel].nil? then
+        tomap=params[:map_sel]
+        unless tomap.empty? then
+          TimeSheetHourObject.instance.elements[tomap.first]=tomap.last
+        end
+      end
     end
 
 end#class

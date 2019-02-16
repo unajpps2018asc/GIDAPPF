@@ -69,7 +69,7 @@
   </tbody>
 </table>
 <br>
-<h1>Class Room Institutes <%= unless @ids_cri.nil?||@ids_cri.elements.nil? then @ids_cri.elements end %></h1>
+<h1>Class Room Institutes <%= unless @map_sel.nil?||@map_sel.elements.nil? then @map_sel.elements end %></h1>
 
 <table>
   <thead>
@@ -90,7 +90,7 @@
   <tbody>
     <% @class_room_institutes.each do |class_room_institute| %>
       <tr>
-        <td><%= button_to( class_room_institute.name, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => unless @ids_cri.nil?||@ids_cri.elements.nil? then @ids_cri.elements.include? class_room_institute.id else false end) %></td>
+        <td><%= button_to( class_room_institute.name, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
         <td><%= class_room_institute.ubication %></td>
         <% 7.times do |i_day|%>
           <td><%= class_room_institute.free_time(i_day) %></td>

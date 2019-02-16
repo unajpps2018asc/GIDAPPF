@@ -104,7 +104,15 @@ class ClassRoomInstitutesController < ApplicationController
   # GET /class_room_institutes/parametrize/1.json
   def parametrize
     respond_to do |format|
-      format.html { redirect_to time_sheet_hours_url(ids_cri: @class_room_institute.id.to_s), notice: "Class room institute #{@class_room_institute.name}."}
+      format.html {
+        redirect_to time_sheet_hours_url(
+          map_sel: [
+            "id_cri#{@class_room_institute.id}",
+            @class_room_institute.id.to_s
+            ]
+          ),
+          notice: "Class room institute #{@class_room_institute.name}."
+        }
       format.json { head :no_content }
     end
   end

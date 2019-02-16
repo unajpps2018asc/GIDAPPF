@@ -4,6 +4,10 @@ class TimeSheetHourObject
   attr_accessor :elements
 
   def initialize
-    @elements=Array.new
+    @elements = {}
+  end
+
+  def version
+    '0.0.1'
   end
 end

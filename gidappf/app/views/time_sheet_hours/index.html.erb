@@ -41,7 +41,7 @@
 
 <br>
 
-<%= link_to 'New Time Sheet Hour', new_time_sheet_hour_path %>
+<%= link_to 'New Time Sheet Hour', time_sheet_hours_multiple_new_url(to_hours_news: hash_to_arr) %>
 
 <h1>Commissions</h1>
 
@@ -58,7 +58,7 @@
   <tbody>
     <% @time_sheets.each do |time_sheet| %>
       <tr>
-        <td><%= button_to( time_sheet.commission.name, time_sheet, :method => :get, :disabled => false ) %></td>
+        <td><%= button_to( time_sheet.commission.name, parametrize_time_sheet_path(time_sheet), :method => :get, :disabled => disable_ts(time_sheet.id) ) %></td>
         <td><%= time_sheet.start_date.strftime("%v") %></td>
         <td><%= time_sheet.end_date.strftime("%v") %></td>
         <td><%= link_to 'Show', time_sheet %></td>

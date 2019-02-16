@@ -12,7 +12,7 @@
 # Archivo GIDAPPF/gidappf/app/controllers/time_sheets_controller.rb       #
 ###########################################################################
 class TimeSheetsController < ApplicationController
-  before_action :set_time_sheet, only: [:show, :edit, :update, :destroy]
+  before_action :set_time_sheet, only: [:show, :edit, :update, :destroy, :parametrize]
   rescue_from ActiveRecord::RecordNotFound, :with => :no_commission
 
   # GET /time_sheets
@@ -84,6 +84,23 @@ class TimeSheetsController < ApplicationController
     @time_sheet.destroy
     respond_to do |format|
       format.html { redirect_to time_sheets_url, notice: 'Time sheet was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  # GET /class_room_institutes/parametrize/1
+  # GET /class_room_institutes/parametrize/1.json
+  def parametrize
+    respond_to do |format|
+      format.html {
+        redirect_to time_sheet_hours_url(
+          map_sel: [
+            "id_ts#{@time_sheet.id}",
+            @time_sheet.id.to_s
+            ]
+          ),
+          notice: "TimeSheet #{@time_sheet.commission.name}."
+        }
       format.json { head :no_content }
     end
   end

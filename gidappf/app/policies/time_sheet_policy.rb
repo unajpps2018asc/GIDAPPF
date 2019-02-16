@@ -118,6 +118,15 @@ class TimeSheetPolicy < ApplicationPolicy
     create?
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción parametrize definida en TimeSheetController         #
+  # Devolución: delega el valor de create, para nuevas aulas                #
+  ###########################################################################
+  def parametrize?
+    show?
+  end
+
   #############################################################################
   # Prerequisitos:                                                            #
   #           1) Acción create definida en RolesController                    #

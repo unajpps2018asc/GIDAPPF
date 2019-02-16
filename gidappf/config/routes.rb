@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   get 'time_sheets/associate'
   get 'time_sheets/renew_all'
   post 'time_sheets/renew_all'
-  resources :time_sheets,only:[:create, :index, :show, :edit, :destroy, :update]
+  resources :time_sheets,only:[:create, :index, :show, :edit, :destroy, :update] do
+    member do
+      get 'parametrize'
+    end
+  end
   resources :vacancies
   resources :class_room_institutes do
     member do

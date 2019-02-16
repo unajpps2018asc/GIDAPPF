@@ -70,8 +70,13 @@ class ClassRoomInstitutePolicy < ApplicationPolicy
     create?
   end
 
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción parametrize definida en ClassRoomInsituteController #
+  # Devolución: delega el valor de create, para nuevas aulas                #
+  ###########################################################################
   def parametrize?
-    create?
+    show?
   end
   ###########################################################################
   # Prerequisitos:                                                          #

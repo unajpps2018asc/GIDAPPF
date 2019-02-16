@@ -22,7 +22,7 @@ class TimeSheetHoursController < ApplicationController
     @time_sheets = TimeSheet.where(end_date: Date.today .. 15.month.after).where(enabled:true)
     @class_room_institutes = ClassRoomInstitute.where(enabled:true)
     if !params[:map_sel].nil? then
-      array_to_hash
+      params_to_hash
     elsif params[:map_sel].nil? then
       unless TimeSheetHourObject.instance.nil? || TimeSheetHourObject.instance.elements.nil?
         TimeSheetHourObject.instance.elements.clear
@@ -93,12 +93,14 @@ class TimeSheetHoursController < ApplicationController
   end#destroy
 
   def multiple_new
-    # @class_room_institutes_chk = params[:class_room_institutes_chk]
-    # @commissions_chk = params[:commissions_chk]
+    c=params[:to_hours_news]
+    unless c.nil? then
+
+    else
+      redirect_back fallback_location: '/', allow_other_host: false, notice: 'Select any pair commission, class_room_institute'
+    end
     respond_to do |format|
-      format.html {
-        # redirect_to time_sheet_hours_url, notice: 'Multiple new.' 
-      }
+      format.html { }
       format.json { head :no_content }
     end
   end
@@ -112,6 +114,15 @@ class TimeSheetHoursController < ApplicationController
   end
   helper_method :disable_cri
 
+  def disable_ts(ts_id)
+    unless @map_sel.nil?||@map_sel.elements.nil? then
+      !@map_sel.elements["id_ts#{ts_id}"].nil?
+    else
+      false
+    end
+  end
+  helper_method :disable_ts
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_time_sheet_hour
@@ -123,13 +134,21 @@ class TimeSheetHoursController < ApplicationController
       params.require(:time_sheet_hour).permit(:vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
     end
 
-    def array_to_hash
+    def params_to_hash
       unless params[:map_sel].nil? then
         tomap=params[:map_sel]
-        unless tomap.empty? then
+        unless tomap.empty? && !TimeSheetHourObject.instance.elements[tomap.first].nil? then
           TimeSheetHourObject.instance.elements[tomap.first]=tomap.last
         end
       end
     end
 
+    def hash_to_arr
+      arr=[]
+      TimeSheetHourObject.instance.elements.each do |key, value|
+        arr << [key,value]
+      end
+      arr
+    end
+    helper_method :hash_to_arr
 end#class

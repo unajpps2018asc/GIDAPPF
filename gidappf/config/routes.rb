@@ -13,13 +13,18 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  get 'time_sheet_hours/multiple_new'
   resources :time_sheet_hours
   get 'time_sheets/associate'
   get 'time_sheets/renew_all'
   post 'time_sheets/renew_all'
   resources :time_sheets,only:[:create, :index, :show, :edit, :destroy, :update]
   resources :vacancies
-  resources :class_room_institutes
+  resources :class_room_institutes do
+    member do
+      get 'parametrize'
+    end
+  end
   devise_for :users, controllers: {
     registrations: 'user/registrations'
   }

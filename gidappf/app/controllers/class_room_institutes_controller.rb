@@ -14,7 +14,7 @@ require 'role_access'
 ###############################################################################
 class ClassRoomInstitutesController < ApplicationController
   include RoleAccess
-  before_action :set_class_room_institute, only: [:show, :edit, :update, :destroy]
+  before_action :set_class_room_institute, only: [:show, :edit, :update, :destroy, :parametrize]
 
   # GET /class_room_institutes
   # GET /class_room_institutes.json
@@ -96,6 +96,15 @@ class ClassRoomInstitutesController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to class_room_institutes_url, notice: 'Class room institute was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  # GET /class_room_institutes/parametrize/1
+  # GET /class_room_institutes/parametrize/1.json
+  def parametrize
+    respond_to do |format|
+      format.html { redirect_to time_sheet_hours_url(ids_cri: @class_room_institute.id.to_s), notice: "Class room institute #{@class_room_institute.name}."}
       format.json { head :no_content }
     end
   end

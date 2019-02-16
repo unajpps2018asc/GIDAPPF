@@ -21,7 +21,14 @@ class TimeSheetHoursController < ApplicationController
     @time_sheet_hours -= @time_sheet_hours.where(from_hour: 0, from_min: 0, to_hour: 0, to_min: 0)
     @time_sheets = TimeSheet.where(end_date: Date.today .. 15.month.after).where(enabled:true)
     @class_room_institutes = ClassRoomInstitute.where(enabled:true)
-    @arr=Array.new
+    if !params[:ids_cri].nil? then
+      TimeSheetHourObject.instance.elements << params[:ids_cri].to_i
+    elsif params[:ids_cri].nil? then
+      unless TimeSheetHourObject.instance.nil? || TimeSheetHourObject.instance.elements.nil?
+        TimeSheetHourObject.instance.elements.clear
+      end
+    end
+    @ids_cri=TimeSheetHourObject.instance
   end#index
 
   # GET /time_sheet_hours/1
@@ -84,6 +91,15 @@ class TimeSheetHoursController < ApplicationController
       format.json { head :no_content }
     end
   end#destroy
+
+  def multiple_new
+    @class_room_institutes_chk = params[:class_room_institutes_chk]
+    @commissions_chk = params[:commissions_chk]
+    # respond_to do |format|
+    #   format.html { redirect_to time_sheet_hours_url, notice: 'Multiple new.' }
+    #   format.json { head :no_content }
+    # end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

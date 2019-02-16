@@ -70,6 +70,9 @@ class ClassRoomInstitutePolicy < ApplicationPolicy
     create?
   end
 
+  def parametrize?
+    create?
+  end
   ###########################################################################
   # Prerequisitos:                                                          #
   #           1) Acción create definida en ClassRoomInsituteController      #

@@ -112,44 +112,4 @@ class CommissionsController < ApplicationController
   def commission_params
     params.require(:commission).permit(:name, :description, :start_date, :end_date)
   end
-
-  ##########################################################################
-  # Metodo privado para decodificar periodos y horarios en select          #
-  # Devuelve: @selection_period y @selection_hour con las frases asignadas #
-  #           segun el codigo interno de Vacancy y TimeSheet               #
-  ##########################################################################
-  def set_new
-    # @selection_hour = [
-    #   ['Desde 8 a 10 hs.', 810],['Desde 10 a 12 hs.', 1012],
-    #   ['Desde 12 a 14 hs.', 1214],['Desde 14 a 16 hs.', 1416],
-    #   ['Desde 16 a 18 hs.', 1618],['Desde 18 a 20 hs.', 1820],
-    #   ['Desde 20 a 22 hs.', 2022],['Desde 8 a 12 hs.', 812],
-    #   ['De 0 a 12 hs.', 12],['De 0 a 24 hs.', 24],
-    #   ['De 10 a 22 hs.', 1022],['De 16 a 24 hs.', 1624]
-    # ]
-  end
-
-  ##########################################################################
-  # Metodo privado para controlar el modelo TimeSheet                      #
-  # Devuelve: Intervalo de tiempo para generar un TimeSheet en @fdate y en #
-  #           @tdate                                                       #
-  ##########################################################################
-  def set_time_sheet
-    # ts = TimeSheet.find_by(commission: @commission)
-    # unless ts
-    #   @ts_start = Date.today
-    #   @ts_end = Date.today
-    # else
-      @ts_start = TimeSheet.find_by(commission: @commission).start_date
-      @ts_end = TimeSheet.find_by(commission: @commission).end_date
-    # end
-   end
-
-  ###############################################################################
-  # Metodo privado para controlar el modelo TimeSheetHour                       #
-  # Devuelve: Cantidad de instancias de vacantes asociadas con el aula segun el #
-  #           codigo de la capacidad guardado en la relacion                    #
-  ###############################################################################
-  def set_time_sheet_hour
-  end
 end

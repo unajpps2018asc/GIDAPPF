@@ -85,4 +85,10 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
     assert_response :no_content
     sign_out :one
   end
+
+  test "should get multiple_new" do
+    get time_sheet_hours_multiple_new_url, headers: @auth_h_tsh
+    assert_response :success
+  end
+
 end

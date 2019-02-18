@@ -11,15 +11,8 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :time_sheet_id %>
-    <%= form.text_field :time_sheet_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :vacancy_id %>
-    <%= form.text_field :vacancy_id %>
-  </div>
+  <%= form.hidden_field :time_sheet_id, value: params[:time_sheet_id] %>
+  <%= form.hidden_field :vacancy_id, value: params[:vacancy_id] %>
 
   <div class="field">
     <%= form.label :from_hour %>

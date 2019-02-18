@@ -66,6 +66,17 @@ class TimeSheetHoursController < ApplicationController
         format.json { render json: @time_sheet_hour.errors, status: :unprocessable_entity }
       end
     end
+    # respond_to do |format|
+    #   if @time_sheet_hour.save
+    #     format.html { redirect_to @time_sheet_hour, notice: "OK, thanks" }
+    #     format.json { render :show, status: :created, location: @time_sheet_hour }
+    #   else
+    #     format.html { render :multiple_new }
+    #     # format.json { render json: @time_sheet_hour.errors, status: :unprocessable_entity}
+    #     format.json { head :no_content}
+    #   end
+    # end
+    # rest_tsh(@arr,@time_sheet_hour)
   end#create
 
   # PATCH/PUT /time_sheet_hours/1
@@ -92,16 +103,34 @@ class TimeSheetHoursController < ApplicationController
     end
   end#destroy
 
+  # # GET /time_sheet_hours/multiple_new
+  # # GET /time_sheet_hours/multiple_new.json
   def multiple_new
-    c=params[:to_hours_news]
-    unless c.nil? then
-
-    else
-      redirect_back fallback_location: '/', allow_other_host: false, notice: 'Select any pair commission, class_room_institute'
-    end
+    arr=time_sheet_each_vacancy(get_ts_and_cri,"id_cri","id_ts")
+    time_sheet_hour=TimeSheetHour.new(
+        time_sheet_id: arr.last.first.id,
+        vacancy_id: arr.first.first.vacancy.first.id,
+        from_hour: params[:from_hour],
+        from_min: params[:from_min],
+        to_hour: params[:to_hour],
+        to_min: params[:to_min],
+        monday: params[:monday],
+        tuesday: params[:tuesday],
+        wednesday: params[:wednesday],
+        thursday: params[:thursday],
+        friday: params[:friday],
+        saturday: params[:saturday],
+        sunday: params[:sunday]
+      )
     respond_to do |format|
-      format.html { }
-      format.json { head :no_content }
+      unless !time_sheet_hour.save
+        msg = "Created TSH{ ts_id=#{arr.last.first.id} vac_id=#{arr.first.first.vacancy.first.id} fh=#{time_sheet_hour.from_hour} fm=#{time_sheet_hour.from_min} th=#{time_sheet_hour.to_hour} tm=#{time_sheet_hour.to_min} mo=#{time_sheet_hour.monday} tu=#{time_sheet_hour.tuesday} we=#{time_sheet_hour.wednesday} th=#{time_sheet_hour.thursday} fr=#{time_sheet_hour.friday} sa=#{time_sheet_hour.saturday} su=#{time_sheet_hour.sunday}}"
+        format.html { redirect_to time_sheet_hours_path, notice: msg }
+        format.json { render :renew_all, status: :ok}
+      else
+        format.html { render :multiple_new}
+        format.json { render json: time_sheet_hour.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -143,12 +172,78 @@ class TimeSheetHoursController < ApplicationController
       end
     end
 
-    def hash_to_arr
-      arr=[]
-      TimeSheetHourObject.instance.elements.each do |key, value|
-        arr << [key,value]
-      end
-      arr
+    def get_ts_and_cri
+      TimeSheetHourObject.instance.elements
     end
-    helper_method :hash_to_arr
+    helper_method :get_ts_and_cri
+
+    def time_sheet_each_vacancy(hash,kcri,kts)
+      out=nil
+      unless hash.nil? then
+        time_sheets=[]
+        class_room_institutes=[]
+        hash.each do |k,v|
+          if k.first(kcri.length).eql?(kcri) then
+            class_room_institutes.push(ClassRoomInstitute.find(v))
+          elsif k.first(kts.length).eql?(kts) then
+            time_sheets.push(TimeSheet.find(v))
+          end
+        end
+        if class_room_institutes.count == time_sheets.count then
+          out=[class_room_institutes, time_sheets]
+        end
+      end
+      out
+    end
+
+    def rest_tsh(cri_ts_arr,ref)
+      params[:notice]="Resto..."
+      vacancy_cri=[]
+      cri_ts_arr.first.each do |c|
+        vacancy_cri << c.vacancy
+      end
+      create_by_groups(cri_ts_arr.last, vacancy_cri ,ref)
+    end
+
+    def create_by_groups(ts_commission, vacancy_cri ,ref)
+      # if ts_commission.count == vacancy_cri.count then
+      vacancy_cri.each do |group_vacancy|
+        time_sheet_of_commission = ts_commission.shift
+        params[:notice]="Comision: #{time_sheet_of_commission.commission.name}"
+        group_vacancy.each do |v|
+          unless !TimeSheetHour.find_by(
+            time_sheet_id: time_sheet_of_commission.id,
+            vacancy_id: v.id,
+            from_min: ref.from_min,
+            to_hour: ref.to_hour,
+            to_min: ref.to_min,
+            monday: ref.monday,
+            tuesday: ref.tuesday,
+            wednesday: ref.wednesday,
+            thursday: ref.thursday,
+            friday: ref.friday,
+            saturday: ref.saturday,
+            sunday: ref.sunday
+          ).nil? then
+            TimeSheetHour.new(
+              time_sheet_id: time_sheet_of_commission.id,
+              vacancy_id: v.id,
+              from_hour: ref.from_hour,
+              from_min: ref.from_min,
+              to_hour: ref.to_hour,
+              to_min: ref.to_min,
+              monday: ref.monday,
+              tuesday: ref.tuesday,
+              wednesday: ref.wednesday,
+              thursday: ref.thursday,
+              friday: ref.friday,
+              saturday: ref.saturday,
+              sunday: ref.sunday
+            ).save
+          end
+        end
+      end
+      # end
+    end
+
 end#class

@@ -14,6 +14,7 @@
 
 Rails.application.routes.draw do
   get 'time_sheet_hours/multiple_new'
+  post 'time_sheet_hours/multiple_new'
   resources :time_sheet_hours
   get 'time_sheets/associate'
   get 'time_sheets/renew_all'

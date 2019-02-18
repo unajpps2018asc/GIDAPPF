@@ -1,25 +1,15 @@
-<%= form_with(model: time_sheet_hour, local: true) do |form| %>
-  <% if time_sheet_hour.errors.any? %>
+<%= form_with url: time_sheet_hours_multiple_new_path do |form| %>
+  <% if @time_sheet_hour.present? && @time_sheet_hour.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(time_sheet_hour.errors.count, "error") %> prohibited this time_sheet_hour from being saved:</h2>
+      <h2><%= pluralize(@time_sheet_hour.errors.count, "error") %> prohibited this time_sheet_hour from being saved:</h2>
 
       <ul>
-      <% time_sheet_hour.errors.full_messages.each do |message| %>
+      <% @time_sheet_hour.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :time_sheet_id %>
-    <%= form.number_field :time_sheet_id, :disabled => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :vacancy_id %>
-    <%= form.number_field :vacancy_id, :disabled => true %>
-  </div>
 
   <div class="field">
     <%= form.label :from_hour %>

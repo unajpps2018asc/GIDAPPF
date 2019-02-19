@@ -1,5 +1,5 @@
 <%= form_with url: time_sheet_hours_multiple_new_path do |form| %>
-  <% if @time_sheet_hour.present? && @time_sheet_hour.errors.any? %>
+  <% if @time_sheet_hour.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@time_sheet_hour.errors.count, "error") %> prohibited this time_sheet_hour from being saved:</h2>
 

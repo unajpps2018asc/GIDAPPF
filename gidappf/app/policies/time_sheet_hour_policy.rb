@@ -30,7 +30,7 @@ class TimeSheetHourPolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción edit definida en CommissionsController              #
+  #           1) Acción edit definida en TimeSheetHourController            #
   # Devolución: delega el valor de update, para editar roles                #
   ###########################################################################
   def edit?
@@ -39,7 +39,7 @@ class TimeSheetHourPolicy < ApplicationPolicy
 
   ##############################################################################
   # Prerequisitos:                                                             #
-  #           1) Acción update definida en RolesController                     #
+  #           1) Acción update definida en TimeSheetHourController             #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
   # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
   #             es true o si @roleaccess es mayor a 30.0                       #
@@ -50,7 +50,7 @@ class TimeSheetHourPolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción destroy definida en CommissionsController           #
+  #           1) Acción destroy definida en TimeSheetHourController         #
   # Devolución: delega el valor de update, para borrar roles                #
   ###########################################################################
   def destroy?
@@ -59,14 +59,15 @@ class TimeSheetHourPolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción new definida en CommissionsController               #
+  #           1) Acción new definida en TimeSheetHourController             #
   # Devolución: delega el valor de create, para nuevos roles                #
   ###########################################################################
-  def new?
+  def multiple_new?
     create?
-  end  ##############################################################################
+  end
+  ##############################################################################
   # Prerequisitos:                                                             #
-  #           1) Acción index definida en RolesController                      #
+  #           1) Acción index definida en TimeSheetHourController              #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
   # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
   #             es true o si @roleaccess es mayor a 20.0                       #

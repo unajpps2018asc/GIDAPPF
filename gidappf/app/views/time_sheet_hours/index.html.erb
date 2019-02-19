@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+
 <h1>Time Sheet Hours</h1>
 
 <table>
@@ -17,7 +18,6 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @time_sheet_hours.each do |time_sheet_hour| %>
       <tr>
@@ -38,67 +38,68 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New Time Sheet Hour', time_sheet_hours_multiple_new_url %>
-
-<h1>Commissions <%= @out %></h1>
-
+<h2>Options</h2>
 <table>
   <thead>
     <tr>
+      <th>ClassRoomInstitute</th>
       <th>Commission</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @time_sheets.each do |time_sheet| %>
-      <tr>
-        <td><%= button_to( time_sheet.commission.name, parametrize_time_sheet_path(time_sheet), :method => :get, :disabled => disable_ts(time_sheet.id) ) %></td>
-        <td><%= time_sheet.start_date.strftime("%v") %></td>
-        <td><%= time_sheet.end_date.strftime("%v") %></td>
-        <td><%= link_to 'Show', time_sheet %></td>
-        <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
-        <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-<h1>Class Room Institutes <%= unless @map_sel.nil?||@map_sel.elements.nil? then @map_sel.elements end %></h1>
-
-<table>
-  <thead>
     <tr>
-      <th>Name</th>
-      <th>Ubication</th>
-      <th>Monday</th>
-      <th>Tuesday</th>
-      <th>Wednesday</th>
-      <th>Thursday</th>
-      <th>Friday</th>
-      <th>Saturday</th>
-      <th>Sunday</th>
-      <th colspan="3"></th>
+      <td>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+              <th>Sunday</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @class_room_institutes.each do |class_room_institute| %>
+              <tr>
+                <td><%= button_to( class_room_institute.to_list, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
+                <% 7.times do |i_day|%>
+                  <td><%= class_room_institute.free_time(i_day) %></td>
+                <% end %>
+                <td><%= link_to 'Show', class_room_institute %></td>
+                <td><%= link_to 'Edit', edit_class_room_institute_path(class_room_institute) %></td>
+                <td><%= link_to 'Destroy', class_room_institute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @time_sheets.each do |time_sheet| %>
+              <tr>
+                <td><%= button_to( time_sheet.commission.name, parametrize_time_sheet_path(time_sheet), :method => :get, :disabled => disable_ts(time_sheet.id) ) %></td>
+                <td><%= link_to 'Show', time_sheet %></td>
+                <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
+                <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
     </tr>
-  </thead>
-
-  <tbody>
-    <% @class_room_institutes.each do |class_room_institute| %>
-      <tr>
-        <td><%= button_to( class_room_institute.name, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
-        <td><%= class_room_institute.ubication %></td>
-        <% 7.times do |i_day|%>
-          <td><%= class_room_institute.free_time(i_day) %></td>
-        <% end %>
-        <td><%= link_to 'Show', class_room_institute %></td>
-        <td><%= link_to 'Edit', edit_class_room_institute_path(class_room_institute) %></td>
-        <td><%= link_to 'Destroy', class_room_institute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
   </tbody>
 </table>
+<h2><%= link_to 'New Time Sheet Hour', time_sheet_hours_multiple_new_url %></h2>

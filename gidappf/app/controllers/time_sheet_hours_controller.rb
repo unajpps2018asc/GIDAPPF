@@ -36,15 +36,6 @@ class TimeSheetHoursController < ApplicationController
   def show
   end#show
 
-  # GET /time_sheet_hours/new
-  def new
-    authorize @time_sheet_hour = TimeSheetHour.new
-    respond_to do |format|
-      format.html { }
-      format.json { head :no_content }
-    end
-  end#new
-
   # GET /time_sheet_hours/1/edit
   def edit
     respond_to do |format|
@@ -96,7 +87,7 @@ class TimeSheetHoursController < ApplicationController
   def multiple_new
     arr=time_sheet_each_vacancy(get_ts_and_cri,"id_cri","id_ts")
     unless arr.nil? || arr.first.empty? || arr.last.empty? then
-      @time_sheet_hour=TimeSheetHour.new(
+      authorize @time_sheet_hour=TimeSheetHour.new(
           time_sheet_id: arr.last.first.id,
           vacancy_id: arr.first.first.vacancy.first.id,
           from_hour: params[:from_hour],

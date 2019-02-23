@@ -28,28 +28,40 @@ gidappf_end_time = Time.rfc3339('3000-12-31T14:00:00-10:00')
 Role.destroy_all
 Role.create!([
   {
-    name: "Ingresante",
-    description: "Usuario que comienza el tramite para participar del Plan Fines",
+    name: "Ingresante",#id1
+    description: "Comienza el tramite para participar del Plan Fines, se reserva el email. Cambio de clave, ya realizada.",
     created_at: gidappf_start_time,
     enabled: true, level: 10.0
   },
   {
-    name: "Estudiante",
+    name: "Estudiante",#id2
     description: "Usuario que participa de las cursadas y esta asignado al Plan Fines.",
     created_at: gidappf_start_time,
     enabled: true, level: 20.0
   },
   {
-    name: "Secretario",
+    name: "Secretario",#id3
     description: "Usuario planificador de las cursadas del Plan Fines.",
     created_at: gidappf_start_time,
     enabled: true, level: 30.0
   },
   {
-    name: "Administrador",
+    name: "Administrador",#id4
     description: "Usuario diseñador de las cursadas del Plan Fines.",
     created_at: gidappf_start_time,
     enabled: true, level: 40.0
+  },
+  {
+    name: "Autogestionado",#id5
+    description: "Usuario que se registra sin intervención de la administración.",
+    created_at: gidappf_start_time,
+    enabled: false, level: 0
+  },
+  {
+    name: "Ingresante",#id6
+    description: "Comienza el tramite para participar del Plan Fines, se reserva el email. Si trata de ingresar al sistema, accede al sistema de cambio de clave, ya que la clave es por defecto.",
+    created_at: gidappf_start_time,
+    enabled: false, level: 10.0
   }
 ])
 p "[GIDAPPF] Creados #{Role.count} Roles"

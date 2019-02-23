@@ -17,7 +17,8 @@ class TimeSheetHoursController < ApplicationController
   # GET /time_sheet_hours
   # GET /time_sheet_hours.json
   def index
-    authorize @time_sheet_hours = TimeSheetHour.all
+    @time_sheet_hours = TimeSheetHour.all
+    authorize @time_sheet_hours
     @time_sheet_hours -= @time_sheet_hours.where(from_hour: 0, from_min: 0, to_hour: 0, to_min: 0)
     @time_sheets = TimeSheet.where(end_date: Date.today .. 15.month.after).where(enabled:true)
     @class_room_institutes = ClassRoomInstitute.where(enabled:true)

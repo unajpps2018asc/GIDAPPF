@@ -18,7 +18,7 @@ class ClassRoomInstitutePolicy < ApplicationPolicy
   # Devolución: true, todos pueden listar aulas                             #
   ###########################################################################
   def index?
-    true
+    show?
   end
 
   ###########################################################################

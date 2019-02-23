@@ -25,7 +25,8 @@
                   onclick:
                     "$(document).ready(function() {
                       window.location.href='"+edit_usercommissionrole_path(id: u.id, radio_selected: r.id.to_s)+"'
-                    });"
+                    });",
+                :disabled => !r.enabled
                 )%>
               <%= label_tag(r.name) %>
             </td>

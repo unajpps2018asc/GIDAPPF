@@ -18,7 +18,8 @@ class TimeSheetsController < ApplicationController
   # GET /time_sheets
   # GET /time_sheets.json
   def index
-    authorize @time_sheets = TimeSheet.where(start_date: 13.months.ago .. Date.today, end_date: 1.month.ago .. Date.today).where(enabled:true)
+    @time_sheets = TimeSheet.where(start_date: 13.months.ago .. Date.today, end_date: 1.month.ago .. Date.today).where(enabled:true)
+    authorize @time_sheets
     @time_sheets1 = TimeSheet.all
   end
 

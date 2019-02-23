@@ -18,6 +18,7 @@ class CommissionsController < ApplicationController
   # GET /commissions.json
   def index
     @commissions = Commission.all
+    authorize @commissions
   end
 
   # GET /commissions/1

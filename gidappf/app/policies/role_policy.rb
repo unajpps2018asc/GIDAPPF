@@ -12,14 +12,14 @@
 # Archivo GIDAPPF/gidappf/app/policies/role_policy.rb                     #
 ###########################################################################
 class RolePolicy < ApplicationPolicy
-  
+
   ###########################################################################
   # Prerequisitos:                                                          #
   #           1) Acción index definida en RolesController                   #
   # Devolución: true, todos pueden listar roles                             #
   ###########################################################################
   def index?
-    true
+    show?
   end
 
   ###########################################################################
@@ -28,7 +28,9 @@ class RolePolicy < ApplicationPolicy
   # Devolución: true, todos pueden ver en detalle roles                     #
   ###########################################################################
   def show?
-    true
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>20.0
   end
 
   ###########################################################################

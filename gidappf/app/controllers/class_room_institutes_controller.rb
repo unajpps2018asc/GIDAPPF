@@ -27,6 +27,7 @@ class ClassRoomInstitutesController < ApplicationController
     else
       @class_room_institutes = ClassRoomInstitute.where(enabled: true)
     end
+    authorize @class_room_institutes
   end
 
   # GET /class_room_institutes/1

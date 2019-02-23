@@ -65,16 +65,6 @@ class TimeSheetHourPolicy < ApplicationPolicy
   def multiple_new?
     create?
   end
-  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción index definida en TimeSheetHourController              #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 20.0                       #
-  ##############################################################################
-  def index?
-    show?
-  end
 
   ##############################################################################
   # Prerequisitos:                                                             #

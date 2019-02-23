@@ -11,8 +11,16 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 # Archivo GIDAPPF/gidappf/app/models/user.rb                              #
 ###########################################################################
-
+# t.string "email", default: "", null: false
+# t.string "encrypted_password", default: "", null: false
+# t.string "reset_password_token"
+# t.datetime "reset_password_sent_at"
+# t.datetime "remember_created_at"
+# t.datetime "created_at", null: false
+# t.datetime "updated_at", null: false
+###########################################################################
 class User < ApplicationRecord
+  DEFAULTPASS = "1234gidappf"
 
   #############################################################################
   # Configuracion del control de autenticacion Devise                         #
@@ -27,9 +35,28 @@ class User < ApplicationRecord
   #############################################################################
   has_many :commission
 
-  ###########################################################################
-  # Asociación uno a muchos: soporta que un usuario sea asignada muchas     #
-  #                          veces en la relación usercommissionrole        #                                                       #
-  ###########################################################################
+  ##########################account######################################
+  # Asociación uno a muchos: soporta que un usuario sea asignada muchas #
+  #                          veces en la relación usercommissionrole    #
+  #######################################################################
   has_many :usercommissionrole
+
+  validate :minimun_security_requierements
+
+  ##########################account######################################
+  # Usado en la validacion.                                             #
+  #######################################################################
+  def minimun_security_requierements
+    errors.add(:password,'Is a default, please use another password...') unless is_usable_password?
+  end
+
+  #######################################################################################
+  # Prerequisitos: 1) Modelo inicializado.                                              #
+  #               2) Policy con la implementacion adecuada a las acciones desarrolladas.#
+  # Devolución: True si el password ingresado es aceptable.                             #
+  #######################################################################################
+  def is_usable_password?
+    !DEFAULTPASS.eql?(password)
+  end
+
 end

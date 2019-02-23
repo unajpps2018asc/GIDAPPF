@@ -24,6 +24,7 @@ class RolesController < ApplicationController
     else
       @roles = Role.where(enabled: true)
     end
+    authorize @roles
   end
 
   # GET /roles/1

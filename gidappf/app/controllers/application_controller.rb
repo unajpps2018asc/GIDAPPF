@@ -23,14 +23,22 @@ class ApplicationController < ActionController::Base
 
 		private
 
-		###########################################################################
-		# Algoritmo que  muestra el mensaje de intento no autorizado de acceso    #
-		# El mensaje lo carga automáticamente desde gidappf/config/locales/en.yml #
-		###########################################################################
+		#########################################################################################
+	  # Prerequisitos: 1) Modelo Role con instancia creada con level: 10, enabled: false.     #
+	  #               2) Policy con la implementacion adecuada a las acciones desarrolladas.  #
+	  # Devolución: Respuesta a la falta de acceso a la accion accedida, detectada. Se        #
+	  #             captura la exepción pundit y se redirige a cambio de password si la falta #
+	  #             de autorización se debe al password obsoleto                              #
+	  #########################################################################################
 		def user_not_authorized(exception)
 			policy_name = exception.policy.class.to_s.underscore
 
 			flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
-			redirect_to root_path
+			if current_user.usercommissionrole.first.role.id == Role.find_by(level: 10, enabled: false).id then
+				reset_session
+				redirect_to new_user_password_path, notice: "Enter email to change passsword..."
+			else
+				redirect_to root_path
+		  end
 		end
 end

@@ -26,7 +26,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   # Prerequisitos: 1) Valor de Rol Ingresante cargado en el id 4 de la tabla role #
   #               2) Setear el valor de la variable de entorno GIDAPPF_SYSADMIN   #
   # Devolución: Un usuario logueado y una relación de usercommissionrole asociado #
-  #             al valor de ingresante                                            #
+  #             al valor de administrador o autogestionado                        #
   #################################################################################
   # POST /resource
   def create
@@ -39,7 +39,7 @@ class User::RegistrationsController < Devise::RegistrationsController
       if u.id == 2 then
         rid=4
       else
-        rid=1
+        rid=5
       end
       Usercommissionrole.new(
         role_id: rid,user_id: u.id, commission_id: 1

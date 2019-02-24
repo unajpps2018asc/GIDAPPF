@@ -23,7 +23,7 @@
 gidappf_start_time = Time.rfc3339('1999-12-31T14:00:00-10:00')
 gidappf_end_time = Time.rfc3339('3000-12-31T14:00:00-10:00')
 ###########################################################################
-# Valores de Roles. Se debe jerarquizar a mayor id, mayor jerarquia       #
+# Valores de Roles. Se debe jerarquizar a mayor level, mayor jerarquia    #
 ###########################################################################
 Role.destroy_all
 Role.create!([

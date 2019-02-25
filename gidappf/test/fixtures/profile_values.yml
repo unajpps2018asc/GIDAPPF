@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: MyText
+  profile_key: one
+
+two:
+  value: MyText
+  profile_key: two

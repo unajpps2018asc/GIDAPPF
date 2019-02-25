@@ -55,7 +55,7 @@ Role.create!([
     name: "Autogestionado",#id5
     description: "Usuario que se registra sin intervención de la administración.",
     created_at: gidappf_start_time,
-    enabled: false, level: 0
+    enabled: false # level default 0
   },
   {
     name: "Ingresante",#id6
@@ -68,11 +68,14 @@ p "[GIDAPPF] Creados #{Role.count} Roles"
 
 ####################################################################################
 # Valores de bloqueo de usuario joho@example.com, accesible solo en RAILS_ENV=test #
+# Usuario student@gidappf.edu.ar que guarda la plantilla del perfil                #
 ####################################################################################
 User.destroy_all
-aux=Devise::Encryptor.digest(User,rand(5..30))
-newuser = User.new({email: 'john@example.com', password: aux, password_confirmation: aux})
-newuser.save
+LockEmail::LIST.each do |e|
+  aux=Devise::Encryptor.digest(User,rand(5..30))
+  User.new({email: e, password: aux, password_confirmation: aux}).save
+end
+p "[GIDAPPF] Creados #{User.count} usuarios de bloqueo"
 
 ###########################################################################
 # Array auxiliar                                                          #
@@ -183,3 +186,46 @@ Vacancy.all.each do |a|
   ])
   end
 p "[GIDAPPF] Creado #{TimeSheetHour.count} Horarios de ingresantes"
+
+######################################################################
+# Plantilla del perfil de alumno                                     #
+######################################################################
+Profile.destroy_all
+Profile.create!([
+    {
+      name: 'StudentProfile',
+      description: 'Any student template profile',
+      valid_from: gidappf_start_time,
+      valid_to: gidappf_end_time
+      }
+    ])
+
+p "[GIDAPPF] Creados #{Profile.count} Perfiles"
+
+Document.destroy_all
+Document.create!([
+    {
+      profile_id: Profile.first.id,
+      user_id: User.find_by(email: 'student@gidappf.edu.ar').id
+     }
+  ])
+
+p "[GIDAPPF] Creados #{Document.count} Documentos"
+
+ProfileKey.destroy_all
+ProfileKey.create!([
+    {
+      key: 'Nombre:',
+      profile_id: Profile.first.id
+    },{
+      key: 'Apellido:',
+      profile_id: Profile.first.id
+    },{
+      key: 'D.N.I.:',
+      profile_id: Profile.first.id
+    }
+])
+#User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(1).key es "Nombre"
+#User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(2).key es "Apellido"
+#User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(3).key es "DNI"
+p "[GIDAPPF] Creados #{ProfileKey.count} claves de perfil"

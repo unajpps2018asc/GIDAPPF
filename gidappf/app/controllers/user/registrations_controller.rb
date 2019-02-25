@@ -23,8 +23,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   #################################################################################
-  # Prerequisitos: 1) Valor de Rol Ingresante cargado en el id 4 de la tabla role #
-  #               2) Setear el valor de la variable de entorno GIDAPPF_SYSADMIN   #
+  # Prerequisitos: 1) Valor de Rol Autogestionado cargado en la tabla role        #
+  #                2) Setear el valor de la variable de entorno GIDAPPF_SYSADMIN  #
+  #                3) Clase LockEmail existente conteniendo el array LIST.        #
   # Devolución: Un usuario logueado y una relación de usercommissionrole asociado #
   #             al valor de administrador o autogestionado                        #
   #################################################################################
@@ -36,7 +37,7 @@ class User::RegistrationsController < Devise::RegistrationsController
     selEnv=ENV[key]
     unless selEnv.eql?(value)
       u = User.last
-      if u.id == 2 then
+      if u.id == LockEmail::LIST.count + 1 then
         rid=Role.find_by(level: 40, enabled: true).id #Admin
       else
         rid=Role.find_by(level: 0, enabled: false).id #Autogestionado

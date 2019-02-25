@@ -9,37 +9,18 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/config/routes.rb                                #
+# Archivo GIDAPPF/gidappf/app/models/document.rb                          #
 ###########################################################################
+class Document < ApplicationRecord
+  #####################################################################
+  # Asociación muchos a uno:soporta muchos documentoss pertenecientes #
+  #                         a un usuario.                             #
+  #####################################################################
+  belongs_to :user
 
-Rails.application.routes.draw do
-  resources :profiles
-  get 'time_sheet_hours/multiple_new'
-  post 'time_sheet_hours/multiple_new'
-  resources :time_sheet_hours, only:[:create, :index, :show, :edit, :destroy, :update]
-  get 'time_sheets/associate'
-  get 'time_sheets/renew_all'
-  post 'time_sheets/renew_all'
-  resources :time_sheets,only:[:create, :index, :show, :edit, :destroy, :update] do
-    member do
-      get 'parametrize'
-    end
-  end
-  resources :vacancies
-  resources :class_room_institutes do
-    member do
-      get 'parametrize'
-    end
-  end
-  devise_for :users, controllers: {
-    registrations: 'user/registrations',
-    sessions: 'user/sessions'
-  }
-
-
-  resources :usercommissionroles,only:[:edit]
-  get 'setsusersaccess/settings'
-  resources :commissions
-  resources :roles
-	root to: "home#index"
+  ####################################################################
+  # Asociación muchos a uno:soporta muchos documentos pertenecientes #
+  #                         a un perfil                              #
+  ####################################################################
+  belongs_to :profile
 end

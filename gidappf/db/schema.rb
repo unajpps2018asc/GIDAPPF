@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_01_232649) do
+ActiveRecord::Schema.define(version: 2019_02_25_112004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,13 +46,47 @@ ActiveRecord::Schema.define(version: 2019_02_01_232649) do
     t.index ["user_id"], name: "index_commissions_on_user_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_documents_on_profile_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "profile_keys", force: :cascade do |t|
+    t.string "key"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_profile_keys_on_profile_id"
+  end
+
+  create_table "profile_values", force: :cascade do |t|
+    t.text "value"
+    t.bigint "profile_key_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_key_id"], name: "index_profile_values_on_profile_key_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "valid_to"
+    t.datetime "valid_from"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.boolean "enabled"
     t.datetime "updated_at", null: false
-    t.float "level", default: 10.0
+    t.float "level", default: 0.0
   end
 
   create_table "time_sheet_hours", force: :cascade do |t|
@@ -120,6 +154,10 @@ ActiveRecord::Schema.define(version: 2019_02_01_232649) do
   end
 
   add_foreign_key "commissions", "users"
+  add_foreign_key "documents", "profiles"
+  add_foreign_key "documents", "users"
+  add_foreign_key "profile_keys", "profiles"
+  add_foreign_key "profile_values", "profile_keys"
   add_foreign_key "time_sheet_hours", "time_sheets"
   add_foreign_key "time_sheet_hours", "vacancies"
 end

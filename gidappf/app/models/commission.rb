@@ -13,22 +13,24 @@
 ###########################################################################
 class Commission < ApplicationRecord
 
-  ###########################################################################
-  # Asociación muchos a uno:soporta muchas comisiones pertenecientes a un   #
-  #                         usuario                                         #
-  ###########################################################################
+  #########################################################################
+  # Asociación muchos a uno:soporta muchas comisiones pertenecientes a un #
+  #                         usuario                                       #
+  #########################################################################
   belongs_to :user
 
-  ###########################################################################
-  # Asociación uno a muchos: soporta que una comision sea asignada muchas   #
-  #                          veces en la relación usercommissionrole        #                                                       #
-  ###########################################################################
+  #########################################################################
+  # Asociación uno a muchos: soporta que una comision sea asignada muchas #
+  #                          veces en la relación usercommissionrole.     #
+  #                          Si se borra, lo hacen  usercommissionroles.  #
+  #########################################################################
   has_many :usercommissionrole, dependent: :delete_all
 
-  ###########################################################################
-  # Asociación uno a muchos: soporta que una comision sea asignada muchas   #
-  #                          veces en la relación time_sheet                #                                                       #
-  ###########################################################################
+  #########################################################################
+  # Asociación uno a muchos: soporta que una comision sea asignada muchas #
+  #                          veces en la relación time_sheet.             #
+  #                          Si se borra, lo hacen time_sheets.           #
+  #########################################################################
   has_many :time_sheet, dependent: :delete_all
 
   validate :check_date_interval

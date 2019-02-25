@@ -1,4 +1,4 @@
-##########################################################################
+###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
 # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
@@ -20,7 +20,6 @@
 # t.datetime "updated_at", null: false
 ###########################################################################
 class User < ApplicationRecord
-  DEFAULTPASS = "1234gidappf"
 
   #############################################################################
   # Configuracion del control de autenticacion Devise                         #
@@ -31,15 +30,24 @@ class User < ApplicationRecord
 
   #############################################################################
   # Asociación uno a muchos: soporta que un usuario sea asignado muchas veces #
-  #                          en la commision como el creador de la comision   #
+  #                          en la commision como el creador de la comision.  #
+  #                          Si se borra, la comision nilifica al creador.    #
   #############################################################################
-  has_many :commission
+  has_many :commission, dependent: :nullify
 
   ##########################account######################################
   # Asociación uno a muchos: soporta que un usuario sea asignada muchas #
-  #                          veces en la relación usercommissionrole    #
+  #                          veces en la relación usercommissionrole.   #
+  #                          Si se borra, lo hace  usercommissionrole.  #
   #######################################################################
-  has_many :usercommissionrole
+  has_many :usercommissionrole, dependent: :delete_all
+
+  ##########################account######################################
+  # Asociación uno a muchos: soporta que un usuario sea asignada muchas #
+  #                          veces en la relación document.             #
+  #                          Si se borra, el document nilifica user.    #
+  #######################################################################
+  has_many :document, dependent: :nullify
 
   validate :minimun_security_requierements
 
@@ -50,13 +58,30 @@ class User < ApplicationRecord
     errors.add(:password,'Is a default, please use another password...') unless is_usable_password?
   end
 
-  #######################################################################################
-  # Prerequisitos: 1) Modelo inicializado.                                              #
-  #               2) Policy con la implementacion adecuada a las acciones desarrolladas.#
-  # Devolución: True si el password ingresado es aceptable.                             #
-  #######################################################################################
+  ####################################################################################
+  # Prerequisitos:                                                                   #
+  #     1) Modelo inicializado.                                                      #
+  #     2) Usuario con email student@gidappf.edu.ar existente.                       #
+  #     3) Clase LockEmail existente conteniendo el array LIST.                      #
+  #     4) Perfil de usuario con email student@gidappf.edu.ar existente en LIST[1]). #
+  #     5) Clave 3 del perfil de usuario student@gidappf.edu.ar existente.           #
+  # Devolución: True si el password ingresado es aceptable.                          #
+  ####################################################################################
   def is_usable_password?
-    !DEFAULTPASS.eql?(password)
+    out = true
+    unless LockEmail::LIST.include?(self.email) then
+      dni = User.find_by(email: LockEmail::LIST[1]).document.first.profile.profile_key.find(3).key
+      if self.document.present? &&
+        self.document.profile.profile_key.find_by(
+          profile_key: dni
+        ).profile_value.present? then
+        if self.document.profile.profile_key.
+          find_by(profile_key: dni).profile_value.eql?(password) then
+          out = false
+        end
+      end
+    end
+    out
   end
 
 end

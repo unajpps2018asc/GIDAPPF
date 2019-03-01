@@ -85,6 +85,31 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # GET /profiles/first
+  def first
+    @user = User.new
+    unless params[:dni_profile].nil? || params[:email_profile].nil? then
+      if User.find_by(email: params[:email_profile]).nil? then
+        @user = User.new({email: params[:email_profile], password: params[:dni_profile], password_confirmation: params[:dni_profile]})
+        if @user.save && Usercommissionrole.new(
+            role_id: Role.find_by(level: 10, enabled: false).id,
+            user_id: @user.id, commission_id: Commission.first.id
+          ).save then
+          respond_to do |format|
+            format.html { redirect_to profiles_second_path, notice: "User created id=#{@user.id} role=#{@user.usercommissionrole.first.role.name}" }
+            format.json { render :second, status: :ok}
+          end
+        end
+      else
+        redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Email is allready registred.'
+      end
+    end
+  end
+
+  # GET /profiles/second
+  def second
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile

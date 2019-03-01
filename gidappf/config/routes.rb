@@ -13,6 +13,9 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  get 'profiles/second'
+  get 'profiles/first'
+  post 'profiles/first'
   resources :profiles
   get 'time_sheet_hours/multiple_new'
   post 'time_sheet_hours/multiple_new'

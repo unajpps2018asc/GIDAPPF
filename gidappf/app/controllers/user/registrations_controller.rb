@@ -43,7 +43,7 @@ class User::RegistrationsController < Devise::RegistrationsController
         rid=Role.find_by(level: 0, enabled: false).id #Autogestionado
       end
       Usercommissionrole.new(
-        role_id: rid,user_id: u.id, commission_id: 1
+        role_id: rid,user_id: u.id, commission_id: Commission.first.id
       ).save
     end
   end

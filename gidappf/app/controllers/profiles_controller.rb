@@ -112,30 +112,23 @@ class ProfilesController < ApplicationController
   def second
     unless params[:id_user].nil? || params[:user_dni].nil? then
       @p=Profile.find_by( name: params[:user_dni])
-    #   if @p.nil? then
-    #     u = User.find(params[:id_user].to_i)
-    #     @p=Profile.new( name: params[:user_dni], description: u.email, valid_from: Date.today, valid_to: 1.year.after )
-    #     @p.save
-    #     Document.new(profile: Profile.last, user: u).save
-    #   end
-    #   if @p.profile_key.empty?
-    #     User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.each do |k|
-    #       ProfileKey.new(profile: @p, key: k.key).save
-    #       unless k.key.eql?('D.N.I.:') then
-    #         ProfileValue.new(profile_key: ProfileKey.last).save
-    #       else
-    #         ProfileValue.new(profile_key: ProfileKey.last, value: params[:user_dni]).save
-    #       end
-    #     end
-    #     # params[:profile]
-    #   end
-    #   if finish_second(@p) then
-        respond_to do |format|
-          msg = 'Profile created Nr: '+ Profile.last.id.to_s+ 'Elements: '+ Profile.last.profile_keys.count.to_s
-          format.html { redirect_to profiles_path, notice: msg }
-          format.json { render :second, status: :ok}
+      if @p.nil? then
+        u = User.find(params[:id_user].to_i)
+        @p=Profile.new( name: params[:user_dni], description: u.email, valid_from: Date.today, valid_to: 1.year.after )
+        @p.save
+        Document.new(profile: Profile.last, user: u).save
+      end
+      if @p.profile_keys.empty?
+        User.find_by(email: 'student@gidappf.edu.ar').documents.first.profile.profile_keys.each do |k|
+          ProfileKey.new(profile: @p, key: k.key).save
+          unless k.key.eql?('D.N.I.:') then
+            ProfileValue.new(profile_key: ProfileKey.last).save
+          else
+            ProfileValue.new(profile_key: ProfileKey.last, value: params[:user_dni]).save
+          end
         end
-      # end
+      end
+      redirect_to edit_profile_path(@p)
     else
       redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Not User identification found!'
     end
@@ -157,13 +150,4 @@ class ProfilesController < ApplicationController
         ]
       )
     end
-
-    # def finish_second(profile)
-    #   u=profile.last.document.first.user
-    #   out=false
-    #   profile.profile_key.each do |v|
-    #     out &= v.profile_value.update(value: "12")
-    #   end
-    #   out
-    # end
 end

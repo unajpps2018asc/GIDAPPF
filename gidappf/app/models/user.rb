@@ -72,11 +72,9 @@ class User < ApplicationRecord
     unless LockEmail::LIST.include?(self.email) then
       dni = User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key
       if self.documents.present? &&
-        self.documents.profile.profile_keys.find_by(
-          profile_key: dni
-        ).profile_values.present? then
-        if self.documents.profile.profile_keys.
-          find_by(profile_key: dni).profile_values.first.value.eql?(password) then
+        self.documents.first.profile.profile_keys.find_by(key: dni).profile_values.present? then
+        if self.documents.first.profile.profile_keys.find_by(key: dni).
+          profile_values.first.value.eql?(password) then
           out = false
         end
       end

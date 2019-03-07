@@ -1,9 +1,9 @@
 <%= form_with url: profiles_second_path do |form| %>
 
-  <% profile.profile_key.each do |k| %>
+  <% profile.profile_keys.each do |k| %>
     <div class="field">
       <%= form.label k.key %>
-      <%= form.fields_for k.profile_value do |profile_value| %>
+      <%= form.fields_for k.profile_values do |profile_value| %>
         <%= profile_value.text_area :value, value: ProfileValue.find_by(profile_key: k).value %>
         <%= profile_value.text_field :profile_key_id, value: ProfileValue.find_by(profile_key: k).profile_key_id, disabled: true %>
       <% end %>

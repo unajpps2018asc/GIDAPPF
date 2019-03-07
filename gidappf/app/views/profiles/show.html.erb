@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h3>
+  <strong>Profile name:</strong>
   <%= @profile.name %>
-</p>
+</h3>
 
 <p>
   <strong>Description:</strong>
@@ -19,6 +19,13 @@
   <strong>Valid from:</strong>
   <%= @profile.valid_from %>
 </p>
+
+<% @profile.profile_keys.each do |s| %>
+  <p><strong><%= s.key %></strong>
+  <% s.profile_values.each do |e| %>
+    <span><%= e.value %></span>
+  <% end %></p>
+<% end %>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

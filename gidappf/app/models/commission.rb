@@ -24,14 +24,14 @@ class Commission < ApplicationRecord
   #                          veces en la relación usercommissionrole.     #
   #                          Si se borra, lo hacen  usercommissionroles.  #
   #########################################################################
-  has_many :usercommissionrole, dependent: :delete_all
+  has_many :usercommissionroles, dependent: :delete_all
 
   #########################################################################
   # Asociación uno a muchos: soporta que una comision sea asignada muchas #
   #                          veces en la relación time_sheet.             #
   #                          Si se borra, lo hacen time_sheets.           #
   #########################################################################
-  has_many :time_sheet, dependent: :delete_all
+  has_many :time_sheets, dependent: :delete_all
 
   validate :check_date_interval
 

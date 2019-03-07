@@ -33,21 +33,21 @@ class User < ApplicationRecord
   #                          en la commision como el creador de la comision.  #
   #                          Si se borra, la comision nilifica al creador.    #
   #############################################################################
-  has_many :commission, dependent: :nullify
+  has_many :commissions, dependent: :nullify
 
   ##########################account######################################
   # Asociación uno a muchos: soporta que un usuario sea asignada muchas #
   #                          veces en la relación usercommissionrole.   #
   #                          Si se borra, lo hace  usercommissionrole.  #
   #######################################################################
-  has_many :usercommissionrole, dependent: :delete_all
+  has_many :usercommissionroles, dependent: :delete_all
 
   ##########################account######################################
   # Asociación uno a muchos: soporta que un usuario sea asignada muchas #
   #                          veces en la relación document.             #
   #                          Si se borra, el document nilifica user.    #
   #######################################################################
-  has_many :document, dependent: :nullify
+  has_many :documents, dependent: :nullify
 
   validate :minimun_security_requierements
 
@@ -70,13 +70,13 @@ class User < ApplicationRecord
   def is_usable_password?
     out = true
     unless LockEmail::LIST.include?(self.email) then
-      dni = User.find_by(email: LockEmail::LIST[1]).document.first.profile.profile_key.find(3).key
-      if self.document.present? &&
-        self.document.profile.profile_key.find_by(
+      dni = User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key
+      if self.documents.present? &&
+        self.documents.profile.profile_keys.find_by(
           profile_key: dni
-        ).profile_value.present? then
-        if self.document.profile.profile_key.
-          find_by(profile_key: dni).profile_value.eql?(password) then
+        ).profile_values.present? then
+        if self.documents.profile.profile_keys.
+          find_by(profile_key: dni).profile_values.first.value.eql?(password) then
           out = false
         end
       end

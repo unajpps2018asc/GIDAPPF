@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 			policy_name = exception.policy.class.to_s.underscore
 
 			flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
-			if current_user.usercommissionrole.first.role.id == Role.find_by(level: 10, enabled: false).id then
+			if current_user.usercommissionroles.first.role.id == Role.find_by(level: 10, enabled: false).id then
 				reset_session
 				redirect_to new_user_password_path, notice: "Enter email to change passsword..."
 			else

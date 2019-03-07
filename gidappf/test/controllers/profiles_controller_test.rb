@@ -54,8 +54,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   test "should destroy profile" do
     sign_in users(:one)
     assert_difference('Profile.count', -1) do
-      @profile.profile_key.all.each do |e|
-        e.profile_value.destroy
+      @profile.profile_keys.all.each do |e|
+        e.profile_values.destroy_all
       end
       delete profile_url(@profile), headers: @auth_h_profile
     end

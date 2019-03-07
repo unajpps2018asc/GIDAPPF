@@ -36,9 +36,9 @@ class User::SessionsController < Devise::SessionsController
   ####################################################################################
   def first_form_password_change
     if (Time.now - Time.parse(current_user.updated_at.to_s)).second < 90 &&
-      current_user.usercommissionrole.first.role_id == Role.find_by(level: 10, enabled: false).id
+      current_user.usercommissionroles.first.role_id == Role.find_by(level: 10, enabled: false).id
       then
-      current_user.usercommissionrole.first.update(role_id: Role.find_by(level: 10, enabled: true).id)
+      current_user.usercommissionroles.first.update(role_id: Role.find_by(level: 10, enabled: true).id)
     end
   end
 end

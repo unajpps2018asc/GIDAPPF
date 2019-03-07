@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
-    @profile.profile_key.build
+    @profile.profile_keys.build.profile_values.build
     respond_to do |format|
       format.html { }
       format.json { head :no_content }
@@ -97,7 +97,7 @@ class ProfilesController < ApplicationController
             user_id: @user.id, commission_id: Commission.first.id
           ).save then
           respond_to do |format|
-            msg = "User created id=#{@user.id} role=#{@user.usercommissionrole.first.role.name}"
+            msg = "User created id=#{@user.id} role=#{@user.usercommissionroles.first.role.name}"
             format.html { redirect_to profiles_second_path(id_user: @user.id.to_s, user_dni: params[:dni_profile]), notice: msg }
             format.json { render :second, status: :ok}
           end
@@ -111,7 +111,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/second
   def second
     unless params[:id_user].nil? || params[:user_dni].nil? then
-    #   @p=Profile.find_by( name: params[:user_dni])
+      @p=Profile.find_by( name: params[:user_dni])
     #   if @p.nil? then
     #     u = User.find(params[:id_user].to_i)
     #     @p=Profile.new( name: params[:user_dni], description: u.email, valid_from: Date.today, valid_to: 1.year.after )
@@ -131,7 +131,7 @@ class ProfilesController < ApplicationController
     #   end
     #   if finish_second(@p) then
         respond_to do |format|
-          msg = 'Profile created Nr: '+ Profile.last.id.to_s+ 'Elements: '+ Profile.last.profile_key.count.to_s
+          msg = 'Profile created Nr: '+ Profile.last.id.to_s+ 'Elements: '+ Profile.last.profile_keys.count.to_s
           format.html { redirect_to profiles_path, notice: msg }
           format.json { render :second, status: :ok}
         end
@@ -151,8 +151,11 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:name, :description, :valid_to, :valid_from,
-        :profile_key_attributes => [:key,
-          :profile_value_attributes => [:value]])
+        :profile_keys_attributes => [
+          :key,
+          :profile_values_attributes => [:value]
+        ]
+      )
     end
 
     # def finish_second(profile)

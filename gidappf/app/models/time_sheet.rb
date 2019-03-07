@@ -6,7 +6,7 @@ class TimeSheet < ApplicationRecord
   #                          veces en la relación time_sheet_hour.        #                                                       #
   #                          Si se borra, lo hacen los  time_sheet_hour.  #
   #########################################################################
-  has_many :time_sheet_hour, dependent: :delete_all
+  has_many :time_sheet_hours, dependent: :delete_all
   validate :check_date_interval
 
   #####################################################################

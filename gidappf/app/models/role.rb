@@ -4,5 +4,5 @@ class Role < ApplicationRecord
   #                          veces en la relación usercommissionrole    #                                                       #
   #                          Si se borra, lo hace  usercommissionrole.  #
   #######################################################################
-  has_many :usercommissionrole, dependent: :delete_all
+  has_many :usercommissionroles, dependent: :delete_all
 end

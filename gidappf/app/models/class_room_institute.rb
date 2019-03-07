@@ -18,7 +18,7 @@ class ClassRoomInstitute < ApplicationRecord
   # Asociación uno a muchos: soporta que un Aula sea asignada muchas  #
   #                          veces en la relación vacancy             #
   #####################################################################
-  has_many :vacancy, dependent: :delete_all
+  has_many :vacancies, dependent: :delete_all
 
   ##################################################################
   # Prerequisitos:                                                 #

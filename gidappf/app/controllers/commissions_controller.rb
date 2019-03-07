@@ -84,7 +84,7 @@ class CommissionsController < ApplicationController
     begin
       @commission.destroy
     rescue ActiveRecord::InvalidForeignKey
-      @commission.time_sheet.destroy_all
+      @commission.time_sheets.destroy_all
       @commission.destroy
     end
     respond_to do |format|

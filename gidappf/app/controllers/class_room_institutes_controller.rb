@@ -92,7 +92,7 @@ class ClassRoomInstitutesController < ApplicationController
     begin
       @class_room_institute.destroy
     rescue ActiveRecord::InvalidForeignKey
-      @class_room_institute.vacancy.destroy_all
+      @class_room_institute.vacancies.destroy_all
       @class_room_institute.destroy
     end
     respond_to do |format|

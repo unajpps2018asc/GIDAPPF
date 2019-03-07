@@ -31,6 +31,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+    @profile.profile_key.build
     respond_to do |format|
       format.html { }
       format.json { head :no_content }
@@ -87,7 +88,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/first
   def first
-    @user = User.new
+    @user = User.new({email: (User.last.id+1).to_s+'@gidappf.edu.ar'})
     unless params[:dni_profile].nil? || params[:email_profile].nil? then
       if User.find_by(email: params[:email_profile]).nil? then
         @user = User.new({email: params[:email_profile], password: params[:dni_profile], password_confirmation: params[:dni_profile]})
@@ -96,7 +97,8 @@ class ProfilesController < ApplicationController
             user_id: @user.id, commission_id: Commission.first.id
           ).save then
           respond_to do |format|
-            format.html { redirect_to profiles_second_path, notice: "User created id=#{@user.id} role=#{@user.usercommissionrole.first.role.name}" }
+            msg = "User created id=#{@user.id} role=#{@user.usercommissionrole.first.role.name}"
+            format.html { redirect_to profiles_second_path(id_user: @user.id.to_s, user_dni: params[:dni_profile]), notice: msg }
             format.json { render :second, status: :ok}
           end
         end
@@ -108,6 +110,35 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/second
   def second
+    unless params[:id_user].nil? || params[:user_dni].nil? then
+    #   @p=Profile.find_by( name: params[:user_dni])
+    #   if @p.nil? then
+    #     u = User.find(params[:id_user].to_i)
+    #     @p=Profile.new( name: params[:user_dni], description: u.email, valid_from: Date.today, valid_to: 1.year.after )
+    #     @p.save
+    #     Document.new(profile: Profile.last, user: u).save
+    #   end
+    #   if @p.profile_key.empty?
+    #     User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.each do |k|
+    #       ProfileKey.new(profile: @p, key: k.key).save
+    #       unless k.key.eql?('D.N.I.:') then
+    #         ProfileValue.new(profile_key: ProfileKey.last).save
+    #       else
+    #         ProfileValue.new(profile_key: ProfileKey.last, value: params[:user_dni]).save
+    #       end
+    #     end
+    #     # params[:profile]
+    #   end
+    #   if finish_second(@p) then
+        respond_to do |format|
+          msg = 'Profile created Nr: '+ Profile.last.id.to_s+ 'Elements: '+ Profile.last.profile_key.count.to_s
+          format.html { redirect_to profiles_path, notice: msg }
+          format.json { render :second, status: :ok}
+        end
+      # end
+    else
+      redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Not User identification found!'
+    end
   end
 
   private
@@ -119,6 +150,17 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name, :description, :valid_to, :valid_from)
+      params.require(:profile).permit(:name, :description, :valid_to, :valid_from,
+        :profile_key_attributes => [:key,
+          :profile_value_attributes => [:value]])
     end
+
+    # def finish_second(profile)
+    #   u=profile.last.document.first.user
+    #   out=false
+    #   profile.profile_key.each do |v|
+    #     out &= v.profile_value.update(value: "12")
+    #   end
+    #   out
+    # end
 end

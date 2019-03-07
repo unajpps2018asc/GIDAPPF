@@ -11,4 +11,5 @@ class Profile < ApplicationRecord
   #                          Si se borra, lo hacen profile_keys.       #
   ######################################################################
   has_many :profile_key, dependent: :delete_all
+  accepts_nested_attributes_for :profile_key
 end

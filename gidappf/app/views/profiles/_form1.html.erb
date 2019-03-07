@@ -16,7 +16,7 @@
 
   <div class="field">
     <%= form.label "Email" %>
-    <%= form.email_field :email_profile %>
+    <%= form.email_field :email_profile , :value => @user.email %>
   </div>
 
   <div class="actions">

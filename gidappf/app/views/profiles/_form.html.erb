@@ -31,6 +31,15 @@
     <%= form.datetime_select :valid_from %>
   </div>
 
+  <%= form.fields_for :profile_key do |s| %>
+    <%= s.label :key %>
+    <%= s.text_field :key %>
+    <%= s.fields_for :profile_value do |e| %>
+      <%= e.label :value %>
+      <%= e.text_field :value %>
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

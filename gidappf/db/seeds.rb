@@ -221,7 +221,7 @@ ProfileKey.create!([
       key: 'Apellido:',
       profile_id: Profile.first.id
     },{
-      key: 'D.N.I.:',
+      key: 'DNI:',
       profile_id: Profile.first.id
     }
 ])

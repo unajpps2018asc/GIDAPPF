@@ -32,11 +32,14 @@
   </div>
 
   <%= form.fields_for :profile_keys do |s| %>
-    <%= s.label :key %>
-    <%= s.text_field :key %>
+    <%= s.hidden_field :key, :value => Profile.first.profile_keys[s.index].key %>
     <%= s.fields_for :profile_values do |e| %>
-      <%= e.label :value %>
-      <%= e.text_field :value %>
+      <%= e.label Profile.first.profile_keys[s.index].key %>
+      <% unless s.index == 2 %>
+        <%= e.text_field :value %>
+      <% else %>
+        <%= e.text_field :value, value: :name %>
+      <% end %>
     <% end %>
   <% end %>
 

@@ -16,8 +16,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_profile_url, headers: @auth_h_profile
-    assert_response :success
+    get new_profile_url
+    assert_response :found
   end
 
   test "should create profile" do

@@ -31,7 +31,9 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
-    @profile.profile_keys.build.profile_values.build
+    User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.count.times do |i|
+      @profile.profile_keys.build.profile_values.build
+    end
     respond_to do |format|
       format.html { }
       format.json { head :no_content }
@@ -119,9 +121,9 @@ class ProfilesController < ApplicationController
         Document.new(profile: Profile.last, user: u).save
       end
       if @p.profile_keys.empty?
-        User.find_by(email: 'student@gidappf.edu.ar').documents.first.profile.profile_keys.each do |k|
+        User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |k|
           ProfileKey.new(profile: @p, key: k.key).save
-          unless k.key.eql?('D.N.I.:') then
+          unless k.key.eql?(User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key) then
             ProfileValue.new(profile_key: ProfileKey.last).save
           else
             ProfileValue.new(profile_key: ProfileKey.last, value: params[:user_dni]).save

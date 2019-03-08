@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 2019_02_25_112004) do
   add_foreign_key "documents", "profiles"
   add_foreign_key "documents", "users"
   add_foreign_key "profile_keys", "profiles"
-  add_foreign_key "profile_values", "profile_keys"
+  add_foreign_key "profile_values", "profile_keys", on_delete: :cascade
   add_foreign_key "time_sheet_hours", "time_sheets"
   add_foreign_key "time_sheet_hours", "vacancies"
 end

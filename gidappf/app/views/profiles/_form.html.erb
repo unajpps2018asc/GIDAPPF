@@ -31,9 +31,9 @@
     <%= form.datetime_select :valid_from %>
   </div>
 
-  <%= form.fields_for :profile_keys do |s| %>
+  <%= form.fields_for :profile_keys, profile.profile_keys do |s| %>
     <%= s.hidden_field :key, :value => Profile.first.profile_keys[s.index].key %>
-    <%= s.fields_for :profile_values do |e| %>
+    <%= s.fields_for :profile_values, profile.profile_keys[s.index].profile_values do |e| %>
       <%= e.label Profile.first.profile_keys[s.index].key %>
       <% unless s.index == 2 %>
         <%= e.text_field :value %>

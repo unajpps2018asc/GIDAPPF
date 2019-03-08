@@ -69,6 +69,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
+        purge_childs(@profile)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -151,5 +152,15 @@ class ProfilesController < ApplicationController
           :profile_values_attributes => [:value]
         ]
       )
+    end
+
+    def purge_childs(profile)
+      if profile.profile_keys.count > Profile.first.profile_keys.count then
+        profile.profile_keys.each do |eachkey|
+          if (Time.now - Time.parse(eachkey.created_at.to_s)) > 6 then
+            eachkey.destroy
+          end
+        end
+      end
     end
 end

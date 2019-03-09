@@ -90,7 +90,7 @@ class TimeSheetHoursController < ApplicationController
     unless arr.nil? || arr.first.empty? || arr.last.empty? then
       authorize @time_sheet_hour=TimeSheetHour.new(
           time_sheet_id: arr.last.first.id,
-          vacancy_id: arr.first.first.vacancy.first.id,
+          vacancy_id: arr.first.first.vacancies.first.id,
           from_hour: params[:from_hour],
           from_min: params[:from_min],
           to_hour: params[:to_hour],
@@ -105,7 +105,7 @@ class TimeSheetHoursController < ApplicationController
         )
       respond_to do |format|
         unless !@time_sheet_hour.save
-          msg = "Created TSH{ ts_id=#{arr.last.first.id} vac_id=#{arr.first.first.vacancy.first.id} fh=#{@time_sheet_hour.from_hour} fm=#{@time_sheet_hour.from_min} th=#{@time_sheet_hour.to_hour} tm=#{@time_sheet_hour.to_min} mo=#{@time_sheet_hour.monday} tu=#{@time_sheet_hour.tuesday} we=#{@time_sheet_hour.wednesday} th=#{@time_sheet_hour.thursday} fr=#{@time_sheet_hour.friday} sa=#{@time_sheet_hour.saturday} su=#{@time_sheet_hour.sunday}}"
+          msg = "Created TSH{ ts_id=#{arr.last.first.id} vac_id=#{arr.first.first.vacancies.first.id} fh=#{@time_sheet_hour.from_hour} fm=#{@time_sheet_hour.from_min} th=#{@time_sheet_hour.to_hour} tm=#{@time_sheet_hour.to_min} mo=#{@time_sheet_hour.monday} tu=#{@time_sheet_hour.tuesday} we=#{@time_sheet_hour.wednesday} th=#{@time_sheet_hour.thursday} fr=#{@time_sheet_hour.friday} sa=#{@time_sheet_hour.saturday} su=#{@time_sheet_hour.sunday}}"
           rest_tsh(arr,@time_sheet_hour)
           format.html { redirect_to time_sheet_hours_path, notice: msg }
           format.json { render :renew_all, status: :ok}
@@ -184,7 +184,7 @@ class TimeSheetHoursController < ApplicationController
     def rest_tsh(cri_ts_arr,ref)
       vacancy_cri=[]
       cri_ts_arr.first.each do |c|
-        vacancy_cri << c.vacancy
+        vacancy_cri << c.vacancies
       end
       create_by_groups(cri_ts_arr.last, vacancy_cri ,ref)
     end

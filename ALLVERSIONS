@@ -2,14 +2,14 @@
 # Detalle del servidor de desarrollo utilizado en el proyecto GIDAPPF #
 #######################################################################
 $ uname -a
-Linux archlinux 4.20.10-arch1-1-ARCH #1 SMP PREEMPT Fri Feb 15 17:49:06 UTC 2019
-x86_64 GNU/Linux
+Linux archlinux 5.0.0-arch1-1-ARCH #1 SMP PREEMPT Mon Mar 4 14:11:43 UTC
+2019 x86_64 GNU/Linux
 
 $ ruby --version
 ruby 2.6.1p33 (2019-01-30 revision 66950) [x86_64-linux]
 
 $ docker --version
-Docker version 18.09.2-ce, build 62479626f2
+Docker version 18.09.3-ce, build 774a1f4eee
 
 $ docker-compose --version
 docker-compose version 1.23.2, build unknown

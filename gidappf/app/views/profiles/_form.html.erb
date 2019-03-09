@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, :readonly => true %>
   </div>
 
   <div class="field">
@@ -34,12 +34,14 @@
   <%= form.fields_for :profile_keys, profile.profile_keys do |s| %>
     <%= s.hidden_field :key, :value => Profile.first.profile_keys[s.index].key %>
     <%= s.fields_for :profile_values, profile.profile_keys[s.index].profile_values do |e| %>
-      <%= e.label Profile.first.profile_keys[s.index].key %>
-      <% unless s.index == 2 %>
-        <%= e.text_field :value %>
-      <% else %>
-        <%= e.text_field :value, value: :name %>
-      <% end %>
+      <div class="field">
+        <%= e.label Profile.first.profile_keys[s.index].key %>
+        <% unless s.index ==2 then %>
+          <%= e.text_field :value %>
+        <% else %>
+          <%= e.text_field :value, :readonly => true %>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 

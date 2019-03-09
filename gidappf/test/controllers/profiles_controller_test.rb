@@ -11,12 +11,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get profiles_url, headers: @auth_h_profile
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_profile_url
+    get profiles_url
     assert_response :found
   end
 

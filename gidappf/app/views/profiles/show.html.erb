@@ -1,29 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<h3>
-  <strong>Profile name:</strong>
-  <%= @profile.name %>
+<h3>Profile name:
+  <strong><%= @profile.name %></strong>
 </h3>
 
-<p>
-  <strong>Description:</strong>
-  <%= @profile.description %>
+<p>Description:
+  <strong><%= @profile.description %></strong>
 </p>
 
-<p>
-  <strong>Valid to:</strong>
-  <%= @profile.valid_to %>
+<p>Valid to:
+  <strong><%= @profile.valid_to %></strong>
 </p>
 
-<p>
-  <strong>Valid from:</strong>
-  <%= @profile.valid_from %>
+<p>Valid from:
+  <strong><%= @profile.valid_from %></strong>
 </p>
 
 <% @profile.profile_keys.each do |s| %>
-  <p><strong><%= s.key %></strong>
+  <p><%= s.key %>
   <% s.profile_values.each do |e| %>
-    <span><%= e.value %></span>
+    <strong><span><%= e.value %></span></strong>
   <% end %></p>
 <% end %>
 

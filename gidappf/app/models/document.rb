@@ -13,7 +13,7 @@
 ###########################################################################
 class Document < ApplicationRecord
   #####################################################################
-  # Asociación muchos a uno:soporta muchos documentoss pertenecientes #
+  # Asociación muchos a uno:soporta muchos documentos pertenecientes  #
   #                         a un usuario.                             #
   #####################################################################
   belongs_to :user

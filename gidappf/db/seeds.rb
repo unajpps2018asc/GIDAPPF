@@ -215,14 +215,125 @@ p "[GIDAPPF] Creados #{Document.count} Documentos"
 ProfileKey.destroy_all
 ProfileKey.create!([
     {
-      key: 'Nombre:',
+      key: 'Nombre:',#0
       profile_id: Profile.first.id
     },{
-      key: 'Apellido:',
+      key: 'Apellido:',#1
       profile_id: Profile.first.id
     },{
-      key: 'DNI:',
+      key: 'DNI:',#2
       profile_id: Profile.first.id
+    },{
+      key: 'Fecha de Nacimiento:',#3
+      profile_id: Profile.first.id
+    },{
+      key: 'CUIL:',#4
+      profile_id: Profile.first.id
+    },{
+      key: 'Grupo sanguíneo:',#5
+      profile_id: Profile.first.id
+    },{
+      key: 'Dirección:',#6
+      profile_id: Profile.first.id
+    },{
+      key: 'Barrio:',#7
+      profile_id: Profile.first.id
+    },{
+      key: 'Localidad:',#8
+      profile_id: Profile.first.id
+    },{
+      key: 'CP:',#9
+      profile_id: Profile.first.id
+    },{
+      key: 'Teléfono:',#10
+      profile_id: Profile.first.id
+    },{
+      key: 'Cobertura médica:',#11
+      profile_id: Profile.first.id
+    },{
+      key: '1)Lugar de atención médica en caso de emergencia:',#12
+      profile_id: Profile.first.id
+    },{
+      key: 'Dirección de (1):',#13
+      profile_id: Profile.first.id
+    },{
+      key: 'Barrio de (1):',#14
+      profile_id: Profile.first.id
+    },{
+      key: 'Localidad de (1):',#15
+      profile_id: Profile.first.id
+    },{
+      key: 'Teléfono de (1):',#16
+      profile_id: Profile.first.id
+    },{
+      key: '2)Trabaja actualmente en:',#17
+      profile_id: Profile.first.id
+    },{
+      key: 'Horario de trabajo (2):',#18
+      profile_id: Profile.first.id
+    },{
+      key: 'Busca trabajo:',#19
+      profile_id: Profile.first.id
+    },{
+      key: '3) Últimos estudios cursados:',#20
+      profile_id: Profile.first.id
+    },{
+      key: 'Establecimiento de (3):',#21
+      profile_id: Profile.first.id
+    },{
+      key: 'Se inscribe a cursar:',#22
+      profile_id: Profile.first.id
+    },{
+      key: 'Elección de turno desde[Hr]:',#23
+      profile_id: Profile.first.id
+    },{
+      key: 'Elección de turno hasta[Hr]:',#24
+      profile_id: Profile.first.id
+    },{
+      key: 'Segunda opción de turno desde[Hr]:',#25
+      profile_id: Profile.first.id
+    },{
+      key: 'Segunda opción de turno hasta[Hr]:',#26
+      profile_id: Profile.first.id
+    },{
+      key: 'Hijos:',#27
+      profile_id: Profile.first.id
+    },{
+      key: 'Padece enfermedad:',#28
+      profile_id: Profile.first.id
+    },{
+      key: 'Toma medicación:',#29
+      profile_id: Profile.first.id
+    },{
+      key: 'Alérgico/a a:',#30
+      profile_id: Profile.first.id
+    },{
+      key: 'Dejó de estudiar aproximadamente hace:',#31
+      profile_id: Profile.first.id
+    },{
+      key: 'Materia que le cuesta más:',#32
+      profile_id: Profile.first.id
+    },{
+      key: 'Luego de egresar continuaría estudiando:',#33
+      profile_id: Profile.first.id
+    },{
+      key: 'Copia de DNI presentada:',#34
+      profile_id: Profile.first.id
+    },{
+      key: 'Copia de partida de nacimiento presentada:',#35
+      profile_id: Profile.first.id
+    },{
+      key: 'Copia de constancia de CUIL presentada:',#36
+      profile_id: Profile.first.id
+    },{
+      key: 'Copia de constancia de estudios previos presentada:',#37
+      profile_id: Profile.first.id
+    },{
+      key: '2 Fotos 4x4 precentadas:',#38
+      profile_id: Profile.first.id
+      },{
+        key: 'Comentarios adicionales:',#39
+        profile_id: Profile.first.id
     }
 ])
 #User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(1).key es "Nombre"

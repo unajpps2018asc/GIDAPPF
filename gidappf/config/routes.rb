@@ -14,7 +14,6 @@
 
 Rails.application.routes.draw do
   get 'profiles/second'
-  post 'profiles/second'
   get 'profiles/first'
   post 'profiles/first'
   resources :profiles

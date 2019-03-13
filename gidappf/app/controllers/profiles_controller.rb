@@ -16,6 +16,18 @@ class ProfilesController < ApplicationController
   include RoleAccess
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
+  # GET /profiles/new
+  def new
+    @profile = Profile.new
+    User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.count.times do |i|
+      @profile.profile_keys.build.profile_values.build
+    end
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+    end
+  end
+
   # GET /profiles
   # GET /profiles.json
   def index
@@ -91,9 +103,10 @@ class ProfilesController < ApplicationController
   def first
     @user = User.new({email: (User.last.id+1).to_s+'@gidappf.edu.ar'})
     unless params[:dni_profile].nil? || params[:email_profile].nil? then
-      if User.find_by(email: params[:email_profile]).nil? then
+      used = ProfileValue.find_by(value: params[:dni_profile].to_s)
+      if User.find_by(email: params[:email_profile]).nil? && (used.nil? || !used.profile_key.key.eql?(Profile.first.profile_keys.find(3).key)) then
         @user = User.new({email: params[:email_profile], password: params[:dni_profile], password_confirmation: params[:dni_profile]})
-        if @user.save && Usercommissionrole.new( #Si crea al ussuario, crea el registro en Usercommissionrole
+        if @user.save && Usercommissionrole.new( #Si crea al usuario, crea el registro en Usercommissionrole
             role_id: Role.find_by(level: 10, enabled: false).id,
             user_id: @user.id, commission_id: Commission.first.id
           ).save then
@@ -104,7 +117,8 @@ class ProfilesController < ApplicationController
           end
         end
       else
-        redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Email is allready registred.'
+        redirect_back fallback_location: '/profiles', allow_other_host: false,
+        alert: "Email or #{User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key} is allready registred."
       end
     end
   end

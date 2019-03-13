@@ -3,11 +3,11 @@
 one:
   name: MyString
   description: MyText
-  valid_to: 2019-02-24 19:26:47
+  valid_to: 2019-03-24 19:26:47
   valid_from: 2019-02-24 19:26:47
 
 two:
   name: MyString
   description: MyText
-  valid_to: 2019-02-24 19:26:47
+  valid_to: 2019-03-24 19:26:47
   valid_from: 2019-02-24 19:26:47

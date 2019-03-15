@@ -38,7 +38,7 @@
         <div class="field">
           <%= nested2.label Profile.first.profile_keys[nested.index].key %>
           <% unless nested.index == 2 then %>
-            <%= nested2.text_field :value, onblur:"$(document).ready(function() {alert('hola'+ $('#profile_profile_keys_attributes_#{nested.index}_profile_values_attributes_0_value').val())});" %>
+            <%= nested2.text_field :value, onblur: Profile.first.profile_keys[nested.index].client_side_validator.script %>
           <% else %>
             <%= nested2.text_field :value, :readonly => true %>
           <% end %>

@@ -29,6 +29,7 @@ class ProfileKey < ApplicationRecord
   # Configuracion dependencia de atributos:                                #
   #        Los atributos de ProfileKey dependen de profile_values.         #
   ##########################################################################
+  belongs_to :client_side_validator, optional: true
   accepts_nested_attributes_for :profile_values
 
 end

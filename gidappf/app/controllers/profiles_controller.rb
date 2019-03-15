@@ -139,13 +139,13 @@ class ProfilesController < ApplicationController
     unless params[:id_user].nil? || params[:user_dni].nil? then
       u = User.find(params[:id_user].to_i)
       unless u.nil? then
-        @p=Profile.find_by( name: params[:user_dni])
-        if @p.nil? then #crea perfil si no tiene
-          @p=Profile.new( name: params[:user_dni], description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
-          if @p.save && Document.new(profile: Profile.last, user: u).save then
-            if @p.profile_keys.empty? then #copia claves del perfil si no tiene
+        @profile = Profile.find_by( name: params[:user_dni])
+        if @profile.nil? then #crea perfil si no tiene
+          @profile=Profile.new( name: params[:user_dni], description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
+          if @profile.save && Document.new(profile: Profile.last, user: u).save then
+            if @profile.profile_keys.empty? then #copia claves del perfil si no tiene
               User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |k|
-                ProfileKey.new(profile: @p, key: k.key).save
+                ProfileKey.new(profile: @profile, key: k.key).save
                 unless k.key.eql?(User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key) then
                   ProfileValue.new(profile_key: ProfileKey.last).save
                 else #copia el valor del dni si ess la clave 3 de la plantilla
@@ -155,7 +155,7 @@ class ProfilesController < ApplicationController
             end
           end
         end
-        redirect_to edit_profile_path(@p) #redirige al rellenado de valores
+        redirect_to edit_profile_path(@profile) #redirige al rellenado de valores
       else
         redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Not User identification found!'
       end

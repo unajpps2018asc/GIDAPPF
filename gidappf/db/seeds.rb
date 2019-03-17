@@ -230,8 +230,6 @@ ClientSideValidator.create!([
           $(event.target).val('');
           $( \"<p class='validation-error'>Date error.</p>\" ).appendTo($(event.target).parent());
         }
-      else{
-        }
       });"
     },
     {
@@ -253,6 +251,8 @@ ClientSideValidator.create!([
       });"
     }
 ])
+
+p "[GIDAPPF] Creados #{ClientSideValidator.count} Validadores"
 
 ProfileKey.destroy_all
 ProfileKey.create!([

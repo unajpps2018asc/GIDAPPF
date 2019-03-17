@@ -215,8 +215,42 @@ p "[GIDAPPF] Creados #{Document.count} Documentos"
 ClientSideValidator.destroy_all
 ClientSideValidator.create!([
     {
-      content_type: "alert",
-      script: "$(document).ready(function() { if (event.target.value == 'Mirtha') {event.target.value = 'pocho'; alert(event.target.value); }});"
+      content_type: "GIDAPPF alphanumerics",
+      script: "$(document).ready(function() {
+      if( $(event.target).val().match(/^[a-zA-Z0-9\\s]+$/) == null ) {
+          $(event.target).val('');
+          $( \"<p class='validation-error'>Alphanumeric error.</p>\" ).appendTo($(event.target).parent());
+        }
+      });"
+    },
+    {
+      content_type: "GIDAPPF dates",
+      script: "$(document).ready(function() {
+      if(Number.isNaN((new Date($(event.target).val())).getTime()) ) {
+          $(event.target).val('');
+          $( \"<p class='validation-error'>Date error.</p>\" ).appendTo($(event.target).parent());
+        }
+      else{
+        }
+      });"
+    },
+    {
+      content_type: "GIDAPPF numbers",
+      script: "$(document).ready(function() {
+      if( $(event.target).val().match(/^[0-9]+$/) == null ) {
+          $(event.target).val('');
+          $( \"<p class='validation-error'>Number error.</p>\" ).appendTo($(event.target).parent());
+        }
+      });"
+    },
+    {
+      content_type: "GIDAPPF words",
+      script: "$(document).ready(function() {
+        if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
+            $(event.target).val('');
+            $( \"<p class='validation-error'>Word error.</p>\" ).appendTo($(event.target).parent());
+          }
+      });"
     }
 ])
 
@@ -225,163 +259,163 @@ ProfileKey.create!([
     {
       key: 'Nombre:',#0
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Apellido:',#1
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'DNI:',#2
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Fecha de Nacimiento:',#3
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF dates').id
     },{
       key: 'CUIL:',#4
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Grupo sanguíneo:',#5
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Dirección:',#6
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     },{
       key: 'Barrio:',#7
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Localidad:',#8
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'CP:',#9
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     },{
       key: 'Teléfono:',#10
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Cobertura médica:',#11
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: '1)Lugar de atención médica en caso de emergencia:',#12
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Dirección de (1):',#13
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     },{
       key: 'Barrio de (1):',#14
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Localidad de (1):',#15
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Teléfono de (1):',#16
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: '2)Trabaja actualmente en:',#17
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Horario de trabajo (2):',#18
       profile_id: Profile.first.id,
-    client_side_validator_id:ClientSideValidator.first.id
-        },{
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+    },{
       key: 'Busca trabajo:',#19
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
-        },{
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+    },{
       key: '3) Últimos estudios cursados:',#20
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Establecimiento de (3):',#21
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Se inscribe a cursar:',#22
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Elección de turno desde[Hr]:',#23
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Elección de turno hasta[Hr]:',#24
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Segunda opción de turno desde[Hr]:',#25
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Segunda opción de turno hasta[Hr]:',#26
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Hijos:',#27
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Padece enfermedad:',#28
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Toma medicación:',#29
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Alérgico/a a:',#30
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Dejó de estudiar aproximadamente hace:',#31
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Materia que le cuesta más:',#32
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Luego de egresar continuaría estudiando:',#33
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Copia de DNI presentada:',#34
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Copia de partida de nacimiento presentada:',#35
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Copia de constancia de CUIL presentada:',#36
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Copia de constancia de estudios previos presentada:',#37
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: '2 Fotos 4x4 precentadas:',#38
       profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
-      },{
-        key: 'Comentarios adicionales:',#39
-        profile_id: Profile.first.id,
-        client_side_validator_id:ClientSideValidator.first.id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+    },{
+      key: 'Comentarios adicionales:',#39
+      profile_id: Profile.first.id,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     }
 ])
 #User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(1).key es "Nombre"

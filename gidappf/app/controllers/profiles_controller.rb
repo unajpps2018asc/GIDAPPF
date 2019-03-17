@@ -145,7 +145,7 @@ class ProfilesController < ApplicationController
           if @profile.save && Document.new(profile: Profile.last, user: u).save then
             if @profile.profile_keys.empty? then #copia claves del perfil si no tiene
               User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |k|
-                ProfileKey.new(profile: @profile, key: k.key).save
+                ProfileKey.new(profile: @profile, key: k.key, client_side_validator: k.client_side_validator).save
                 unless k.key.eql?(User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key) then
                   ProfileValue.new(profile_key: ProfileKey.last).save
                 else #copia el valor del dni si ess la clave 3 de la plantilla

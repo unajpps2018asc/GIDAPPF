@@ -36,9 +36,9 @@
       <%= nested.hidden_field :key, :value => Profile.first.profile_keys[nested.index].key %>
       <%= nested.fields_for :profile_values, profile.profile_keys[nested.index].profile_values do |nested2| %>
         <div class="field">
-          <%= nested2.label Profile.first.profile_keys[nested.index].key %>
+          <%= nested2.label @profile.profile_keys[nested.index].key %>
           <% unless nested.index == 2 then %>
-            <%= nested2.text_field :value, onfocusout: Profile.first.profile_keys[nested.index].client_side_validator.script %>
+            <%= nested2.text_field :value, onfocusout: @profile.profile_keys[nested.index].client_side_validator.script %>
           <% else %>
             <%= nested2.text_field :value, :readonly => true %>
           <% end %>

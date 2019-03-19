@@ -17,14 +17,14 @@ class Profile < ApplicationRecord
   #                          veces en distintos documents.             #
   #                          Si se borra, lo hacen documents.          #
   ######################################################################
-  has_many :documents, dependent: :delete_all
+  has_many :documents, dependent: :destroy
 
   ##########################account#####################################
   # Asociación uno a muchos: soporta que un perfil sea asignado muchas #
   #                          veces en distintos profile_keys.          #
   #                          Si se borra, lo hacen profile_keys.       #
   ######################################################################
-  has_many :profile_keys, dependent: :delete_all
+  has_many :profile_keys, dependent: :destroy
 
   ##########################account#####################################
   # Configuracion dependencia de atributos:                            #

@@ -2,51 +2,34 @@
   <% if profile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
       <ul>
-      <% profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, :readonly => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :valid_to %>
+  <div class="field"><%= form.label :name %><%= form.text_field :name, :readonly => true %></div>
+  <div class="field"><%= form.label :description %><%= form.text_area :description %></div>
+  <div class="field"><%= form.label :valid_to %>
     <%= form.date_field :valid_to, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
   </div>
-
-  <div class="field">
-    <%= form.label :valid_from %>
+  <div class="field"><%= form.label :valid_from %>
     <%= form.date_field :valid_from, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
   </div>
-
-  <% unless profile.errors.any? %>
-    <%= form.fields_for :profile_keys, profile.profile_keys do |nested| %>
-      <%= nested.hidden_field :key, :value => Profile.first.profile_keys[nested.index].key %>
-      <%= nested.fields_for :profile_values, profile.profile_keys[nested.index].profile_values do |nested2| %>
-        <div class="field">
-          <%= nested2.label @profile.profile_keys[nested.index].key %>
-          <% unless nested.index == 2 then %>
-            <%= nested2.text_field :value, onfocusout: @profile.profile_keys[nested.index].client_side_validator.script %>
-          <% else %>
-            <%= nested2.text_field :value, :readonly => true %>
-          <% end %>
-        </div>
+    <% unless profile.errors.any? %>
+      <%= form.fields_for :profile_keys, profile.profile_keys do |nested| %>
+        <%= nested.hidden_field :key, :value => Profile.find(profile.id).profile_keys[nested.index].key %>
+        <%= nested.fields_for :profile_values, profile.profile_keys[nested.index].profile_values do |nested2| %>
+          <div class="field">
+            <%= nested2.label Profile.find(profile.id).profile_keys[nested.index].key %>
+            <% unless Profile.find(profile.id).profile_keys[nested.index].client_side_validator_id == 1 then %>
+              <%= nested2.text_field :value, onfocusout: ClientSideValidator.find(Profile.find(profile.id).profile_keys[nested.index].client_side_validator_id).script %>
+            <% else %><%= nested2.text_field :value, :readonly => true %><% end %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-
   <div class="actions">
     <%= form.submit %>
   </div>

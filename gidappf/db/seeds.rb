@@ -215,6 +215,10 @@ p "[GIDAPPF] Creados #{Document.count} Documentos"
 ClientSideValidator.destroy_all
 ClientSideValidator.create!([
     {
+      content_type: 'GIDAPPF read only',
+      script: ''
+    },
+    {
       content_type: "GIDAPPF alphanumerics",
       script: "$(document).ready(function() {
       if( $(event.target).val().match(/^[a-zA-Z0-9\\s]+$/) == null ) {
@@ -267,7 +271,7 @@ ProfileKey.create!([
     },{
       key: 'DNI:',#2
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
     },{
       key: 'Fecha de Nacimiento:',#3
       profile_id: Profile.first.id,

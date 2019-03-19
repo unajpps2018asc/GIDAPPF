@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_215813) do
+ActiveRecord::Schema.define(version: 2019_03_18_114656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,9 +65,9 @@ ActiveRecord::Schema.define(version: 2019_03_13_215813) do
   create_table "profile_keys", force: :cascade do |t|
     t.string "key"
     t.bigint "profile_id"
+    t.bigint "client_side_validator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "client_side_validator_id"
     t.index ["client_side_validator_id"], name: "index_profile_keys_on_client_side_validator_id"
     t.index ["profile_id"], name: "index_profile_keys_on_profile_id"
   end
@@ -166,8 +166,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_215813) do
   add_foreign_key "documents", "profiles"
   add_foreign_key "documents", "users"
   add_foreign_key "profile_keys", "client_side_validators"
-  add_foreign_key "profile_keys", "profiles", on_delete: :cascade
-  add_foreign_key "profile_values", "profile_keys", on_delete: :cascade
+  add_foreign_key "profile_keys", "profiles"
+  add_foreign_key "profile_values", "profile_keys"
   add_foreign_key "time_sheet_hours", "time_sheets"
   add_foreign_key "time_sheet_hours", "vacancies"
 end

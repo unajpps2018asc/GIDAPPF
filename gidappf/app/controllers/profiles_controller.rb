@@ -17,10 +17,11 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles/new
+  #Profile.new(valid_from: Date.today, valid_to: 1.year.after ).profile_keys.build(:key => ProfileKey.first.key, :client_side_validator_id => ProfileKey.first.client_side_validator_id).profile_values.build(:value => 'x').save
   def new
-    @profile = Profile.new
-    User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.count.times do |i|
-      @profile.profile_keys.build.profile_values.build
+    @profile = Profile.new(valid_from: Date.today, valid_to: 1.year.after )
+    User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+      @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
     respond_to do |format|
       format.html { }
@@ -33,8 +34,8 @@ class ProfilesController < ApplicationController
   def index
     @profiles = Profile.all
     authorize @profiles
-    User.find_by(email: LockEmail::LIST[1]).documents.each do |d|
-      @profiles -= @profiles.where(id: d.profile_id)
+    User.find_by(email: LockEmail::LIST[1]).documents.each do |quit|
+      @profiles -= @profiles.where(id: quit.profile_id)
     end
   end
 
@@ -57,7 +58,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     authorize @profile #inicialización del nivel de acceso
     respond_to do |format|
-      if @profile.save
+      if @profile.save then
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
@@ -72,7 +73,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        purge_profile_keys(@profile)
+        merge_profile_keys
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -144,12 +145,11 @@ class ProfilesController < ApplicationController
           @profile=Profile.new( name: params[:user_dni], description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
           if @profile.save && Document.new(profile: Profile.last, user: u).save then
             if @profile.profile_keys.empty? then #copia claves del perfil si no tiene
-              User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |k|
-                ProfileKey.new(profile: @profile, key: k.key, client_side_validator: k.client_side_validator).save
-                unless k.key.eql?(User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key) then
-                  ProfileValue.new(profile_key: ProfileKey.last).save
-                else #copia el valor del dni si ess la clave 3 de la plantilla
-                  ProfileValue.new(profile_key: ProfileKey.last, value: params[:user_dni]).save
+              User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+                unless i.key.eql?(User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key) then
+                  @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+                else #copia el valor del dni si es la clave 3 de la plantilla
+                  @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => params[:user_dni]).save
                 end
               end
             end
@@ -174,25 +174,27 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:name, :description, :valid_to, :valid_from,
-        :profile_keys_attributes => [
-          :key,
+        :profile_keys_attributes => [:key, :client_side_validator_id,
           :profile_values_attributes => [:value]
-        ]
-      )
+          ])
     end
 
     #########################################################################################
+    # Estrategia de nuevos nested atributos                                                 #
     # Prerequisitos:                                                                        #
     #           1) Modelo de datos inicializado.                                            #
     #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
     #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
     #           4) Existencia de la plantilla del perfil en Profile.firts.                  #
-    # Devolución: Perfil asociado a las claves mas recientes. desscarta las obsoletas.      #
+    # Devolución: Perfil asociado a las claves mas recientes. descarta errores.             #
     #########################################################################################
-    def purge_profile_keys(profile)
-      if profile.profile_keys.count > Profile.first.profile_keys.count then
-        profile.profile_keys.each do |eachkey|
-          if (Time.now - Time.parse(eachkey.created_at.to_s)) > 6 then
+    def merge_profile_keys
+      if @profile.profile_keys.count > Profile.first.profile_keys.count then
+        @profile.profile_keys.each do |eachkey|
+          if eachkey.client_side_validator_id.nil? then
+            @profile.profile_keys.where(key: eachkey.key).
+              where.not(client_side_validator_id: nil).
+                first.profile_values.first.update(value: eachkey.profile_values.first.value)
             eachkey.destroy
           end
         end

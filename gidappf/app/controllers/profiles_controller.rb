@@ -103,8 +103,8 @@ class ProfilesController < ApplicationController
   #             Redirecciona a la accion second con los parametros id_user y user_dni.    #
   #########################################################################################
   def first
+    authorize Profile.first
     @user = User.new({email: (User.last.id+1).to_s+'@gidappf.edu.ar'})
-    # authorize @user
     unless params[:dni_profile].nil? || params[:email_profile].nil? then
       used = ProfileValue.find_by(value: params[:dni_profile].to_s)
       if User.find_by(email: params[:email_profile]).nil? && (used.nil? || !used.profile_key.key.eql?(Profile.first.profile_keys.find(3).key)) then
@@ -139,11 +139,11 @@ class ProfilesController < ApplicationController
   #########################################################################################
   # GET /profiles/second
   def second
+    authorize Profile.first
     unless params[:id_user].nil? || params[:user_dni].nil? then
       u = User.find(params[:id_user].to_i)
       unless u.nil? then
         @profile = Profile.find_by( name: params[:user_dni])
-        # authorize @profile
         if @profile.nil? then #crea perfil si no tiene
           @profile=Profile.new( name: params[:user_dni], description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
           if @profile.save && Document.new(profile: Profile.last, user: u).save then

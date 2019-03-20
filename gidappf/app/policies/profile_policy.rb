@@ -15,8 +15,17 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción index definida en RolesController                   #
-  # Devolución: true, todos pueden listar roles                             #
+  #           1) Acción new definida en ProfilesController                  #
+  # Devolución: delega el valor de new, para update profiles                #
+  ###########################################################################
+  def new?
+    update?
+  end
+
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción index definida en ProfilesController                #
+  # Devolución: delega el valor de index, para show profiles                #
   ###########################################################################
   def index?
     show?
@@ -24,8 +33,8 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción show definida en RolesController                    #
-  # Devolución: true, todos pueden ver en detalle roles                     #
+  #           1) Acción show definida en ProfilesController                 #
+  # Devolución: true, si roleaccess es mayor a 10                           #
   ###########################################################################
   def show?
     self.set_is_sysadmin
@@ -35,8 +44,8 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción edit definida en RolesController                    #
-  # Devolución: delega el valor de update, para editar roles                #
+  #           1) Acción edit definida en ProfilesController                 #
+  # Devolución: delega el valor de edit, para update profiles               #
   ###########################################################################
   def edit?
     update?
@@ -44,8 +53,17 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción update definida en RolesController                  #
-  # Devolución: false, salvo para john@example.com de los testings          #
+  #           1) Acción edit definida en ProfilesController                 #
+  # Devolución: delega el valor de edit, para update profiles               #
+  ###########################################################################
+  def create?
+    update?
+  end
+
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción update definida en ProfilesController               #
+  # Devolución: true, si roleaccess es mayor a 10          #
   ###########################################################################
   def update?
     self.set_is_sysadmin
@@ -55,29 +73,31 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción destroy definida en RolesController                 #
-  # Devolución: delega el valor de update, para borrar roles                #
+  #           1) Acción destroy definida en ProfilesController              #
+  # Devolución: delega el valor de update, para borrar Profile              #
   ###########################################################################
   def destroy?
-    update?
-  end
-
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción new definida en RolesController                     #
-  # Devolución: delega el valor de create, para nuevos roles                #
-  ###########################################################################
-  def new?
-    create?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>20.0
   end
 
   ##############################################################################
   # Prerequisitos:                                                             #
-  #           1) Acción create definida en RolesController                     #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
+  #           1) Acción create definida en ProfilesController                  #
   # Devolución: Crea un nuevo rol si @user el el de testeo o @issadmin es true #
   ##############################################################################
-  def create?
+  def first?
+    update?
+  end
+
+  ##############################################################################
+  # Prerequisitos:                                                             #
+  #           1) Acción create definida en ProfilesController                  #
+  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
+  # Devolución: true, si roleaccess es mayor a 10 #
+  ##############################################################################
+  def second?
     update?
   end
 

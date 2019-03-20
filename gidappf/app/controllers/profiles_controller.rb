@@ -23,6 +23,7 @@ class ProfilesController < ApplicationController
     User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
       @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
+    authorize @profile
     respond_to do |format|
       format.html { }
       format.json { head :no_content }
@@ -103,6 +104,7 @@ class ProfilesController < ApplicationController
   #########################################################################################
   def first
     @user = User.new({email: (User.last.id+1).to_s+'@gidappf.edu.ar'})
+    # authorize @user
     unless params[:dni_profile].nil? || params[:email_profile].nil? then
       used = ProfileValue.find_by(value: params[:dni_profile].to_s)
       if User.find_by(email: params[:email_profile]).nil? && (used.nil? || !used.profile_key.key.eql?(Profile.first.profile_keys.find(3).key)) then
@@ -141,6 +143,7 @@ class ProfilesController < ApplicationController
       u = User.find(params[:id_user].to_i)
       unless u.nil? then
         @profile = Profile.find_by( name: params[:user_dni])
+        # authorize @profile
         if @profile.nil? then #crea perfil si no tiene
           @profile=Profile.new( name: params[:user_dni], description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
           if @profile.save && Document.new(profile: Profile.last, user: u).save then

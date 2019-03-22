@@ -19,11 +19,11 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   #Profile.new(valid_from: Date.today, valid_to: 1.year.after ).profile_keys.build(:key => ProfileKey.first.key, :client_side_validator_id => ProfileKey.first.client_side_validator_id).profile_values.build(:value => 'x').save
   def new
+    authorize Profile.first
     @profile = Profile.new(valid_from: Date.today, valid_to: 1.year.after )
     User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
       @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
-    authorize @profile
     respond_to do |format|
       format.html { }
       format.json { head :no_content }

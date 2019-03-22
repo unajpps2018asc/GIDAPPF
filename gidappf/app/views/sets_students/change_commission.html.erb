@@ -1,0 +1,32 @@
+<h1>Change commissions</h1>
+<table>
+  <thead>
+     <tr>
+      <th>Student</th>
+      <th colspan=".<%= @comms_period.count.to_s %>." >Commission:</th>
+     </tr>
+  </thead>
+
+  <tbody remote="true">
+    <% @profiles_period.each do |p| %>
+      <tr>
+        <td><%= p.name %></td>
+        <% @comms_period.each do |c| %>
+          <td>
+             <%= radio_button_tag(
+                  "c_"+ c.id.to_s+"_"+:radio_selected.to_s,
+                  p.documents.first.user.usercommissionroles.first.commission_id,
+                  (c.id == p.documents.first.user.usercommissionroles.first.commission_id),
+                  onclick:
+                    "$(document).ready(function() {
+                      window.location.href='"+sets_students_selected_commission_path(id: p.id, radio_selected: c.id.to_s)+
+                    "'});",
+                :disabled  => c.end_date < Date.today
+                )%>
+            <%= label_tag(c.name) %>
+          </td>
+      <% end %>
+     </tr>
+   <% end %>
+  </tbody>
+</table>

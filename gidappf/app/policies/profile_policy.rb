@@ -19,7 +19,7 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de new, para update profiles                #
   ###########################################################################
   def new?
-    update?
+    false
   end
 
   ###########################################################################
@@ -53,7 +53,7 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción edit definida en ProfilesController                 #
+  #           1) Acción create definida en ProfilesController               #
   # Devolución: delega el valor de edit, para update profiles               #
   ###########################################################################
   def create?
@@ -63,7 +63,7 @@ class ProfilePolicy < ApplicationPolicy
   ###########################################################################
   # Prerequisitos:                                                          #
   #           1) Acción update definida en ProfilesController               #
-  # Devolución: true, si roleaccess es mayor a 10          #
+  # Devolución: true, si roleaccess es mayor a 20                           #
   ###########################################################################
   def update?
     self.set_is_sysadmin
@@ -74,7 +74,7 @@ class ProfilePolicy < ApplicationPolicy
   ###########################################################################
   # Prerequisitos:                                                          #
   #           1) Acción destroy definida en ProfilesController              #
-  # Devolución: delega el valor de update, para borrar Profile              #
+  # Devolución: true, si roleaccess es mayor a 30                           #
   ###########################################################################
   def destroy?
     self.set_is_sysadmin
@@ -84,8 +84,8 @@ class ProfilePolicy < ApplicationPolicy
 
   ##############################################################################
   # Prerequisitos:                                                             #
-  #           1) Acción create definida en ProfilesController                  #
-  # Devolución: Crea un nuevo rol si @user el el de testeo o @issadmin es true #
+  #           1) Acción first definida en ProfilesController                   #
+  # Devolución: delega el valor de edit, para update profiles                  #
   ##############################################################################
   def first?
     update?
@@ -93,9 +93,8 @@ class ProfilePolicy < ApplicationPolicy
 
   ##############################################################################
   # Prerequisitos:                                                             #
-  #           1) Acción create definida en ProfilesController                  #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: true, si roleaccess es mayor a 10 #
+  #           1) Acción second definida en ProfilesController                  #
+  # Devolución: delega el valor de edit, para update profiles                  #
   ##############################################################################
   def second?
     update?

@@ -1,0 +1,10 @@
+<%= form_tag sets_students_change_commission_path do %>
+  <%= label_tag ("Select") %>
+  <%=
+    select_tag nil,
+    options_from_collection_for_select(str_periods,  "to_s", "to_s", params[:def_period]),
+    onchange:  "$(document).ready(function() {
+      window.location.href='/sets_students/change_commission?def_period='+ $(event.target).val();
+    });"
+    %>
+<% end %>

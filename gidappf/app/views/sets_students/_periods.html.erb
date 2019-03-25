@@ -1,5 +1,5 @@
 <%= form_tag sets_students_change_commission_path do %>
-  <%= label_tag ("Select") %>
+  <%= label_tag ("Period: ") %>
   <%=
     select_tag nil,
     options_from_collection_for_select(str_periods,  "to_s", "to_s", params[:def_period]),

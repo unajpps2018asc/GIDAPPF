@@ -157,7 +157,7 @@ Commission.all.each do |a|
       }
     ])
 end
-p "[GIDAPPF] Creadas #{TimeSheet.count} Aulas"
+p "[GIDAPPF] Creados #{TimeSheet.count} periodos"
 
 ############################################################################
 # Vacantes de Aulas                                                        #

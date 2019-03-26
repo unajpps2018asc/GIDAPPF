@@ -3,5 +3,6 @@
 <%= render 'periods', str_periods: @opt_periods.uniq %>
 
 <% @per_time_categ_profiles.each do |profiles_time_cat| %>
-  <%= render 'table1', profiles_period: profiles_time_cat.drop(1), comms_period: @comms_period, title: profiles_time_cat.first %>
+  <%= render 'table1', profiles_period: profiles_time_cat.drop(1),
+        comms_period: @comms_period, title: profiles_time_cat.first %>
 <% end %>

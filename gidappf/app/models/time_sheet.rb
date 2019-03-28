@@ -22,15 +22,16 @@ class TimeSheet < ApplicationRecord
   end
 
   def time_category
-    out=''
+    out=[]
     unless self.time_sheet_hours.empty?
       min=60*24
       max=0
       self.time_sheet_hours.each do |h|
-        if h.from_min+h.from_hour*60 < min then min=h.from_min+h.from_hour*60 end
-        if h.to_min+h.to_hour*60 > max then max=h.to_min+h.to_hour*60 end
+        if h.from_min.to_i+h.from_hour.to_i*60 < min then min=h.from_min.to_i+h.from_hour.to_i*60 end
+        if h.to_min.to_i+h.to_hour.to_i*60 > max then max=h.to_min.to_i+h.to_hour.to_i*60 end
       end
-      out << "#{min/60} ~ #{max/60}"
+      out << min
+      out << max
     end
     out
   end

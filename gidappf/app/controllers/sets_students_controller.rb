@@ -31,15 +31,15 @@ class SetsStudentsController < ApplicationController
     @per_time_categ_profiles = []
     array_all_trayect.each do |trayect| #itera primero, segundo, tercero, etc.
       all_time_categories.each do |time_categ| #itera por cada turno
-        profiles_in_time_category = [subtitle_maker(time_categ, trayect)]# El subtitulo (*)
+        profiles_in_time_category = [table_metadata_maker(time_categ, trayect)]# El subtitulo (*)
         ProfileKey.where(key: ProfileKey.find(24).key).where.not(profile: Profile.first).each do |e| #'Elección de turno desde[Hr]:'
           unless e.profile_values.empty? || e.profile_values.first.value.blank? then
             if e.key.eql?(ProfileKey.find(24).key) &&
               e.profile_values.first.value.to_i*60 >= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
-              e.profile.valid_to >= Date.today && # Si el perfil esta habilitado
               e.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
                 profile_values.first.value.to_i*60 <=time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
-              !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? then #"Se inscribe a cursar:"
+              !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? && #"Se inscribe a cursar:"
+              selected_period_profile(e.profile,params[:def_period]) then # Si el perfil esta habilitado
                 if e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase!.eql?(trayect) then
                   profiles_in_time_category << e.profile # si "Se inscribe a cursar:" es igual a trayect
                 end
@@ -51,13 +51,17 @@ class SetsStudentsController < ApplicationController
         end
       end
     end
-    @comms_period = time_sheet_from_commissions_in_period
   end
 
   def selected_commission
   end
 
   private
+
+    def selected_period_profile(profile,selected_period)
+      profile.valid_from >= start_period && profile.valid_to <= end_period
+    end
+
   ########################################################################################################
   # Metodo privado para decodificar el comienzo del periodo seleccionado por el parametro url def_period #
   # Devuelve: un objeto DateTime con la fecha del comienzo del periodo.                                  #
@@ -118,9 +122,14 @@ class SetsStudentsController < ApplicationController
     # Metodo privado para obtener la lista de periodos de comisiones que se solapan con el seleccionado. #
     # Devuelve: una query con todos los TimeSheet dentro del periodo seleccionado.                       #
     ######################################################################################################
-    def time_sheet_from_commissions_in_period
-      TimeSheet.where.not(commission: Commission.first).where(
-        :start_date => start_period - 30  .. start_period + 30).where(:end_date => end_period - 30  .. end_period + 30)
+    def time_sheet_from_commissions_in_period(schedul)
+      out = []
+      TimeSheet.where.not(commission: Commission.first).where(:start_date => start_period - 30  .. start_period + 30).where(:end_date => end_period - 30  .. end_period + 30).each do |e|
+        if !e.time_category.empty? && e.time_category.first >= schedul[1] + schedul[0]*60 && e.time_category.last <= schedul[3] + schedul[2]*60 then
+          out << e
+        end
+      end
+      out
     end
 
     ######################################################################
@@ -136,7 +145,11 @@ class SetsStudentsController < ApplicationController
     # Metodo privado para obtener un subtitulo de la tabla correspondiente. #
     # Devuelve: un string reprecentando a la tabla.                         #
     #########################################################################
-    def subtitle_maker(time_categ, trayect)
-      "#{trayect} #{Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R')} ~ #{Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R')}"
+    def table_metadata_maker(time_categ, trayect)
+      [
+        "#{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
+        +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
+        time_sheet_from_commissions_in_period(time_categ)
+      ]
     end
 end

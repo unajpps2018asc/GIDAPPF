@@ -21,6 +21,15 @@ class TimeSheet < ApplicationRecord
     self.commission.name
   end
 
+  ########################################################################
+  # Prerequisitos:                                                       #
+  #           1) Modelo de datos inicializado.                           #
+  # parámetros:                                                          #
+  #           ninguno.                                                   #
+  # Devolución: Array con dos elementos, el primero es el minimo horario #
+  #          TimeSheetHour de los asignados. El segundo es el maximo     #
+  #          horario de los asignados.                                   #
+  ########################################################################
   def time_category
     out=[]
     unless self.time_sheet_hours.empty?
@@ -34,6 +43,18 @@ class TimeSheet < ApplicationRecord
       out << max
     end
     out
+  end
+
+  ############################################################################
+  # Prerequisitos:                                                           #
+  #           1) Modelo de datos inicializado.                               #
+  # parámetros:                                                              #
+  #           trayect. (Primero, Segundo, Tercero, etc.)                     #
+  # Devolución: True si las materias asignadas a los TimeSheetHour asignados #
+  #           al presente TimeSheet tienen un trayect igual a trayect.       #
+  ############################################################################
+  def is_of_trayect?(trayect)
+    true
   end
 
   private

@@ -1,5 +1,18 @@
+<!-- ########################################################################### -->
+<!-- # Universidad Nacional Arturo Jauretche                                   # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               # -->
+<!-- # Tutores:                                                                # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                     # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/sets_students/_periods.html.erb       # -->
+<!-- ########################################################################### -->
 <%= form_tag sets_students_change_commission_path do %>
   <%= label_tag ("Period: ") %>
+  <!-- redirecciona a la accion change_commission con el parametro def_period con valor elegido por event.target -->
   <%=
     select_tag nil,
     options_from_collection_for_select(str_periods,  "to_s", "to_s", params[:def_period]),

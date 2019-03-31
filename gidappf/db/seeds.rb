@@ -20,6 +20,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'LoTR' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+###########################################################################
+# OBJETOS DE SISTEMA, CONFIGURABLES                                       #
+###########################################################################
 gidappf_start_time = Time.rfc3339('1999-12-31T14:00:00-10:00')
 gidappf_end_time = Time.rfc3339('3000-12-31T14:00:00-10:00')
 ###########################################################################
@@ -31,7 +34,7 @@ Role.create!([
     name: "Ingresante",#id1
     description: "Comienza el tramite para participar del Plan Fines, se reserva el email. Cambio de clave, ya realizada.",
     created_at: gidappf_start_time,
-    enabled: true, level: 10.0
+    enabled: true, level: 10.0 #REQUERIDO POR SISTEMA
   },
   {
     name: "Estudiante",#id2
@@ -43,25 +46,25 @@ Role.create!([
     name: "Secretario",#id3
     description: "Usuario planificador de las cursadas del Plan Fines.",
     created_at: gidappf_start_time,
-    enabled: true, level: 30.0
+    enabled: true, level: 30.0 #REQUERIDO POR SISTEMA
   },
   {
     name: "Administrador",#id4
     description: "Usuario diseñador de las cursadas del Plan Fines.",
     created_at: gidappf_start_time,
-    enabled: true, level: 40.0
+    enabled: true, level: 40.0 #REQUERIDO POR SISTEMA
   },
   {
     name: "Autogestionado",#id5
     description: "Usuario que se registra sin intervención de la administración.",
     created_at: gidappf_start_time,
-    enabled: false # level default 0
+    enabled: false # level default 0 #REQUERIDO POR SISTEMA
   },
   {
     name: "Ingresante",#id6
     description: "Comienza el tramite para participar del Plan Fines, se reserva el email. Si trata de ingresar al sistema, accede al sistema de cambio de clave, ya que la clave es por defecto.",
     created_at: gidappf_start_time,
-    enabled: false, level: 10.0
+    enabled: false, level: 10.0 #REQUERIDO POR SISTEMA
   }
 ])
 p "[GIDAPPF] Creados #{Role.count} Roles"
@@ -71,20 +74,11 @@ p "[GIDAPPF] Creados #{Role.count} Roles"
 # Usuario student@gidappf.edu.ar que guarda la plantilla del perfil                #
 ####################################################################################
 User.destroy_all
-LockEmail::LIST.each do |e|
+LockEmail::LIST.each do |e| #REQUERIDO POR SISTEMA
   aux=Devise::Encryptor.digest(User,rand(5..30))
   User.new({email: e, password: aux, password_confirmation: aux}).save
 end
 p "[GIDAPPF] Creados #{User.count} usuarios de bloqueo"
-
-###########################################################################
-# Array auxiliar                                                          #
-###########################################################################
-aulas=Array.new
-4.times {|i|
-  e=[i+1,"estudiantes#{i+1}","Descripción nro. #{i+1} generada automáticamente"]
-  aulas.push(e)
-}
 
 ####################################################################################
 # Comision de ingresantes                                                          #
@@ -99,93 +93,7 @@ Commission.create!([
     user_id: 1
     }
   ])
-p "[GIDAPPF] Creada Comision de ingresantes"
-
-###############################################################################
-# Comisiones de prueba por cada aula                                          #
-###############################################################################
-aulas.each do |a|
-  Commission.create!([
-    {
-      name: "C. #{a[1]}",
-      description: "#{a[2]} para la comisión.",
-      start_date: gidappf_start_time,
-      end_date: gidappf_end_time,
-      user_id: 1
-      }
-    ])
-end
-p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
-
-#############################################################################
-# Aulas iniciales                                                           #
-#############################################################################
-ClassRoomInstitute.destroy_all
-aulas.each do |a|
-  ClassRoomInstitute.create!([
-    {
-      name: "Aula de #{a[1]}",
-      description: "#{a[2]} para el aula.",
-      ubication: "Av. Ubicación Nº 1234",
-      available_from: Time.now,
-      available_to: gidappf_end_time,
-      available_monday: true,
-      available_tuesday: true,
-      available_wednesday: true,
-      available_thursday: true,
-      available_friday: true,
-      available_saturday: false,
-      available_sunday: false,
-      available_time: 24,
-      capacity: 812,
-      enabled: true,
-    }])
-end
-p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
-
-##########################################################################
-# Períodos de prueba                                                     #
-##########################################################################
-TimeSheet.destroy_all
-Commission.all.each do |a|
-  TimeSheet.create!([
-    {
-      commission_id: a.id,
-      start_date: Date.today,
-      end_date: 13.month.after,
-      enabled: true
-      }
-    ])
-end
-p "[GIDAPPF] Creados #{TimeSheet.count} periodos"
-
-############################################################################
-# Vacantes de Aulas                                                        #
-############################################################################
-Vacancy.destroy_all
-ClassRoomInstitute.all.each do |a|
-  12.times {|i|
-    Vacancy.create!([{class_room_institute_id: a.id, user_id: 1, occupant: nil, enabled: true}])
-  }
-end
-p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes"
-
-######################################################################
-# Horarios de la comision inicial                                    #
-######################################################################
-TimeSheetHour.destroy_all
-Vacancy.all.each do |a|
-  TimeSheetHour.create!([
-     {
-     from_hour: 0, from_min: 0, to_hour: 0, to_min: 0,
-     monday: true, tuesday: true, wednesday: true, thursday: true,
-     friday: true, saturday: true, sunday: true,
-     vacancy_id: a.id,
-     time_sheet_id: TimeSheet.first.id
-     }
-  ])
-  end
-p "[GIDAPPF] Creado #{TimeSheetHour.count} Horarios de ingresantes"
+p "[GIDAPPF] Creada Comision de ingresantes" #REQUERIDO POR SISTEMA
 
 ######################################################################
 # Plantilla del perfil de alumno                                     #
@@ -199,24 +107,24 @@ Profile.create!([
       valid_to: gidappf_end_time
       }
     ])
-
+#REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Profile.count} Perfiles"
 
 Document.destroy_all
 Document.create!([
     {
       profile_id: Profile.first.id,
-      user_id: User.find_by(email: 'student@gidappf.edu.ar').id
+      user_id: User.find_by(email: LockEmail::LIST[1] ).id
      }
   ])
-
+#REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Document.count} Documentos"
 
 ClientSideValidator.destroy_all
 ClientSideValidator.create!([
     {
       content_type: 'GIDAPPF read only',
-      script: ''
+      script: ''#REQUERIDO POR SISTEMA
     },
     {
       content_type: "GIDAPPF alphanumerics",
@@ -260,7 +168,7 @@ p "[GIDAPPF] Creados #{ClientSideValidator.count} Validadores"
 
 ProfileKey.destroy_all
 ProfileKey.create!([
-    {
+    {#REQUERIDO POR SISTEMA
       key: 'Nombre:',#0
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
@@ -268,7 +176,7 @@ ProfileKey.create!([
       key: 'Apellido:',#1
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
-    },{
+    },{ #REQUERIDO POR SISTEMA
       key: 'DNI:',#2
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
@@ -348,15 +256,15 @@ ProfileKey.create!([
       key: 'Establecimiento de (3):',#21
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
-    },{
+    },{ #REQUERIDO POR SISTEMA
       key: 'Se inscribe a cursar:',#22
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
-    },{
+    },{ #REQUERIDO POR SISTEMA
       key: 'Elección de turno desde[Hr]:',#23
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
-    },{
+    },{ #REQUERIDO POR SISTEMA
       key: 'Elección de turno hasta[Hr]:',#24
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
@@ -422,7 +330,4 @@ ProfileKey.create!([
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     }
 ])
-#User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(1).key es "Nombre"
-#User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(2).key es "Apellido"
-#User.find_by(email: 'student@gidappf.edu.ar').document.first.profile.profile_key.find(3).key es "DNI"
 p "[GIDAPPF] Creados #{ProfileKey.count} claves de perfil"

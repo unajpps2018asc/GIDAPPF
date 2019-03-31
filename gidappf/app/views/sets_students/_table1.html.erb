@@ -1,3 +1,15 @@
+<!-- ########################################################################## -->
+<!-- # Universidad Nacional Arturo Jauretche                                  # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática         # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018 # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>              # -->
+<!-- # Tutores:                                                               # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                    # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                           # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                              # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/sets_students/_table1.html.erb       # -->
+<!-- ########################################################################## -->
 <h3><%= title %></h3>
 <table>
   <thead>
@@ -13,14 +25,15 @@
         <td><%= p.name %></td>
         <% comms_period.each do |ts| %>
           <td>
+            <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->
             <%= check_box_tag(
-                "p_"+ p.id.to_s+"_"+:radio_selected.to_s+"_"+ts.id.to_s,
+                "p_"+ p.id.to_s+"_"+:box_selected.to_s+"_"+ts.id.to_s,
                 p.documents.first.user.usercommissionroles.first.commission_id,
                 ts.commission.id == p.documents.first.user.usercommissionroles.last.commission_id,
                 onclick: "$(document).ready(function() {
-                      window.location.href='"+sets_students_selected_commission_path(id: p.id, radio_selected: ts.id.to_s)+
+                      window.location.href='"+sets_students_selected_commission_path(id: p.id, box_selected: ts.id.to_s)+
                     "'});",
-                :disabled  => ts.end_date < Date.today
+                :disabled  => ts.end_date < Date.today || !ts.enabled
               )%>
             <%= label_tag(ts.commission.name) %>
           </td>

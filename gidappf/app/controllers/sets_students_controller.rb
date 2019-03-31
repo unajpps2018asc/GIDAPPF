@@ -26,7 +26,6 @@ class SetsStudentsController < ApplicationController
   #        la modificacion de la seleccion causada por el usuario.                  #
   ###################################################################################
   def change_commission
-    @msg=[]
     @opt_periods = array_options_period
     @per_time_categ_profiles = []
     array_all_trayect.each do |trayect| #itera primero, segundo, tercero, etc.
@@ -35,9 +34,9 @@ class SetsStudentsController < ApplicationController
         ProfileKey.where(key: ProfileKey.find(24).key).where.not(profile: Profile.first).each do |e| #'Elección de turno desde[Hr]:'
           unless e.profile_values.empty? || e.profile_values.first.value.blank? then
             if e.key.eql?(ProfileKey.find(24).key) &&
-              e.profile_values.first.value.to_i*60 >= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
+              e.profile_values.first.value.to_i*60 <= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
               e.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
-                profile_values.first.value.to_i*60 <=time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
+                profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
               !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? && #"Se inscribe a cursar:"
               selected_period_profile(e.profile) then # Si el perfil esta habilitado
                 if e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase.eql?(trayect) then
@@ -165,7 +164,6 @@ class SetsStudentsController < ApplicationController
               time_sheet.time_category.last <= schedul[3] + schedul[2]*60 then
               out << time_sheet
         end
-        @msg << "TS#{time_sheet.time_category} / Sch #{schedul} "
       end
       out
     end

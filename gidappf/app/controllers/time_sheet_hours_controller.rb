@@ -14,14 +14,27 @@
 class TimeSheetHoursController < ApplicationController
   before_action :set_time_sheet_hour, only: [:show, :edit, :update, :destroy]
 
+  ###################################################################################
+  # Prerequisitos:                                                                  #
+  #           1) Modelo de datos inicializado.                                      #
+  #           2) ProfileKey numero 23 con valor key reprecentando trayecto.         #
+  #           3) ProfileKey numero 24 con valor key reprecentando turno desde.      #
+  #           4) ProfileKey numero 25 con valor key reprecentando turno hasta.      #
+  #           5) Profile numero 1 es una plantilla, no tiene valores, solo claves.  #
+  # Devolución: Accion que permite seleccionar comisiones dentro del periodo actual #
+  #      hasta periodos que finalizan en 3 anos por un lado. Por otro Aulas en forma#
+  #      agrupada con los perfiles que podrian ser asignadoss #
+  #        o ya estan asignados a estas comisiones. La vista proporciona el link a  #
+  #        la modificacion de la seleccion causada por el usuario.                  #
+  ###################################################################################
   # GET /time_sheet_hours
   # GET /time_sheet_hours.json
   def index
     @time_sheet_hours = TimeSheetHour.all
     authorize @time_sheet_hours
     @time_sheet_hours -= @time_sheet_hours.where(from_hour: 0, from_min: 0, to_hour: 0, to_min: 0)
-    @time_sheets = TimeSheet.where(end_date: Date.today .. 15.month.after).where(enabled:true)
-    @class_room_institutes = ClassRoomInstitute.where(enabled:true)
+    @time_sheets = TimeSheet.where(end_date: Date.today .. 36.month.after).where(enabled:true).where.not(commission: Commission.first)
+    @class_room_institutes = ClassRoomInstitute.where(enabled:true).where.not(available_to: 24.month.after .. 36.month.after)
     if !params[:map_sel].nil? then
       params_to_hash
     elsif params[:map_sel].nil? then

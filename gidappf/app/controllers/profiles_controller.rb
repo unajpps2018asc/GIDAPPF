@@ -99,6 +99,7 @@ class ProfilesController < ApplicationController
   #           1) Modelo de datos inicializado.                                            #
   #           2)Asociacion un User a muchos Usercommisssionrole registrada en el modelo.  #
   #           3) Role con level 10 y enabled false existente.                             #
+  #           4) Primer comisión de ingresantes existente.                                #
   # Devolución: Registro de un nuevo usuario con password provisorio y rol de ingresante. #
   #             Redirecciona a la accion second con los parametros id_user y user_dni.    #
   #########################################################################################

@@ -41,7 +41,7 @@ aulas=Array.new
   aulas.push(e)
 }
 ###############################################################################
-# Comisiones de prueba por cada aula                                          #
+# Comisiones de prueba por cada aula, creadas a partir del array auxiliar.    #
 ###############################################################################
 aulas.each do |a|
   Commission.create!([
@@ -54,10 +54,23 @@ aulas.each do |a|
       }
     ])
 end
+###############################################################################
+# Comision del turno noche.                                                   #
+###############################################################################
+Commission.create!([
+  {
+    name: "C. noche",
+    description: "Descripción para la comisión noche.",
+    start_date: gidappf_start_time,
+    end_date: gidappf_end_time,
+    user_id: 1
+    }
+  ])
+
 p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
 
 #############################################################################
-# Aulas iniciales                                                           #
+# Aulas iniciales, creadas a partir del array auxiliar.                     #
 #############################################################################
 ClassRoomInstitute.destroy_all
 aulas.each do |a|
@@ -83,7 +96,7 @@ end
 p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
 
 ############################################################################
-# Vacantes de Aulas                                                        #
+# Vacantes de Aulas, por cada aula                                         #
 ############################################################################
 Vacancy.destroy_all
 ClassRoomInstitute.all.each do |a|
@@ -94,7 +107,9 @@ end
 p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes" #requerido por cada aula
 
 ##########################################################################
-# Períodos de prueba                                                     #
+# Períodos de prueba, arbitrariamente se crea un período actual, otro    #
+# pasado y otro futuro. Tambien es arbitrario que sean las mismas        #
+# comisiones por cada periodo, podrian ser distintas                     #
 ##########################################################################
 TimeSheet.destroy_all
 Commission.all.each do |a|
@@ -120,26 +135,30 @@ end  #requerido por cada comisión
 p "[GIDAPPF] Creados #{TimeSheet.count} periodos"
 
 ######################################################################
-# Horarios de la comision inicial                                    #
+# Horarios de la comision inicial, es requerimiento de sistema.      #
+# Cada vacante requiere un horario dentro del primer periodo.        #
+# La comisión inicial existe para controlar la cantidad de vacantes  #
+# es por eso que no importan los horarios ni el periodo.             #
 ######################################################################
 TimeSheetHour.destroy_all
 Vacancy.all.each do |a|
   TimeSheetHour.create!([
-     {
-     from_hour: 0, from_min: 0, to_hour: 0, to_min: 0,
-     monday: true, tuesday: true, wednesday: true, thursday: true,
-     friday: true, saturday: true, sunday: true,
-     vacancy_id: a.id,
-     time_sheet_id: TimeSheet.first.id
-     }
+    {
+      from_hour: 0, from_min: 0, to_hour: 0, to_min: 0,
+      monday: true, tuesday: true, wednesday: true, thursday: true,
+      friday: true, saturday: true, sunday: true,
+      vacancy_id: a.id,
+      time_sheet_id: TimeSheet.first.id
+    }
   ])
 end #requerido por cada vacante de aula
 p "[GIDAPPF] Creado #{TimeSheetHour.count} Horarios de ingresantes"
 
 ###########################################################################
-# 4 Horarios de muestra turno mañana, todos los períodos                  #
+# 4 Horarios de muestra turno mañana, todos los períodos y todas las      #
+# vacantes.                                                               #
 ###########################################################################
-Commission.where.not(id: 1).where.not(id: 4).where.not(id: 5).each do |c|
+Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).where.not(id: 6).each do |c|
   Vacancy.all.each do |a|
     c.time_sheets.each do |p|
       TimeSheetHour.new(
@@ -166,10 +185,12 @@ Commission.where.not(id: 1).where.not(id: 4).where.not(id: 5).each do |c|
     end
   end
 end
+
 ###########################################################################
-# 4 Horarios de muestra turno tarde                                       #
+# 4 Horarios de muestra turno tarde, todos los períodos y todas las       #
+# vacantes.                                                               #
 ###########################################################################
-Commission.where.not(id: 1).where.not(id: 2).where.not(id: 3).each do |c|
+Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).where.not(id: 6).each do |c|
   Vacancy.all.each do |a|
     c.time_sheets.each do |p|
       TimeSheetHour.new(
@@ -189,63 +210,166 @@ Commission.where.not(id: 1).where.not(id: 2).where.not(id: 3).each do |c|
     end
   end
 end
+
+###########################################################################
+# 1 Horarios de muestra turno noche, todos los períodos y todas las       #
+# vacantes.                                                               #
+###########################################################################
+  Vacancy.all.each do |a|
+    Commission.find(6).time_sheets.each do |p|
+      TimeSheetHour.new(
+        from_hour: 17, from_min: 0, to_hour: 22, to_min: 0,
+        monday: true, tuesday: true, wednesday: true, thursday: true,
+        friday: true, saturday: false, sunday: false,
+        vacancy_id: a.id,
+        time_sheet_id: p.id
+      ).save
+    end
+  end
 p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
 
 ###########################################################################
-# 200 usuarios de muestra turno mañana                                    #
+# 10 ingresantes de muestra turno mañana, minimo perfil                   #
 ###########################################################################
 10.times do |u|
-  u200 = User.new({email: "ingresante#{u}@gidappf.edu.ar", password: "ingresante#{u}", password_confirmation: "ingresante#{u}"})
-  u200.save
+  u10 = User.new({email: "ingresante#{u}@gidappf.edu.ar", password: "ingresante#{u}", password_confirmation: "ingresante#{u}"})
+  u10.save
   Usercommissionrole.new(
     role_id: Role.find_by(level: 10, enabled: false).id,
-    user_id: u200.id, commission_id: Commission.first.id
+    user_id: u10.id, commission_id: Commission.first.id
   ).save
-  p200=Profile.new( name: (u+1000000).to_s, description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
+  p10=Profile.new( name: (u+1000000).to_s, description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+1000000).to_s).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+1000000).to_s).save
       when 23 #"Se inscribe a cursar:"
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "PRIMERO").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "PRIMERO").save
       when 24 #'Elección de turno desde[Hr]:'
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "8").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "8").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "12").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "12").save
       else
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p200, user: u200).save
+  Document.new(profile: p10, user: u10).save
 end
 
 ###########################################################################
-# 200 usuarios de muestra turno tarde                                     #
+# 10 ingresantes de muestra turno tarde, minimo perfil                    #
 ###########################################################################
 10.times do |u|
-  u200 = User.new({email: "ingresante#{u+10}@gidappf.edu.ar", password: "ingresante#{u+10}", password_confirmation: "ingresante#{u+10}"})
-  u200.save
+  u10 = User.new({email: "ingresante#{u+10}@gidappf.edu.ar", password: "ingresante#{u+10}", password_confirmation: "ingresante#{u+10}"})
+  u10.save
   Usercommissionrole.new(
     role_id: Role.find_by(level: 10, enabled: false).id,
-    user_id: u200.id, commission_id: Commission.first.id
+    user_id: u10.id, commission_id: Commission.first.id
   ).save
-  p200=Profile.new( name: (u+2000000).to_s, description: "A description user #{u+10}", valid_from: Date.today, valid_to: 1.year.after )
+  p10=Profile.new( name: (u+2000000).to_s, description: "A description user #{u+10}", valid_from: Date.today, valid_to: 1.year.after )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+2000000).to_s).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+2000000).to_s).save
       when 23 #"Se inscribe a cursar:"
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "Segundo").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "Segundo").save
       when 24 #'Elección de turno desde[Hr]:'
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "13").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "13").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
       else
-        p200.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p200, user: u200).save
+  Document.new(profile: p10, user: u10).save
+end
+
+###########################################################################
+# 5 ingresantes de muestra turno noche, minimo perfil                     #
+###########################################################################
+5.times do |u|
+  u5 = User.new({email: "ingresante#{u+20}@gidappf.edu.ar", password: "ingresante#{u+20}", password_confirmation: "ingresante#{u+20}"})
+  u5.save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 10, enabled: false).id,
+    user_id: u5.id, commission_id: Commission.first.id
+  ).save
+  p5=Profile.new( name: (u+3000000).to_s, description: "A description user #{u+20}", valid_from: Date.today, valid_to: 1.year.after )
+  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+    x=i.id
+    case x
+      when 3 #dni si es la clave 3 de la plantilla
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+3000000).to_s).save
+      when 23 #"Se inscribe a cursar:"
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "primero").save
+      when 24 #'Elección de turno desde[Hr]:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
+      when 25 #'Elección de turno hasta[Hr]:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "22").save
+      else
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+    end
+  end
+  Document.new(profile: p5, user: u5).save
+end
+
+###########################################################################
+# 5 ingresantes de muestra turno con amplia disponibilidad, minimo perfil #
+###########################################################################
+5.times do |u|
+  u5 = User.new({email: "ingresante#{u+25}@gidappf.edu.ar", password: "ingresante#{u+25}", password_confirmation: "ingresante#{u+25}"})
+  u5.save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 10, enabled: false).id,
+    user_id: u5.id, commission_id: Commission.first.id
+  ).save
+  p5=Profile.new( name: (u+4000000).to_s, description: "A description user #{u+25}", valid_from: Date.today, valid_to: 1.year.after )
+  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+    x=i.id
+    case x
+      when 3 #dni si es la clave 3 de la plantilla
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+4000000).to_s).save
+      when 23 #"Se inscribe a cursar:"
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "tercero").save
+      when 24 #'Elección de turno desde[Hr]:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "7").save
+      when 25 #'Elección de turno hasta[Hr]:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "22").save
+      else
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+    end
+  end
+  Document.new(profile: p5, user: u5).save
+end
+
+###########################################################################
+# 5 estudiantes del periodo anterior, minimo perfil                       #
+###########################################################################
+5.times do |u|
+  u5 = User.new({email: "estudiante#{u+30}@gidappf.edu.ar", password: "estudiante#{u+30}", password_confirmation: "estudiante#{u+30}"})
+  u5.save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 20, enabled: true).id,
+    user_id: u5.id, commission_id: Commission.last.id
+  ).save
+  p5=Profile.new( name: (u+5000000).to_s, description: "A description user #{u+25}", valid_from: 15.month.before, valid_to: 5.month.before )
+  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+    x=i.id
+    case x
+      when 3 #dni si es la clave 3 de la plantilla
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+5000000).to_s).save
+      when 23 #"Se inscribe a cursar:"
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "tercero").save
+      when 24 #'Elección de turno desde[Hr]:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
+      when 25 #'Elección de turno hasta[Hr]:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "22").save
+      else
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+    end
+  end
+  Document.new(profile: p5, user: u5).save
 end
 p "[GIDAPPF] Creados #{User.count} usuarios de muestra"

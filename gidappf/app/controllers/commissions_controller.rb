@@ -29,6 +29,7 @@ class CommissionsController < ApplicationController
   # GET /commissions/new
   def new
     @commission = Commission.new
+    authorize @commission
   end
 
   # GET /commissions/1/edit

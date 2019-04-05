@@ -82,4 +82,15 @@ class User < ApplicationRecord
     out
   end
 
+  ####################################################################################
+  # Prerequisitos:                                                                   #
+  #     1) Modelo inicializado.                                                      #
+  # parámetros:                                                                      #
+  #           time_sheet: hoja de tiempos del periodo                                #
+  # Devolución: True si el usuario esta asignado al time_sheet.                      #
+  ####################################################################################
+  def asigned_in_time_sheet?(time_sheet)
+    self.usercommissionroles.last.commission.time_sheets.first.eql?(time_sheet)
+  end
+
 end

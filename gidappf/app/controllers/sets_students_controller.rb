@@ -53,6 +53,13 @@ class SetsStudentsController < ApplicationController
   end #action
 
   def selected_commission
+    p = Profile.find(params[:id].to_i)
+    ucr = Profile.find(params[:id].to_i).documents.first.user.usercommissionroles.last
+    ts = TimeSheet.find(params[:box_selected].to_i)
+    unless p.nil? || ts.nil? || ucr.nil? then
+      ucr.update(role: Role.find_by(enabled: true, level: 20.0), commission: ts.commission)
+      redirect_to sets_students_change_commission_path(def_period: params[:def_period]), notice: "Profile #{p.name} change to #{ts.commission.name}"
+    end
   end
 
   private

@@ -69,7 +69,7 @@ class TimeSheet < ApplicationRecord
   #             comision en un mensaje junto con la referencia.                  #
   ################################################################################
   def commission_info
-    "#{self.commission.name}: #{users_asigned_in_timesheet}/#{self.time_sheet_hours.first.vacancy.class_room_institute.vacancies.count}"
+    "#{self.commission.name}: #{self.users_asigned_in_timesheet}/#{self.time_sheet_hours.first.vacancy.class_room_institute.vacancies.count}"
   end
 
   ################################################################################

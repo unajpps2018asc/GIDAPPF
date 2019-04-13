@@ -159,7 +159,7 @@ p "[GIDAPPF] Creado #{TimeSheetHour.count} Horarios de ingresantes"
 # vacantes.                                                               #
 ###########################################################################
 Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).where.not(id: 6).each do |c|
-  Vacancy.all.each do |a|
+  Vacancy.where.not(class_room_institute_id: 3).where.not(class_room_institute_id: 4).each do |a|
     c.time_sheets.each do |p|
       TimeSheetHour.new(
         from_hour: 8, from_min: 0, to_hour: 9, to_min: 15,
@@ -191,7 +191,7 @@ end
 # vacantes.                                                               #
 ###########################################################################
 Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).where.not(id: 6).each do |c|
-  Vacancy.all.each do |a|
+  Vacancy.where.not(class_room_institute_id: 1).where.not(class_room_institute_id: 2).each do |a|
     c.time_sheets.each do |p|
       TimeSheetHour.new(
         from_hour: 13, from_min: 0, to_hour: 15, to_min: 15,
@@ -215,7 +215,7 @@ end
 # 1 Horarios de muestra turno noche, todos los períodos y todas las       #
 # vacantes.                                                               #
 ###########################################################################
-  Vacancy.all.each do |a|
+  Vacancy.where(class_room_institute_id: 1).each do |a|
     Commission.find(6).time_sheets.each do |p|
       TimeSheetHour.new(
         from_hour: 17, from_min: 0, to_hour: 22, to_min: 0,
@@ -352,9 +352,9 @@ end
   u5.save
   Usercommissionrole.new(
     role_id: Role.find_by(level: 20, enabled: true).id,
-    user_id: u5.id, commission_id: Commission.last.id
+    user_id: u5.id, commission_id: Commission.find_by(name: "C. noche").id
   ).save
-  p5=Profile.new( name: (u+5000000).to_s, description: "A description user #{u+25}", valid_from: 15.month.before, valid_to: 5.month.before )
+  p5=Profile.new( name: (u+5000000).to_s, description: "A description user #{u+30}", valid_from: 15.month.before, valid_to: 5.month.before )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x

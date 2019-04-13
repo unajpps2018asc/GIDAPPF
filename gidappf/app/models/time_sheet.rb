@@ -52,9 +52,18 @@ class TimeSheet < ApplicationRecord
   #           trayect. (Primero, Segundo, Tercero, etc.)                     #
   # Devolución: True si las materias asignadas a los TimeSheetHour asignados #
   #           al presente TimeSheet tienen un trayect igual a trayect.       #
+  # (provisoriamente comprueba a trayect del primer anotado)                 #
   ############################################################################
   def is_of_trayect?(trayect)
-    true
+    u=Usercommissionrole.find_by(commission: self.commission)
+    if !u.nil? && u.user.documents.first.profile.valid_to <= self.end_date &&
+      u.user.documents.first.profile.valid_from >= self.start_date then
+        u.user.documents.first.profile.profile_keys.
+          find_by(key:ProfileKey.find(23).key).
+            profile_values.first.value.upcase.eql?(trayect.upcase)
+    else
+      true
+    end
   end
 
   ################################################################################
@@ -65,11 +74,11 @@ class TimeSheet < ApplicationRecord
   # 4) Perfil de usuario con email student@gidappf.edu.ar existente en LIST[1]). #
   # parámetros:                                                                  #
   #           ninnguno                                                           #
-  # Devolución: Fraccion de vacantes utilizadas en este periodo de la            #
-  #             comision en un mensaje junto con la referencia.                  #
+  # Devolución: Mensaje con la fraccion de vacantes utilizadas en este periodo   #
+  #             de la comision en un mensaje junto con la referencia.            #
   ################################################################################
   def commission_info
-    "#{self.commission.name}: #{self.users_asigned_in_timesheet}/#{self.time_sheet_hours.first.vacancy.class_room_institute.vacancies.count}"
+    "#{self.commission.name}: #{self.users_assigned_in_timesheet}/#{self.time_sheet_hours.first.vacancy.class_room_institute.vacancies.count}"
   end
 
   ################################################################################
@@ -80,17 +89,24 @@ class TimeSheet < ApplicationRecord
   # 4) Perfil de usuario con email student@gidappf.edu.ar existente en LIST[1]). #
   # parámetros:                                                                  #
   #           ninguno                                                            #
-  # Devolución: True si las materias asignadas a los TimeSheetHour asignados     #
-  #           al presente TimeSheet tienen un trayect igual a trayect.           #
+  # Devolución: Número de asignados al TimeSheet seleccionado entre start_date y #
+  #             end_date.                                                        #
   ################################################################################
-  def users_asigned_in_timesheet
+  def users_assigned_in_timesheet
     out=0
-    User.where.not(email: LockEmail::LIST).each do |u|
-      if u.asigned_in_time_sheet?(self) then
-        out += 1
+    User.where.not(email: LockEmail::LIST).joins(documents: :profile, usercommissionroles: :role).
+      select(:id, :profile_id, :role_id, :commission_id).each do |e|
+        if e.role_id == 2 && Commission.find(e.commission_id).eql?(self.commission) &&
+          Profile.find(e.profile_id).valid_from >= self.start_date &&
+          Profile.find(e.profile_id).valid_to <= self.end_date then
+          out += 1
+        end
       end
-    end
     out
+    end
+
+  def selectable?
+    self.end_date < Date.today || !self.enabled
   end
 
   private

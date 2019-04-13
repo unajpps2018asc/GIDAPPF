@@ -38,10 +38,9 @@ class SetsStudentsController < ApplicationController
               e.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
                 profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
               !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? && #"Se inscribe a cursar:"
-              selected_period_profile(e.profile) then # Si el perfil esta habilitado
-                if e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase.eql?(trayect) then
+              selected_period_profile(e.profile) &&
+              e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase.eql?(trayect.upcase) then
                   profiles_in_time_category << e.profile # si "Se inscribe a cursar:" es igual a trayect
-                end #if e.profile...
             end #if e.key.eql?...
           end #unless e.profile_values...
         end #ProfileKey.where(key:...)...each do |e|
@@ -112,7 +111,7 @@ class SetsStudentsController < ApplicationController
   #########################################################################
   def table_metadata_maker(time_categ, trayect)
     [
-      "#{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
+      "Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
       +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
       time_sheet_from_commissions_in_period(time_categ, trayect)
     ]

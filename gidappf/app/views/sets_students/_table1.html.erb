@@ -33,7 +33,7 @@
                 onclick: "$(document).ready(function() {
                       window.location.href='"+sets_students_selected_commission_path(id: p.id, box_selected: ts.id.to_s, def_period: params[:def_period])+
                     "'});",
-                :disabled  => ts.end_date < Date.today || !ts.enabled
+                :disabled  => ts.selectable?
               )%>
             <%= label_tag(ts.commission_info) %>
           </td>

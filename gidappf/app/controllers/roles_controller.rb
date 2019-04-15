@@ -1,4 +1,3 @@
-require 'role_access'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,7 +12,6 @@ require 'role_access'
 # Archivo GIDAPPF/gidappf/app/controllers/roles_controller.rb             #
 ###########################################################################
 class RolesController < ApplicationController
-  include RoleAccess
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /roles

@@ -12,7 +12,7 @@
 # Archivo GIDAPPF/gidappf/lib/role_access.rb                              #
 ###########################################################################
 module RoleAccess
-  
+
   #####################################################################################################################
   # Prerequisitos:                                                                                                     #
   #           1) Modelo de datos inicializado                                                                          #
@@ -23,21 +23,42 @@ module RoleAccess
   #             -10 si el usercommisionrole no relaciona a @user en ninguna comision                                   #
   ######################################################################################################################
   def get_role_access
-    roleaccess=-20.0
-    begin
-      records = Usercommissionrole.where(user_id: current_user.id)
-    rescue ActiveRecord::RecordNotFound => e1
-      records = nil
-    end
-    if records == nil then roleaccess=-10.0
-    else
-      records.each do |my_record|
-        if my_record.role.level > roleaccess
-          roleaccess=my_record.role.level
-        end
-      end #do
-    end #if
+    roleaccess=-10.0
+    l= Usercommissionrole.where(user: current_user.id).joins(:role).
+        select(:level).maximum("level")
+    unless l.nil? then
+      roleaccess=l
+    end #unless
     roleaccess
   end #method
 
+  ##########################################################################################################################################
+  # Prerequisitos:                                                                                                                         #
+  #           1) Modelo de datos inicializado                                                                                              #
+  # Devolución: 'layouts/forty_links' si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 4 al menos una vez  #
+  #             'layouts/thirty_links' si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez #
+  #             'layouts/twenty_links' si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 2 al menos una vez #
+  #             'layouts/ten_links' si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez    #
+  #             'layouts/links_logout' si el usercommisionrole no relaciona a @user en ninguna comision                                    #
+  ##########################################################################################################################################
+  def get_user_links
+    out=''
+    unless current_user.nil? then
+      l=get_role_access
+      if l >= 40.0 then
+        out='layouts/forty_links'
+      elsif l < 40.0 && l >= 30.0 then
+        out='layouts/thirty_links'
+      elsif l < 30.0 && l >= 20.0 then
+        out='layouts/twenty_links'
+      elsif l < 20.0 && l >= 10.0 then
+        out='layouts/ten_links'
+      elsif l < 10.0 && l >= -10.0 then
+        out='layouts/links_logout'
+      end
+    else
+      out='layouts/links_logout'
+    end
+    out
+  end
 end #module

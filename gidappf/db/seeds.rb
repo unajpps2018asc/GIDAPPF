@@ -65,6 +65,12 @@ Role.create!([
     description: "Comienza el tramite para participar del Plan Fines, se reserva el email. Si trata de ingresar al sistema, accede al sistema de cambio de clave, ya que la clave es por defecto.",
     created_at: gidappf_start_time,
     enabled: false, level: 10.0 #REQUERIDO POR SISTEMA
+  },
+  {
+    name: "Docente",#id7
+    description: "Rol asignado posteriormente, ya sea luego de ser autogestionado o un perfil.",
+    created_at: gidappf_start_time,
+    enabled: true, level: 29.0 #REQUERIDO POR SISTEMA
   }
 ])
 p "[GIDAPPF] Creados #{Role.count} Roles"

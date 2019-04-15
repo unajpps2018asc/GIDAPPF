@@ -1,3 +1,4 @@
+require 'role_access'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,6 +14,11 @@
 ###########################################################################
 class ApplicationController < ActionController::Base
 	include Pundit #requerimiento para establecer el control de acceso
+	include RoleAccess
+	###############################################
+	# :get_user_links, definido en RoleAccess     #
+	###############################################
+	helper_method :get_user_links
 	protect_from_forgery with: :exception
 	before_action :authenticate_user!
 		##########################################################################
@@ -24,6 +30,7 @@ class ApplicationController < ActionController::Base
 		if Rails.env.development?
 	    Rack::MiniProfiler.authorize_request
 		end
+
 
 		private
 

@@ -54,6 +54,7 @@ class SetsStudentsController < ApplicationController
   def selected_commission
     p = Profile.find(params[:id].to_i)
     ucr = Profile.find(params[:id].to_i).documents.first.user.usercommissionroles.last
+    authorize ucr
     ts = TimeSheet.find(params[:box_selected].to_i)
     unless p.nil? || ts.nil? || ucr.nil? then
       ucr.update(role: Role.find_by(enabled: true, level: 20.0), commission: ts.commission)

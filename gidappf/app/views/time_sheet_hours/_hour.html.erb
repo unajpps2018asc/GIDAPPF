@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= form.label "Matter" %>
+    <%= form.select :matter_id, matters.collect { |m| [ m.name, m.id ] }, include_blank: true %>
+  </div>
 
   <div class="field">
     <%= form.label :from_hour %>

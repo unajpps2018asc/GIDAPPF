@@ -13,6 +13,12 @@ class TimeSheetHour < ApplicationRecord
   #############################################################################
   belongs_to :time_sheet
 
+  #############################################################################
+  # Asociación uno a uno:soporta muchos TimeSheetHours pertenecientes         #
+  #                         a una Matter                                      #
+  #############################################################################
+  belongs_to :matter
+
   validates :from_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 24}
   validates :to_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 24}
   validates :from_min, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 60}

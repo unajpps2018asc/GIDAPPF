@@ -13,6 +13,7 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  resources :matters
   get 'sets_students/change_commission'
   get 'sets_students/selected_commission'
   get 'sets_students/change_commission'

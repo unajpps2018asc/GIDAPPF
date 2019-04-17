@@ -99,11 +99,13 @@ class TimeSheetHoursController < ApplicationController
 
   # post /time_sheet_hours/multiple_new/params
   def multiple_new
+    @matters=Matter.where(enable: true)
     arr=time_sheet_each_vacancy(get_ts_and_cri,"id_cri","id_ts")
     unless arr.nil? || arr.first.empty? || arr.last.empty? then
       authorize @time_sheet_hour=TimeSheetHour.new(
           time_sheet_id: arr.last.first.id,
           vacancy_id: arr.first.first.vacancies.first.id,
+          matter_id: params[:matter_id].to_i,
           from_hour: params[:from_hour],
           from_min: params[:from_min],
           to_hour: params[:to_hour],
@@ -158,7 +160,7 @@ class TimeSheetHoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_sheet_hour_params
-      params.require(:time_sheet_hour).permit(:vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+      params.require(:time_sheet_hour).permit(:matter_id, :vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
     end
 
     def params_to_hash
@@ -209,6 +211,7 @@ class TimeSheetHoursController < ApplicationController
           group_vacancy.each do |v|
             unless !TimeSheetHour.find_by(
               time_sheet_id: time_sheet_of_commission.id,
+              matter_id: ref.matter_id,
               vacancy_id: v.id,
               from_min: ref.from_min,
               to_hour: ref.to_hour,
@@ -223,6 +226,7 @@ class TimeSheetHoursController < ApplicationController
             ).nil? then
               TimeSheetHour.new(
                 time_sheet_id: time_sheet_of_commission.id,
+                matter_id: ref.matter_id,
                 vacancy_id: v.id,
                 from_hour: ref.from_hour,
                 from_min: ref.from_min,

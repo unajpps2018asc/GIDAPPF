@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label "Matter" %>
+    <%= form.select :matter_id, Matter.all.collect { |m| [ m.name, m.id ] }, include_blank: true %>
+  </div>
+
+  <div class="field">
     <%= form.label :time_sheet_id %>
     <%= form.number_field :time_sheet_id, :disabled => true %>
   </div>

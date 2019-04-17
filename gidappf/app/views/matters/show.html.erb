@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @matter.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @matter.description %>
+</p>
+
+<p>
+  <strong>Enable:</strong>
+  <%= @matter.enable %>
+</p>
+
+<%= link_to 'Edit', edit_matter_path(@matter) %> |
+<%= link_to 'Back', matters_path %>

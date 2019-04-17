@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_114656) do
+ActiveRecord::Schema.define(version: 2019_04_16_173534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 2019_03_18_114656) do
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_documents_on_profile_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "matters", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "enable"
   end
 
   create_table "profile_keys", force: :cascade do |t|
@@ -114,6 +122,8 @@ ActiveRecord::Schema.define(version: 2019_03_18_114656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "vacancy_id"
+    t.bigint "matter_id"
+    t.index ["matter_id"], name: "index_time_sheet_hours_on_matter_id"
     t.index ["time_sheet_id"], name: "index_time_sheet_hours_on_time_sheet_id"
     t.index ["vacancy_id"], name: "index_time_sheet_hours_on_vacancy_id"
   end
@@ -168,6 +178,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_114656) do
   add_foreign_key "profile_keys", "client_side_validators"
   add_foreign_key "profile_keys", "profiles"
   add_foreign_key "profile_values", "profile_keys"
+  add_foreign_key "time_sheet_hours", "matters"
   add_foreign_key "time_sheet_hours", "time_sheets"
   add_foreign_key "time_sheet_hours", "vacancies"
 end

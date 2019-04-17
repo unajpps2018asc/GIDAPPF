@@ -134,6 +134,20 @@ Commission.all.each do |a|
 end  #requerido por cada comisión
 p "[GIDAPPF] Creados #{TimeSheet.count} periodos"
 
+###############################################################################
+# Materias de prueba por cada aula, creadas a partir del array auxiliar.      #
+###############################################################################
+aulas.each do |a|
+  Matter.create!([
+    {
+      name: "Materia #{a[1]}",
+      description: "#{a[2]} para la materia.",
+      enable: true
+      }
+    ])
+end
+p "[GIDAPPF] Creados #{Matter.count} materias"
+
 ######################################################################
 # Horarios de la comision inicial, es requerimiento de sistema.      #
 # Cada vacante requiere un horario dentro del primer periodo.        #
@@ -148,7 +162,8 @@ Vacancy.all.each do |a|
       monday: true, tuesday: true, wednesday: true, thursday: true,
       friday: true, saturday: true, sunday: true,
       vacancy_id: a.id,
-      time_sheet_id: TimeSheet.first.id
+      time_sheet_id: TimeSheet.first.id,
+      matter_id: Matter.first.id
     }
   ])
 end #requerido por cada vacante de aula
@@ -166,21 +181,24 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
-        time_sheet_id: p.id
+        time_sheet_id: p.id,
+        matter_id: Matter.first.id
       ).save
       TimeSheetHour.new(
         from_hour: 9, from_min: 30, to_hour: 10, to_min: 10,
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
-        time_sheet_id: p.id
+        time_sheet_id: p.id,
+        matter_id: Matter.first.id
       ).save
       TimeSheetHour.new(
         from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
-        time_sheet_id: p.id
+        time_sheet_id: p.id,
+        matter_id: Matter.first.id
       ).save
     end
   end
@@ -198,14 +216,16 @@ Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
-        time_sheet_id: p.id
+        time_sheet_id: p.id,
+        matter_id: Matter.first.id
       ).save
       TimeSheetHour.new(
         from_hour: 15, from_min: 15, to_hour: 17, to_min: 0,
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
-        time_sheet_id: p.id
+        time_sheet_id: p.id,
+        matter_id: Matter.first.id
       ).save
     end
   end
@@ -222,7 +242,8 @@ end
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
-        time_sheet_id: p.id
+        time_sheet_id: p.id,
+        matter_id: Matter.first.id
       ).save
     end
   end

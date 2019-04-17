@@ -26,6 +26,7 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
       post time_sheet_hours_url, params: {
         time_sheet_hour: {
           time_sheet_id: @time_sheet_hour.time_sheet_id,
+          matter_id: @time_sheet_hour.matter_id,
           vacancy_id: @time_sheet_hour.vacancy_id,
           from_hour: @time_sheet_hour.from_hour,
           to_hour: @time_sheet_hour.to_hour,

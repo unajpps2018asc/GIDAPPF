@@ -16,8 +16,8 @@ class MattersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_matter_url
-    assert_response :success, headers: @auth_h_matter
+    get new_matter_url, headers: @auth_h_matter
+    assert_response :success
   end
 
   test "should create matter" do

@@ -22,10 +22,18 @@ class MattersController < ApplicationController
   def new
     @matter = Matter.new
     authorize @matter
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+    end
   end
 
   # GET /matters/1/edit
   def edit
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+    end
   end
 
   # POST /matters

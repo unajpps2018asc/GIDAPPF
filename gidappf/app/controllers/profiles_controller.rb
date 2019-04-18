@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
   def new
     authorize Profile.first
     @profile = Profile.new(valid_from: Date.today, valid_to: 1.year.after )
-    User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+    User.find_by(email: params[:pointer]).documents.first.profile.profile_keys.each do |i|
       @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
     respond_to do |format|
@@ -75,7 +75,7 @@ class ProfilesController < ApplicationController
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
-        format.html { render :new }
+        format.html { render new_profile_path(pointer: params[:pointer])  }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end

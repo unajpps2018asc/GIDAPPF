@@ -33,8 +33,22 @@ class ProfilesController < ApplicationController
   def index
     @profiles = Profile.all
     authorize @profiles
-    User.find_by(email: LockEmail::LIST[1]).documents.each do |quit|
-      @profiles -= @profiles.where(id: quit.profile_id)
+    LockEmail::LIST.each do |e|
+      u=User.find_by(email: e)
+      unless e.nil? || u.nil? || u.documents.empty? then
+        @profiles -= Profile.where(id: u.documents.first.profile_id)
+      end
+    end
+    rids = params[:role_ids]
+    unless rids.nil?
+      ucr = Usercommissionrole.where.not(role_id: rids.shift.to_i)
+      rids.each do |id| ucr = ucr.where.not(role_id: id.to_i) end
+    end
+    unless ucr.nil? then ucr.find_each do |quit|
+      unless quit.user.documents.empty? then
+          @profiles -= Profile.where(id: quit.user.documents.first.profile_id)
+        end
+      end
     end
   end
 

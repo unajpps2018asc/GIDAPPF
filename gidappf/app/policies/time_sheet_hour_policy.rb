@@ -25,7 +25,9 @@ class TimeSheetHourPolicy < ApplicationPolicy
   # Devolución: idem show                                             #
   #####################################################################
   def index?
-    show?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>=10.0
   end
 
   ###########################################################################

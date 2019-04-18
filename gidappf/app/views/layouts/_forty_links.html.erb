@@ -1,6 +1,6 @@
 <li><%= link_to 'Sets users access', setsusersaccess_settings_path %></li>
 <li><%= link_to 'Change commission', sets_students_change_commission_path %></li>
-<li><%= link_to 'Profiles', profiles_path %></li>
+<li><%= link_to 'Profiles', profiles_path(role_ids: [1,2,6]) %></li>
 <li><%= link_to 'Commissions', commissions_path %></li>
 <li><%= link_to 'Hours', time_sheet_hours_path %></li>
 <li><%= link_to 'Periods', time_sheets_path %></li>

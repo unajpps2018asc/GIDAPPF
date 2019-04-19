@@ -111,18 +111,37 @@ Profile.create!([
       description: 'Any student template profile',
       valid_from: gidappf_start_time,
       valid_to: gidappf_end_time
-      }
-    ])
+    },{
+      name: 'DocentProfile',
+      description: 'Any docent template profile',
+      valid_from: gidappf_start_time,
+      valid_to: gidappf_end_time
+    },{
+      name: 'SecretaryProfile',
+      description: 'Any secretary template profile',
+      valid_from: gidappf_start_time,
+      valid_to: gidappf_end_time
+    },{
+      name: 'administratorProfile',
+      description: 'Any administrator template profile',
+      valid_from: gidappf_start_time,
+      valid_to: gidappf_end_time
+    }
+  ])
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Profile.count} Perfiles"
 
 Document.destroy_all
-Document.create!([
-    {
-      profile_id: Profile.first.id,
-      user_id: User.find_by(email: LockEmail::LIST[1] ).id
-     }
-  ])
+lock=LockEmail::LIST
+lock.shift
+lock.each_with_index do |e,index|
+  Document.create!([
+      {
+        profile_id: index + 1,
+        user_id: User.find_by(email: e ).id
+      }
+    ])
+end
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Document.count} Documentos"
 
@@ -336,4 +355,49 @@ ProfileKey.create!([
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     }
 ])
+
+ProfileKey.create!([
+    {#REQUERIDO POR SISTEMA
+      key: ProfileKey.find(1).key,#0 'Nombre:'
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+    },{
+      key: ProfileKey.find(2).key,#1 'Apellido:'
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+    },{ #REQUERIDO POR SISTEMA
+      key: ProfileKey.find(3).key,#2 DNI:
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+    },{
+      key: 'Fecha de Nacimiento:',#3
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF dates').id
+    },{
+      key: 'CUIL:',#4
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+    },{
+      key: 'Dirección:',#6
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+    },{
+      key: 'Teléfono:',#10
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+    },{
+      key: 'Materias:',#10
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+    },{
+      key: 'Elección de turno desde[Hr]:',#23
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+    },{ #REQUERIDO POR SISTEMA
+      key: 'Elección de turno hasta[Hr]:',#24
+      profile_id: 2,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+    }
+])
+
 p "[GIDAPPF] Creados #{ProfileKey.count} claves de perfil"

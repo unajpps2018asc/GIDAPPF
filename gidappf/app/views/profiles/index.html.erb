@@ -1,3 +1,16 @@
+<!-- ########################################################################## -->
+<!-- # Universidad Nacional Arturo Jauretche                                  # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática         # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018 # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>              # -->
+<!-- # Tutores:                                                               # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                    # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                           # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                              # -->
+<!-- #    - TAPTA: Dra. Ferrari, Mariela                                      # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/profiles/index.html.erb              # -->
+<!-- ########################################################################## -->
 <p id="notice"><%= notice %></p>
 
 <h1>Profiles</h1>
@@ -30,4 +43,12 @@
 
 <br>
 
+<!-- ############################################################### -->
+<!-- # Creación de perfil basado en el parámetro pointer.          # -->
+<!-- ############################################################### -->
 <%= link_to 'New Profile', profiles_first_path(pointer: LockEmail::LIST[1]) %>
+
+<!-- ############################################################### -->
+<!-- # Creación de perfil basado en el parámetro pointer.          # -->
+<!-- ############################################################### -->
+<%= link_to 'New Docent', profiles_first_path(pointer: LockEmail::LIST[2]) %>

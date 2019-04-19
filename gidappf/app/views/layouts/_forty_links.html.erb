@@ -1,6 +1,19 @@
+<!-- ########################################################################## -->
+<!-- # Universidad Nacional Arturo Jauretche                                  # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática         # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018 # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>              # -->
+<!-- # Tutores:                                                               # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                    # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                           # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                              # -->
+<!-- #    - TAPTA: Dra. Ferrari, Mariela                                      # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/layouts/_forty_links.html.erb        # -->
+<!-- ########################################################################## -->
 <li><%= link_to 'Sets users access', setsusersaccess_settings_path %></li>
 <li><%= link_to 'Change commission', sets_students_change_commission_path %></li>
-<li><%= link_to 'Profiles', profiles_path(role_ids: [1,2,6]) %></li>
+<li><%= link_to 'Students', profiles_path(role_ids: [1,2,6]) %></li>
 <li><%= link_to 'Commissions', commissions_path %></li>
 <li><%= link_to 'Hours', time_sheet_hours_path %></li>
 <li><%= link_to 'Periods', time_sheets_path %></li>

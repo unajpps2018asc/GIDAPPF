@@ -117,13 +117,14 @@ class ProfilesController < ApplicationController
   #########################################################################################
   def first
     authorize Profile.first
+    @@template=params[:pointer]
     @user = User.new({email: (User.last.id+1).to_s+'@gidappf.edu.ar'})
     unless params[:dni_profile].nil? || params[:email_profile].nil? then
       used = ProfileValue.find_by(value: params[:dni_profile].to_s)
       if User.find_by(email: params[:email_profile]).nil? && (used.nil? || !used.profile_key.key.eql?(Profile.first.profile_keys.find(3).key)) then
         @user = User.new({email: params[:email_profile], password: params[:dni_profile], password_confirmation: params[:dni_profile]})
         if @user.save && Usercommissionrole.new( #Si crea al usuario, crea el registro en Usercommissionrole
-            role_id: Role.find_by(level: 10, enabled: false).id,
+            role_id: role_from_pointer,
             user_id: @user.id, commission_id: Commission.first.id
           ).save then
           respond_to do |format|
@@ -160,9 +161,10 @@ class ProfilesController < ApplicationController
         if @profile.nil? then #crea perfil si no tiene
           @profile=Profile.new( name: params[:user_dni], description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
           if @profile.save && Document.new(profile: Profile.last, user: u).save then
+            index=User.find_by(email: @@template).documents.first.profile.profile_keys.first.id.to_i
             if @profile.profile_keys.empty? then #copia claves del perfil si no tiene
-              User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
-                unless i.key.eql?(User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key) then
+              User.find_by(email: @@template).documents.first.profile.profile_keys.each do |i|
+                unless i.key.eql?(User.find_by(email: @@template).documents.first.profile.profile_keys.find(index+2).key) then
                   @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
                 else #copia el valor del dni si es la clave 3 de la plantilla
                   @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => params[:user_dni]).save
@@ -205,15 +207,27 @@ class ProfilesController < ApplicationController
     # Devolución: Perfil asociado a las claves mas recientes. descarta errores.             #
     #########################################################################################
     def merge_profile_keys
-      if @profile.profile_keys.count > Profile.first.profile_keys.count then
-        @profile.profile_keys.each do |eachkey|
-          if eachkey.client_side_validator_id.nil? then
-            @profile.profile_keys.where(key: eachkey.key).
-              where.not(client_side_validator_id: nil).
-                first.profile_values.first.update(value: eachkey.profile_values.first.value)
-            eachkey.destroy
+      @@template ||=''
+      unless @@template.empty?
+        if @profile.profile_keys.count > User.find_by(email: @@template).
+          documents.first.profile.profile_keys.count then
+          @profile.profile_keys.each do |eachkey|
+            if eachkey.client_side_validator_id.nil? then
+              @profile.profile_keys.where(key: eachkey.key).
+                where.not(client_side_validator_id: nil).
+                  first.profile_values.first.update(value: eachkey.profile_values.first.value)
+              eachkey.destroy
+            end
           end
         end
+      end
+    end
+
+    def role_from_pointer
+      if LockEmail::LIST[1].eql?(@@template) then
+        Role.find_by(level: 10, enabled: false).id
+      else
+        Role.find_by(level: 29, enabled: true).id
       end
     end
 

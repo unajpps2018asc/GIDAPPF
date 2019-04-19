@@ -1,3 +1,16 @@
+<!-- ############################################################################## -->
+<!-- # Universidad Nacional Arturo Jauretche                                      # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática             # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018     # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                  # -->
+<!-- # Tutores:                                                                   # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                        # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                               # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                  # -->
+<!-- #    - TAPTA: Dra. Ferrari, Mariela                                          # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                        # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/layouts/_navigation.html.erb             # -->
+<!-- ############################################################################## -->
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
@@ -12,6 +25,9 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
+        <!-- ############################################################### -->
+        <!-- # Renderización del menú basado en roles                      # -->
+        <!-- ############################################################### -->
         <%= render get_user_links %>
       </ul>
     </div>

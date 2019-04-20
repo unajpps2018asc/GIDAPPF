@@ -101,9 +101,9 @@ Commission.create!([
   ])
 p "[GIDAPPF] Creada Comision de ingresantes" #REQUERIDO POR SISTEMA
 
-######################################################################
-# Plantilla del perfil de alumno                                     #
-######################################################################
+###########################################################
+# Plantillas de perfiles                                  #
+###########################################################
 Profile.destroy_all
 Profile.create!([
     {

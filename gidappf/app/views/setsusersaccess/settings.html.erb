@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Profile</th>
       <th>Email</th>
       <th>Commission</th>
       <th colspan=".<%= @roleOpts.count.to_s %>." >Role:</th>
@@ -12,8 +12,8 @@
   <tbody remote="true">
     <% @usercommissionroles.each do |u| %>
       <tr>
-        <td><%= u.user_id %></td>
-        <td><%= u.user.email %></td>
+        <td><%= unless u.user.documents.empty? then u.user.documents.first.profile.name end %></td>
+        <td><%= u.user.email.first(15)+"…" %></td>
         <td><%= u.commission.name %></td>
         <% @roleOpts.each do |r| %>
             <td>

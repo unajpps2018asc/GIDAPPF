@@ -159,7 +159,7 @@ class ProfilesController < ApplicationController
       unless u.nil? then
         @profile = Profile.find_by( name: params[:user_dni])
         if @profile.nil? then #crea perfil si no tiene
-          @profile=Profile.new( name: params[:user_dni], description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
+          @profile=Profile.new( name: make_name(params[:user_dni]), description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
           if @profile.save && Document.new(profile: Profile.last, user: u).save then
             index=User.find_by(email: @@template).documents.first.profile.profile_keys.first.id.to_i
             if @profile.profile_keys.empty? then #copia claves del perfil si no tiene
@@ -180,6 +180,22 @@ class ProfilesController < ApplicationController
     else
       redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Not User identification found!'
     end
+  end
+
+  #########################################################################################
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un User a muchos Usercommisssionrole registrada en el modelo. #
+  #           3) Asociacion un Role a muchos Usercommisssionrole registrada en el modelo. #
+  #           4) Existencia del email en el registro de usuarios.                         #
+  # Devolución: Valor editable del campo descripcion.                                     #
+  #########################################################################################
+  def make_description(email)
+    "Legajo= #{Profile.count+1}, email principal: #{email}. Estado: #{User.find_by(email: email).usercommissionroles.first.role.name}."
+  end
+
+  def make_name(dni)
+    "#{Profile.count+1}/#{dni}"
   end
 
   private
@@ -231,15 +247,4 @@ class ProfilesController < ApplicationController
       end
     end
 
-    #########################################################################################
-    # Prerequisitos:                                                                        #
-    #           1) Modelo de datos inicializado.                                            #
-    #           2) Asociacion un User a muchos Usercommisssionrole registrada en el modelo. #
-    #           3) Asociacion un Role a muchos Usercommisssionrole registrada en el modelo. #
-    #           4) Existencia del email en el registro de usuarios.                         #
-    # Devolución: Valor editable del campo descripcion.                                     #
-    #########################################################################################
-    def make_description(email)
-      "Legajo= #{Profile.count+1}, email principal: #{email}. Estado: #{User.find_by(email: email).usercommissionroles.first.role.name}."
-    end
 end

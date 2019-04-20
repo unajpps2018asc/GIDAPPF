@@ -259,7 +259,7 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
     role_id: Role.find_by(level: 10, enabled: false).id,
     user_id: u10.id, commission_id: Commission.first.id
   ).save
-  p10=Profile.new( name: (u+1000000).to_s, description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
+  p10=Profile.new( name: "#{Profile.count+1}/#{u+1000000}", description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
@@ -288,7 +288,7 @@ end
     role_id: Role.find_by(level: 10, enabled: false).id,
     user_id: u10.id, commission_id: Commission.first.id
   ).save
-  p10=Profile.new( name: (u+2000000).to_s, description: "A description user #{u+10}", valid_from: Date.today, valid_to: 1.year.after )
+  p10=Profile.new( name: "#{Profile.count+1}/#{u+2000000}", description: "A description user #{u+10}", valid_from: Date.today, valid_to: 1.year.after )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
@@ -317,7 +317,7 @@ end
     role_id: Role.find_by(level: 10, enabled: false).id,
     user_id: u5.id, commission_id: Commission.first.id
   ).save
-  p5=Profile.new( name: (u+3000000).to_s, description: "A description user #{u+20}", valid_from: Date.today, valid_to: 1.year.after )
+  p5=Profile.new( name: "#{Profile.count+1}/#{u+3000000}", description: "A description user #{u+20}", valid_from: Date.today, valid_to: 1.year.after )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
@@ -346,7 +346,7 @@ end
     role_id: Role.find_by(level: 10, enabled: false).id,
     user_id: u5.id, commission_id: Commission.first.id
   ).save
-  p5=Profile.new( name: (u+4000000).to_s, description: "A description user #{u+25}", valid_from: Date.today, valid_to: 1.year.after )
+  p5=Profile.new( name: "#{Profile.count+1}/#{u+4000000}", description: "A description user #{u+25}", valid_from: Date.today, valid_to: 1.year.after )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
@@ -375,7 +375,7 @@ end
     role_id: Role.find_by(level: 20, enabled: true).id,
     user_id: u5.id, commission_id: Commission.find_by(name: "C. noche").id
   ).save
-  p5=Profile.new( name: (u+5000000).to_s, description: "A description user #{u+30}", valid_from: 15.month.before, valid_to: 5.month.before )
+  p5=Profile.new( name: "#{Profile.count+1}/#{u+5000000}", description: "A description user #{u+30}", valid_from: 15.month.before, valid_to: 5.month.before )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x

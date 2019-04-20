@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label "Matter" %>
-    <%= form.select :matter_id, Matter.all.collect { |m| [ m.name, m.id ] }, include_blank: true %>
+    <%= form.select :matter_id, Matter.where(enable: true).collect { |m| [ m.name, m.id ] }, include_blank: true %>
   </div>
 
   <div class="field">

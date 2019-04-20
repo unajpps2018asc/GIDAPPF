@@ -75,7 +75,7 @@ class ProfilesController < ApplicationController
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
-        format.html { render new_profile_path(pointer: params[:pointer])  }
+        format.html { render new_profile_path }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
@@ -124,8 +124,7 @@ class ProfilesController < ApplicationController
       if User.find_by(email: params[:email_profile]).nil? && (used.nil? || !used.profile_key.key.eql?(Profile.first.profile_keys.find(3).key)) then
         @user = User.new({email: params[:email_profile], password: params[:dni_profile], password_confirmation: params[:dni_profile]})
         if @user.save && Usercommissionrole.new( #Si crea al usuario, crea el registro en Usercommissionrole
-            role_id: role_from_pointer,
-            user_id: @user.id, commission_id: Commission.first.id
+            role_id: role_from_pointer,user_id: @user.id, commission_id: Commission.first.id
           ).save then
           respond_to do |format|
             msg = "User created id=#{@user.id} role=#{@user.usercommissionroles.first.role.name}"

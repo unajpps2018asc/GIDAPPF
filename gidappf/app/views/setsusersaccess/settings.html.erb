@@ -12,7 +12,10 @@
   <tbody remote="true">
     <% @usercommissionroles.each do |u| %>
       <tr>
-        <td><%= unless u.user.documents.empty? then u.user.documents.first.profile.name end %></td>
+        <td><%= unless u.user.documents.empty? then
+          link_to "#{u.user.documents.first.profile.name}", profile_path(id:u.user.documents.first.profile.id)
+          end
+          %></td>
         <td><%= u.user.email.first(15)+"…" %></td>
         <td><%= u.commission.name %></td>
         <% @roleOpts.each do |r| %>

@@ -8,17 +8,16 @@
       <th>Commission</th>
       <th>Start date</th>
       <th>End date</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @time_sheets.each do |time_sheet| %>
       <tr>
-        <td><%= time_sheet.commission.name %></td>
-        <td><%= time_sheet.start_date %></td>
-        <td><%= time_sheet.end_date %></td>
-        <td><%= link_to 'Show', time_sheet %></td>
+        <td><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
+        <td><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
+        <td><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
         <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
         <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -34,17 +33,16 @@
       <th>Commission</th>
       <th>Start date</th>
       <th>End date</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @time_sheets1.each do |time_sheet| %>
       <tr>
-        <td><%= time_sheet.commission.name %></td>
-        <td><%= time_sheet.start_date %></td>
-        <td><%= time_sheet.end_date %></td>
-        <td><%= link_to 'Show', time_sheet %></td>
+        <td><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
+        <td><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
+        <td><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
         <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
         <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

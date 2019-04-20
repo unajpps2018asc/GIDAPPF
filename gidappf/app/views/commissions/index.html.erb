@@ -18,8 +18,8 @@
       <tr>
         <td><%= commission.name %></td>
         <td><%= commission.description %></td>
-        <td><%= commission.start_date %></td>
-        <td><%= commission.end_date %></td>
+        <td><%= commission.start_date.strftime("%d/%m/%Y") %></td>
+        <td><%= commission.end_date.strftime("%d/%m/%Y") %></td>
         <td><%= link_to 'Show', commission %></td>
         <td><%= link_to 'Edit', edit_commission_path(commission) %></td>
         <td><%= link_to 'Destroy', commission, method: :delete, data: { confirm: 'Are you sure?' } %></td>

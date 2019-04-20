@@ -31,12 +31,13 @@ class SetsStudentsController < ApplicationController
     array_all_trayect.each do |trayect| #itera primero, segundo, tercero, etc.
       all_time_categories.each do |time_categ| #itera por cada turno
         profiles_in_time_category = [table_metadata_maker(time_categ, trayect)]# El subtitulo (*)
-        ProfileKey.where(key: ProfileKey.find(24).key).where.not(profile: Profile.first).each do |e| #'Elección de turno desde[Hr]:'
+        ProfileKey.where(key: ProfileKey.find(24).key).where.not("profile_id < ?", LockEmail::LIST.count-1).each do |e| #'Elección de turno desde[Hr]:'
           unless e.profile_values.empty? || e.profile_values.first.value.blank? then
             if e.key.eql?(ProfileKey.find(24).key) &&
               e.profile_values.first.value.to_i*60 <= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
               e.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
                 profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
+              !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).nil? && #"Se inscribe a cursar existente"
               !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? && #"Se inscribe a cursar:"
               selected_period_profile(e.profile) &&
               e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase.eql?(trayect.upcase) then

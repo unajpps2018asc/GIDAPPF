@@ -22,7 +22,7 @@
   <tbody remote="true">
     <% profiles_period.each do |p| %>
       <tr>
-        <td><%= p.name %></td>
+        <td><%= link_to "#{p.name}", profile_path(id: p.id) %></td>
         <% comms_period.each do |ts| %>
           <td>
             <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->

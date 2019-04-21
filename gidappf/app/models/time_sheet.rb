@@ -54,18 +54,17 @@ class TimeSheet < ApplicationRecord
   #           al presente TimeSheet tienen un trayect igual a trayect.       #
   # (provisoriamente comprueba a trayect del primer anotado)                 #
   ############################################################################
-  def is_of_trayect?(trayect,template)
+  def is_of_trayect?(trayect)
     out  = true
-    unless LockEmail::LIST[2].eql?(template) then
-      u=Usercommissionrole.find_by(commission: self.commission)
-      if !u.nil? && u.user.documents.first.profile.valid_to <= self.end_date &&
-        u.user.documents.first.profile.valid_from >= self.start_date &&
-        !u.user.documents.first.profile.profile_keys.
-          find_by(key:ProfileKey.find(23).key).nil? then
-          out = u.user.documents.first.profile.profile_keys.
-            find_by(key:ProfileKey.find(23).key).
-              profile_values.first.value.upcase.eql?(trayect.upcase)
-      end
+    u=Usercommissionrole.find_by(commission: self.commission)
+    if !u.nil? &&
+      u.user.documents.first.profile.valid_to <= self.end_date &&
+      u.user.documents.first.profile.valid_from >= self.start_date &&
+      !u.user.documents.first.profile.profile_keys.
+        find_by(key:ProfileKey.find(23).key).nil? then
+        out = u.user.documents.first.profile.profile_keys.
+          find_by(key:ProfileKey.find(23).key).
+            profile_values.first.value.upcase.eql?(trayect.upcase)
     end
     out
   end

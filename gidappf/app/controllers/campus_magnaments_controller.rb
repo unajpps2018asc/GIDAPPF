@@ -201,7 +201,7 @@ class CampusMagnamentsController < ApplicationController
       TimeSheet.where.not(commission: Commission.first).
         where(:start_date => start_period - 30.day  .. start_period + 30.day).
           where(:end_date => end_period - 30.day  .. end_period + 30.day).each do |time_sheet|
-            if !time_sheet.time_category.empty? && time_sheet.is_of_trayect?(trayect, params[:profile_type]) &&
+            if !time_sheet.time_category.empty? && time_sheet.is_of_trayect?(trayect) &&
               time_sheet.time_category.first >= schedul[1] + schedul[0]*60 &&
               time_sheet.time_category.last <= schedul[3] + schedul[2]*60 then
               out << time_sheet

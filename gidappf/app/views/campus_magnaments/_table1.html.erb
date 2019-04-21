@@ -31,7 +31,12 @@
                 p.documents.first.user.usercommissionroles.first.commission_id,
                 ts.commission.id == p.documents.first.user.usercommissionroles.last.commission_id,
                 onclick: "$(document).ready(function() {
-                      window.location.href='"+campus_magnaments_set_campus_segmentation_path(id: p.id, box_selected: ts.id.to_s, def_period: params[:def_period])+
+                      window.location.href='"+
+                        campus_magnaments_set_campus_segmentation_path(
+                          id: p.id,
+                          box_selected: ts.id.to_s,
+                          def_period: params[:def_period],
+                          profile_type: params[:profile_type])+
                     "'});",
                 :disabled  => ts.selectable?
               )%>

@@ -33,15 +33,8 @@ class CampusMagnamentsController < ApplicationController
         profiles_in_time_category = [table_metadata_maker(time_categ, trayect)]# El subtitulo (*)
         ProfileKey.where(key: ProfileKey.find(24).key).where.not("profile_id < ?", LockEmail::LIST.count-1).each do |e| #'Elección de turno desde[Hr]:'
           unless e.profile_values.empty? || e.profile_values.first.value.blank? then
-            if e.key.eql?(ProfileKey.find(24).key) &&
-              e.profile_values.first.value.to_i*60 <= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
-              e.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
-                profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
-              !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).nil? && #"Se inscribe a cursar existente"
-              !e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? && #"Se inscribe a cursar:"
-              selected_period_profile(e.profile) &&
-              e.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase.eql?(trayect.upcase) then
-                  profiles_in_time_category << e.profile # si "Se inscribe a cursar:" es igual a trayect
+            if include_in_trayect_and_time_category_by_role?(e, trayect, time_categ, params[:profile_type]) then
+              profiles_in_time_category << e.profile # si "Se inscribe a cursar:" es igual a trayect
             end #if e.key.eql?...
           end #unless e.profile_values...
         end #ProfileKey.where(key:...)...each do |e|
@@ -52,6 +45,17 @@ class CampusMagnamentsController < ApplicationController
     end #array_all_trayect.each do |trayect|
   end #action
 
+  ####################################################################################
+  # Prerequisitos:                                                                   #
+  #           1) Modelo de datos inicializado, segun 2.                              #
+  #           2) Role con campos enabled: true, level: 20.0 existente.               #
+  #           3) Parámetro id del Profile válido.                                    #
+  #           4) parametro box_selected válido.                                      #
+  #           5) parametro def_period válido.                                        #
+  # Devolución: Accion que permite seleccionar cambiar comisiones de cada perfil     #
+  #        con los valores nuevos que se obtienen por parámetros. Luego redirecciona #
+  #        a get_campus_segmentation con el cambio realizado y mostrando un mensaje. #
+  ####################################################################################
   def set_campus_segmentation
     p = Profile.find(params[:id].to_i)
     ucr = Profile.find(params[:id].to_i).documents.first.user.usercommissionroles.last
@@ -59,11 +63,42 @@ class CampusMagnamentsController < ApplicationController
     ts = TimeSheet.find(params[:box_selected].to_i)
     unless p.nil? || ts.nil? || ucr.nil? then
       ucr.update(role: Role.find_by(enabled: true, level: 20.0), commission: ts.commission)
-      redirect_to campus_magnaments_get_campus_segmentation_path(def_period: params[:def_period]), notice: "Profile #{p.name} change to #{ts.commission.name}"
+      redirect_to campus_magnaments_get_campus_segmentation_path(
+        def_period: params[:def_period],
+        profile_type: params[:profile_type]),
+        notice: "Profile #{p.name} change to #{ts.commission.name}"
     end
   end
 
   private
+
+  ######################################################################
+  # Metodo privado para definir el grupo de segmentacion.              #
+  # Devuelve: true si profile_key_24 pertenece a trayect y time_categ  #
+  #            sino false.                                             #
+  ######################################################################
+  def include_in_trayect_and_time_category_by_role?(profile_key_24, trayect, time_categ, profile_type)
+    out = false
+    if LockEmail::LIST[1].eql?(profile_type) then
+      out = profile_key_24.profile_values.first.value.to_i*60 <= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
+      !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? && #"Elección de turno hasta existente"
+      profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
+        profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
+      !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(23).key).nil? && #"Se inscribe a cursar existente"
+      !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? && #"Se inscribe a cursar:"
+      selected_period_profile(profile_key_24.profile) &&
+      profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase.eql?(trayect.upcase)
+    elsif LockEmail::LIST[2].eql?(profile_type) then
+      out = profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(23).key).nil? && #"Se inscribe a cursar inexistente"
+      profile_key_24.profile_values.first.value.to_i*60 <= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
+      !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? && #"Elección de turno hasta existente"
+      profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
+        profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
+      selected_period_profile(profile_key_24.profile)
+    end
+    out
+  end
+
   ###################################################################
   # Metodo privado para obtener la lista de periodos disponibles    #
   # Devuelve: un array con elementos string reprecentando periodos. #
@@ -166,7 +201,7 @@ class CampusMagnamentsController < ApplicationController
       TimeSheet.where.not(commission: Commission.first).
         where(:start_date => start_period - 30.day  .. start_period + 30.day).
           where(:end_date => end_period - 30.day  .. end_period + 30.day).each do |time_sheet|
-            if !time_sheet.time_category.empty? && time_sheet.is_of_trayect?(trayect) &&
+            if !time_sheet.time_category.empty? && time_sheet.is_of_trayect?(trayect, params[:profile_type]) &&
               time_sheet.time_category.first >= schedul[1] + schedul[0]*60 &&
               time_sheet.time_category.last <= schedul[3] + schedul[2]*60 then
               out << time_sheet

@@ -17,7 +17,7 @@
     select_tag nil,
     options_from_collection_for_select(str_periods,  "to_s", "to_s", params[:def_period]),
     onchange:  "$(document).ready(function() {
-      window.location.href='/campus_magnaments/get_campus_segmentation?def_period='+ $(event.target).val();
+      window.location.href='/campus_magnaments/get_campus_segmentation?profile_type=#{params[:profile_type]}&def_period='+ $(event.target).val();
     });"
     %>
 <% end %>

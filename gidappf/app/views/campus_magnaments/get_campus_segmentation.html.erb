@@ -1,0 +1,23 @@
+<!-- ################################################################################## -->
+<!-- # Universidad Nacional Arturo Jauretche                                          # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática                 # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018         # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                      # -->
+<!-- # Tutores:                                                                       # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                            # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                                   # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                      # -->
+<!-- #    - TAPTA: Dra. Ferrari, Mariela                                              # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                            # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/campus_magnaments/get_campus_segmentation.html.erb # -->
+<!-- ################################################################################## -->
+<h1>Change commissions</h1>
+<!-- <p><% @msg %></p><!-- Variable de pruebas-->
+
+<%= render 'periods', str_periods: @opt_periods.uniq %> <!-- archivo _periods.html.erb -->
+
+<% @per_time_categ_profiles.each do |profiles_time_cat| %>
+  <!-- archivo _table1.html.erb por cada profiles_time_cat-->
+  <%= render 'table1', profiles_period: profiles_time_cat.drop(1),
+        comms_period: profiles_time_cat.first.last, title: profiles_time_cat.first.first %>
+<% end %>

@@ -9,9 +9,9 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                 #
 #    - TAPTA: Dra. Ferrari, Mariela                                         #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                       #
-# Archivo GIDAPPF/gidappf/app/controllers/sets_students_controller.rb       #
+# Archivo GIDAPPF/gidappf/app/controllers/campus_magnaments_controller.rb   #
 #############################################################################
-class SetsStudentsController < ApplicationController
+class CampusMagnamentsController < ApplicationController
 
   ###################################################################################
   # Prerequisitos:                                                                  #
@@ -25,7 +25,7 @@ class SetsStudentsController < ApplicationController
   #        o ya estan asignados a estas comisiones. La vista proporciona el link a  #
   #        la modificacion de la seleccion causada por el usuario.                  #
   ###################################################################################
-  def change_commission
+  def get_campus_segmentation
     @opt_periods = array_options_period
     @per_time_categ_profiles = []
     array_all_trayect.each do |trayect| #itera primero, segundo, tercero, etc.
@@ -52,14 +52,14 @@ class SetsStudentsController < ApplicationController
     end #array_all_trayect.each do |trayect|
   end #action
 
-  def selected_commission
+  def set_campus_segmentation
     p = Profile.find(params[:id].to_i)
     ucr = Profile.find(params[:id].to_i).documents.first.user.usercommissionroles.last
     authorize ucr
     ts = TimeSheet.find(params[:box_selected].to_i)
     unless p.nil? || ts.nil? || ucr.nil? then
       ucr.update(role: Role.find_by(enabled: true, level: 20.0), commission: ts.commission)
-      redirect_to sets_students_change_commission_path(def_period: params[:def_period]), notice: "Profile #{p.name} change to #{ts.commission.name}"
+      redirect_to campus_magnaments_get_campus_segmentation_path(def_period: params[:def_period]), notice: "Profile #{p.name} change to #{ts.commission.name}"
     end
   end
 

@@ -14,9 +14,8 @@
 
 Rails.application.routes.draw do
   resources :matters
-  get 'sets_students/change_commission'
-  get 'sets_students/selected_commission'
-  get 'sets_students/change_commission'
+  get 'campus_magnaments/set_campus_segmentation'
+  get 'campus_magnaments/get_campus_segmentation'
   get 'profiles/second'
   get 'profiles/first'
   post 'profiles/first'
@@ -42,8 +41,6 @@ Rails.application.routes.draw do
     registrations: 'user/registrations',
     sessions: 'user/sessions'
   }
-
-
   resources :usercommissionroles,only:[:edit]
   get 'setsusersaccess/settings'
   resources :commissions

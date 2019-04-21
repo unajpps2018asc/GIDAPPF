@@ -8,7 +8,7 @@
 <!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                           # -->
 <!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                              # -->
 <!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
-<!-- # Archivo GIDAPPF/gidappf/app/views/sets_students/_table1.html.erb       # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/campus_magnaments/_table1.html.erb   # -->
 <!-- ########################################################################## -->
 <h3><%= title %></h3>
 <table>
@@ -31,7 +31,7 @@
                 p.documents.first.user.usercommissionroles.first.commission_id,
                 ts.commission.id == p.documents.first.user.usercommissionroles.last.commission_id,
                 onclick: "$(document).ready(function() {
-                      window.location.href='"+sets_students_selected_commission_path(id: p.id, box_selected: ts.id.to_s, def_period: params[:def_period])+
+                      window.location.href='"+campus_magnaments_set_campus_segmentation_path(id: p.id, box_selected: ts.id.to_s, def_period: params[:def_period])+
                     "'});",
                 :disabled  => ts.selectable?
               )%>

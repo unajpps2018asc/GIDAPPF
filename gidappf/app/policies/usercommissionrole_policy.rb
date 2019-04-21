@@ -35,9 +35,9 @@ class UsercommissionrolePolicy < ApplicationPolicy
   end
 
   #########################################################################
-  # Políticas de acceso para sets_students_controller                     #
+  # Políticas de acceso para campus_magnaments_controller                 #
   #########################################################################
-  def selected_commission?
+  def set_campus_segmentation?
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>29.0

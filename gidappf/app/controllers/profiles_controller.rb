@@ -39,10 +39,10 @@ class ProfilesController < ApplicationController
         @profiles -= Profile.where(id: u.documents.first.profile_id)
       end
     end
-    rids = params[:role_ids]
-    unless rids.nil?
-      ucr = Usercommissionrole.where.not(role_id: rids.shift.to_i)
-      rids.each do |id| ucr = ucr.where.not(role_id: id.to_i) end
+    unless params[:role_ids].nil?
+      rids = []
+      params[:role_ids].each do |i| rids.push(i.to_i) end
+      ucr = Usercommissionrole.where.not(:role_id => rids)
     end
     unless ucr.nil? then ucr.find_each do |quit|
       unless quit.user.documents.empty? then

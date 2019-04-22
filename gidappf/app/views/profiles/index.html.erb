@@ -45,9 +45,8 @@
 <!-- ############################################################### -->
 <!-- # Creación de perfil basado en el parámetro pointer.          # -->
 <!-- ############################################################### -->
-<%= link_to 'New Profile', profiles_first_path(pointer: LockEmail::LIST[1]) %>
-
-<!-- ############################################################### -->
-<!-- # Creación de perfil basado en el parámetro pointer.          # -->
-<!-- ############################################################### -->
+<% if !params[:role_ids].nil? && params[:role_ids].include?("2") %>
+<%= link_to 'New Student', profiles_first_path(pointer: LockEmail::LIST[1]) %>
+<% elsif !params[:role_ids].nil? && params[:role_ids].include?("7") %>
 <%= link_to 'New Docent', profiles_first_path(pointer: LockEmail::LIST[2]) %>
+<% end %>

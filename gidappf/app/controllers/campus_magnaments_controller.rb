@@ -62,7 +62,7 @@ class CampusMagnamentsController < ApplicationController
     authorize ucr
     ts = TimeSheet.find(params[:box_selected].to_i)
     unless p.nil? || ts.nil? || ucr.nil? then
-      ucr.update(role: Role.find_by(enabled: true, level: 20.0), commission: ts.commission)
+      ucr.update(role: role_from_profile_type, commission: ts.commission)
       redirect_to campus_magnaments_get_campus_segmentation_path(
         def_period: params[:def_period],
         profile_type: params[:profile_type]),
@@ -177,10 +177,10 @@ class CampusMagnamentsController < ApplicationController
       out
     end
 
-    #####################################################################################################
-    # Metodo privado para decodificar el final del periodo seleccionado por el parametro url def_period #
-    # Devuelve: un objeto DateTime con la fecha del fin del periodo.                                    #
-    #####################################################################################################
+  #####################################################################################################
+  # Metodo privado para decodificar el final del periodo seleccionado por el parametro url def_period #
+  # Devuelve: un objeto DateTime con la fecha del fin del periodo.                                    #
+  #####################################################################################################
     def end_period
       out = nil
       if params[:def_period].nil? then out=Commission.last.end_date
@@ -192,10 +192,10 @@ class CampusMagnamentsController < ApplicationController
       out
     end
 
-    ######################################################################################################
-    # Metodo privado para obtener la lista de periodos de comisiones que se solapan con el seleccionado. #
-    # Devuelve: una query con todos los TimeSheet dentro del periodo seleccionado.                       #
-    ######################################################################################################
+  ######################################################################################################
+  # Metodo privado para obtener la lista de periodos de comisiones que se solapan con el seleccionado. #
+  # Devuelve: una query con todos los TimeSheet dentro del periodo seleccionado.                       #
+  ######################################################################################################
     def time_sheet_from_commissions_in_period(schedul, trayect)
       out = []
       TimeSheet.where.not(commission: Commission.first).
@@ -207,6 +207,22 @@ class CampusMagnamentsController < ApplicationController
               out << time_sheet
             end
           end
+      out
+    end
+
+  #####################################################################################
+  # Metodo privado para obtener el rol equivalente en base al parámetro profile_type. #
+  # Devuelve: alguno de los LockEmail::list que apuntan al perfil.                    #
+  #####################################################################################
+    def role_from_profile_type
+      out=''
+      unless params[:profile_type].nil? then
+        if params[:profile_type].eql?(LockEmail::LIST[1]) then
+          out=Role.find_by(enabled: true, level: 20.0)
+        elsif params[:profile_type].eql?(LockEmail::LIST[2]) then
+          out=Role.find_by(enabled: true, level: 29.0)
+        end
+      end
       out
     end
 

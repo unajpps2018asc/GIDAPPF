@@ -3,7 +3,7 @@ class TimeSheet < ApplicationRecord
 
   #########################################################################
   # Asociación uno a muchos: soporta que un periodo sea asignada muchas   #
-  #                          veces en la relación time_sheet_hour.        #                                                       #
+  #                          veces en la relación time_sheet_hour.        #
   #                          Si se borra, lo hacen los  time_sheet_hour.  #
   #########################################################################
   has_many :time_sheet_hours, dependent: :delete_all
@@ -99,7 +99,8 @@ class TimeSheet < ApplicationRecord
     out=0
     User.where.not(email: LockEmail::LIST).joins(documents: :profile, usercommissionroles: :role).
       select(:id, :profile_id, :role_id, :commission_id).each do |e|
-        if e.role_id == 2 && Commission.find(e.commission_id).eql?(self.commission) &&
+        if (e.role_id == 2 || e.role_id == 7) &&
+          Commission.find(e.commission_id).eql?(self.commission) &&
           Profile.find(e.profile_id).valid_from >= self.start_date &&
           Profile.find(e.profile_id).valid_to <= self.end_date then
           out += 1

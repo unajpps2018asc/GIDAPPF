@@ -12,8 +12,10 @@
 <!-- # Archivo GIDAPPF/gidappf/app/views/layouts/_forty_links.html.erb        # -->
 <!-- ########################################################################## -->
 <li><%= link_to 'Sets users access', setsusersaccess_settings_path %></li>
-<li><%= link_to 'Change commission', campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[1]) %></li>
+<li><%= link_to 'Campus students', campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[1]) %></li>
+<li><%= link_to 'Campus docents', campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[2]) %></li>
 <li><%= link_to 'Students', profiles_path(role_ids: [1,2,6]) %></li>
+<li><%= link_to 'Docent', profiles_path(role_ids: [7]) %></li>
 <li><%= link_to 'Commissions', commissions_path %></li>
 <li><%= link_to 'Hours', time_sheet_hours_path %></li>
 <li><%= link_to 'Periods', time_sheets_path %></li>

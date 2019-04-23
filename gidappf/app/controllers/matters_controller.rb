@@ -7,7 +7,7 @@ class MattersController < ApplicationController
     if get_role_access > 30.0
       @matters = Matter.all
     else
-      @matters = Matter.where(enabled: true)
+      @matters = Matter.where(enable: true)
     end
     authorize @matters
     @matters = Matter.all

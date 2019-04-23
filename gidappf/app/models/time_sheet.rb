@@ -99,7 +99,7 @@ class TimeSheet < ApplicationRecord
     out=0
     User.where.not(email: LockEmail::LIST).joins(documents: :profile, usercommissionroles: :role).
       select(:id, :profile_id, :role_id, :commission_id).each do |e|
-        if (e.role_id == 2 || e.role_id == 7) &&
+        if(Role.where(level: 20.0).pluck(:id).include?(e.role_id) || Role.where(level: 29.0).pluck(:id).include?(e.role_id))&&
           Commission.find(e.commission_id).eql?(self.commission) &&
           Profile.find(e.profile_id).valid_from >= self.start_date &&
           Profile.find(e.profile_id).valid_to <= self.end_date then

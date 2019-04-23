@@ -242,7 +242,7 @@ class ProfilesController < ApplicationController
       if LockEmail::LIST[1].eql?(@@template) then
         Role.find_by(level: 10, enabled: false).id
       else
-        Role.find_by(level: 29, enabled: true).id
+        Role.find_by(level: 29, enabled: false).id
       end
     end
 

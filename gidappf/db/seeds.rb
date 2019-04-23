@@ -58,7 +58,7 @@ Role.create!([
     name: "Autogestionado",#id5
     description: "Usuario que se registra sin intervención de la administración.",
     created_at: gidappf_start_time,
-    enabled: false # level default 0 #REQUERIDO POR SISTEMA
+    enabled: true # level default 0 #REQUERIDO POR SISTEMA
   },
   {
     name: "Ingresante",#id6
@@ -68,9 +68,21 @@ Role.create!([
   },
   {
     name: "Docente",#id7
-    description: "Rol asignado posteriormente, ya sea luego de ser autogestionado o un perfil.",
+    description: "Responsable de la comisión asignada, ya sea luego de ser autogestionado o un perfil.",
     created_at: gidappf_start_time,
     enabled: true, level: 29.0 #REQUERIDO POR SISTEMA
+  },
+  {
+    name: "Docente",#id8
+    description: "Responsable de la comisión asignada, ya sea luego de ser autogestionado o un perfil, con contraseña insegura",
+    created_at: gidappf_start_time,
+    enabled: false, level: 29.0 #REQUERIDO POR SISTEMA
+  },
+  {
+    name: "Estudiante",#id9
+    description: "Usuario que participa de las cursadas y esta asignado al Plan Fines, pero con contraseña insegura.",
+    created_at: gidappf_start_time,
+    enabled: false, level: 20.0
   }
 ])
 p "[GIDAPPF] Creados #{Role.count} Roles"

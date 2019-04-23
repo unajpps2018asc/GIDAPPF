@@ -45,8 +45,8 @@
 <!-- ############################################################### -->
 <!-- # Creación de perfil basado en el parámetro pointer.          # -->
 <!-- ############################################################### -->
-<% if !params[:role_ids].nil? && params[:role_ids].include?("2") %>
+<% if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
 <%= link_to 'New Student', profiles_first_path(pointer: LockEmail::LIST[1]) %>
-<% elsif !params[:role_ids].nil? && params[:role_ids].include?("7") %>
+<% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) %>
 <%= link_to 'New Docent', profiles_first_path(pointer: LockEmail::LIST[2]) %>
 <% end %>

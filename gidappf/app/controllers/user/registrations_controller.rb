@@ -40,7 +40,7 @@ class User::RegistrationsController < Devise::RegistrationsController
       if u.id == LockEmail::LIST.count + 1 then
         rid=Role.find_by(level: 40, enabled: true).id #Admin
       else
-        rid=Role.find_by(level: 0, enabled: false).id #Autogestionado
+        rid=Role.find_by(level: 0, enabled: true).id #Autogestionado
       end
       Usercommissionrole.new(
         role_id: rid,user_id: u.id, commission_id: Commission.first.id

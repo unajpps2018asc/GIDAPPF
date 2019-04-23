@@ -35,10 +35,11 @@ class User::SessionsController < Devise::SessionsController
   #             recientemente debido al cambio de password.                          #
   ####################################################################################
   def first_form_password_change
-    if (Time.now - Time.parse(current_user.updated_at.to_s)).second < 90 &&
-      current_user.usercommissionroles.first.role_id == Role.find_by(level: 10, enabled: false).id
-      then
-      current_user.usercommissionroles.first.update(role_id: Role.find_by(level: 10, enabled: true).id)
+    old_role=current_user.usercommissionroles.first.role
+    if (Time.now - Time.parse(current_user.updated_at.to_s)).second < 90 && !old_role.enabled then
+      current_user.usercommissionroles.first.update(
+        role: Role.find_by(level: old_role.level, enabled: true)
+      )
     end
   end
 end

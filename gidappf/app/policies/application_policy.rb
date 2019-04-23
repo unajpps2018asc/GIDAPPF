@@ -87,26 +87,31 @@ class ApplicationPolicy
   #             -10 si el usercommisionrole no relaciona a @user en ninguna comision                                   #
   ######################################################################################################################
   def set_roleaccess
-    @roleaccess=-20.0
-    begin
-      records = Usercommissionrole.where(user_id: @user.id)
-    rescue ActiveRecord::RecordNotFound => e1
-      records = nil
-    end
-    # Alternativa:
-    # @user.usercommissionrole.each do |r| if
-    #   r.role.level > @roleaccess
-    #     @roleaccess=r.role.level
+    # @roleaccess=-20.0
+    # begin
+    #   records = Usercommissionrole.where(user_id: @user.id)
+    # rescue ActiveRecord::RecordNotFound => e1
+    #   records = nil
+    # end
+    # # Alternativa:
+    # # @user.usercommissionrole.each do |r| if
+    # #   r.role.level > @roleaccess
+    # #     @roleaccess=r.role.level
+    # #   end
+    # # end
+    # if records === nil then @roleaccess=-10.0
+    # else
+    #   records.each do |my_record|
+    #     if my_record.role.level > @roleaccess
+    #       @roleaccess=my_record.role.level
+    #     end
     #   end
     # end
-    if records === nil then @roleaccess=-10.0
-    else
-      records.each do |my_record|
-        if my_record.role.level > @roleaccess
-          @roleaccess=my_record.role.level
-        end
-      end
+    @roleaccess=-10.0
+    unless @user.usercommissionroles.empty? then
+      l=Role.where.not(enabled: false).where(:id => @user.usercommissionroles.pluck(:role_id).uniq).maximum(:level)
     end
+    unless l.nil? then @roleaccess=l end
   end
 
 end

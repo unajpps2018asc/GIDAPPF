@@ -372,31 +372,31 @@ ProfileKey.create!([
     {#REQUERIDO POR SISTEMA
       key: ProfileKey.find(1).key,#1 'Nombre:'
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id: ProfileKey.find(1).client_side_validator_id
     },{
       key: ProfileKey.find(2).key,#2 'Apellido:'
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id: ProfileKey.find(2).client_side_validator_id
     },{ #REQUERIDO POR SISTEMA
       key: ProfileKey.find(3).key,#3 DNI:
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+      client_side_validator_id: ProfileKey.find(3).client_side_validator_id
     },{
       key: ProfileKey.find(4).key,#4 'Fecha de Nacimiento:',
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF dates').id
+      client_side_validator_id: ProfileKey.find(4).client_side_validator_id
     },{
       key: ProfileKey.find(5).key,#'CUIL:',#5
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+      client_side_validator_id: ProfileKey.find(5).client_side_validator_id
     },{
       key: ProfileKey.find(6).key,#'Dirección:',#6
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+      client_side_validator_id: ProfileKey.find(6).client_side_validator_id
     },{
       key: ProfileKey.find(11).key,#'Teléfono:',#7
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+      client_side_validator_id: ProfileKey.find(11).client_side_validator_id
     },{
       key: 'Materias:',#8
       profile_id: 2,
@@ -404,11 +404,11 @@ ProfileKey.create!([
     },{
       key: ProfileKey.find(24).key,#'Elección de turno desde[Hr]:',#9
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+      client_side_validator_id: ProfileKey.find(24).client_side_validator_id
     },{ #REQUERIDO POR SISTEMA
       key: ProfileKey.find(25).key,#'Elección de turno hasta[Hr]:',#10
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+      client_side_validator_id: ProfileKey.find(25).client_side_validator_id
     }
 ])
 

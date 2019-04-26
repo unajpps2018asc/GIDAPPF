@@ -31,24 +31,17 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
-    authorize @profiles
-    LockEmail::LIST.each do |e|
-      u=User.find_by(email: e)
-      unless e.nil? || u.nil? || u.documents.empty? then
-        @profiles -= Profile.where(id: u.documents.first.profile_id)
-      end
-    end
+    @profiles = Profile.where('id > ?',LockEmail::LIST.count-1)
     unless params[:role_ids].nil?
       rids = []
       params[:role_ids].each do |i| rids.push(i.to_i) end
-      ucr = Usercommissionrole.where.not(:role_id => rids)
-    end
-    unless ucr.nil? then ucr.find_each do |quit|
-      unless quit.user.documents.empty? then
-          @profiles -= Profile.where(id: quit.user.documents.first.profile_id)
-        end
-      end
+      @profiles = Profile.where(
+        :id => Document.where(
+          :user_id => Usercommissionrole.where(
+            :role_id => rids).pluck(:user_id)
+          ).pluck(:profile_id)
+        )
+      authorize @profiles
     end
   end
 
@@ -124,7 +117,7 @@ class ProfilesController < ApplicationController
       if User.find_by(email: params[:email_profile]).nil? && (used.nil? || !used.profile_key.key.eql?(Profile.first.profile_keys.find(3).key)) then
         @user = User.new({email: params[:email_profile], password: params[:dni_profile], password_confirmation: params[:dni_profile]})
         if @user.save && Usercommissionrole.new( #Si crea al usuario, crea el registro en Usercommissionrole
-            role_id: role_from_pointer,user_id: @user.id, commission_id: Commission.first.id
+            role_id: first_role_from_pointer,user_id: @user.id, commission_id: Commission.first.id
           ).save then
           respond_to do |format|
             msg = "User created id=#{@user.id} role=#{@user.usercommissionroles.first.role.name}"
@@ -222,28 +215,56 @@ class ProfilesController < ApplicationController
     # Devolución: Perfil asociado a las claves mas recientes. descarta errores.             #
     #########################################################################################
     def merge_profile_keys
-      @@template ||=''
-      unless @@template.empty?
-        if @profile.profile_keys.count > User.find_by(email: @@template).
-          documents.first.profile.profile_keys.count then
-          @profile.profile_keys.each do |eachkey|
-            if eachkey.client_side_validator_id.nil? then
-              @profile.profile_keys.where(key: eachkey.key).
-                where.not(client_side_validator_id: nil).
-                  first.profile_values.first.update(value: eachkey.profile_values.first.value)
-              eachkey.destroy
+      @profile.profile_keys.each do |k|
+        if k.profile_values.count == 2 then
+          max=@profile.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.maximum('created_at'))
+          min=@profile.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.minimum('created_at'))
+          unless !max.value.empty? then
+            unless min.value.empty? then
+              max.update(value: min.value)
             end
           end
         end
       end
+      template_of_merge
+      User.find_by(email: @@template).documents.first.profile.profile_keys.each do |tpk|
+        if @profile.profile_keys.where(key: tpk.key).count == 2 then
+          keys=@profile.profile_keys.where(key: tpk.key)
+          max=keys.find_by(key: tpk.key,created_at: keys.maximum('created_at'))
+          min=keys.find_by(key: tpk.key,created_at: keys.minimum('created_at'))
+          if max.client_side_validator_id.nil? then
+            max.update(client_side_validator_id: tpk.client_side_validator_id)
+          end
+          min.destroy
+        end
+      end
     end
 
-    def role_from_pointer
+    def first_role_from_pointer
       if LockEmail::LIST[1].eql?(@@template) then
         Role.find_by(level: 10, enabled: false).id
       else
         Role.find_by(level: 29, enabled: false).id
       end
+    end
+
+    def template_of_merge
+      temp1=Profile.find(LockEmail::LIST.index(LockEmail::LIST[1])).profile_keys.pluck(:key)
+      temp2=Profile.find(LockEmail::LIST.index(LockEmail::LIST[2])).profile_keys.pluck(:key)
+      profile=@profile.profile_keys.pluck(:key)
+      if compare_templates_of_merge(profile, temp1) then
+        @@template = LockEmail::LIST[1];
+      elsif compare_templates_of_merge(profile, temp2) then
+        @@template = LockEmail::LIST[2];
+      end
+    end
+
+    def compare_templates_of_merge(list, reference)
+      out = true
+      list.each do |e|
+        unless reference.include?(e) then out=false end
+      end
+      out
     end
 
 end

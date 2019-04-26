@@ -393,4 +393,86 @@ end
   end
   Document.new(profile: p5, user: u5).save
 end
+
+###########################################################################
+# 2 docentes de muestra turno manana                                      #
+###########################################################################
+2.times do |u|
+  u2 = User.new({email: "docente#{u+35}@gidappf.edu.ar", password: "docente#{u+35}", password_confirmation: "docente#{u+35}"})
+  u2.save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 29, enabled: false).id,
+    user_id: u2.id, commission_id: Commission.first.id
+  ).save
+  p2=Profile.new( name: "#{Profile.count+1}/#{u+6000000}", description: "A Docent description user #{u+35}", valid_from: Date.today, valid_to: 1.year.after  )
+  User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
+    x=i.id
+    case x
+      when 43 #dni si es la clave 43 de la plantilla
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+6000000).to_s).save
+      when 49 #'Elección de turno desde[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "7").save
+      when 50 #'Elección de turno hasta[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "12").save
+      else
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+    end
+  end
+  Document.new(profile: p2, user: u2).save
+end
+
+###########################################################################
+# 2 docentes de muestra turno tarde                                       #
+###########################################################################
+2.times do |u|
+  u2 = User.new({email: "docente#{u+37}@gidappf.edu.ar", password: "docente#{u+37}", password_confirmation: "docente#{u+37}"})
+  u2.save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 29, enabled: false).id,
+    user_id: u2.id, commission_id: Commission.first.id
+  ).save
+  p2=Profile.new( name: "#{Profile.count+1}/#{u+7000000}", description: "A Docent description user #{u+37}", valid_from: Date.today, valid_to: 1.year.after  )
+  User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
+    x=i.id
+    case x
+      when 43 #dni si es la clave 43 de la plantilla
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+7000000).to_s).save
+      when 49 #'Elección de turno desde[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "13").save
+      when 50 #'Elección de turno hasta[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "18").save
+      else
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+    end
+  end
+  Document.new(profile: p2, user: u2).save
+end
+
+###########################################################################
+# 2 docentes de muestra turno noche                                       #
+###########################################################################
+2.times do |u|
+  u2 = User.new({email: "docente#{u+39}@gidappf.edu.ar", password: "docente#{u+39}", password_confirmation: "docente#{u+39}"})
+  u2.save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 29, enabled: false).id,
+    user_id: u2.id, commission_id: Commission.first.id
+  ).save
+  p2=Profile.new( name: "#{Profile.count+1}/#{u+8000000}", description: "A Docent description user #{u+39}", valid_from: Date.today, valid_to: 1.year.after  )
+  User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
+    x=i.id
+    case x
+      when 43 #dni si es la clave 43 de la plantilla
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+8000000).to_s).save
+      when 49 #'Elección de turno desde[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
+      when 50 #'Elección de turno hasta[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "23").save
+      else
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+    end
+  end
+  Document.new(profile: p2, user: u2).save
+end
+
 p "[GIDAPPF] Creados #{User.count} usuarios de muestra"

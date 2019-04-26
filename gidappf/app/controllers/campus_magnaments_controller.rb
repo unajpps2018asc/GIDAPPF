@@ -58,11 +58,12 @@ class CampusMagnamentsController < ApplicationController
   ####################################################################################
   def set_campus_segmentation
     p = Profile.find(params[:id].to_i)
-    ucr = Profile.find(params[:id].to_i).documents.first.user.usercommissionroles.last
-    authorize ucr
+    ucrs = Profile.find(params[:id].to_i).documents.first.user.usercommissionroles
+    authorize ucrs
     ts = TimeSheet.find(params[:box_selected].to_i)
-    unless p.nil? || ts.nil? || ucr.nil? then
-      ucr.update(role: role_from_profile_type(ucr.role), commission: ts.commission)
+    unless p.nil? || ts.nil? || ucrs.nil? || ucrs.empty? then
+      # ucrs.last.update(role: role_from_profile_type(ucrs.last.role), commission: ts.commission)
+      set_usercommissionroles(ucrs.last.user, ts.commission)
       redirect_to campus_magnaments_get_campus_segmentation_path(
         def_period: params[:def_period],
         profile_type: params[:profile_type]),
@@ -224,6 +225,11 @@ class CampusMagnamentsController < ApplicationController
         end
       end
       out
+    end
+
+    def set_usercommissionroles(user,commission)
+      #ucrs.last.update(role: role_from_profile_type(ucrs.last.role), commission: ts.commission)
+      user.usercommissionroles.last.update(role: role_from_profile_type(user.usercommissionroles.last.role), commission: commission)
     end
 
 end

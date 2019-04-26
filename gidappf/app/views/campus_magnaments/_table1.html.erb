@@ -23,27 +23,28 @@
     <% profiles_period.each do |p| %>
       <tr>
         <td><%= link_to "#{p.name}", profile_path(id: p.id) %></td>
-        <% comms_period.each do |ts| %>
-          <td>
-            <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->
-            <%= check_box_tag(
-                "p_"+ p.id.to_s+"_"+:box_selected.to_s+"_"+ts.id.to_s,
-                p.documents.first.user.usercommissionroles.first.commission_id,
-                ts.commission.id == p.documents.first.user.usercommissionroles.last.commission_id,
-                onclick: "$(document).ready(function() {
-                      window.location.href='"+
-                        campus_magnaments_set_campus_segmentation_path(
-                          id: p.id,
-                          box_selected: ts.id.to_s,
-                          def_period: params[:def_period],
-                          profile_type: params[:profile_type])+
-                    "'});",
-                :disabled  => ts.selectable?
-              )%>
-            <%= label_tag(ts.commission_info) %>
-          </td>
-      <% end %>
-     </tr>
-   <% end %>
+        <td>
+          <% p.documents.first.user.usercommissionroles.each do |cp| %>
+            <div class="field">
+              <% comms_period.each do |ts| %>
+                <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->
+                <%= check_box_tag(
+                    "p_"+ p.id.to_s+"_"+:box_selected.to_s+"_"+ts.id.to_s,
+                    cp.commission_id,ts.commission.id == cp.commission_id,
+                    onclick: "$(document).ready(function() {
+                        window.location.href='"+
+                          campus_magnaments_set_campus_segmentation_path(
+                            id: p.id,box_selected: ts.id.to_s,
+                            def_period: params[:def_period],
+                            profile_type: params[:profile_type])+
+                        "'});",
+                    :disabled  => ts.selectable?) %>
+                <%= label_tag(ts.commission_info) %>
+              <% end %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

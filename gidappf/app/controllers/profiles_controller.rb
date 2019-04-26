@@ -205,28 +205,106 @@ class ProfilesController < ApplicationController
           ])
     end
 
-    #########################################################################################
-    # Estrategia de nuevos nested atributos                                                 #
-    # Prerequisitos:                                                                        #
-    #           1) Modelo de datos inicializado.                                            #
-    #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
-    #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
-    #           4) Existencia de la plantilla del perfil en Profile.firts.                  #
-    # Devolución: Perfil asociado a las claves mas recientes. descarta errores.             #
-    #########################################################################################
+  ########################################################################################
+  # Método privado: implementa estrategia de edición de nested atributos.                #
+  # Prerequisitos:                                                                       #
+  #           1) Modelo de datos inicializado.                                           #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.      #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo. #
+  #           4) Existencia del arreglo estático LockEmail::LIST.                        #
+  # Devolución: Perfil seleccionado en @profile asociado a las claves mas recientes.     #
+  #             Descarta valores no inicializados.                                       #
+  ########################################################################################
     def merge_profile_keys
+      merge_each_value
+      template_of_merge
+      merge_each_key
+    end
+
+  #########################################################################################
+  # Método privado: implementa inicialización del rol para un nuevoperfil,                #
+  # según @@template.                                                                     #
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+  #           4) Existencia del arreglo estático LockEmail::LIST.                         #
+  #           5) Existencia de la variable de clase @@template inicializada.              #
+  # Devolución: Rol para asociarlo al nuevo perfil.                                       #
+  #########################################################################################
+    def first_role_from_pointer
+      if LockEmail::LIST[1].eql?(@@template) then
+        Role.find_by(level: 10, enabled: false).id
+      else
+        Role.find_by(level: 29, enabled: false).id
+      end
+    end
+
+  #########################################################################################
+  # Método privado: implementa inicialización de la variable estática @@template.         #
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+  #           4) Existencia del arreglo estático LockEmail::LIST.                         #
+  # Devolución: Rol para asociarlo al nuevo perfil.                                       #
+  #########################################################################################
+    def template_of_merge
+      profile=@profile.profile_keys.pluck(:key)
+      if compare_templates_of_merge(profile, Profile.find(LockEmail::LIST.index(LockEmail::LIST[1])).profile_keys.pluck(:key)) then
+        @@template = LockEmail::LIST[1];
+      elsif compare_templates_of_merge(profile, Profile.find(LockEmail::LIST.index(LockEmail::LIST[2])).profile_keys.pluck(:key)) then
+        @@template = LockEmail::LIST[2];
+      end
+    end
+
+  #########################################################################################
+  # Método privado: implementa comparación entre arrays para saber si todos los elementos #
+  #                 de list están en reference.                                           #
+  # Prerequisitos:                                                                        #
+  #           1) reference not null.                                                      #
+  # Devolución: True si cada elemento de list está en reference.                          #
+  #########################################################################################
+    def compare_templates_of_merge(list, reference)
+      out = list.count >= reference.count
+      if out then
+        list.each do |e|
+          unless reference.include?(e) then out=false end
+        end
+      end
+      out
+    end
+
+  #########################################################################################
+  # Método privado: implementa merge para profile_value de cada profile_key.              #
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+  # Devolución: mantiene un único profile_value actualizado por cada profile_key.         #
+  #########################################################################################
+    def merge_each_value
       @profile.profile_keys.each do |k|
         if k.profile_values.count == 2 then
           max=@profile.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.maximum('created_at'))
           min=@profile.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.minimum('created_at'))
-          unless !max.value.empty? then
-            unless min.value.empty? then
-              max.update(value: min.value)
-            end
-          end
+          if max.value.empty? && !min.value.empty? then max.update(value: min.value) end
+          min.destroy
         end
       end
-      template_of_merge
+    end
+
+    #########################################################################################
+    # Método privado: implementa merge para profile_key del @profile seleccionado.          #
+    # Prerequisitos:                                                                        #
+    #           1) Modelo de datos inicializado.                                            #
+    #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+    #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+    #           4) Existencia del arreglo estático LockEmail::LIST.                         #
+    #           5) Existencia de la variable de clase @@template inicializada.              #
+    # Devolución: mantiene los elementos de profile_keys equivalente al de @@templale.      #
+    #########################################################################################
+    def merge_each_key
       User.find_by(email: @@template).documents.first.profile.profile_keys.each do |tpk|
         if @profile.profile_keys.where(key: tpk.key).count == 2 then
           keys=@profile.profile_keys.where(key: tpk.key)
@@ -238,33 +316,6 @@ class ProfilesController < ApplicationController
           min.destroy
         end
       end
-    end
-
-    def first_role_from_pointer
-      if LockEmail::LIST[1].eql?(@@template) then
-        Role.find_by(level: 10, enabled: false).id
-      else
-        Role.find_by(level: 29, enabled: false).id
-      end
-    end
-
-    def template_of_merge
-      temp1=Profile.find(LockEmail::LIST.index(LockEmail::LIST[1])).profile_keys.pluck(:key)
-      temp2=Profile.find(LockEmail::LIST.index(LockEmail::LIST[2])).profile_keys.pluck(:key)
-      profile=@profile.profile_keys.pluck(:key)
-      if compare_templates_of_merge(profile, temp1) then
-        @@template = LockEmail::LIST[1];
-      elsif compare_templates_of_merge(profile, temp2) then
-        @@template = LockEmail::LIST[2];
-      end
-    end
-
-    def compare_templates_of_merge(list, reference)
-      out = true
-      list.each do |e|
-        unless reference.include?(e) then out=false end
-      end
-      out
     end
 
 end

@@ -14,7 +14,7 @@
 <table>
   <thead>
      <tr>
-      <th>Student</th>
+      <th><%= params[:profile_type].first(params[:profile_type].index("@")).capitalize + ":" %></th>
       <th colspan=".<%= comms_period.count.to_s %>." >Commission:</th>
      </tr>
   </thead>

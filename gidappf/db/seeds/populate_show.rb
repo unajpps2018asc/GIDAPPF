@@ -458,6 +458,10 @@ end
     role_id: Role.find_by(level: 29, enabled: false).id,
     user_id: u2.id, commission_id: Commission.first.id
   ).save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 29, enabled: false).id,
+    user_id: u2.id, commission_id: 2
+  ).save
   p2=Profile.new( name: "#{Profile.count+1}/#{u+8000000}", description: "A Docent description user #{u+39}", valid_from: Date.today, valid_to: 1.year.after  )
   User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
     x=i.id

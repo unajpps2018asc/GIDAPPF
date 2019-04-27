@@ -30,7 +30,7 @@ class CampusMagnamentsController < ApplicationController
     @per_time_categ_profiles = []
     array_all_trayect.each do |trayect| #itera primero, segundo, tercero, etc.
       all_time_categories.each do |time_categ| #itera por cada turno
-        profiles_in_time_category = [table_metadata_maker(time_categ, trayect)]# El subtitulo (*)
+        profiles_in_time_category = [table_metadata_maker(time_categ, trayect,params[:profile_type])]# El subtitulo (*)
         ProfileKey.where(key: ProfileKey.find(24).key).where.not("profile_id < ?", LockEmail::LIST.count-1).each do |e| #'Elección de turno desde[Hr]:'
           unless e.profile_values.empty? || e.profile_values.first.value.blank? then
             if include_in_trayect_and_time_category_by_role?(e, trayect, time_categ, params[:profile_type]) then
@@ -60,10 +60,10 @@ class CampusMagnamentsController < ApplicationController
     p = Profile.find(params[:id].to_i)
     ucrs = Profile.find(params[:id].to_i).documents.first.user.usercommissionroles
     authorize ucrs
+    ucr = Usercommissionrole.find(params[:ucr_id].to_i)
     ts = TimeSheet.find(params[:box_selected].to_i)
-    unless p.nil? || ts.nil? || ucrs.nil? || ucrs.empty? then
-      # ucrs.last.update(role: role_from_profile_type(ucrs.last.role), commission: ts.commission)
-      set_usercommissionroles(ucrs.last.user, ts.commission)
+    unless p.nil? || ts.nil? || ucrs.nil? || ucrs.empty? || ucr.nil? then
+      set_usercommissionroles(ucr, ts.commission)
       redirect_to campus_magnaments_get_campus_segmentation_path(
         def_period: params[:def_period],
         profile_type: params[:profile_type]),
@@ -134,7 +134,7 @@ class CampusMagnamentsController < ApplicationController
   def all_time_categories
     out=[]
     a=[]
-    TimeSheet.where.not(id: 1).find_each do |c|
+    TimeSheet.where.not(id: TimeSheet.first.id).find_each do |c|
       a << c.time_category
     end
     a.uniq.each do |f|
@@ -147,7 +147,7 @@ class CampusMagnamentsController < ApplicationController
   # Metodo privado para obtener un subtitulo de la tabla correspondiente. #
   # Devuelve: un array con un string reprecentando a la tabla.            #
   #########################################################################
-  def table_metadata_maker(time_categ, trayect)
+  def table_metadata_maker(time_categ, trayect, profile_type)
     [
       "Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
       +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
@@ -227,9 +227,8 @@ class CampusMagnamentsController < ApplicationController
       out
     end
 
-    def set_usercommissionroles(user,commission)
-      #ucrs.last.update(role: role_from_profile_type(ucrs.last.role), commission: ts.commission)
-      user.usercommissionroles.last.update(role: role_from_profile_type(user.usercommissionroles.last.role), commission: commission)
+    def set_usercommissionroles(usercommissionrole,commission)
+      usercommissionrole.update(role: role_from_profile_type(usercommissionrole.role), commission: commission)
     end
 
 end

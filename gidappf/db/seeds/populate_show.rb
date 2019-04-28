@@ -137,19 +137,58 @@ p "[GIDAPPF] Creados #{TimeSheet.count} periodos"
 ###############################################################################
 # Materias de prueba por cada aula, creadas a partir del array auxiliar.      #
 ###############################################################################
-3.times do |mat|
-  3.times do |trayect|
-    6.times do |hr|
-      Matter.create!([
-        {
-          name: "Matter#{mat}_(tr:#{trayect}/#{hr})_",
-          description: "Materia #{mat} del trayecto #{trayect} horario #{hr}.",
-          enable: true
-          }
-        ])
-    end
-  end
-end
+Matter.destroy_all
+Matter.create!([
+{
+  name: "1Matem1",
+  description: "Matemática Uno",
+  enable: true
+},{
+  name: "2Matem2",
+  description: "Matemática dos",
+  enable: true
+},{
+  name: "3Matem3",
+  description: "Matemática tres",
+  enable: true
+},{
+  name: "4Leng1",
+  description: "Lengua uno",
+  enable: true
+},{
+  name: "5Leng2",
+  description: "Lengua dos",
+  enable: true
+},{
+  name: "6Leng3",
+  description: "Lengua tres",
+  enable: true
+},{
+  name: "7Hist1",
+  description: "Historia uno",
+  enable: true
+},{
+  name: "8Hist2",
+  description: "Historia dos",
+  enable: true
+},{
+  name: "9geo1",
+  description: "Geografia uno",
+  enable: true
+},{
+  name: "10Geo2",
+  description: "Geografia dos",
+  enable: true
+},{
+  name: "11Nat1",
+  description: "Ciencias naturales uno",
+  enable: true
+},{
+  name: "12Nat2",
+  description: "Ciencias naturales dos",
+  enable: true
+}
+])
 p "[GIDAPPF] Creados #{Matter.count} materias"
 
 ######################################################################
@@ -186,7 +225,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "Matter2_(tr:1/1)_").id
+        matter_id: Matter.find_by(name: "1Matem1").id
       ).save
       TimeSheetHour.new(
         from_hour: 9, from_min: 30, to_hour: 10, to_min: 10,
@@ -194,7 +233,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "Matter1_(tr:1/2)_").id
+        matter_id: Matter.find_by(name: "2Matem2").id
       ).save
       TimeSheetHour.new(
         from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
@@ -202,7 +241,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "Matter0_(tr:2/2)_").id
+        matter_id: Matter.find_by(name: "4Leng1").id
       ).save
     end
   end
@@ -221,7 +260,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "Matter2_(tr:2/1)_").id
+        matter_id: Matter.find_by(name: "4Leng1").id
       ).save
       TimeSheetHour.new(
         from_hour: 15, from_min: 15, to_hour: 17, to_min: 0,
@@ -229,7 +268,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "Matter2_(tr:2/2)_").id
+        matter_id: Matter.find_by(name: "1Matem1").id
       ).save
     end
   end
@@ -247,7 +286,7 @@ end
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "Matter1_(tr:1/1)_").id
+        matter_id: Matter.find_by(name: "10Geo2").id
       ).save
     end
   end
@@ -340,9 +379,9 @@ end
   Document.new(profile: p5, user: u5).save
 end
 
-###########################################################################
-# 5 ingresantes de muestra turno con amplia disponibilidad, minimo perfil #
-###########################################################################
+#######################################################################################
+# 5 ingresantes de muestra turno con amplia disponibilidad, ya cursaron anteriormente #
+#######################################################################################
 5.times do |u|
   u5 = User.new({email: "ingresante#{u+25}@gidappf.edu.ar", password: "ingresante#{u+25}", password_confirmation: "ingresante#{u+25}"})
   u5.save
@@ -419,7 +458,7 @@ end
       when 43 #dni si es la clave 43 de la plantilla
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+6000000).to_s).save
       when 48 #'Materias'
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "2").save
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "1").save
       when 49 #'Elección de turno desde[Hr]:'
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "7").save
       when 50 #'Elección de turno hasta[Hr]:'
@@ -452,7 +491,7 @@ end
       when 43 #dni si es la clave 43 de la plantilla
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+7000000).to_s).save
       when 48 #'Materias'
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "3").save
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "2").save
       when 49 #'Elección de turno desde[Hr]:'
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "13").save
       when 50 #'Elección de turno hasta[Hr]:'
@@ -485,7 +524,7 @@ end
       when 43 #dni si es la clave 43 de la plantilla
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+8000000).to_s).save
       when 48 #'Materias'
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "4").save
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "10").save
       when 49 #'Elección de turno desde[Hr]:'
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
       when 50 #'Elección de turno hasta[Hr]:'

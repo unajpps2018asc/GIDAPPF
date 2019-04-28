@@ -63,11 +63,24 @@ class CampusMagnamentsController < ApplicationController
     ucr = Usercommissionrole.find(params[:ucr_id].to_i)
     ts = TimeSheet.find(params[:box_selected].to_i)
     unless p.nil? || ts.nil? || ucrs.nil? || ucrs.empty? || ucr.nil? then
-      set_usercommissionroles(ucr, ts.commission)
-      redirect_to campus_magnaments_get_campus_segmentation_path(
-        def_period: params[:def_period],
-        profile_type: params[:profile_type]),
-        notice: "Profile #{p.name} change to #{ts.commission.name}"
+      if params[:profile_type].eql?(LockEmail::LIST[1]) then
+          set_usercommissionroles(ucr, ts.commission)
+          redirect_to campus_magnaments_get_campus_segmentation_path(
+            def_period: params[:def_period],
+            profile_type: params[:profile_type]),
+            notice: "Profile #{p.name} change to #{ts.commission.name}"
+      elsif TimeSheetHour.find(params[:tsh_id].to_i).matter_id == ucr.user.documents.first.profile.profile_keys.find_by(key: "Materias:").profile_values.first.value.to_i then
+        set_usercommissionroles(ucr, ts.commission)
+        redirect_to campus_magnaments_get_campus_segmentation_path(
+          def_period: params[:def_period],
+          profile_type: params[:profile_type]),
+          notice: "Profile #{p.name} change to #{ts.commission.name}"
+      else
+        flash[:errors] = "Profile #{p.name} can't Matter available!"
+        redirect_to campus_magnaments_get_campus_segmentation_path(
+          def_period: params[:def_period],
+          profile_type: params[:profile_type])
+      end
     end
   end
 
@@ -148,11 +161,17 @@ class CampusMagnamentsController < ApplicationController
   # Devuelve: un array con un string reprecentando a la tabla.            #
   #########################################################################
   def table_metadata_maker(time_categ, trayect, profile_type)
-    [
-      "Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
-      +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
-      time_sheet_from_commissions_in_period(time_categ, trayect)
-    ]
+    out=[]
+    if profile_type.eql?(LockEmail::LIST[1]) then
+      out.push("Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
+        +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
+        time_sheet_from_commissions_in_period(time_categ, trayect))
+    elsif profile_type.eql?(LockEmail::LIST[2]) then
+      out.push("Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
+        +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
+        time_sheet_hour_from_commissions_in_period(time_categ, trayect))
+    end
+    out
   end
 
   ####################################################################################
@@ -206,6 +225,27 @@ class CampusMagnamentsController < ApplicationController
               time_sheet.time_category.first >= schedul[1] + schedul[0]*60 &&
               time_sheet.time_category.last <= schedul[3] + schedul[2]*60 then
               out << time_sheet
+            end
+          end
+      out
+    end
+
+  ####################################################################################################
+  # Metodo privado para obtener la lista de horarios de periodos de comisiones que se solapan con el #
+  # seleccionado.                                                                                    #
+  # Devuelve: una query con todos los TimeSheet dentro del periodo seleccionado.                     #
+  ####################################################################################################
+    def time_sheet_hour_from_commissions_in_period(schedul, trayect)
+      out = []
+      TimeSheet.where.not(commission: Commission.first).
+        where(:start_date => start_period - 30.day  .. start_period + 30.day).
+          where(:end_date => end_period - 30.day  .. end_period + 30.day).each do |time_sheet|
+            if !time_sheet.time_category.empty? && time_sheet.is_of_trayect?(trayect) &&
+              time_sheet.time_category.first >= schedul[1] + schedul[0]*60 &&
+              time_sheet.time_category.last <= schedul[3] + schedul[2]*60 then
+                time_sheet.time_sheet_hours.select(:from_hour,:from_min,:to_hour,:to_min).distinct.each do |e|
+                  out << TimeSheetHour.where(time_sheet: time_sheet, from_hour: e.from_hour, from_min: e.from_min, to_hour: e.to_hour,to_min: e.to_min).first
+                end
             end
           end
       out

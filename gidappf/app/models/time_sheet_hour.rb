@@ -51,6 +51,24 @@ class TimeSheetHour < ApplicationRecord
     week << self.sunday
     week
   end
+
+  ########################################################################
+  # Prerequisitos:                                                       #
+  #           1) Modelo de datos inicializado.                           #
+  # parámetros:                                                          #
+  #           ninguno.                                                   #
+  # Devolución: Array con dos elementos, el primero es el minimo horario #
+  #          TimeSheetHour de los asignados. El segundo es el maximo     #
+  #          horario de los asignados.                                   #
+  ########################################################################
+  def time_category
+    out=[]
+    out << h.from_min.to_i+h.from_hour.to_i*60
+    out << h.to_min.to_i+h.to_hour.to_i*60
+    out
+  end
+
+
   private
 
   #######################################################################

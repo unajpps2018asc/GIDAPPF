@@ -25,23 +25,42 @@
         <td><%= link_to "#{p.name}", profile_path(id: p.id) %></td>
         <td>
           <% p.documents.first.user.usercommissionroles.each do |ucr| %>
-            <div class="field"><%= "- #{p.documents.first.user.usercommissionroles.index(ucr)+1}. #{ucr.role.name} at commission: #{ucr.commission.name} -" %></div>
             <div class="field">
-              <% comms_period.each do |ts| %>
-                <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->
-                <%= check_box_tag(
-                    "p_"+ p.id.to_s+"_"+:box_selected.to_s+"_"+ts.id.to_s,
-                    ucr.commission_id,ts.commission.id == ucr.commission_id,
-                    onclick: "$(document).ready(function() {
-                        window.location.href='"+
-                          campus_magnaments_set_campus_segmentation_path(
-                            id: p.id,box_selected: ts.id.to_s,
-                            def_period: params[:def_period],
-                            profile_type: params[:profile_type],
-                            ucr_id: ucr.id)+
-                        "'});",
-                    :disabled  => ts.selectable?) %>
-                <%= label_tag(ts.commission_info) %>
+              <p><%= "#{p.documents.first.user.usercommissionroles.index(ucr)+1}. #{ucr.role.name} at commission: #{ucr.commission.name}" %></p>
+            </div>
+            <div class="field">
+              <% if params[:profile_type].eql?(LockEmail::LIST[1]) then  %>
+                <% comms_period.each do |ts| %>
+                  <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->
+                  <%= check_box_tag(nil,ucr.commission_id,ts.commission.id == ucr.commission_id,
+                      onclick: "$(document).ready(function() {
+                          window.location.href='"+
+                            campus_magnaments_set_campus_segmentation_path(
+                              id: p.id,box_selected: ts.id.to_s,
+                              def_period: params[:def_period],
+                              profile_type: params[:profile_type],
+                              ucr_id: ucr.id)+
+                          "'});",
+                      :disabled  => ts.selectable?) %>
+                  <%= label_tag(ts.commission_info) %>
+                <% end %>
+              <% elsif params[:profile_type].eql?(LockEmail::LIST[2]) then  %>
+                <% comms_period.each do |ts| %>
+                  <% if ts.matter_id.eql?(p.profile_keys.find_by(key:"Materias:").profile_values.first.value.to_i) then %>
+                    <%= check_box_tag(nil,ucr.commission_id,ts.time_sheet.commission.id == ucr.commission_id,
+                        onclick: "$(document).ready(function() {
+                            window.location.href='"+
+                              campus_magnaments_set_campus_segmentation_path(
+                                id: p.id,box_selected: ts.time_sheet.id.to_s,
+                                def_period: params[:def_period],
+                                profile_type: params[:profile_type],
+                                ucr_id: ucr.id,
+                                tsh_id: ts.id)+
+                            "'});",
+                        :disabled  => ts.time_sheet.selectable?) %>
+                    <%= label_tag(nil,"#{ts.occupied_hour_fmt}#{ts.matter.name} #{ts.time_sheet.commission_info}", class: 'gidappf-small_label') %>
+                  <% end %>
+                <% end %>
               <% end %>
             </div>
           <% end %>

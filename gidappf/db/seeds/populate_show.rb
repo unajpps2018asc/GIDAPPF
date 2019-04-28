@@ -137,14 +137,18 @@ p "[GIDAPPF] Creados #{TimeSheet.count} periodos"
 ###############################################################################
 # Materias de prueba por cada aula, creadas a partir del array auxiliar.      #
 ###############################################################################
-aulas.each do |a|
-  Matter.create!([
-    {
-      name: "Materia #{a[1]}",
-      description: "#{a[2]} para la materia.",
-      enable: true
-      }
-    ])
+3.times do |mat|
+  3.times do |trayect|
+    6.times do |hr|
+      Matter.create!([
+        {
+          name: "Matter#{mat}_(tr:#{trayect}/#{hr})_",
+          description: "Materia #{mat} del trayecto #{trayect} horario #{hr}.",
+          enable: true
+          }
+        ])
+    end
+  end
 end
 p "[GIDAPPF] Creados #{Matter.count} materias"
 
@@ -182,7 +186,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.first.id
+        matter_id: Matter.find_by(name: "Matter2_(tr:1/1)_").id
       ).save
       TimeSheetHour.new(
         from_hour: 9, from_min: 30, to_hour: 10, to_min: 10,
@@ -190,7 +194,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.first.id
+        matter_id: Matter.find_by(name: "Matter1_(tr:1/2)_").id
       ).save
       TimeSheetHour.new(
         from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
@@ -198,7 +202,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.first.id
+        matter_id: Matter.find_by(name: "Matter0_(tr:2/2)_").id
       ).save
     end
   end
@@ -217,7 +221,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.first.id
+        matter_id: Matter.find_by(name: "Matter2_(tr:2/1)_").id
       ).save
       TimeSheetHour.new(
         from_hour: 15, from_min: 15, to_hour: 17, to_min: 0,
@@ -225,7 +229,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.first.id
+        matter_id: Matter.find_by(name: "Matter2_(tr:2/2)_").id
       ).save
     end
   end
@@ -243,7 +247,7 @@ end
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.first.id
+        matter_id: Matter.find_by(name: "Matter1_(tr:1/1)_").id
       ).save
     end
   end
@@ -404,12 +408,18 @@ end
     role_id: Role.find_by(level: 29, enabled: false).id,
     user_id: u2.id, commission_id: Commission.first.id
   ).save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 29, enabled: false).id,
+    user_id: u2.id, commission_id: Commission.first.id
+  ).save
   p2=Profile.new( name: "#{Profile.count+1}/#{u+6000000}", description: "A Docent description user #{u+35}", valid_from: Date.today, valid_to: 1.year.after  )
   User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 43 #dni si es la clave 43 de la plantilla
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+6000000).to_s).save
+      when 48 #'Materias'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "2").save
       when 49 #'Elección de turno desde[Hr]:'
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "7").save
       when 50 #'Elección de turno hasta[Hr]:'
@@ -431,12 +441,18 @@ end
     role_id: Role.find_by(level: 29, enabled: false).id,
     user_id: u2.id, commission_id: Commission.first.id
   ).save
+  Usercommissionrole.new(
+    role_id: Role.find_by(level: 29, enabled: false).id,
+    user_id: u2.id, commission_id: Commission.first.id
+  ).save
   p2=Profile.new( name: "#{Profile.count+1}/#{u+7000000}", description: "A Docent description user #{u+37}", valid_from: Date.today, valid_to: 1.year.after  )
   User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 43 #dni si es la clave 43 de la plantilla
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+7000000).to_s).save
+      when 48 #'Materias'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "3").save
       when 49 #'Elección de turno desde[Hr]:'
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "13").save
       when 50 #'Elección de turno hasta[Hr]:'
@@ -460,7 +476,7 @@ end
   ).save
   Usercommissionrole.new(
     role_id: Role.find_by(level: 29, enabled: false).id,
-    user_id: u2.id, commission_id: 2
+    user_id: u2.id, commission_id: Commission.first.id
   ).save
   p2=Profile.new( name: "#{Profile.count+1}/#{u+8000000}", description: "A Docent description user #{u+39}", valid_from: Date.today, valid_to: 1.year.after  )
   User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
@@ -468,6 +484,8 @@ end
     case x
       when 43 #dni si es la clave 43 de la plantilla
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+8000000).to_s).save
+      when 48 #'Materias'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "4").save
       when 49 #'Elección de turno desde[Hr]:'
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
       when 50 #'Elección de turno hasta[Hr]:'

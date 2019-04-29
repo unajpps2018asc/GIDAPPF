@@ -62,25 +62,17 @@ class CampusMagnamentsController < ApplicationController
     authorize ucrs
     ucr = Usercommissionrole.find(params[:ucr_id].to_i)
     ts = TimeSheet.find(params[:box_selected].to_i)
-    unless p.nil? || ts.nil? || ucrs.nil? || ucrs.empty? || ucr.nil? then
-      if params[:profile_type].eql?(LockEmail::LIST[1]) then
-          set_usercommissionroles(ucr, ts.commission)
-          redirect_to campus_magnaments_get_campus_segmentation_path(
-            def_period: params[:def_period],
-            profile_type: params[:profile_type]),
-            notice: "Profile #{p.name} change to #{ts.commission.name}"
-      elsif TimeSheetHour.find(params[:tsh_id].to_i).matter_id == ucr.user.documents.first.profile.profile_keys.find_by(key: "Materias:").profile_values.first.value.to_i then
-        set_usercommissionroles(ucr, ts.commission)
-        redirect_to campus_magnaments_get_campus_segmentation_path(
-          def_period: params[:def_period],
-          profile_type: params[:profile_type]),
-          notice: "Profile #{p.name} change to #{ts.commission.name}"
-      else
-        flash[:errors] = "Profile #{p.name} can't Matter available!"
-        redirect_to campus_magnaments_get_campus_segmentation_path(
-          def_period: params[:def_period],
-          profile_type: params[:profile_type])
-      end
+    unless invalid_selection_to_set_ucr?(p,ucrs,ucr,ts) then
+      set_usercommissionroles(ucr, ts.commission)
+      redirect_to campus_magnaments_get_campus_segmentation_path(
+        def_period: params[:def_period],
+        profile_type: params[:profile_type]),
+        notice: "Profile #{p.name} change to #{ts.commission.name}"
+    else
+      flash[:errors] = "Profile #{p.name}, schedule previously assigned for this #{params[:profile_type].first(params[:profile_type].index("@")).capitalize}…"
+      redirect_to campus_magnaments_get_campus_segmentation_path(
+        def_period: params[:def_period],
+        profile_type: params[:profile_type])
     end
   end
 
@@ -267,8 +259,39 @@ class CampusMagnamentsController < ApplicationController
       out
     end
 
+  ########################################################################################
+  # Metodo privado para obtener la actualizacion del rol y la asignacion de la comision. #
+  # Si la comisión es la misma que estaba, entonces asigna la comision de ingresantes.   #
+  ########################################################################################
     def set_usercommissionroles(usercommissionrole,commission)
-      usercommissionrole.update(role: role_from_profile_type(usercommissionrole.role), commission: commission)
+      unless commission.eql?(usercommissionrole.commission)
+        usercommissionrole.update(role: role_from_profile_type(usercommissionrole.role), commission: commission)
+      else
+        usercommissionrole.update(commission: Commission.first)
+      end
+    end
+
+  ########################################################################################
+  # Metodo privado para validacion de set_usercommissionroles.                           #
+  ########################################################################################
+    def invalid_selection_to_set_ucr?(profile,usercommissionroles,to_usercommissionrole,time_sheet)
+      out = true
+      unless profile.nil? || time_sheet.nil? || usercommissionroles.nil? || usercommissionroles.empty? || to_usercommissionrole.nil? then
+        if params[:profile_type].eql?(LockEmail::LIST[1]) then
+          out = false
+        elsif !params[:tsh_id].nil? && TimeSheetHour.find(params[:tsh_id].to_i).matter_id == to_usercommissionrole.user.documents.first.profile.profile_keys.find_by(key: "Materias:").profile_values.first.value.to_i then
+          matter_of_profile = to_usercommissionrole.user.documents.first.profile.profile_keys.find_by(key: "Materias:").profile_values.first.value.to_i
+          arr = []
+          to_usercommissionrole.user.usercommissionroles.where.not(id: to_usercommissionrole.id).where.not(commission_id: 1).find_each do |e| arr.push(e.commission_id) end
+          arr2 = []
+          TimeSheet.where(:commission_id => arr).find_each do |e| arr2.push(e.time_sheet_hours.where(matter_id: matter_of_profile).pluck(:from_hour,:from_min,:to_hour,:to_min).uniq) end
+          obj=TimeSheetHour.find(params[:tsh_id].to_i)
+          unless arr2.include?([[obj.from_hour,obj.from_min, obj.to_hour, obj.to_min]]) then
+            out = false
+          end
+        end
+      end
+      out
     end
 
 end

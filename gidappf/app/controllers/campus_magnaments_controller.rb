@@ -284,9 +284,10 @@ class CampusMagnamentsController < ApplicationController
           arr = []
           to_usercommissionrole.user.usercommissionroles.where.not(id: to_usercommissionrole.id).where.not(commission_id: 1).find_each do |e| arr.push(e.commission_id) end
           arr2 = []
-          TimeSheet.where(:commission_id => arr).find_each do |e| arr2.push(e.time_sheet_hours.where(matter_id: matter_of_profile).pluck(:from_hour,:from_min,:to_hour,:to_min).uniq) end
+          TimeSheet.where(:commission_id => arr).find_each do |e| arr2.push(e.time_sheet_hours.where(matter_id: matter_of_profile).
+            pluck(:from_hour,:from_min,:to_hour,:to_min,:monday,:tuesday,:wednesday,:thursday,:friday,:saturday,:sunday).uniq) end
           obj=TimeSheetHour.find(params[:tsh_id].to_i)
-          unless arr2.include?([[obj.from_hour,obj.from_min, obj.to_hour, obj.to_min]]) then
+          unless arr2.include?([[obj.from_hour,obj.from_min,obj.to_hour,obj.to_min,obj.monday,obj.tuesday,obj.wednesday,obj.thursday,obj.friday,obj.saturday,obj.sunday]]) then
             out = false
           end
         end

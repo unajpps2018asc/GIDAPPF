@@ -119,6 +119,11 @@ class ProfilesController < ApplicationController
         if @user.save && Usercommissionrole.new( #Si crea al usuario, crea el registro en Usercommissionrole
             role_id: first_role_from_pointer,user_id: @user.id, commission_id: Commission.first.id
           ).save then
+          if @@template.eql?(LockEmail::LIST[2])then
+            2.times do |i|
+              Usercommissionrole.new( role_id: first_role_from_pointer,user_id: @user.id, commission_id: Commission.first.id).save
+            end
+          end
           respond_to do |format|
             msg = "User created id=#{@user.id} role=#{@user.usercommissionroles.first.role.name}"
             format.html { redirect_to profiles_second_path(id_user: @user.id.to_s, user_dni: params[:dni_profile]), notice: msg }
@@ -235,7 +240,7 @@ class ProfilesController < ApplicationController
     def first_role_from_pointer
       if LockEmail::LIST[1].eql?(@@template) then
         Role.find_by(level: 10, enabled: false).id
-      else
+      elsif LockEmail::LIST[2].eql?(@@template) then
         Role.find_by(level: 29, enabled: false).id
       end
     end

@@ -41,29 +41,4 @@ class Profile < ApplicationRecord
   def check_date_interval
     errors.add(:valid_to, 'must be a valid datetime') unless Date.parse(valid_to.to_s) > Date.parse(valid_from.to_s)
   end
-  #
-  # #######################################################################
-  # # Usado en la validacion.                                             #
-  # #######################################################################
-  # def check_nested_params
-  #   errors.add(:name, "must be a valid nested atribute: #{detect_fail}") unless nested_validations_ok
-  # end
-  #
-  # def nested_validations_ok
-  #   out=true
-  #   unless self.profile_keys.nil?
-  #     self.profile_keys.each_with_index do |key, index|
-  #       if index == 4 then out = (!Date.parse(key.profile_values.first.value).present? rescue false;) end
-  #     end
-  #   end
-  #   out
-  # end
-  #
-  # def detect_fail
-  #   self.profile_keys.each_with_index do |key, index|
-  #     if index == 3 && (!Date.parse(key.profile_values.first.value).present? rescue true;) then
-  #       out << key.key
-  #     end
-  #   end
-  # end
 end

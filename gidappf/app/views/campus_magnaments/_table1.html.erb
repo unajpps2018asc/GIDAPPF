@@ -30,9 +30,9 @@
             </div>
             <div class="field">
               <% if params[:profile_type].eql?(LockEmail::LIST[1]) then  %>
-                <%= render 'students_check_boxes', comms_period: comms_period, ucr: ucr, profile: p, period: params[:def_period], type: params[:profile_type] %>
+                <%= render 'students_check_boxes', comms_period: comms_period, usercommissionrole: ucr, profile: p, period: params[:def_period], type: params[:profile_type] %>
               <% elsif params[:profile_type].eql?(LockEmail::LIST[2]) then  %>
-                <%= render 'docents_check_boxes', comms_period: comms_period, ucr: ucr, profile: p, period: params[:def_period], type: params[:profile_type] %>
+                <%= render 'docents_check_boxes', comms_period: comms_period, usercommissionrole: ucr, profile: p, period: params[:def_period], type: params[:profile_type] %>
               <% end %>
             </div>
           <% end %>

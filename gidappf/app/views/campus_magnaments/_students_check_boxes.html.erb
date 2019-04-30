@@ -10,16 +10,16 @@
 <!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                      # -->
 <!-- #GIDAPPF/gidappf/app/views/campus_magnaments/_students_check_boxes.html.erb# -->
 <!-- ############################################################################ -->
-<% comms_period.each do |ts| %>
+<% comms_period.each do |time_sheet| %>
   <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->
-  <%= check_box_tag(nil,ucr.commission_id,ts.commission.id == ucr.commission_id,
+  <%= check_box_tag(nil,usercommissionrole.commission_id,time_sheet.commission.id == usercommissionrole.commission_id,
       onclick: "$(document).ready(function() {
           window.location.href='"+
             campus_magnaments_set_campus_segmentation_path(
-              id: profile.id,box_selected: ts.id.to_s,
+              id: profile.id,box_selected: time_sheet.id.to_s,
               def_period: period,profile_type: type,
-              ucr_id: ucr.id)+
+              ucr_id: usercommissionrole.id)+
           "'});",
-      :disabled  => ts.selectable?) %>
-  <%= label_tag(nil,ts.commission_info, class: 'gidappf-small_label') %>
+      :disabled  => time_sheet.selectable?) %>
+  <%= label_tag(nil,time_sheet.commission_info, class: 'gidappf-small_label') %>
 <% end %>

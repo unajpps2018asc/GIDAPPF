@@ -13,7 +13,15 @@
 <!-- ########################################################################## -->
 <p id="notice"><%= notice %></p>
 
-<h1>Profiles</h1>
+<h1>
+  <% if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
+    <%= "Students" %>
+  <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) %>
+    <%= "Docents" %>
+  <% else %>
+    <%= "Profiles" %>
+  <% end %>
+</h1>
 
 <table>
   <thead>

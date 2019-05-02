@@ -56,21 +56,9 @@ class TimeSheet < ApplicationRecord
   ############################################################################
   def is_of_trayect?(trayect)
     out  = false
-    # u=Usercommissionrole.find_by(commission: self.commission)
-    # if !u.nil? &&
-    #   u.user.documents.first.profile.valid_to <= self.end_date &&
-    #   u.user.documents.first.profile.valid_from >= self.start_date &&
-    #   !u.user.documents.first.profile.profile_keys.
-    #     find_by(key:ProfileKey.find(23).key).nil? then
-    #     out = u.user.documents.first.profile.profile_keys.
-    #       find_by(key:ProfileKey.find(23).key).
-    #         profile_values.first.value.upcase.eql?(trayect.upcase)
-    # end
-    matters_trayect=Matter.where(
-      :id => self.time_sheet_hours.pluck(:matter_id).uniq
-    ).pluck(:trayect).uniq
+    matters_trayect=Matter.where(:id => self.time_sheet_hours.pluck(:matter_id).uniq).pluck(:trayect).uniq
     if matters_trayect.count == 1 then
-      out = matters_trayect[0].upcase.eql?(trayect.upcase)
+      out = matters_trayect.first.upcase.eql?(trayect.upcase)
     end
     out
   end

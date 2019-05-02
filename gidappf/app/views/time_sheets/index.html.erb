@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Expired time sheets</h1>
+<p>Start: 13 months ago ~ today & End: 1 month ago ~ today</p>
 
 <table>
   <thead>
@@ -25,6 +26,8 @@
   </tbody>
 </table>
 
+<%= link_to 'Renew all', time_sheets_renew_all_path %>
+<hr>
 <h1>All</h1>
 
 <table>
@@ -50,5 +53,3 @@
   </tbody>
 </table>
 <br>
-
-<%= link_to 'Renew all', time_sheets_renew_all_path %>

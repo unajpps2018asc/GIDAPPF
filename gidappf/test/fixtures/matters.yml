@@ -3,9 +3,11 @@
 one:
   name: MyString
   description: MyText
+  trayect: First
   enable: false
 
 two:
   name: MyString
   description: MyText
+  trayect: Second
   enable: false

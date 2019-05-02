@@ -63,10 +63,11 @@ ActiveRecord::Schema.define(version: 2019_04_16_173534) do
   end
 
   create_table "matters", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "trayect", null: false
     t.boolean "enable"
   end
 

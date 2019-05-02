@@ -36,14 +36,14 @@ gidappf_end_time = Time.rfc3339('3000-12-31T14:00:00-10:00')
 # Array auxiliar, contenido aplicable a name, description.                #
 ###########################################################################
 aulas=Array.new
-4.times {|i|
+12.times {|i|
   e=[i+1,"estudiantes#{i+1}","Descripción nro. #{i+1} generada automáticamente"]
   aulas.push(e)
 }
 ###############################################################################
 # Comisiones de prueba por cada aula, creadas a partir del array auxiliar.    #
 ###############################################################################
-aulas.each do |a|
+aulas.first(9).each do |a|
   Commission.create!([
     {
       name: "C. #{a[1]}",
@@ -73,7 +73,7 @@ p "[GIDAPPF] Creadas #{Commission.count} Comisiones"
 # Aulas iniciales, creadas a partir del array auxiliar.                     #
 #############################################################################
 ClassRoomInstitute.destroy_all
-aulas.each do |a|
+aulas.first(4).each do |a|
   ClassRoomInstitute.create!([
     {
       name: "Aula de #{a[1]}",
@@ -142,50 +142,62 @@ Matter.create!([
 {
   name: "1Matem1",
   description: "Matemática Uno",
+  trayect: "PRIMERO",
   enable: true
 },{
   name: "2Matem2",
   description: "Matemática dos",
+  trayect: "SEGUNDO",
   enable: true
 },{
   name: "3Matem3",
   description: "Matemática tres",
+  trayect: "TERCERO",
   enable: true
 },{
   name: "4Leng1",
   description: "Lengua uno",
+  trayect: "PRIMERO",
   enable: true
 },{
   name: "5Leng2",
   description: "Lengua dos",
+  trayect: "SEGUNDO",
   enable: true
 },{
   name: "6Leng3",
   description: "Lengua tres",
+  trayect: "TERCERO",
   enable: true
 },{
   name: "7Hist1",
   description: "Historia uno",
+  trayect: "PRIMERO",
   enable: true
 },{
   name: "8Hist2",
   description: "Historia dos",
+  trayect: "SEGUNDO",
   enable: true
 },{
   name: "9geo1",
   description: "Geografia uno",
+  trayect: "PRIMERO",
   enable: true
 },{
   name: "10Geo2",
   description: "Geografia dos",
+  trayect: "SEGUNDO",
   enable: true
 },{
   name: "11Nat1",
   description: "Ciencias naturales uno",
+  trayect: "PRIMERO",
   enable: true
 },{
   name: "12Nat2",
   description: "Ciencias naturales dos",
+  trayect: "SEGUNDO",
   enable: true
 }
 ])
@@ -213,12 +225,10 @@ end #requerido por cada vacante de aula
 p "[GIDAPPF] Creado #{TimeSheetHour.count} Horarios de ingresantes"
 
 ###########################################################################
-# 4 Horarios de muestra turno mañana, todos los períodos y todas las      #
-# vacantes.                                                               #
+# 1. Horarios de muestra turno manana y todas las vacantes aula 1.        #
 ###########################################################################
-Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).where.not(id: 6).each do |c|
-  Vacancy.where.not(class_room_institute_id: 3).where.not(class_room_institute_id: 4).each do |a|
-    c.time_sheets.each do |p|
+  Vacancy.where(class_room_institute_id: 1).each do |a|
+    Commission.find(2).time_sheets.each do |p|
       TimeSheetHour.new(
         from_hour: 8, from_min: 0, to_hour: 9, to_min: 15,
         monday: true, tuesday: true, wednesday: true, thursday: true,
@@ -233,7 +243,7 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "2Matem2").id
+        matter_id: Matter.find_by(name: "4Leng1").id
       ).save
       TimeSheetHour.new(
         from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
@@ -241,21 +251,18 @@ Commission.where.not(id: Commission.first.id).where.not(id: 4).where.not(id: 5).
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "4Leng1").id
+        matter_id: Matter.find_by(name: "7Hist1").id
       ).save
     end
   end
-end
 
 ###########################################################################
-# 4 Horarios de muestra turno tarde, todos los períodos y todas las       #
-# vacantes.                                                               #
+# 2. Horarios de muestra turno manana y todas las vacantes aula 2.        #
 ###########################################################################
-Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).where.not(id: 6).each do |c|
-  Vacancy.where.not(class_room_institute_id: 1).where.not(class_room_institute_id: 2).each do |a|
-    c.time_sheets.each do |p|
+  Vacancy.where(class_room_institute_id: 2).each do |a|
+    Commission.find(3).time_sheets.each do |p|
       TimeSheetHour.new(
-        from_hour: 13, from_min: 0, to_hour: 15, to_min: 15,
+        from_hour: 8, from_min: 0, to_hour: 9, to_min: 15,
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
@@ -263,7 +270,47 @@ Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).
         matter_id: Matter.find_by(name: "4Leng1").id
       ).save
       TimeSheetHour.new(
-        from_hour: 15, from_min: 15, to_hour: 17, to_min: 0,
+        from_hour: 9, from_min: 30, to_hour: 10, to_min: 10,
+        monday: true, tuesday: true, wednesday: true, thursday: true,
+        friday: true, saturday: false, sunday: false,
+        vacancy_id: a.id,
+        time_sheet_id: p.id,
+        matter_id: Matter.find_by(name: "7Hist1").id
+      ).save
+      TimeSheetHour.new(
+        from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
+        monday: true, tuesday: true, wednesday: true, thursday: true,
+        friday: true, saturday: false, sunday: false,
+        vacancy_id: a.id,
+        time_sheet_id: p.id,
+        matter_id: Matter.find_by(name: "1Matem1").id
+      ).save
+    end
+  end
+
+###########################################################################
+# 3. Horarios de muestra turno manana y todas las vacantes aula 3.        #
+###########################################################################
+  Vacancy.where(class_room_institute_id: 3).each do |a|
+    Commission.find(4).time_sheets.each do |p|
+      TimeSheetHour.new(
+        from_hour: 8, from_min: 0, to_hour: 9, to_min: 15,
+        monday: true, tuesday: true, wednesday: true, thursday: true,
+        friday: true, saturday: false, sunday: false,
+        vacancy_id: a.id,
+        time_sheet_id: p.id,
+        matter_id: Matter.find_by(name: "2Matem2").id
+      ).save
+      TimeSheetHour.new(
+        from_hour: 9, from_min: 30, to_hour: 10, to_min: 10,
+        monday: true, tuesday: true, wednesday: true, thursday: true,
+        friday: true, saturday: false, sunday: false,
+        vacancy_id: a.id,
+        time_sheet_id: p.id,
+        matter_id: Matter.find_by(name: "5Leng2").id
+      ).save
+      TimeSheetHour.new(
+        from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
@@ -272,21 +319,146 @@ Commission.where.not(id: Commission.first.id).where.not(id: 2).where.not(id: 3).
       ).save
     end
   end
-end
+
+  ###########################################################################
+  # 4. Horarios de muestra turno manana y todas las vacantes aula 4.        #
+  ###########################################################################
+    Vacancy.where(class_room_institute_id: 4).each do |a|
+      Commission.find(5).time_sheets.each do |p|
+        TimeSheetHour.new(
+          from_hour: 8, from_min: 0, to_hour: 9, to_min: 15,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "5Leng2").id
+        ).save
+        TimeSheetHour.new(
+          from_hour: 9, from_min: 30, to_hour: 10, to_min: 10,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "8Hist2").id
+        ).save
+        TimeSheetHour.new(
+          from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "2Matem2").id
+        ).save
+      end
+    end
+  ###########################################################################
+  # 5. Horarios de muestra turno manana y todas las vacantes aula 3.        #
+  ###########################################################################
+    Vacancy.where(class_room_institute_id: 3).each do |a|
+      Commission.find(6).time_sheets.each do |p|
+        TimeSheetHour.new(
+          from_hour: 8, from_min: 0, to_hour: 9, to_min: 15,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "2Matem2").id
+        ).save
+        TimeSheetHour.new(
+          from_hour: 9, from_min: 30, to_hour: 10, to_min: 10,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "5Leng2").id
+        ).save
+        TimeSheetHour.new(
+          from_hour: 10, from_min: 20, to_hour: 12, to_min: 0,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "8Hist2").id
+        ).save
+      end
+    end
+
+  ###########################################################################
+  # 6. Horarios de muestra turno tarde y todas las vacantes aula 3.         #
+  ###########################################################################
+    Vacancy.where(class_room_institute_id: 3).each do |a|
+      Commission.find(7).time_sheets.each do |p|
+        TimeSheetHour.new(
+          from_hour: 13, from_min: 0, to_hour: 14, to_min: 15,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "5Leng2").id
+        ).save
+        TimeSheetHour.new(
+          from_hour: 14, from_min: 20, to_hour: 15, to_min: 45,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "2Matem2").id
+        ).save
+        TimeSheetHour.new(
+          from_hour: 15, from_min: 50, to_hour: 17, to_min: 0,
+          monday: true, tuesday: true, wednesday: true, thursday: true,
+          friday: true, saturday: false, sunday: false,
+          vacancy_id: a.id,
+          time_sheet_id: p.id,
+          matter_id: Matter.find_by(name: "5Leng2").id
+        ).save
+      end
+    end
+
+    ###########################################################################
+    # 7. Horarios de muestra turno tarde y todas las vacantes aula 4.         #
+    ###########################################################################
+      Vacancy.where(class_room_institute_id: 4).each do |a|
+        Commission.find(8).time_sheets.each do |p|
+          TimeSheetHour.new(
+            from_hour: 13, from_min: 0, to_hour: 14, to_min: 15,
+            monday: true, tuesday: true, wednesday: true, thursday: true,
+            friday: true, saturday: false, sunday: false,
+            vacancy_id: a.id,
+            time_sheet_id: p.id,
+            matter_id: Matter.find_by(name: "5Leng2").id
+          ).save
+          TimeSheetHour.new(
+            from_hour: 14, from_min: 20, to_hour: 15, to_min: 45,
+            monday: true, tuesday: true, wednesday: true, thursday: true,
+            friday: true, saturday: false, sunday: false,
+            vacancy_id: a.id,
+            time_sheet_id: p.id,
+            matter_id: Matter.find_by(name: "2Matem2").id
+          ).save
+          TimeSheetHour.new(
+            from_hour: 15, from_min: 50, to_hour: 17, to_min: 0,
+            monday: true, tuesday: true, wednesday: true, thursday: true,
+            friday: true, saturday: false, sunday: false,
+            vacancy_id: a.id,
+            time_sheet_id: p.id,
+            matter_id: Matter.find_by(name: "5Leng2").id
+          ).save
+        end
+      end
 
 ###########################################################################
-# 1 Horarios de muestra turno noche, todos los períodos y todas las       #
-# vacantes.                                                               #
+# 8. Horarios de muestra turno tarde y todas las vacantes aula 1.         #
 ###########################################################################
   Vacancy.where(class_room_institute_id: 1).each do |a|
-    Commission.find(6).time_sheets.each do |p|
+    Commission.find(9).time_sheets.each do |p|
       TimeSheetHour.new(
         from_hour: 17, from_min: 0, to_hour: 22, to_min: 0,
         monday: true, tuesday: true, wednesday: true, thursday: true,
         friday: true, saturday: false, sunday: false,
         vacancy_id: a.id,
         time_sheet_id: p.id,
-        matter_id: Matter.find_by(name: "10Geo2").id
+        matter_id: Matter.find_by(name: "6Leng3").id
       ).save
     end
   end

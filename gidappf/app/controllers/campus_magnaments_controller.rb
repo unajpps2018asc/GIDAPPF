@@ -100,6 +100,7 @@ class CampusMagnamentsController < ApplicationController
       !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? && #"Elección de turno hasta existente"
       profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
         profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
+      Matter.find(profile_key_24.profile.profile_keys.find_by(key: ProfileKey.find(48).key).profile_values.first.value.to_i).trayect.upcase.eql?(trayect.upcase) &&
       selected_period_profile(profile_key_24.profile)
     end
     out
@@ -122,13 +123,7 @@ class CampusMagnamentsController < ApplicationController
   # Devuelve: un array con elementos string reprecentando trayectos. #
   ####################################################################
   def array_all_trayect
-    to_course = []
-    ProfileKey.where.not(profile: Profile.first).find_each do |e|
-      if e.key.eql?(ProfileKey.find(23).key) then # "Se inscribe a cursar:"
-        unless e.profile_values.empty? then to_course << e.profile_values.first.value.upcase end
-      end
-    end
-    to_course.uniq
+    Matter.where(enable: true).pluck(:trayect).uniq
   end
 
   ######################################################################

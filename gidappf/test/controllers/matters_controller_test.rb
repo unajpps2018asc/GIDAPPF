@@ -23,7 +23,7 @@ class MattersControllerTest < ActionDispatch::IntegrationTest
   test "should create matter" do
     sign_in users(:one)
     assert_difference('Matter.count') do
-      post matters_url, params: { matter: { description: @matter.description, enable: @matter.enable, name: @matter.name } }
+      post matters_url, params: { matter: { description: @matter.description, enable: @matter.enable, name: @matter.name, trayect: @matter.trayect } }
     end
 
     assert_redirected_to matter_url(Matter.last)

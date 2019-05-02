@@ -1,5 +1,6 @@
 class MattersController < ApplicationController
   before_action :set_matter, only: [:show, :edit, :update, :destroy]
+  before_action :set_selection_trayect, only: [:new, :edit]
 
   # GET /matters
   # GET /matters.json
@@ -77,6 +78,13 @@ class MattersController < ApplicationController
     end
   end
 
+  def set_selection_trayect
+    @selection_trayect=[
+      ['Primero', "PRIMERO"],['Segundo', "SEGUNDO"],['Tercero', "TERCERO"]
+    ]
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_matter
@@ -86,6 +94,6 @@ class MattersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def matter_params
-      params.require(:matter).permit(:name, :description, :enable)
+      params.require(:matter).permit(:name, :description, :trayect, :enable)
     end
 end

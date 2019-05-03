@@ -24,20 +24,18 @@ docker-compose
 
 PARA SUMARSE AL DESARROLLO DEL PROYECTO, HACER:
 
-$ git clone https://github.com/unajpps2018asc/GIDAPPF.git
+* $ git clone https://github.com/unajpps2018asc/GIDAPPF.git
 
-$ cd GIDAPPF/gidappf
+* $ cd GIDAPPF/gidappf
 
------ Descargar .env dentro de la carpeta GIDAPPF/gidappf descargándolo desde --------
-| https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing |
---------------------------------------------------------------------------------------
+* ----- Descargar .env dentro de la carpeta GIDAPPF/gidappf descargándolo desde --------
+* https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing
 
-$ docker-compose up --build
+* $ docker-compose up --build
 
-LUEGO, EN UNA SEGUNDa TERMINAL:
+* LUEGO, EN UNA SEGUNDa TERMINAL:
 
-$ cd <path>/GIDAPPF/gidappf
-$ docker-compose exec --user "$(id -u):$(id -g)" website rails db:reset
-$ docker-compose exec --user "$(id -u):$(id -g)" website rails db:migrate
+* $ cd <path>/GIDAPPF/gidappf
+* $ docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup
 
-AHORA SE PUEDE VISITAR EL SITIO http://localhost:3000
+* AHORA SE PUEDE VISITAR EL SITIO http://localhost:3000

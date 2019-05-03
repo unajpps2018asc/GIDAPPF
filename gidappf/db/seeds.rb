@@ -191,6 +191,15 @@ ClientSideValidator.create!([
       });"
     },
     {
+      content_type: "GIDAPPF matters",
+      script: "$(document).ready(function() {
+      if( $(event.target).val().match(/^[0-9]+$/) == null ) {
+          $(event.target).val('');
+          $( \"<p class='validation-error'>Number error.</p>\" ).appendTo($(event.target).parent());
+        }
+      });"
+    },
+    {
       content_type: "GIDAPPF words",
       script: "$(document).ready(function() {
         if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
@@ -400,7 +409,7 @@ ProfileKey.create!([
     },{
       key: 'Materias:',#8
       profile_id: 2,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF matters').id
     },{
       key: ProfileKey.find(24).key,#'Elección de turno desde[Hr]:',#9
       profile_id: 2,

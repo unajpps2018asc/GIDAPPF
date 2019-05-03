@@ -1,0 +1,8 @@
+<% unless profile.errors.any? then %>
+  <%= form.fields_for :profile_keys, profile.profile_keys do |nested| %>
+    <%= nested.hidden_field :key, :value => Profile.find(profile.id).profile_keys[nested.index].key %>
+    <%= nested.fields_for :profile_values, profile.profile_keys[nested.index].profile_values do |nested2| %>
+        <%= render "fields_for_profile_values", nested2: nested2, profile_id: profile.id, nested_index: nested.index %>
+      <% end %>
+  <% end %>
+<% end %>

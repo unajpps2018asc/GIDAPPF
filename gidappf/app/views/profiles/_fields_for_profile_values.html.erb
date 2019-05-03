@@ -1,0 +1,10 @@
+<div class="field">
+  <%= nested2.label Profile.find(profile_id).profile_keys[nested_index].key %>
+  <% if Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id then %>
+    <%= nested2.text_field :value, :readonly => true %>
+  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF matters').id then %>
+    <%= nested2.select :value, Matter.where(enable: true).collect { |m| [ m.name, m.id ] }, include_blank: true, onfocusout: ClientSideValidator.find(Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id).script %>
+  <% else %>
+    <%= nested2.text_field :value, onfocusout: ClientSideValidator.find(Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id).script %>
+  <% end %>
+</div>

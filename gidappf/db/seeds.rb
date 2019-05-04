@@ -182,6 +182,15 @@ ClientSideValidator.create!([
       });"
     },
     {
+      content_type: "GIDAPPF matters",
+      script: "$(document).ready(function() {
+      if( $(event.target).val().match(/^[0-9]+$/) == null ) {
+          $(event.target).val('');
+          $( \"<p class='validation-error'>Number error.</p>\" ).appendTo($(event.target).parent());
+        }
+      });"
+    },
+    {
       content_type: "GIDAPPF numbers",
       script: "$(document).ready(function() {
       if( $(event.target).val().match(/^[0-9]+$/) == null ) {
@@ -191,11 +200,11 @@ ClientSideValidator.create!([
       });"
     },
     {
-      content_type: "GIDAPPF matters",
+      content_type: "GIDAPPF trayects",
       script: "$(document).ready(function() {
-      if( $(event.target).val().match(/^[0-9]+$/) == null ) {
+      if( jQuery.inArray( $(event.target).val(), ['PRIMERO', 'SEGUNDO', 'TERCERO'] )  < 0 ) {
           $(event.target).val('');
-          $( \"<p class='validation-error'>Number error.</p>\" ).appendTo($(event.target).parent());
+          $( \"<p class='validation-error'>Choose one of ['PRIMERO', 'SEGUNDO', 'TERCERO']</p>\" ).appendTo($(event.target).parent());
         }
       });"
     },
@@ -305,7 +314,7 @@ ProfileKey.create!([
     },{ #REQUERIDO POR SISTEMA
       key: 'Se inscribe a cursar:',#23
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF trayects').id
     },{ #REQUERIDO POR SISTEMA
       key: 'Elección de turno desde[Hr]:',#24
       profile_id: Profile.first.id,

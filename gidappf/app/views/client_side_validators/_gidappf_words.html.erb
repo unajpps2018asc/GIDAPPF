@@ -1,0 +1,21 @@
+<!--###################################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                           #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática                  #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018          #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                       #-->
+<!--# Tutores:                                                                        #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                             #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                                    #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                       #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                               #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                             #-->
+<!--#Archivo:GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_words.html.erb#-->
+<!--###################################################################################-->
+<%= valuable_gidappf_field.text_field :value,
+  onfocusout:"$(document).ready(function() {
+    if( $(event.target).val().match(/^[a-zA-Z\\s]+$/) == null ) {
+      $(event.target).val('');
+      $( \"<p class='validation-error'>Word error.</p>\" ).appendTo($(event.target).parent());
+    }
+  });"
+%>

@@ -160,60 +160,39 @@ p "[GIDAPPF] Creados #{Document.count} Documentos"
 ClientSideValidator.destroy_all
 ClientSideValidator.create!([
     {
-      content_type: 'GIDAPPF read only',
-      script: ''#REQUERIDO POR SISTEMA
+      content_type: 'GIDAPPF read only',#1
+      script: 'client_side_validators/gidappf_read_onlys'#REQUERIDO POR SISTEMA
     },
     {
-      content_type: "GIDAPPF alphanumerics",
-      script: "$(document).ready(function() {
-      if( $(event.target).val().match(/^[a-zA-Z0-9\\s]+$/) == null ) {
-          $(event.target).val('');
-          $( \"<p class='validation-error'>Alphanumeric error.</p>\" ).appendTo($(event.target).parent());
-        }
-      });"
+      content_type: "GIDAPPF alphanumerics",#2
+      script: 'client_side_validators/gidappf_alphanumerics'
     },
     {
-      content_type: "GIDAPPF dates",
-      script: "$(document).ready(function() {
-      if(Number.isNaN((new Date($(event.target).val())).getTime()) ) {
-          $(event.target).val('');
-          $( \"<p class='validation-error'>Date error.</p>\" ).appendTo($(event.target).parent());
-        }
-      });"
+      content_type: "GIDAPPF dates",#3
+      script: 'client_side_validators/gidappf_dates'
     },
     {
-      content_type: "GIDAPPF matters",
-      script: "$(document).ready(function() {
-      if( $(event.target).val().match(/^[0-9]+$/) == null ) {
-          $(event.target).val('');
-          $( \"<p class='validation-error'>Number error.</p>\" ).appendTo($(event.target).parent());
-        }
-      });"
+      content_type: "GIDAPPF matters",#4
+      script: 'client_side_validators/gidappf_matters'
     },
     {
-      content_type: "GIDAPPF numbers",
-      script: "$(document).ready(function() {
-      if( $(event.target).val().match(/^[0-9]+$/) == null ) {
-          $(event.target).val('');
-          $( \"<p class='validation-error'>Number error.</p>\" ).appendTo($(event.target).parent());
-        }
-      });"
+      content_type: "GIDAPPF numbers",#5
+      script: 'client_side_validators/gidappf_numbers'
     },
     {
-      content_type: "GIDAPPF trayects",
-      script: "$(document).ready(function() {
-      if( jQuery.inArray( $(event.target).val(), ['PRIMERO', 'SEGUNDO', 'TERCERO'] )  < 0 ) {
-          $(event.target).val('');
-          $( \"<p class='validation-error'>Choose one of ['PRIMERO', 'SEGUNDO', 'TERCERO']</p>\" ).appendTo($(event.target).parent());
-        }
-      });"
+      content_type: "GIDAPPF trayects",#6
+      script: 'client_side_validators/gidappf_trayects'
     },
     {
-      content_type: "GIDAPPF words",
+      content_type: "GIDAPPF words",#7
+      script: 'client_side_validators/gidappf_words'
+    },
+    {
+      content_type: "GIDAPPF validator example",#8
       script: "$(document).ready(function() {
         if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
             $(event.target).val('');
-            $( \"<p class='validation-error'>Word error.</p>\" ).appendTo($(event.target).parent());
+            $( \"<p class='validation-error'>Error detected.</p>\" ).appendTo($(event.target).parent());
           }
       });"
     }

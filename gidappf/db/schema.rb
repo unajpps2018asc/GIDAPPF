@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_173534) do
+ActiveRecord::Schema.define(version: 2019_05_06_001557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,10 +36,11 @@ ActiveRecord::Schema.define(version: 2019_04_16_173534) do
   end
 
   create_table "client_side_validators", force: :cascade do |t|
-    t.string "content_type"
-    t.text "script"
+    t.string "content_type", null: false
+    t.text "script", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["content_type"], name: "index_client_side_validators_on_content_type", unique: true
   end
 
   create_table "commissions", force: :cascade do |t|

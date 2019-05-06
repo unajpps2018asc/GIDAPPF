@@ -14,21 +14,9 @@
 <!-- ########################################################################## -->
 <div class="field">
   <%= form.label Profile.find(profile_id).profile_keys[nested_index].key %>
-  <% if Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id then %>
-    <%= render ClientSideValidator.find_by(content_type: 'GIDAPPF read only').script, valuable_gidappf_field: form %>
-  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id then %>
-    <%= render ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').script, valuable_gidappf_field: form %>
-  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF dates').id then %>
-    <%= render ClientSideValidator.find_by(content_type: 'GIDAPPF dates').script, valuable_gidappf_field: form %>
-  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF matters').id then %>
-    <%= render ClientSideValidator.find_by(content_type: 'GIDAPPF matters').script, valuable_gidappf_field: form %>
-  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id then %>
-    <%= render ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').script, valuable_gidappf_field: form %>
-  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF trayects').id then %>
-    <%= render ClientSideValidator.find_by(content_type: 'GIDAPPF trayects').script, valuable_gidappf_field: form %>
-  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id == ClientSideValidator.find_by(content_type: 'GIDAPPF words').id then %>
-    <%= render ClientSideValidator.find_by(content_type: 'GIDAPPF words').script, valuable_gidappf_field: form %>
-  <% elsif Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id > ClientSideValidator.find_by(content_type: 'GIDAPPF words').id then %>
+  <% if Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id > ClientSideValidator.find_by(content_type: 'GIDAPPF words').id then %>
     <%= form.text_field :value, onfocusout: ClientSideValidator.find(Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id).script %>
+  <% else %>
+    <%= render ClientSideValidator.find(Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id).script, valuable_gidappf_field: form %>
   <% end %>
 </div>

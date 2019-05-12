@@ -22,6 +22,12 @@ Además del proyecto de desarrollo de la aplicación web a medida del Plan Fines
 * docker
 * docker-compose
 
+**Ultimas versiones Testeadas de las dependencias indicadas**
+* git version 2.17.1
+* ruby version 2.5.1p57 (2018-03-29 revision 63029)
+* docker version 18.09.2, build 6247962
+* docker-compose version 1.23.1, build b02f1306
+ 
 PARA SUMARSE AL DESARROLLO DEL PROYECTO, HACER:
 ``` [bash]
   $ systemctl start docker (para encender el proceso de docker si no se habilito antes)

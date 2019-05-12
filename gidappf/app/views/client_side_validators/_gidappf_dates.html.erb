@@ -11,24 +11,22 @@
 <!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                             #-->
 <!--#Archivo:GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_dates.html.erb#-->
 <!--###################################################################################-->
-<%= if valuable_gidappf_field.object.value.nil?  then
-    valuable_gidappf_field.date_field :value,
-    onfocusout:
-      "$(document).ready(function() {
-        if(Number.isNaN((new Date($(event.target).val())).getTime()) ) {
-            $(event.target).val('');
-            $( \"<p class='validation-error'>Date error.</p>\" ).appendTo($(event.target).parent());
-          }
-        });"
+
+<!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<% target_reg_exp_strategy = "$(document).ready(function() {
+      if(Number.isNaN((new Date($(event.target).val())).getTime()) ) {
+          $(event.target).val('');
+          $( \"<p class='validation-error'>Date error.</p>\" ).appendTo($(event.target).parent());
+        }
+      });"
+%>
+
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<%=
+  if valuable_gidappf_field.object.value.nil?  then
+    valuable_gidappf_field.date_field :value, onfocusout: target_reg_exp_strategy
   else
-    valuable_gidappf_field.date_field :value,
-      value: valuable_gidappf_field.object.value.to_date,
-      onfocusout:
-        "$(document).ready(function() {
-          if(Number.isNaN((new Date($(event.target).val())).getTime()) ) {
-              $(event.target).val('');
-              $( \"<p class='validation-error'>Date error.</p>\" ).appendTo($(event.target).parent());
-            }
-          });"
+    valuable_gidappf_field.date_field :value, onfocusout: target_reg_exp_strategy,
+      value: valuable_gidappf_field.object.value.to_date
   end
 %>

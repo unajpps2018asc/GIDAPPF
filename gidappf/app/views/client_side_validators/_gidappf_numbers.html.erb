@@ -12,11 +12,16 @@
 <!--# Archivo:                                                                        #-->
 <!--#GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_numbers.html.erb      #-->
 <!--###################################################################################-->
-<%= valuable_gidappf_field.number_field :value,
-  onfocusout:"$(document).ready(function() {
+
+<!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<%
+  target_reg_exp_strategy = "$(document).ready(function() {
     if( $(event.target).val().match(/^[0-9]+$/) == null ) {
       $(event.target).val('');
       $( \"<p class='validation-error'>Number error.</p>\" ).appendTo($(event.target).parent());
     }
   });"
 %>
+
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<%= valuable_gidappf_field.number_field :value, onfocusout: target_reg_exp_strategy %>

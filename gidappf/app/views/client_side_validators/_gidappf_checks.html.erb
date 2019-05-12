@@ -9,18 +9,19 @@
 <!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                       #-->
 <!--#    - TAPTA: Dra. Ferrari, Mariela                                               #-->
 <!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                             #-->
-<!--# Archivo:                                                                        #-->
-<!--#GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_matters.html.erb      #-->
+<!--#Archivo:GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_checks.html.erb#-->
 <!--###################################################################################-->
 
 <!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
-<% target_reg_exp_strategy = "$(document).ready(function() {
-    if( $(event.target).val().match(/^[a-zA-Z0-9\\s]+$/) == null ) {
+<%
+  target_reg_exp_strategy = "$(document).ready(function() {
+    if( $(event.target).val().match(/no|si/i/) == null ) {
       $(event.target).val('');
-      $( \"<p class='validation-error'>Alphanumeric error.</p>\" ).appendTo($(event.target).parent());
+      $( \"<p class='validation-error'>Check error.</p>\" ).appendTo($(event.target).parent());
     }
   });"
 %>
 
-<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
-<%= valuable_gidappf_field.select :value, Matter.where(enable: true).collect { |m| [ m.name, m.id ] }, include_blank: true, onfocusout: target_reg_exp_strategy %>
+<!-- Aplicacion de la estrategia en el formmulario elegido para el campo, aunque es  -->
+<!-- irrelevante en este caso, podria ser util en collection_check_box -->
+<%= valuable_gidappf_field.check_box :value,{ :onfocusout => target_reg_exp_strategy }, "Si", "No" %>

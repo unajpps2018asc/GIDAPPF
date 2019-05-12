@@ -12,11 +12,16 @@
 <!--# Archivo:                                                                        #-->
 <!--#GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_alphanumerics.html.erb#-->
 <!--###################################################################################-->
-<%= valuable_gidappf_field.text_field :value,
-  onfocusout:"$(document).ready(function() {
+
+<!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<%
+  target_reg_exp_strategy = "$(document).ready(function() {
     if( $(event.target).val().match(/^[a-zA-Z0-9\\s]+$/) == null ) {
       $(event.target).val('');
       $( \"<p class='validation-error'>Alphanumeric error.</p>\" ).appendTo($(event.target).parent());
     }
   });"
 %>
+
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<%= valuable_gidappf_field.text_field :value, onfocusout: target_reg_exp_strategy %>

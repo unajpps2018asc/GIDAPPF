@@ -168,27 +168,31 @@ ClientSideValidator.create!([
       script: 'client_side_validators/gidappf_alphanumerics'
     },
     {
-      content_type: "GIDAPPF dates",#3
+      content_type: "GIDAPPF checks",#3
+      script: 'client_side_validators/gidappf_checks'
+    },
+    {
+      content_type: "GIDAPPF dates",#4
       script: 'client_side_validators/gidappf_dates'
     },
     {
-      content_type: "GIDAPPF matters",#4
+      content_type: "GIDAPPF matters",#5
       script: 'client_side_validators/gidappf_matters'
     },
     {
-      content_type: "GIDAPPF numbers",#5
+      content_type: "GIDAPPF numbers",#6
       script: 'client_side_validators/gidappf_numbers'
     },
     {
-      content_type: "GIDAPPF trayects",#6
+      content_type: "GIDAPPF trayects",#7
       script: 'client_side_validators/gidappf_trayects'
     },
     {
-      content_type: "GIDAPPF words",#7
+      content_type: "GIDAPPF words",#8
       script: 'client_side_validators/gidappf_words'
     },
     {
-      content_type: "GIDAPPF validator example",#8
+      content_type: "GIDAPPF validator example",#9
       script: "$(document).ready(function() {
         if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
             $(event.target).val('');
@@ -281,7 +285,7 @@ ProfileKey.create!([
     },{
       key: 'Busca trabajo:',#20
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: '3) Últimos estudios cursados:',#21
       profile_id: Profile.first.id,
@@ -337,27 +341,27 @@ ProfileKey.create!([
     },{
       key: 'Luego de egresar continuaría estudiando:',#34
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de DNI presentada:',#35
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de partida de nacimiento presentada:',#36
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de constancia de CUIL presentada:',#37
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de constancia de estudios previos presentada:',#38
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: '2 Fotos 4x4 precentadas:',#39
       profile_id: Profile.first.id,
-      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Comentarios adicionales:',#40
       profile_id: Profile.first.id,

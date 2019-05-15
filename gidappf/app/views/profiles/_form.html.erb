@@ -9,7 +9,10 @@
       </ul>
     </div>
   <% end %>
-  <div class="field"><%= form.label :name %><%= form.text_field :name, :readonly => true %></div>
+  <div class="field">
+    <% form.hidden_field :name, value: form.object.name %>
+    <p>Profile name: <strong><%= form.object.name  %></strong></p>
+  </div>
   <div class="field"><%= form.label :description %><%= form.text_area :description %></div>
   <div class="field"><%= form.label :valid_to %>
     <%= form.date_field :valid_to, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>

@@ -318,7 +318,12 @@ class ProfilesController < ApplicationController
           if max.client_side_validator_id.nil? then
             max.update(client_side_validator_id: tpk.client_side_validator_id)
           end
-          min.destroy
+          if min.profile_values.first.gidappf_readonly? then
+            max.destroy
+          else
+            min.destroy
+          end
+          # min.destroy
         end
       end
     end

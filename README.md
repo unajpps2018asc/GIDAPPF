@@ -27,7 +27,7 @@ Además del proyecto de desarrollo de la aplicación web a medida del Plan Fines
 * ruby version 2.5.1p57 (2018-03-29 revision 63029)
 * docker version 18.09.2, build 6247962
 * docker-compose version 1.23.1, build b02f1306
- 
+
 PARA SUMARSE AL DESARROLLO DEL PROYECTO, HACER:
 ``` [bash]
   $ systemctl start docker (para encender el proceso de docker si no se habilito antes)
@@ -51,3 +51,9 @@ PARA SUMARSE AL DESARROLLO DEL PROYECTO, HACER:
 ``` [bash]
   $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show
 ```
+
+En el caso en el que en el servidor anfitrión mantenga el servicio 'inode-tools', indicador de eventos de FileSystem los mensajes de este servicio se detendrán con:
+``` [bash]
+  $ sudo killall inotifywait
+```
+No significaria un problema porque es un proceso creado por un script de sincronismo, en todo caso el script volvera a activarlo al reiniciar el sistema.

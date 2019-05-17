@@ -143,19 +143,55 @@ Profile.create!([
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Profile.count} Perfiles"
 
+###########################################################
+# Plantillas de information                               #
+###########################################################
+Information.destroy_all
+Information.create!([
+{
+  title: 'Student absence',
+  summary: 'Un documento de ausencia',
+  grouping: false,
+  enable: true,
+  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+},{
+  title: 'Time sheet hour students list',
+  summary: 'Un listado de horario iniciado',
+  grouping: true,
+  enable: true,
+  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+},{
+  title: 'Time sheet hour list absences',
+  summary: 'Un listado de justificaciones',
+  grouping: true,
+  enable: true,
+  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+},{
+  title: 'Admministrative rules',
+  summary: 'Un listado de límites y tolerancias',
+  grouping: false,
+  enable: true,
+  author: User.find_by(email: 'administrator@gidappf.edu.ar').id
+}
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{Information.count} Informations"
+
 Document.destroy_all
 lock=LockEmail::LIST
 lock.shift
 lock.each_with_index do |e,index|
   Document.create!([
-      {
-        profile_id: index + 1,
-        user_id: User.find_by(email: e ).id
-      }
-    ])
+  {
+      profile_id: Profile.find( index + 1 ).id,
+      information_id: Information.find( index + 1 ).id,
+      user_id: User.find_by( email: e ).id
+  }
+])
 end
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Document.count} Documentos"
+
 
 ClientSideValidator.destroy_all
 ClientSideValidator.create!([
@@ -176,23 +212,27 @@ ClientSideValidator.create!([
       script: 'client_side_validators/gidappf_dates'
     },
     {
-      content_type: "GIDAPPF matters",#5
+      content_type: "GIDAPPF links",#5
+      script: 'client_side_validators/gidappf_links'
+    },
+    {
+      content_type: "GIDAPPF matters",#6
       script: 'client_side_validators/gidappf_matters'
     },
     {
-      content_type: "GIDAPPF numbers",#6
+      content_type: "GIDAPPF numbers",#7
       script: 'client_side_validators/gidappf_numbers'
     },
     {
-      content_type: "GIDAPPF trayects",#7
+      content_type: "GIDAPPF trayects",#8
       script: 'client_side_validators/gidappf_trayects'
     },
     {
-      content_type: "GIDAPPF words",#8
+      content_type: "GIDAPPF words",#9
       script: 'client_side_validators/gidappf_words'
     },
     {
-      content_type: "GIDAPPF validator example",#9
+      content_type: "GIDAPPF validator example",#10
       script: "$(document).ready(function() {
         if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
             $(event.target).val('');
@@ -414,3 +454,70 @@ ProfileKey.create!([
 ])
 
 p "[GIDAPPF] Creados #{ProfileKey.count} claves de perfil"
+
+InfoKey.destroy_all
+InfoKey.create!([#Un documento de ausencia
+{#REQUERIDO POR SISTEMA plantilla de asistencia
+  key: 'Horario:',#1
+  information_id: Information.find_by(title: 'Student absence').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+},{
+  key: 'Justificante:',#2
+  information_id: Information.find_by(title: 'Student absence').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+},{
+  key: 'Justificado:',#3
+  information_id: Information.find_by(title: 'Student absence').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
+},{
+  key: 'Observaciones:',#4
+  information_id: Information.find_by(title: 'Student absence').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+}
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Student absence')).count} campos de plantilla ducumento de ausencia"
+
+InfoKey.create!([# Un listado de horario iniciado generado por el docente
+{#REQUERIDO POR SISTEMA plantilla de asistencia
+  key: 'Legajos:',#1
+  information_id: Information.find_by(title: 'Time sheet hour students list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+},{
+  key: 'Vacantes:',#2
+  information_id: Information.find_by(title: 'Time sheet hour students list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+},{
+  key: 'Presente:',#3
+  information_id: Information.find_by(title: 'Time sheet hour students list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
+  }
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Time sheet hour students list')).count} campos de plantilla listado de horario iniciado"
+
+InfoKey.create!([# Un listado de justificaciones pendientes
+{#REQUERIDO POR SISTEMA plantilla de asistencia
+  key: 'Legajos:',#1
+  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
+},{
+  key: 'Vacantes:',#2
+  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+},{
+  key: 'Justificado:',#3
+  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+},{
+  key: 'edit',#4
+  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
+},{
+  key: 'destroy',#5
+  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
+}
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Time sheet hour list absences')).count} campos de plantilla listado de justificaciones pendientes"

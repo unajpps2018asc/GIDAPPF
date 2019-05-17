@@ -13,6 +13,7 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  resources :information
   resources :matters
   get 'campus_magnaments/set_campus_segmentation'
   get 'campus_magnaments/get_campus_segmentation'

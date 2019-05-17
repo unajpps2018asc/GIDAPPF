@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key: MyString
+  information: one
+  client_side_validator: one
+
+two:
+  key: MyString
+  information: two
+  client_side_validator: two
+
+tree:
+  key: MyString2
+  information: one
+  client_side_validator: two

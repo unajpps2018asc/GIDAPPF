@@ -23,4 +23,10 @@ class Document < ApplicationRecord
   #                         a un perfil                              #
   ####################################################################
   belongs_to :profile
+
+  ####################################################################
+  # Asociación muchos a uno:soporta muchos documentos pertenecientes #
+  #                         a un perfil                              #
+  ####################################################################
+  belongs_to :information
 end

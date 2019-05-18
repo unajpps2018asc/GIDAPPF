@@ -13,3 +13,9 @@
 %>
 
 <h1>Welcome! Now, you can <%= link_to 'Log Out', destroy_user_session_url, method: :delete %></h1>
+
+<% unless @my_profile.nil? then %>
+  <strong><%= link_to 'View your profile', @my_profile %> </strong>
+<% else %>
+  <strong><%= link_to 'Generate profile', new_profile_url %> </strong>
+<% end %>

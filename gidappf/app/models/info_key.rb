@@ -14,7 +14,7 @@ class InfoKey < ApplicationRecord
 
   ##########################account#########################################
   # Configuracion dependencia de atributos:                                #
-  #        Los atributos de ProfileKey dependen de profile_values.         #
+  #        Los atributos de InfoKey dependen de info_values.               #
   ##########################################################################
   belongs_to :client_side_validator, optional: true
   accepts_nested_attributes_for :info_values

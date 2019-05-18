@@ -521,3 +521,55 @@ InfoKey.create!([# Un listado de justificaciones pendientes
 ])
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Time sheet hour list absences')).count} campos de plantilla listado de justificaciones pendientes"
+
+InfoKey.create!([# Un documento de reglas administrativas
+{#REQUERIDO POR SISTEMA plantilla de asistencia
+  key: 'Introducción:',#1
+  information_id: Information.find_by(title: 'Admministrative rules').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
+},{
+  key: 'Minutos tolerados de ausencia injustificada:',#2
+  information_id: Information.find_by(title: 'Admministrative rules').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+},{
+  key: 'Nota de aprobación:',#3
+  information_id: Information.find_by(title: 'Admministrative rules').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+},{
+  key: 'Nota de promoción:',#4
+  information_id: Information.find_by(title: 'Admministrative rules').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
+}
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Admministrative rules')).count} campos de plantilla listado del documento de reglas administrativas"
+
+InfoValue.create!([# Un documento de reglas administrativas
+{#REQUERIDO POR SISTEMA plantilla de asistencia
+  value: "La administración considera que los siguientes items deben ser respetados por toda la comunidad:",
+  info_key: InfoKey.find_by(
+    key: 'Introducción:',
+    information: Information.find_by(title: 'Admministrative rules')
+  )
+},{
+  value: "720",
+  info_key: InfoKey.find_by(
+    key: 'Minutos tolerados de ausencia injustificada:',
+    information: Information.find_by(title: 'Admministrative rules')
+  )
+},{
+  value: "4",
+  info_key: InfoKey.find_by(
+    key: 'Nota de aprobación:',
+    information: Information.find_by(title: 'Admministrative rules')
+  )
+},{
+  value: "7",
+  info_key: InfoKey.find_by(
+    key: 'Nota de promoción:',
+    information: Information.find_by(title: 'Admministrative rules')
+  )
+}
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Admministrative rules')).count} valores del documento de reglas administrativas"

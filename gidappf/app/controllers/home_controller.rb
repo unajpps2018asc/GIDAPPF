@@ -11,6 +11,8 @@
 ###########################################################################
     class HomeController < ApplicationController
         def index
-     
+          if current_user.documents.present? && current_user.documents.first.profile.present?
+            @my_profile=current_user.documents.first.profile
+          end
         end
     end

@@ -41,8 +41,8 @@ class ProfilesController < ApplicationController
             :role_id => rids).pluck(:user_id)
           ).pluck(:profile_id)
         )
-      authorize @profiles
     end
+    authorize @profiles
   end
 
   # GET /profiles/1
@@ -157,7 +157,7 @@ class ProfilesController < ApplicationController
         @profile = Profile.find_by( name: params[:user_dni])
         if @profile.nil? then #crea perfil si no tiene
           @profile=Profile.new( name: make_name(params[:user_dni]), description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
-          if @profile.save && Document.new(profile: Profile.last, user: u).save then
+          if @profile.save && Document.new(profile: Profile.last, user: u, information: Information.find_by(author: User.find_by(email: 'administrator@gidappf.edu.ar'))).save then
             index=User.find_by(email: @@template).documents.first.profile.profile_keys.first.id.to_i
             if @profile.profile_keys.empty? then #copia claves del perfil si no tiene
               User.find_by(email: @@template).documents.first.profile.profile_keys.each do |i|

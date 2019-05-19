@@ -1,10 +1,10 @@
-<%= form_with(model: information, local: true) do |form| %>
-  <% if information.errors.any? %>
+<%= form_with(model: input, local: true) do |form| %>
+  <% if input.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(information.errors.count, "error") %> prohibited this information from being saved:</h2>
+      <h2><%= pluralize(input.errors.count, "error") %> prohibited this input from being saved:</h2>
 
       <ul>
-      <% information.errors.full_messages.each do |message| %>
+      <% input.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -35,6 +35,8 @@
     <%= form.label :author %>
     <%= form.text_field :author %>
   </div>
+
+    <%= render 'fields_for_info_keys', input: input, form: form  %>
 
   <div class="actions">
     <%= form.submit %>

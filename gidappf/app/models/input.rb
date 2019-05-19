@@ -1,16 +1,17 @@
-class Information < ApplicationRecord
+class Input < ApplicationRecord
   ##########################account#####################################
-  # Asociación uno a muchos: soporta que una informacion sea asignada  #
-  #                    muchas veces en distintos documents.            #
-  #                    Si se borra, lo hacen documents.                #
+  # Asociación uno a muchos: soporta que un perfil sea asignado muchas #
+  #                          veces en distintos documents.             #
+  #                          Si se borra, lo hacen documents.          #
   ######################################################################
   has_many :documents, dependent: :destroy
+
   ##########################account#####################################
   # Asociación uno a muchos: soporta que un perfil sea asignado muchas #
   #                          veces en distintos profile_keys.          #
   #                          Si se borra, lo hacen profile_keys.       #
   ######################################################################
-  has_many :info_keys, dependent: :destroy
+  has_many :info_keys, dependent: :nullify
 
   ##########################account#####################################
   # Configuracion dependencia de atributos:                            #

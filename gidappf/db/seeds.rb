@@ -146,8 +146,8 @@ p "[GIDAPPF] Creados #{Profile.count} Perfiles"
 ###########################################################
 # Plantillas de information                               #
 ###########################################################
-Information.destroy_all
-Information.create!([
+Input.destroy_all
+Input.create!([
 {
   title: 'Student absence',
   summary: 'Un documento de ausencia',
@@ -175,7 +175,7 @@ Information.create!([
 }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{Information.count} Informations"
+p "[GIDAPPF] Creados #{Input.count} Inputs"
 
 Document.destroy_all
 lock=LockEmail::LIST
@@ -184,7 +184,7 @@ lock.each_with_index do |e,index|
   Document.create!([
   {
       profile_id: Profile.find( index + 1 ).id,
-      information_id: Information.find( index + 1 ).id,
+      input_id: Input.find( index + 1 ).id,
       user_id: User.find_by( email: e ).id
   }
 ])
@@ -459,117 +459,117 @@ InfoKey.destroy_all
 InfoKey.create!([#Un documento de ausencia
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Horario:',#1
-  information_id: Information.find_by(title: 'Student absence').id,
+  input_id: Input.find_by(title: 'Student absence').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Justificante:',#2
-  information_id: Information.find_by(title: 'Student absence').id,
+  input_id: Input.find_by(title: 'Student absence').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
 },{
   key: 'Justificado:',#3
-  information_id: Information.find_by(title: 'Student absence').id,
+  input_id: Input.find_by(title: 'Student absence').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
 },{
   key: 'Observaciones:',#4
-  information_id: Information.find_by(title: 'Student absence').id,
+  input_id: Input.find_by(title: 'Student absence').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
 }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Student absence')).count} campos de plantilla ducumento de ausencia"
+p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Student absence')).count} campos de plantilla ducumento de ausencia"
 
 InfoKey.create!([# Un listado de horario iniciado generado por el docente
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Legajos:',#1
-  information_id: Information.find_by(title: 'Time sheet hour students list').id,
+  input_id: Input.find_by(title: 'Time sheet hour students list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Vacantes:',#2
-  information_id: Information.find_by(title: 'Time sheet hour students list').id,
+  input_id: Input.find_by(title: 'Time sheet hour students list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Presente:',#3
-  information_id: Information.find_by(title: 'Time sheet hour students list').id,
+  input_id: Input.find_by(title: 'Time sheet hour students list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
   }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Time sheet hour students list')).count} campos de plantilla listado de horario iniciado"
+p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Time sheet hour students list')).count} campos de plantilla listado de horario iniciado"
 
 InfoKey.create!([# Un listado de justificaciones pendientes
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Legajos:',#1
-  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'Vacantes:',#2
-  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Justificado:',#3
-  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'edit',#4
-  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'destroy',#5
-  information_id: Information.find_by(title: 'Time sheet hour list absences').id,
+  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Time sheet hour list absences')).count} campos de plantilla listado de justificaciones pendientes"
+p "[GIDAPPF] Creados #{ InfoKey.where( input: Input.find_by( title: 'Time sheet hour list absences' ) ).count } campos de plantilla listado de justificaciones pendientes"
 
 InfoKey.create!([# Un documento de reglas administrativas
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Introducción:',#1
-  information_id: Information.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Admministrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
 },{
   key: 'Minutos tolerados de ausencia injustificada:',#2
-  information_id: Information.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Admministrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 },{
   key: 'Nota de aprobación:',#3
-  information_id: Information.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Admministrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 },{
   key: 'Nota de promoción:',#4
-  information_id: Information.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Admministrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Admministrative rules')).count} campos de plantilla listado del documento de reglas administrativas"
+p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Admministrative rules')).count} campos de plantilla listado del documento de reglas administrativas"
 
 InfoValue.create!([# Un documento de reglas administrativas
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   value: "La administración considera que los siguientes items deben ser respetados por toda la comunidad:",
   info_key: InfoKey.find_by(
     key: 'Introducción:',
-    information: Information.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Admministrative rules')
   )
 },{
   value: "720",
   info_key: InfoKey.find_by(
     key: 'Minutos tolerados de ausencia injustificada:',
-    information: Information.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Admministrative rules')
   )
 },{
   value: "4",
   info_key: InfoKey.find_by(
     key: 'Nota de aprobación:',
-    information: Information.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Admministrative rules')
   )
 },{
   value: "7",
   info_key: InfoKey.find_by(
     key: 'Nota de promoción:',
-    information: Information.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Admministrative rules')
   )
 }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{InfoKey.where(information: Information.find_by(title: 'Admministrative rules')).count} valores del documento de reglas administrativas"
+p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Admministrative rules')).count} valores del documento de reglas administrativas"

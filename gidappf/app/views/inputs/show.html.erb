@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @input.title %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @input.summary %>
+</p>
+
+<p>
+  <strong>Grouping:</strong>
+  <%= @input.grouping %>
+</p>
+
+<p>
+  <strong>Enable:</strong>
+  <%= @input.enable %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @input.author %>
+</p>
+
+<%= link_to 'Edit', edit_input_path(@input) %> |
+<%= link_to 'Back', inputs_path %>

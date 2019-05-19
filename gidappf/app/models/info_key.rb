@@ -3,7 +3,7 @@ class InfoKey < ApplicationRecord
   # Asociación muchos a uno: Soporta muchos InfoKey pertenecientes a una      #
   #     Information, opcional para que funcione accepts_nested_attributes_for.#
   #############################################################################
-  belongs_to :information, optional: true
+  belongs_to :input, optional: true
 
   ##########################account#########################################
   # Asociación uno a muchos: soporta que un InfoKey sea asignado muchas    #

@@ -490,7 +490,7 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p10, user: u10, information: Information.find_by(title: 'Admministrative rules')).save
+  Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
 end
 
 ###########################################################################
@@ -519,7 +519,7 @@ end
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p10, user: u10, information: Information.find_by(title: 'Admministrative rules')).save
+  Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
 end
 
 ###########################################################################
@@ -548,7 +548,7 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5, information: Information.find_by(title: 'Admministrative rules')).save
+  Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
 end
 
 #######################################################################################
@@ -577,7 +577,7 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5, information: Information.find_by(title: 'Admministrative rules')).save
+  Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
 end
 
 ###########################################################################
@@ -606,7 +606,7 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5, information: Information.find_by(title: 'Admministrative rules')).save
+  Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
 end
 
 ###########################################################################
@@ -643,7 +643,7 @@ Matter.all.each_with_index do |matter, index|
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p2, user: u2, information: Information.find_by(title: 'Admministrative rules')).save
+  Document.new(profile: p2, user: u2, input: Input.find_by(title: 'Admministrative rules')).save
 end
 
 p "[GIDAPPF] Creados #{User.count} usuarios de muestra"

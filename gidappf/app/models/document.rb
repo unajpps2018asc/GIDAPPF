@@ -28,5 +28,5 @@ class Document < ApplicationRecord
   # Asociación muchos a uno:soporta muchos documentos pertenecientes #
   #                         a un perfil                              #
   ####################################################################
-  belongs_to :information
+  belongs_to :input
 end

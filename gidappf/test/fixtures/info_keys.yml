@@ -2,15 +2,15 @@
 
 one:
   key: MyString
-  information: one
+  input: one
   client_side_validator: one
 
 two:
   key: MyString
-  information: two
+  input: two
   client_side_validator: two
 
 tree:
   key: MyString2
-  information: one
+  input: one
   client_side_validator: two

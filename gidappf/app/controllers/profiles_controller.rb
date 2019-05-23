@@ -157,17 +157,9 @@ class ProfilesController < ApplicationController
         @profile = Profile.find_by( name: params[:user_dni])
         if @profile.nil? then #crea perfil si no tiene
           @profile=Profile.new( name: make_name(params[:user_dni]), description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
-          if @profile.save && Document.new(profile: Profile.last, user: u, information: Information.find_by(author: User.find_by(email: 'administrator@gidappf.edu.ar'))).save then
-            index=User.find_by(email: @@template).documents.first.profile.profile_keys.first.id.to_i
-            if @profile.profile_keys.empty? then #copia claves del perfil si no tiene
-              User.find_by(email: @@template).documents.first.profile.profile_keys.each do |i|
-                unless i.key.eql?(User.find_by(email: @@template).documents.first.profile.profile_keys.find(index+2).key) then
-                  @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
-                else #copia el valor del dni si es la clave 3 de la plantilla
-                  @profile.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => params[:user_dni]).save
-                end
-              end
-            end
+          if @profile.save && Document.new(profile: Profile.last, user: u, input: Input.find_by(author: User.find_by(email: 'administrator@gidappf.edu.ar'))).save then
+            #Las claves (ProfileKey) del perfil se copian de la plantilla. #
+            @profile.copy_template(@@template,params[:user_dni])
           end
         end
         redirect_to edit_profile_path(@profile) #redirige al rellenado de valores

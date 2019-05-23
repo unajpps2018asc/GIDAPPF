@@ -1,29 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @input.title %>
-</p>
+<p>Title:<strong><%= @input.title %></strong></p>
 
-<p>
-  <strong>Summary:</strong>
-  <%= @input.summary %>
-</p>
+<p>Summary:<strong><%= @input.summary %></strong></p>
 
-<p>
-  <strong>Grouping:</strong>
-  <%= @input.grouping %>
-</p>
+<p>Enable:<strong><%= @input.enable %></strong></p>
 
-<p>
-  <strong>Enable:</strong>
-  <%= @input.enable %>
-</p>
+<p>Author:<strong><%= @input.author %></strong></p>
 
-<p>
-  <strong>Author:</strong>
-  <%= @input.author %>
-</p>
-
+<% unless @input.grouping? %>
+  <% @input.info_keys.each do |s| %>
+    <p><%= s.key %>
+    <% s.info_values.each do |e| %>
+      <strong><span><%= e.value %></span></strong>
+    <% end %></p>
+  <% end %>
+<% else %>
+  <table>
+    <thead>
+       <tr>
+          <% @input.info_keys.each do |s| %>
+            <th><%= s.key %></th>
+          <% end %>
+       </tr>
+    </thead>
+    <tbody remote="true">
+      <tr>
+        <% @input.info_keys.each do |s| %>
+          <td>
+            <ul style="list-style: none;" >
+              <% s.info_values.each do |e| %>
+                <li><%= e.value %></li>
+              <% end %>
+            </ul>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
 <%= link_to 'Edit', edit_input_path(@input) %> |
 <%= link_to 'Back', inputs_path %>

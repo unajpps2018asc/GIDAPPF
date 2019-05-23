@@ -22,21 +22,21 @@
   </div>
 
   <div class="field">
-    <%= form.label :grouping %>
-    <%= form.check_box :grouping %>
-  </div>
-
-  <div class="field">
     <%= form.label :enable %>
     <%= form.check_box :enable %>
   </div>
+
+  <%= form.hidden_field :grouping %>
 
   <div class="field">
     <%= form.label :author %>
     <%= form.text_field :author %>
   </div>
-
+  <% if form.object.grouping? %>
+    <%= render 'table_for_info_keys', input: input, form: form  %>
+  <% else %>
     <%= render 'fields_for_info_keys', input: input, form: form  %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

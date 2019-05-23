@@ -1,0 +1,8 @@
+<% unless input.errors.any? then %>
+  <%= form.fields_for :info_keys, input.info_keys do |nested| %>
+    <%= nested.hidden_field :key, :value => input.info_keys[nested.index].key %>
+    <%= nested.fields_for :info_values, input.info_keys[nested.index].info_values do |nested2| %>
+        <%= render "fields_for_info_values", form: nested2, input_id: input.id, nested_index: nested.index %>
+      <% end %>
+  <% end %>
+<% end %>

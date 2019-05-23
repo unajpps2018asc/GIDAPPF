@@ -544,8 +544,13 @@ InfoKey.create!([# Un documento de reglas administrativas
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Admministrative rules')).count} campos de plantilla listado del documento de reglas administrativas"
 
+#########################################################################################
+#REQUERIDO POR SISTEMA documento 'Admministrative rules'                                #
+# Cualquier perfil obligatoriamente tiene asociado este documento sin restricciones de  #
+# lectura. Los valores son referencias constantes para calculos estadisticos.           #
+#########################################################################################
 InfoValue.create!([# Un documento de reglas administrativas
-{#REQUERIDO POR SISTEMA plantilla de asistencia
+{
   value: "La administración considera que los siguientes items deben ser respetados por toda la comunidad:",
   info_key: InfoKey.find_by(
     key: 'Introducción:',

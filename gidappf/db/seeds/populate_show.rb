@@ -472,7 +472,7 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
   u10.save
   Usercommissionrole.new(
     role_id: Role.find_by(level: 10, enabled: false).id,
-    user_id: u10.id, commission_id: Commission.first.id
+    user_id: u10.id, commission_id: 2
   ).save
   p10=Profile.new( name: "#{Profile.count+1}/#{u+1000000}", description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
   User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
@@ -647,3 +647,28 @@ Matter.all.each_with_index do |matter, index|
 end
 
 p "[GIDAPPF] Creados #{User.count} usuarios de muestra"
+
+#########################################################################################
+#REQUERIDO POR SISTEMA documento 'Admministrative rules'                                #
+# Cualquier perfil obligatoriamente tiene asociado este documento sin restricciones de  #
+# lectura. Los valores son referencias constantes para calculos estadisticos.           #
+#########################################################################################
+User.find_by(email: "docente35@gidappf.edu.ar").usercommissionroles.first.update(commission_id: 2)
+in1=Input.new(
+  title: 'Time sheet hour students list',
+  summary: 'Un listado de horario iniciado',
+  grouping: true,
+  enable: true,
+  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+)
+Input.where(title: 'Time sheet hour students list').first.info_keys.each do |i|
+  s=nil
+  build=in1.info_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id)
+  s=build.info_values.build(:value => "not empty")
+  s.save
+end
+Document.new(
+  profile: User.find_by(email: "docente35@gidappf.edu.ar").documents.first.profile,
+  user: User.find_by(email: "docente35@gidappf.edu.ar"),
+  input: Input.where(title: 'Time sheet hour students list').last
+).save

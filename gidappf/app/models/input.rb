@@ -1,3 +1,5 @@
+require 'gidappf_templates_tools'
+
 class Input < ApplicationRecord
   ##########################account#####################################
   # Asociación uno a muchos: soporta que un input sea asignado muchas  #
@@ -36,4 +38,41 @@ class Input < ApplicationRecord
       end
     end
   end
+
+  #########################################################################################
+  # Método privado: implementa inicialización de la variable estática @@template.         #
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+  #           4) Existencia del arreglo estático LockEmail::LIST.                         #
+  # Devolución: Rol para asociarlo al nuevo perfil.                                       #
+  #########################################################################################
+    def template_to_merge
+      out=Input.find_by(title: 'Admministrative rules').id
+      t1=self.info_keys.pluck(:id)
+      templates=get_templates(Input.all)
+      templates.each do |t|
+        if GidappfTemplatesTools.compare_templates_do(t1, InfoKey.where(input: t).pluck(:id)) then
+          out = t.id
+        end
+      end
+      out
+    end
+
+  #####################################################################################
+  # Método privado: implementa filtrado de documentos que separa a las plantillas.    #
+  # Prerequisitos:                                                                    #
+  #           1) Modelo de datos inicializado.                                        #
+  #           2) Asociacion un Informmation a muchos InfoKey registrada en el modelo. #
+  #           3) Asociacion un InfoKey a muchos InfoValue registrada en el modelo.    #
+  # Devolución: ActiveQuery con todos los docummentos vacios.                         #
+  #####################################################################################
+    def get_templates(inputs)
+      out=inputs.where(
+        id: (InfoKey.all-InfoKey.where(id: InfoValue.pluck(:info_key_id))).pluck(:input_id).uniq
+      )
+      out
+    end
+
 end

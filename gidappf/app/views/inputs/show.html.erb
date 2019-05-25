@@ -28,11 +28,9 @@
       <tr>
         <% @input.info_keys.each do |s| %>
           <td>
-            <ul style="list-style: none;" >
-              <% s.info_values.each do |e| %>
-                <li><%= e.value %></li>
-              <% end %>
-            </ul>
+            <% s.info_values.each do |e| %>
+              <p><%= e.value %></p>
+            <% end %>
           </td>
         <% end %>
       </tr>

@@ -1,3 +1,4 @@
+require 'gidappf_templates_tools'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -57,6 +58,74 @@ class Profile < ApplicationRecord
       end
     end
   end
+
+  #########################################################################################
+  # Método privado: implementa inicialización de la variable estática @@template.         #
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+  #           4) Existencia del arreglo estático LockEmail::LIST.                         #
+  # Devolución: Rol para asociarlo al nuevo perfil.                                       #
+  #########################################################################################
+    def template_to_merge
+      out=''
+      profile=self.profile_keys.pluck(:key)
+      if GidappfTemplatesTools.compare_templates_do(profile, Profile.find(LockEmail::LIST.index(LockEmail::LIST[1])).profile_keys.pluck(:key)) then
+        out = LockEmail::LIST[1];
+      elsif GidappfTemplatesTools.compare_templates_do(profile, Profile.find(LockEmail::LIST.index(LockEmail::LIST[2])).profile_keys.pluck(:key)) then
+        out = LockEmail::LIST[2];
+      end
+      out
+    end
+
+  #########################################################################################
+  # Método privado: implementa merge para profile_value de cada profile_key.              #
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+  # Devolución: mantiene un único profile_value actualizado por cada profile_key.         #
+  #########################################################################################
+    def merge_each_value
+      self.profile_keys.each do |k|
+        if k.profile_values.count == 2 then
+          max=self.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.maximum('created_at'))
+          min=self.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.minimum('created_at'))
+          if max.value.empty? && !min.value.empty? then max.update(value: min.value) end
+          min.destroy
+        end
+      end
+    end
+
+    #########################################################################################
+    # Método privado: implementa merge para profile_key del @profile seleccionado.          #
+    # Prerequisitos:                                                                        #
+    #           1) Modelo de datos inicializado.                                            #
+    #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+    #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+    #           4) Existencia del arreglo estático LockEmail::LIST.                         #
+    #           5) Existencia de la variable de clase @@template inicializada.              #
+    # Devolución: mantiene los elementos de profile_keys equivalente al de @@templale.      #
+    #########################################################################################
+    def merge_each_key(template)
+      User.find_by(email: template).documents.first.profile.profile_keys.each do |tpk|
+        if self.profile_keys.where(key: tpk.key).count == 2 then
+          keys=self.profile_keys.where(key: tpk.key)
+          max=keys.find_by(key: tpk.key,created_at: keys.maximum('created_at'))
+          min=keys.find_by(key: tpk.key,created_at: keys.minimum('created_at'))
+          if max.client_side_validator_id.nil? then
+            max.update(client_side_validator_id: tpk.client_side_validator_id)
+          end
+          if min.profile_values.first.gidappf_readonly? then
+            max.destroy
+          else
+            min.destroy
+          end
+        end
+      end
+    end
+
 
   private
   #######################################################################

@@ -649,26 +649,42 @@ end
 p "[GIDAPPF] Creados #{User.count} usuarios de muestra"
 
 #########################################################################################
-#REQUERIDO POR SISTEMA documento 'Admministrative rules'                                #
+# Documentos 'Time sheet hour students list'                                            #
 # Cualquier perfil obligatoriamente tiene asociado este documento sin restricciones de  #
 # lectura. Los valores son referencias constantes para calculos estadisticos.           #
 #########################################################################################
 User.find_by(email: "docente35@gidappf.edu.ar").usercommissionroles.first.update(commission_id: 2)
-in1=Input.new(
-  title: 'Time sheet hour students list',
-  summary: 'Un listado de horario iniciado',
-  grouping: true,
-  enable: true,
-  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
-)
-Input.where(title: 'Time sheet hour students list').first.info_keys.each do |i|
-  s=nil
-  build=in1.info_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id)
-  s=build.info_values.build(:value => "not empty")
-  s.save
+
+Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
+  last.time_sheet_hours.pluck(:from_hour,:from_min, :to_hour,:to_min).uniq.each do |hour|
+    in_each_hour=Input.new(
+      title: 'Time sheet hour students list',
+      summary: 'Un listado de horario iniciado',
+      grouping: true,
+      enable: true,
+      author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+    )
+    #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
+    t=Input.where(title: 'Time sheet hour students list').first.info_keys
+    leg=in_each_hour.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
+    vac=in_each_hour.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
+    pr=in_each_hour.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
+    time_sheet_hour = Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
+      last.time_sheet_hours.find_by(from_hour: hour[0],from_min: hour[1], to_hour: hour[2],to_min: hour[3])
+    Profile.where(
+      id: Document.where(user_id: User.where(id: Commission.find(2).usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
+    ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each_with_index do |p, index|
+      leg.info_values.build(:value => p.id.to_s)
+      vac.info_values.build(:value => index.to_s)
+      pr.info_values.build(:value => "link")
+    end
+    leg.save
+    vac.save
+    pr.save
+    Document.new(
+      profile: User.find_by(email: "docent@gidappf.edu.ar").documents.first.profile,
+      user: User.find_by(email: "docent@gidappf.edu.ar"),
+      input: in_each_hour
+    ).save
+    in_each_hour.update(summary: "Materia:#{time_sheet_hour.matter.name}.")
 end
-Document.new(
-  profile: User.find_by(email: "docente35@gidappf.edu.ar").documents.first.profile,
-  user: User.find_by(email: "docente35@gidappf.edu.ar"),
-  input: Input.where(title: 'Time sheet hour students list').last
-).save

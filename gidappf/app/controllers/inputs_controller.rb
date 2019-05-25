@@ -125,44 +125,8 @@ class InputsController < ApplicationController
   ########################################################################################
     def merge_info_keys
       merge_each_value
-      template_of_merge
+      @@template=@input.template_to_merge
       merge_each_key
-    end
-  #########################################################################################
-  # Método privado: implementa inicialización de la variable estática @@template.         #
-  # Prerequisitos:                                                                        #
-  #           1) Modelo de datos inicializado.                                            #
-  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
-  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
-  #           4) Existencia del arreglo estático LockEmail::LIST.                         #
-  # Devolución: Rol para asociarlo al nuevo perfil.                                       #
-  #########################################################################################
-    def template_of_merge
-      @@template=Input.find_by(title: 'Admministrative rules').id
-      profile=@input.info_keys.pluck(:id)
-      templates=get_templates(Input.all)
-      templates.each do |t|
-        if compare_templates_of_merge(profile, InfoKey.where(input: t).pluck(:id)) then
-          @@template = t.id
-        end
-      end
-    end
-
-  #########################################################################################
-  # Método privado: implementa comparación entre arrays para saber si todos los elementos #
-  #                 de list están en reference.                                           #
-  # Prerequisitos:                                                                        #
-  #           1) reference not null.                                                      #
-  # Devolución: True si cada elemento de list está en reference.                          #
-  #########################################################################################
-    def compare_templates_of_merge(list, reference)
-      out = list.count >= reference.count
-      if out then
-        list.each do |e|
-          unless reference.include?(e) then out=false end
-        end
-      end
-      out
     end
 
   #########################################################################################

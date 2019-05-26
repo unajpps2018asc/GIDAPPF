@@ -1,5 +1,6 @@
 class InputsController < ApplicationController
   before_action :set_input, only: [:show, :edit, :update, :destroy]
+  after_action :merge_info_keys, only: [:update]
 
   # GET /inputs
   # GET /inputs.json
@@ -51,7 +52,6 @@ class InputsController < ApplicationController
   def update
     respond_to do |format|
       if @input.update(input_params)
-        merge_info_keys
         format.html { redirect_to @input, notice: 'Input was successfully updated.' }
         format.json { render :show, status: :ok, location: @input }
       else
@@ -84,6 +84,7 @@ class InputsController < ApplicationController
           :info_values_attributes => [:value]
           ])
     end
+
   #####################################################################################
   # Método privado: implementa filtrado de plantillas que separa a los documentos.    #
   # Prerequisitos:                                                                    #
@@ -99,6 +100,7 @@ class InputsController < ApplicationController
         ).pluck(:input_id).uniq
       )
     end
+
   #####################################################################################
   # Método privado: implementa filtrado de documentos que separa a las plantillas.    #
   # Prerequisitos:                                                                    #
@@ -113,6 +115,7 @@ class InputsController < ApplicationController
       )
       out
     end
+
   ########################################################################################
   # Método privado: implementa estrategia de edición de nested atributos.                #
   # Prerequisitos:                                                                       #
@@ -124,55 +127,11 @@ class InputsController < ApplicationController
   #             Descarta valores no inicializados.                                       #
   ########################################################################################
     def merge_info_keys
-      merge_each_value
+      @input.merge_each_value
       @@template=@input.template_to_merge
-      merge_each_key
-    end
-
-  #########################################################################################
-  # Método privado: implementa merge para profile_value de cada profile_key.              #
-  # Prerequisitos:                                                                        #
-  #           1) Modelo de datos inicializado.                                            #
-  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
-  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
-  # Devolución: mantiene un único profile_value actualizado por cada profile_key.         #
-  #########################################################################################
-    def merge_each_value
-      @input.info_keys.each do |k|
-        if k.info_values.count == 2 then
-          max=@input.info_keys.find(k.id).info_values.find_by(created_at: k.info_values.maximum('created_at'))
-          min=@input.info_keys.find(k.id).info_values.find_by(created_at: k.info_values.minimum('created_at'))
-          if max.value.empty? && !min.value.empty? then max.update(value: min.value) end
-          min.destroy
-        end
-      end
-    end
-
-  #########################################################################################
-  # Método privado: implementa merge para profile_key del @profile seleccionado.          #
-  # Prerequisitos:                                                                        #
-  #           1) Modelo de datos inicializado.                                            #
-  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
-  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
-  #           4) Existencia del arreglo estático LockEmail::LIST.                         #
-  #           5) Existencia de la variable de clase @@template inicializada.              #
-  # Devolución: mantiene los elementos de profile_keys equivalente al de @@templale.      #
-  #########################################################################################
-    def merge_each_key
-      Input.find(@@template).info_keys.each do |tik|
-        if @input.info_keys.where(key: tik.key).count == 2 then
-          keys=@input.info_keys.where(key: tik.key)
-          max=keys.find_by(key: tik.key,created_at: keys.maximum('created_at'))
-          min=keys.find_by(key: tik.key,created_at: keys.minimum('created_at'))
-          if max.client_side_validator_id.nil? then
-            max.update(client_side_validator_id: tik.client_side_validator_id)
-          end
-          if min.info_values.first.gidappf_readonly? then
-            max.destroy
-          else
-            min.destroy
-          end
-        end
+      @input.merge_each_key(@@template)
+      if @input.title.eql?('Time sheet hour students list') then
+        @input.present_each_vacancy
       end
     end
 

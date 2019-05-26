@@ -10,7 +10,7 @@ class InfoKey < ApplicationRecord
   #                          veces en distintos info_values.               #
   #                          Si se borra, se anulan en info_values.        #
   ##########################################################################
-  has_many :info_values, dependent: :nullify
+  has_many :info_values, dependent: :destroy
 
   ##########################account#########################################
   # Configuracion dependencia de atributos:                                #

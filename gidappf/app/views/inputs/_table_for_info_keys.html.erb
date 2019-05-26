@@ -1,8 +1,23 @@
 <% unless input.errors.any? then %>
-  <%= form.fields_for :info_keys, input.info_keys do |nested| %>
-    <%= nested.hidden_field :key, :value => input.info_keys[nested.index].key %>
-    <%= nested.fields_for :info_values, input.info_keys[nested.index].info_values do |nested2| %>
-        <%= render "fields_for_info_values", form: nested2, input_id: input.id, nested_index: nested.index %>
-      <% end %>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <% input.info_keys.each do |s| %>
+          <th><%= s.key.gsub ':','s' %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody remote="true">
+      <tr>
+        <%= form.fields_for :info_keys, input.info_keys do |nested| %>
+          <%= nested.hidden_field :key, :value => input.info_keys[nested.index].key %>
+            <td>
+              <%= nested.fields_for :info_values, input.info_keys[nested.index].info_values do |nested2| %>
+                <p><%= render "fields_for_info_values", form: nested2, input_id: input.id, nested_index: nested.index %></p>
+              <% end %>
+            </td>
+          <% end %>
+      </tr>
+    </tbody>
+  </table>
 <% end %>

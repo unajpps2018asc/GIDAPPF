@@ -480,11 +480,11 @@ p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Student absenc
 
 InfoKey.create!([# Un listado de horario iniciado generado por el docente
 {#REQUERIDO POR SISTEMA plantilla de asistencia
-  key: 'Legajos:',#1
+  key: 'Legajo:',#1
   input_id: Input.find_by(title: 'Time sheet hour students list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
-  key: 'Vacantes:',#2
+  key: 'Vacante:',#2
   input_id: Input.find_by(title: 'Time sheet hour students list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{

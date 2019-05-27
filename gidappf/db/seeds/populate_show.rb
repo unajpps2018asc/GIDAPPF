@@ -674,7 +674,7 @@ Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, ena
     Profile.where(
       id: Document.where(user_id: User.where(id: Commission.find(2).usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
     ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each do |p|
-      leg.info_values.build(:value => p.id)
+      leg.info_values.build(:value => p.id )
       vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id)
       pr.info_values.build(:value => "link")
     end

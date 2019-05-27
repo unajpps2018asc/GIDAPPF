@@ -105,7 +105,7 @@ class InputsController < ApplicationController
   # Método privado: implementa filtrado de documentos que separa a las plantillas.    #
   # Prerequisitos:                                                                    #
   #           1) Modelo de datos inicializado.                                        #
-  #           2) Asociacion un Informmation a muchos InfoKey registrada en el modelo. #
+  #           2) Asociacion un Input a muchos InfoKey registrada en el modelo.        #
   #           3) Asociacion un InfoKey a muchos InfoValue registrada en el modelo.    #
   # Devolución: ActiveQuery con todos los docummentos vacios.                         #
   #####################################################################################
@@ -116,16 +116,16 @@ class InputsController < ApplicationController
       out
     end
 
-  ########################################################################################
-  # Método privado: implementa estrategia de edición de nested atributos.                #
-  # Prerequisitos:                                                                       #
-  #           1) Modelo de datos inicializado.                                           #
-  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.      #
-  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo. #
-  #           4) Existencia del arreglo estático LockEmail::LIST.                        #
-  # Devolución: Perfil seleccionado en @profile asociado a las claves mas recientes.     #
-  #             Descarta valores no inicializados.                                       #
-  ########################################################################################
+  #################################################################################
+  # Método privado: implementa estrategia de edición de nested atributos.         #
+  # Prerequisitos:                                                                #
+  #           1) Modelo de datos inicializado.                                    #
+  #           2) Asociacion un Input a muchos InfoKey registrada en el modelo.    #
+  #           3) Asociacion un InfoKey a muchos InfoValue registrada en el modelo.#
+  #           4) Existencia del arreglo estático LockEmail::LIST.                 #
+  # Devolución: Input seleccionado en @input asociado a las claves mas recientes. #
+  #             Descarta valores no inicializados.                                #
+  #################################################################################
     def merge_info_keys
       @input.merge_each_value
       @@template=@input.template_to_merge

@@ -31,13 +31,13 @@ class Input < ApplicationRecord
   #           6) Existencia de la plantilla del perfil en Input.find(template).     #
   # Devolución: Las claves (InfoKey) de la plantilla input se copian en este Input. #
   ###################################################################################
-  def copy_template(template)
-    if self.info_keys.empty? then #copia claves si no tiene
-      Input.find(template).info_keys.each do |i|
-        self.info_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).info_values.build(:value => nil).save
-      end
-    end
-  end
+  # def copy_template(template)
+  #   if self.info_keys.empty? then #copia claves si no tiene
+  #     Input.find(template).info_keys.each do |i|
+  #       self.info_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).info_values.build(:value => nil).save
+  #     end
+  #   end
+  # end
 
   #########################################################################################
   # Método privado: implementa inicialización de la variable estática @@template.         #
@@ -49,7 +49,7 @@ class Input < ApplicationRecord
   # Devolución: Rol para asociarlo al nuevo perfil.                                       #
   #########################################################################################
     def template_to_merge
-      out=Input.find_by(title: 'Admministrative rules').id
+      out=Input.find_by(title: 'Administrative rules').id
       t1=self.info_keys.pluck(:key)#array de info_keys
       templates=get_templates(Input.all)
       templates.each do |t|
@@ -105,15 +105,19 @@ class Input < ApplicationRecord
   # Devolución: mantiene los elementos de info_keys equivalente al de @@templale.  #
   ##################################################################################
     def merge_each_key(template)
-      Input.find(template.to_i).info_keys.each do |tik|
+      in1=Input.find(template.to_i)
+      if !self.grouping.eql?(in1.grouping?) then self.update(grouping: in1.grouping?) end
+      in1.info_keys.each do |tik|
         if self.info_keys.where(key: tik.key).count == 2 then
           keys=self.info_keys.where(key: tik.key)
           max=keys.find_by(key: tik.key,created_at: keys.maximum('created_at'))
           min=keys.find_by(key: tik.key,created_at: keys.minimum('created_at'))
-          if max.client_side_validator_id.nil? && !min.info_values.first.gidappf_readonly? then
+          read_only_or_link=ClientSideValidator.where(content_type: "GIDAPPF links").
+            or(ClientSideValidator.where(content_type: "GIDAPPF read only")).include?(min.client_side_validator)
+          if max.client_side_validator_id.nil? && !read_only_or_link then
             max.update(client_side_validator_id: tik.client_side_validator_id)
             min.destroy
-          elsif min.info_values.first.gidappf_readonly? then
+          elsif read_only_or_link then
             max.destroy
           end
         end

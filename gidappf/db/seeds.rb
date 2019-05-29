@@ -167,7 +167,7 @@ Input.create!([
   enable: true,
   author: User.find_by(email: 'secretary@gidappf.edu.ar').id
 },{
-  title: 'Admministrative rules',
+  title: 'Administrative rules',
   summary: 'Un listado de límites y tolerancias',
   grouping: false,
   enable: true,
@@ -482,7 +482,7 @@ InfoKey.create!([# Un listado de horario iniciado generado por el docente
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Legajo:',#1
   input_id: Input.find_by(title: 'Time sheet hour students list').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'Vacante:',#2
   input_id: Input.find_by(title: 'Time sheet hour students list').id,
@@ -525,19 +525,19 @@ p "[GIDAPPF] Creados #{ InfoKey.where( input: Input.find_by( title: 'Time sheet 
 InfoKey.create!([# Un documento de reglas administrativas
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Introducción:',#1
-  input_id: Input.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Administrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
 },{
   key: 'Minutos tolerados de ausencia injustificada:',#2
-  input_id: Input.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Administrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 },{
   key: 'Nota de aprobación:',#3
-  input_id: Input.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Administrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 },{
   key: 'Nota de promoción:',#4
-  input_id: Input.find_by(title: 'Admministrative rules').id,
+  input_id: Input.find_by(title: 'Administrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 }
 ])
@@ -554,27 +554,27 @@ InfoValue.create!([# Un documento de reglas administrativas
   value: "La administración considera que los siguientes items deben ser respetados por toda la comunidad:",
   info_key: InfoKey.find_by(
     key: 'Introducción:',
-    input: Input.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Administrative rules')
   )
 },{
   value: "720",
   info_key: InfoKey.find_by(
     key: 'Minutos tolerados de ausencia injustificada:',
-    input: Input.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Administrative rules')
   )
 },{
   value: "4",
   info_key: InfoKey.find_by(
     key: 'Nota de aprobación:',
-    input: Input.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Administrative rules')
   )
 },{
   value: "7",
   info_key: InfoKey.find_by(
     key: 'Nota de promoción:',
-    input: Input.find_by(title: 'Admministrative rules')
+    input: Input.find_by(title: 'Administrative rules')
   )
 }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Admministrative rules')).count} valores del documento de reglas administrativas"
+p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Administrative rules')).count} valores del documento de reglas administrativas"

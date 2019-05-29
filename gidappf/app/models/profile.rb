@@ -98,29 +98,29 @@ class Profile < ApplicationRecord
       end
     end
 
-    #########################################################################################
-    # Método privado: implementa merge para profile_key del @profile seleccionado.          #
-    # Prerequisitos:                                                                        #
-    #           1) Modelo de datos inicializado.                                            #
-    #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
-    #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
-    #           4) Existencia del arreglo estático LockEmail::LIST.                         #
-    #           5) Existencia de la variable de clase @@template inicializada.              #
-    # Devolución: mantiene los elementos de profile_keys equivalente al de @@templale.      #
-    #########################################################################################
+  #########################################################################################
+  # Método privado: implementa merge para profile_key del @profile seleccionado.          #
+  # Prerequisitos:                                                                        #
+  #           1) Modelo de datos inicializado.                                            #
+  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
+  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
+  #           4) Existencia del arreglo estático LockEmail::LIST.                         #
+  #           5) Existencia de la variable de clase @@template inicializada.              #
+  # Devolución: mantiene los elementos de profile_keys equivalente al de @@templale.      #
+  #########################################################################################
     def merge_each_key(template)
       User.find_by(email: template).documents.first.profile.profile_keys.each do |tpk|
         if self.profile_keys.where(key: tpk.key).count == 2 then
           keys=self.profile_keys.where(key: tpk.key)
           max=keys.find_by(key: tpk.key,created_at: keys.maximum('created_at'))
           min=keys.find_by(key: tpk.key,created_at: keys.minimum('created_at'))
-          if max.client_side_validator_id.nil? then
+          read_only_or_link=ClientSideValidator.where(content_type: "GIDAPPF links").
+            or(ClientSideValidator.where(content_type: "GIDAPPF read only")).include?(min.client_side_validator)
+          if max.client_side_validator_id.nil? && !read_only_or_link then
             max.update(client_side_validator_id: tpk.client_side_validator_id)
-          end
-          if min.profile_values.first.gidappf_readonly? then
-            max.destroy
-          else
             min.destroy
+          elsif read_only_or_link then
+            max.destroy
           end
         end
       end

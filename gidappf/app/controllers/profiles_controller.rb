@@ -157,7 +157,7 @@ class ProfilesController < ApplicationController
         @profile = Profile.find_by( name: params[:user_dni])
         if @profile.nil? then #crea perfil si no tiene
           @profile=Profile.new( name: make_name(params[:user_dni]), description: make_description(u.email), valid_from: Date.today, valid_to: 1.year.after )
-          if @profile.save && Document.new(profile: Profile.last, user: u, input: Input.find_by(author: User.find_by(email: 'administrator@gidappf.edu.ar'))).save then
+          if @profile.save && Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(@profile,u) then
             #Las claves (ProfileKey) del perfil se copian de la plantilla. #
             @profile.copy_template(@@template,params[:user_dni])
           end

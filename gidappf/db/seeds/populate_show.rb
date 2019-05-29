@@ -490,7 +490,8 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
+  # Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p10,u10)
 end
 
 ###########################################################################
@@ -519,7 +520,8 @@ end
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
+  # Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p10,u10)
 end
 
 ###########################################################################
@@ -548,7 +550,8 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p5,u5)
 end
 
 #######################################################################################
@@ -577,7 +580,8 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p5,u5)
 end
 
 ###########################################################################
@@ -606,7 +610,8 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p5,u5)
 end
 
 ###########################################################################
@@ -643,7 +648,8 @@ Matter.all.each_with_index do |matter, index|
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p2, user: u2, input: Input.find_by(title: 'Admministrative rules')).save
+  # Document.new(profile: p2, user: u2, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p2,u2)
 end
 
 p "[GIDAPPF] Creados #{User.count} usuarios de muestra"
@@ -674,7 +680,7 @@ Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, ena
     Profile.where(
       id: Document.where(user_id: User.where(id: Commission.find(2).usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
     ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each do |p|
-      leg.info_values.build(:value => p.id )
+      leg.info_values.build(:value => p.to_global_id )
       vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id)
       pr.info_values.build(:value => "link")
     end

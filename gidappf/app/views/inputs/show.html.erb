@@ -4,7 +4,7 @@
 
 <p>Summary:<strong><%= @input.summary %></strong></p>
 
-<p>Author:<strong><%= Profile.find(@input.author.to_i).name %></strong></p>
+<p>Author:<strong> Legajo nro. <%= @input.author %></strong></p>
 
 <% unless @input.grouping? %>
   <% @input.info_keys.each do |s| %>
@@ -27,7 +27,11 @@
         <% @input.info_keys.each do |s| %>
           <td>
             <% s.info_values.each do |e| %>
-              <p><%= e.value %></p>
+              <% if e.value.to_s.first(6).eql?('gid://') then %>
+                <p><%= e.value.to_s.gsub(/[^0-9]/, '') %></p>
+              <% else %>
+                <p><%= e.value.to_s %></p>
+              <% end %>
             <% end %>
           </td>
         <% end %>

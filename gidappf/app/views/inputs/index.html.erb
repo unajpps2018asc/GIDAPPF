@@ -1,27 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Inputs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Summary</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @inputs.each do |input| %>
-      <tr>
-        <td><%= link_to "#{input.title}", input %></td>
-        <td><%= input.summary %></td>
-        <td><%= link_to 'Edit', edit_input_path(input) %></td>
-        <td><%= link_to 'Destroy', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @ins.include?(LockEmail::LIST[1]) %>
+  <%= render 'with_edit_column', inputs: @inputs %>
+<% else %>
+  <%= render 'without_edit_column', inputs: @inputs %>
+<% end %>
 
 <br>
 

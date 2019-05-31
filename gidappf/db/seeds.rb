@@ -134,7 +134,7 @@ Profile.create!([
       valid_from: gidappf_start_time,
       valid_to: gidappf_end_time
     },{
-      name: 'administratorProfile',
+      name: 'AdministratorProfile',
       description: 'Any administrator template profile',
       valid_from: gidappf_start_time,
       valid_to: gidappf_end_time
@@ -153,42 +153,51 @@ Input.create!([
   summary: 'Un documento de ausencia',
   grouping: false,
   enable: true,
-  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+  author: Profile.find_by(name: 'SecretaryProfile').id
 },{
   title: 'Time sheet hour students list',
   summary: 'Un listado de horario iniciado',
   grouping: true,
   enable: true,
-  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+  author: Profile.find_by(name: 'SecretaryProfile').id
 },{
   title: 'Time sheet hour list absences',
   summary: 'Un listado de justificaciones',
   grouping: true,
   enable: true,
-  author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+  author: Profile.find_by(name: 'SecretaryProfile').id
 },{
   title: 'Administrative rules',
   summary: 'Un listado de límites y tolerancias',
   grouping: false,
   enable: true,
-  author: User.find_by(email: 'administrator@gidappf.edu.ar').id
+  author: Profile.find_by(name: 'AdministratorProfile').id
 }
 ])
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Input.count} Inputs"
 
+#REQUERIDO POR SISTEMA
 Document.destroy_all
-lock=LockEmail::LIST
-lock.shift
-lock.each_with_index do |e,index|
-  Document.create!([
+Document.create!([
   {
-      profile_id: Profile.find( index + 1 ).id,
-      input_id: Input.find( index + 1 ).id,
-      user_id: User.find_by( email: e ).id
+    profile_id: Profile.find_by(name: 'StudentProfile').id, #perfil,
+    input_id: Input.find_by(title: 'Student absence').id, #datos y
+    user_id: User.find_by( email: LockEmail::LIST[4] ).id #usuario student@gidappf.edu.ar vinculados por Document1
+  },{
+    profile_id: Profile.find_by(name: 'DocentProfile').id,#perfil,
+    input_id: Input.find_by(title: 'Time sheet hour students list').id,#datos y
+    user_id: User.find_by( email: LockEmail::LIST[3] ).id #usuario docent@gidappf.edu.ar vinculados por Document2
+  },{
+    profile_id: Profile.find_by(name: 'SecretaryProfile').id,#perfil,
+    input_id: Input.find_by(title: 'Time sheet hour list absences').id,#datos y
+    user_id: User.find_by( email: LockEmail::LIST[2] ).id #usuario secretary@gidappf.edu.ar vinculados por Document3
+  },{
+    profile_id: Profile.find_by(name: 'AdministratorProfile').id, #perfil,
+    input_id: Input.find_by(title: 'Administrative rules').id, #datos y
+    user_id: User.find_by( email: LockEmail::LIST[1] ).id #usuario administrator@gidappf.edu.ar vinculados por Document3
   }
 ])
-end
 #REQUERIDO POR SISTEMA
 p "[GIDAPPF] Creados #{Document.count} Documentos"
 

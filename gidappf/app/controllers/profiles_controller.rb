@@ -119,7 +119,7 @@ class ProfilesController < ApplicationController
         if @user.save && Usercommissionrole.new( #Si crea al usuario, crea el registro en Usercommissionrole
             role_id: first_role_from_pointer,user_id: @user.id, commission_id: Commission.first.id
           ).save then
-          if @@template.eql?(LockEmail::LIST[2])then
+          if @@template.eql?(LockEmail::LIST[3])then
             2.times do |i|
               Usercommissionrole.new( role_id: first_role_from_pointer,user_id: @user.id, commission_id: Commission.first.id).save
             end
@@ -132,7 +132,7 @@ class ProfilesController < ApplicationController
         end
       else
         redirect_back fallback_location: '/profiles', allow_other_host: false,
-        alert: "Email or #{User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key} is allready registred."
+        alert: "Email or #{User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.find(3).key} is allready registred."
       end
     end
   end
@@ -230,9 +230,9 @@ class ProfilesController < ApplicationController
   # Devolución: Rol para asociarlo al nuevo perfil.                                       #
   #########################################################################################
     def first_role_from_pointer
-      if LockEmail::LIST[1].eql?(@@template) then
+      if LockEmail::LIST[4].eql?(@@template) then
         Role.find_by(level: 10, enabled: false).id
-      elsif LockEmail::LIST[2].eql?(@@template) then
+      elsif LockEmail::LIST[3].eql?(@@template) then
         Role.find_by(level: 29, enabled: false).id
       end
     end

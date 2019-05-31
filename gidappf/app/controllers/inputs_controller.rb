@@ -1,22 +1,28 @@
 class InputsController < ApplicationController
-  before_action :set_input, only: [:show, :edit, :update, :destroy]
+  before_action :set_input, only: [:show, :edit, :update, :destroy, :disable]
   after_action :merge_info_keys, only: [:update]
+  after_action :sync_slaves, only: [:update]
 
   # GET /inputs
   # GET /inputs.json
   def index
-    @inputs = get_not_templates(Input.all)
+    @ins=get_inputs_emails
+    unless current_user.documents.empty? then @ins << current_user.email end
+    @inputs = get_not_templates(Input.all).where(id: Document.where(user: User.where(email: @ins)).pluck(:input_id))
     @templates = get_templates(Input.all)
+    authorize @inputs
   end
 
   # GET /inputs/1
   # GET /inputs/1.json
   def show
+    authorize Input.first
   end
 
   # GET /inputs/new
   def new
     @input = Input.new
+    authorize @input
     respond_to do |format|
       format.html { }
       format.json { head :no_content }
@@ -35,7 +41,7 @@ class InputsController < ApplicationController
   # POST /inputs.json
   def create
     @input = Input.new(input_params)
-
+    authorize @input
     respond_to do |format|
       if @input.save
         format.html { redirect_to @input, notice: 'Input was successfully created.' }
@@ -71,10 +77,21 @@ class InputsController < ApplicationController
     end
   end
 
+  # PATCH /inputs/1
+  # PATCH /inputs/1.json
+  def disable
+    @input.update(enable: false)
+    respond_to do |format|
+      format.html { redirect_to inputs_url, notice: 'Input was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_input
       @input = Input.find(params[:id])
+      authorize @input
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -94,11 +111,17 @@ class InputsController < ApplicationController
   # Devolución: ActiveQuery con todos los docummentos no vacios.                      #
   #####################################################################################
     def get_not_templates(inputs)
-      inputs.where(
-        id: InfoKey.where(
-          id: InfoValue.pluck(:info_key_id)
+      out = nil
+      if get_role_access < 30
+        out = inputs.where.not(enable: false)
+      else
+        out = inputs
+      end
+      out=out.where(
+        id: InfoKey.where(id: InfoValue.pluck(:info_key_id)
         ).pluck(:input_id).uniq
       )
+      out
     end
 
   #####################################################################################
@@ -132,6 +155,13 @@ class InputsController < ApplicationController
       @input.merge_each_key(@@template)
       if @input.title.eql?('Time sheet hour students list') then
         @input.present_each_vacancy
+      end
+    end
+
+    def sync_slaves
+      if LockEmail::LIST.include?(@input.documents.first.user.email) &&
+        !InfoValue.where(info_key_id: @input.info_keys.pluck(:id)).empty? then
+        flash[:errors]="Not Synchronized"
       end
     end
 

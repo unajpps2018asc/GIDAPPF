@@ -85,7 +85,7 @@ class CampusMagnamentsController < ApplicationController
   ######################################################################
   def include_in_trayect_and_time_category_by_role?(profile_key_24, trayect, time_categ, profile_type)
     out = false
-    if LockEmail::LIST[1].eql?(profile_type) then
+    if LockEmail::LIST[4].eql?(profile_type) then
       out = profile_key_24.profile_values.first.value.to_i*60 <= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
       !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? && #"Elección de turno hasta existente"
       profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
@@ -94,7 +94,7 @@ class CampusMagnamentsController < ApplicationController
       !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.empty? && #"Se inscribe a cursar:"
       selected_period_profile(profile_key_24.profile) &&
       profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(23).key).profile_values.first.value.upcase.eql?(trayect.upcase)
-    elsif LockEmail::LIST[2].eql?(profile_type) then
+    elsif LockEmail::LIST[3].eql?(profile_type) then
       out = profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(23).key).nil? && #"Se inscribe a cursar inexistente"
       profile_key_24.profile_values.first.value.to_i*60 <= time_categ[0]*60+time_categ[1] && # si es mayor o igual a 'Elección de turno desde[Hr]:'
       !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? && #"Elección de turno hasta existente"
@@ -149,11 +149,11 @@ class CampusMagnamentsController < ApplicationController
   #########################################################################
   def table_metadata_maker(time_categ, trayect, profile_type)
     out=[]
-    if profile_type.eql?(LockEmail::LIST[1]) then
+    if profile_type.eql?(LockEmail::LIST[4]) then
       out.push("Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
         +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
         time_sheet_from_commissions_in_period(time_categ, trayect))
-    elsif profile_type.eql?(LockEmail::LIST[2]) then
+    elsif profile_type.eql?(LockEmail::LIST[3]) then
       out.push("Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
         +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
         time_sheet_hour_from_commissions_in_period(time_categ, trayect))
@@ -245,9 +245,9 @@ class CampusMagnamentsController < ApplicationController
     def role_from_profile_type(old_role)
       out=''
       unless params[:profile_type].nil? then
-        if params[:profile_type].eql?(LockEmail::LIST[1]) then
+        if params[:profile_type].eql?(LockEmail::LIST[4]) then
           out=Role.find_by(enabled: old_role.enabled, level: 20.0)
-        elsif params[:profile_type].eql?(LockEmail::LIST[2]) then
+        elsif params[:profile_type].eql?(LockEmail::LIST[3]) then
           out=Role.find_by(enabled: old_role.enabled, level: 29.0)
         end
       end
@@ -272,7 +272,7 @@ class CampusMagnamentsController < ApplicationController
     def invalid_selection_to_set_ucr?(profile,usercommissionroles,to_usercommissionrole,time_sheet)
       out = true
       unless profile.nil? || time_sheet.nil? || usercommissionroles.nil? || usercommissionroles.empty? || to_usercommissionrole.nil? then
-        if params[:profile_type].eql?(LockEmail::LIST[1]) then
+        if params[:profile_type].eql?(LockEmail::LIST[4]) then
           out = false
         elsif !params[:tsh_id].nil? && TimeSheetHour.find(params[:tsh_id].to_i).matter_id == to_usercommissionrole.user.documents.first.profile.profile_keys.find_by(key: "Materias:").profile_values.first.value.to_i then
           matter_of_profile = to_usercommissionrole.user.documents.first.profile.profile_keys.find_by(key: "Materias:").profile_values.first.value.to_i

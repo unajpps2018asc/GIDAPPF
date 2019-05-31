@@ -475,7 +475,7 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
     user_id: u10.id, commission_id: 2
   ).save
   p10=Profile.new( name: "#{Profile.count+1}/#{u+1000000}", description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -505,7 +505,7 @@ end
     user_id: u10.id, commission_id: Commission.first.id
   ).save
   p10=Profile.new( name: "#{Profile.count+1}/#{u+2000000}", description: "A description user #{u+10}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -535,7 +535,7 @@ end
     user_id: u5.id, commission_id: Commission.first.id
   ).save
   p5=Profile.new( name: "#{Profile.count+1}/#{u+3000000}", description: "A description user #{u+20}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -565,7 +565,7 @@ end
     user_id: u5.id, commission_id: Commission.first.id
   ).save
   p5=Profile.new( name: "#{Profile.count+1}/#{u+4000000}", description: "A description user #{u+25}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -633,7 +633,7 @@ Matter.all.each_with_index do |matter, index|
     user_id: u2.id, commission_id: Commission.first.id
   ).save
   p2=Profile.new( name: "#{Profile.count+1}/#{index+6000000}", description: "A Docent of matter #{matter.name},  description user #{index+35}", valid_from: Date.today, valid_to: 1.year.after  )
-  User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[3]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 43 #dni si es la clave 43 de la plantilla
@@ -668,7 +668,7 @@ Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, ena
       summary: 'Un listado de horario iniciado',
       grouping: true,
       enable: true,
-      author: User.find_by(email: 'secretary@gidappf.edu.ar').id
+      author: Input.find_by(title: 'Time sheet hour students list').author
     )
     #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
     t=Input.where(title: 'Time sheet hour students list').first.info_keys

@@ -12,8 +12,8 @@
 <!-- # Archivo GIDAPPF/gidappf/app/views/layouts/_forty_links.html.erb        # -->
 <!-- ########################################################################## -->
 <li><%= link_to 'Sets users access', setsusersaccess_settings_path %></li>
-<li><%= link_to 'Campus students', campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[1]) %></li>
-<li><%= link_to 'Campus docents', campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[2]) %></li>
+<li><%= link_to 'Campus students', campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[4]) %></li>
+<li><%= link_to 'Campus docents', campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[3]) %></li>
 <li><%= link_to 'Students', profiles_path(role_ids: [Role.find_by(enabled: true, level: 10.0).id,Role.find_by(enabled: true, level: 20.0).id,Role.find_by(enabled: false, level: 10.0).id,Role.find_by(enabled: false, level: 20.0).id]) %></li>
 <li><%= link_to 'Docent', profiles_path(role_ids: [Role.find_by(enabled: true, level: 29.0).id,Role.find_by(enabled: false, level: 29.0).id]) %></li>
 <li><%= link_to 'Commissions', commissions_path %></li>

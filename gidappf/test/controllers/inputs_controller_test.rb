@@ -18,7 +18,7 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
     sign_in users(:one)
     get new_input_url, headers: @auth_h_in
-    assert_response :success
+    assert_response :found
   end
 
   test "should create input" do

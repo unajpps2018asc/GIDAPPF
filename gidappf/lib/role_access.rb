@@ -61,4 +61,20 @@ module RoleAccess
     end
     out
   end
+
+  def get_inputs_emails
+    acc = get_role_access
+    out=LockEmail::LIST.dup
+    if acc < 30 && acc >= 29
+      out.shift 2
+    elsif acc < 29 && acc >= 20
+      out.shift 3
+    elsif acc < 20 && acc >= 10
+      out.shift 4
+    elsif acc < 10 && acc >= -20
+      out.shift 5
+    end
+    out
+  end
+
 end #module

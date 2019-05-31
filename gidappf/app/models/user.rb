@@ -70,7 +70,7 @@ class User < ApplicationRecord
   def is_usable_password?
     out = true
     unless LockEmail::LIST.include?(self.email) then
-      dni = User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key
+      dni = User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.find(3).key
       if self.documents.present? &&
         self.documents.first.profile.profile_keys.find_by(key: dni).profile_values.present? then
         if self.documents.first.profile.profile_keys.find_by(key: dni).

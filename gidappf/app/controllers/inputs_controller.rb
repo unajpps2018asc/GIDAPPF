@@ -1,7 +1,6 @@
 class InputsController < ApplicationController
   before_action :set_input, only: [:show, :edit, :update, :destroy, :disable]
   after_action :merge_info_keys, only: [:update]
-  after_action :sync_slaves, only: [:update]
 
   # GET /inputs
   # GET /inputs.json
@@ -156,12 +155,15 @@ class InputsController < ApplicationController
       if @input.title.eql?('Time sheet hour students list') then
         @input.present_each_vacancy
       end
+      sync_slaves
     end
 
     def sync_slaves
       if LockEmail::LIST.include?(@input.documents.first.user.email) &&
         !InfoValue.where(info_key_id: @input.info_keys.pluck(:id)).empty? then
-        flash[:errors]="Not Synchronized"
+        unless Input.find_by(title: 'Administrative rules').documents.first.update_in_all then
+          flash[:errors]="Not Synchronized"
+        end
       end
     end
 

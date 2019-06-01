@@ -59,7 +59,7 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de edit, para update profiles               #
   ###########################################################################
   def create?
-    update?
+    first?
   end
 
   ###########################################################################
@@ -91,7 +91,10 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de edit, para update profiles                  #
   ##############################################################################
   def first?
-    update?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||
+    @issysadmin||is_my_profile?||@roleaccess>30.0
   end
 
   ##############################################################################
@@ -100,7 +103,7 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de edit, para update profiles                  #
   ##############################################################################
   def second?
-    update?
+    first?
   end
 
   private

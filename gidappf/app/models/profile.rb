@@ -71,9 +71,9 @@ class Profile < ApplicationRecord
     def template_to_merge
       out=''
       profile=self.profile_keys.pluck(:key)
-      if GidappfTemplatesTools.compare_templates_do(profile, Profile.find(LockEmail::LIST.index(LockEmail::LIST[4])).profile_keys.pluck(:key)) then
+      if GidappfTemplatesTools.compare_templates_do(profile, User.find_by(email:LockEmail::LIST[4]).documents.first.profile.profile_keys.pluck(:key)) then
         out = LockEmail::LIST[4];
-      elsif GidappfTemplatesTools.compare_templates_do(profile, Profile.find(LockEmail::LIST.index(LockEmail::LIST[3])).profile_keys.pluck(:key)) then
+      elsif GidappfTemplatesTools.compare_templates_do(profile, User.find_by(email:LockEmail::LIST[3]).documents.first.profile.profile_keys.pluck(:key)) then
         out = LockEmail::LIST[3];
       end
       out

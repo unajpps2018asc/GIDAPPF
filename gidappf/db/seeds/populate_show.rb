@@ -688,8 +688,8 @@ Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, ena
     vac.save
     pr.save
     Document.new(
-      profile: User.find_by(email: "docent@gidappf.edu.ar").documents.first.profile,
-      user: User.find_by(email: "docent@gidappf.edu.ar"),
+      profile: User.find_by(email: "docente35@gidappf.edu.ar").documents.first.profile,
+      user: User.find_by(email: "docente35@gidappf.edu.ar"),
       input: in_each_hour
     ).save
     in_each_hour.update(summary: "Materia:#{it_time_sheet_hour.first.matter.name}.")

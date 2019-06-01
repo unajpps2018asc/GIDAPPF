@@ -43,6 +43,27 @@ class Document < ApplicationRecord
     Document.new(profile: profile, user: user, input: copy_of_input).save
   end
 
+  #######################################################################################
+  # Implementa la actualización de documentos esclavos asignados.                       #
+  # Prerequisitos:                                                                      #
+  #           1) Modelo de datos inicializado.                                          #
+  #           2) Profile destino.                                                       #
+  #           3) Usuario destino.                                                       #
+  # Devolución:  Inicializa la documentación del proxile vinculado con el user mediante #
+  #           documento con entrada igual a la de self.                                 #
+  #######################################################################################
+  def update_in_all
+    out = true
+    User.where.not(email: LockEmail::LIST).each do |user|
+      unless user.documents.empty?
+        profile=user.documents.first.profile
+        user.documents.find_by(input_id: Input.where(title:self.input.title).pluck(:id)).destroy
+        out &= self.send_copy_first_document_to(profile,user)
+      end
+    end
+    out
+  end
+
   private
 
   ###################################################################################

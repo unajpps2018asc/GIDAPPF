@@ -70,8 +70,8 @@ class InputPolicy < ApplicationPolicy
   def update?
     set_is_sysadmin
     set_roleaccess
-    @user.email.eql?( 'john@example.com')||
-    @issysadmin||is_my_profile?||@roleaccess>20.0
+    @user.email.eql?('john@example.com')||@issysadmin||
+    (is_my_profile? && is_not_master_document?)||@roleaccess>=40.0
   end
 
   ###########################################################################
@@ -82,25 +82,7 @@ class InputPolicy < ApplicationPolicy
   def destroy?
     set_is_sysadmin
     set_roleaccess
-    @user.email.eql?( 'john@example.com')||is_my_profile?
-  end
-
-  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción first definida en ProfilesController                   #
-  # Devolución: delega el valor de edit, para update profiles                  #
-  ##############################################################################
-  def first?
-    update?
-  end
-
-  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción second definida en ProfilesController                  #
-  # Devolución: delega el valor de edit, para update profiles                  #
-  ##############################################################################
-  def second?
-    update?
+    @user.email.eql?('john@example.com')||is_my_profile?
   end
 
   ###########################################################################
@@ -119,6 +101,10 @@ class InputPolicy < ApplicationPolicy
     @user.documents.first.present? &&
     @user.documents.first.profile.present? &&
     @record.documents.first.profile.eql?(@user.documents.first.profile)
+  end
+
+  def is_not_master_document?
+    InfoValue.where(info_key: Input.find(@record.template_to_merge).info_keys.pluck(:id)).empty?
   end
 
 end

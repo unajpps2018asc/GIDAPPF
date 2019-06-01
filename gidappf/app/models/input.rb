@@ -115,7 +115,7 @@ class Input < ApplicationRecord
           read_only_or_link=ClientSideValidator.where(content_type: "GIDAPPF links").
             or(ClientSideValidator.where(content_type: "GIDAPPF read only")).include?(min.client_side_validator)
           if max.client_side_validator_id.nil? && !read_only_or_link then
-            max.update(client_side_validator_id: tik.client_side_validator_id)
+            max.update(client_side_validator_id: min.client_side_validator_id)
             min.destroy
           elsif read_only_or_link then
             max.destroy

@@ -57,11 +57,17 @@ class Document < ApplicationRecord
     User.where.not(email: LockEmail::LIST).each do |user|
       unless user.documents.empty?
         profile=user.documents.first.profile
-        user.documents.find_by(input_id: Input.where(title:self.input.title).pluck(:id)).destroy
+        d=user.documents.find_by(input_id: Input.where(title:self.input.title).pluck(:id))
+        d.input_destroy
         out &= self.send_copy_first_document_to(profile,user)
       end
     end
     out
+  end
+
+  def input_destroy
+    self.input.destroy
+    self.destroy
   end
 
   private

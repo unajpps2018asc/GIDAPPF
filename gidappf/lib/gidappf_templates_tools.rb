@@ -16,4 +16,8 @@ module GidappfTemplatesTools
     out
   end
 
+  def students_list_to_circulate_at_hour(time_sheet_hour)
+
+  end
+
 end #module

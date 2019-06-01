@@ -17,4 +17,10 @@ class ProfileValue < ApplicationRecord
   #      ProfileKey, opcional para que funcione accepts_nested_attributes_for.#
   #############################################################################
   belongs_to :profile_key, optional: true
+
+  def gidappf_readonly?
+    self.profile_key.profile_values.count > 0 &&
+    self.profile_key.client_side_validator_id.present? &&
+    self.profile_key.client_side_validator.content_type.eql?('GIDAPPF read only')
+  end
 end

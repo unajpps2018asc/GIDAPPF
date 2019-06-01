@@ -1,3 +1,6 @@
+<!--Definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<%= valuable_gidappf_field.hidden_field :value, value: valuable_gidappf_field.object.value %>
+
 <!--#################################################################################-->
 <!--# Universidad Nacional Arturo Jauretche                                         #-->
 <!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática                #-->
@@ -13,5 +16,5 @@
 <!--#GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_read_onlys.html.erb #-->
 <!--#################################################################################-->
 <!-- Datos inmodificables-->
-<!-- target_reg_exp_strategy no se aplica en este caso -->
-<%= valuable_gidappf_field.text_field :value, :readonly => true %>
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<strong><%= valuable_gidappf_field.object.value  %></strong>

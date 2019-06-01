@@ -52,22 +52,20 @@ class TimeSheetHour < ApplicationRecord
     week
   end
 
-  ########################################################################
-  # Prerequisitos:                                                       #
-  #           1) Modelo de datos inicializado.                           #
-  # parámetros:                                                          #
-  #           ninguno.                                                   #
-  # Devolución: Array con dos elementos, el primero es el minimo horario #
-  #          TimeSheetHour de los asignados. El segundo es el maximo     #
-  #          horario de los asignados.                                   #
-  ########################################################################
-  def time_category
-    out=[]
-    out << h.from_min.to_i+h.from_hour.to_i*60
-    out << h.to_min.to_i+h.to_hour.to_i*60
+  ######################################################################
+  # Metodo privado para definir el grupo de segmentacion.              #
+  # Devuelve: true si profile_key_24 pertenece a trayect y time_categ  #
+  #            sino false.                                             #
+  ######################################################################
+  def include_in_time_category?(profile)
+    out = false
+    if !profile.profile_keys.find_by(key:ProfileKey.find(24).key).nil? && !profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? then
+      profile_key_24 = profile.profile_keys.find_by(key:ProfileKey.find(24).key).profile_values.first.value.to_i
+      profile_key_25 = profile.profile_keys.find_by(key:ProfileKey.find(25).key).profile_values.first.value.to_i
+      out = profile_key_24*60 <= self.from_min*60+self.from_hour && profile_key_25*60 >= self.to_min*60+self.to_hour
+    end
     out
   end
-
 
   private
 

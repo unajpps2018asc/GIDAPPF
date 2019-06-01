@@ -28,7 +28,9 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de index, para show profiles                #
   ###########################################################################
   def index?
-    show?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>10.0
   end
 
   ###########################################################################
@@ -39,7 +41,7 @@ class ProfilePolicy < ApplicationPolicy
   def show?
     self.set_is_sysadmin
     self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>10.0
+    @user.email.eql?( 'john@example.com')||is_my_profile?||@issysadmin||@roleaccess>10.0
   end
 
   ###########################################################################
@@ -57,7 +59,7 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de edit, para update profiles               #
   ###########################################################################
   def create?
-    update?
+    first?
   end
 
   ###########################################################################
@@ -68,7 +70,8 @@ class ProfilePolicy < ApplicationPolicy
   def update?
     self.set_is_sysadmin
     self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>20.0
+    @user.email.eql?( 'john@example.com')||
+    @issysadmin||is_my_profile?||@roleaccess>20.0
   end
 
   ###########################################################################
@@ -88,7 +91,10 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de edit, para update profiles                  #
   ##############################################################################
   def first?
-    update?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||
+    @issysadmin||is_my_profile?||@roleaccess>30.0
   end
 
   ##############################################################################
@@ -97,7 +103,16 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: delega el valor de edit, para update profiles                  #
   ##############################################################################
   def second?
-    update?
+    first?
+  end
+
+  private
+
+  def is_my_profile?
+    @user.documents.present? &&
+    @user.documents.first.present? &&
+    @user.documents.first.profile.present? &&
+    @record.eql?(@user.documents.first.profile)
   end
 
 end

@@ -91,17 +91,16 @@ class TimeSheet < ApplicationRecord
   ################################################################################
   def users_assigned_in_timesheet
     out=0
-    User.where.not(email: LockEmail::LIST).joins(documents: :profile, usercommissionroles: :role).
-      select(:id, :profile_id, :role_id, :commission_id).each do |e|
-        if(Role.where(level: 20.0).pluck(:id).include?(e.role_id) || Role.where(level: 29.0).pluck(:id).include?(e.role_id))&&
-          Commission.find(e.commission_id).eql?(self.commission) &&
-          Profile.find(e.profile_id).valid_from >= self.start_date &&
-          Profile.find(e.profile_id).valid_to <= self.end_date then
-          out += 1
-        end
-      end
+    # User.where.not(email: LockEmail::LIST).joins(documents: :profile, usercommissionroles: :role).
+    #   select(:id, :profile_id, :role_id, :commission_id, :valid_from, :valid_to).each do |e|
+    #     if Role.where("level <= ?", 29.0).where("level >= ?",20.0).pluck(:id).include?(e.role_id) &&
+    #       e.commission_id == commission_id && e.valid_from >= self.start_date && e.valid_to <= self.end_date then
+    #       out += 1
+    #     end
+    # end
+    out=self.commission.usercommissionroles.where(role_id: Role.where("level <= ?", 29.0).where("level >= ?",20.0).pluck(:id)).count
     out
-    end
+  end
 
   def selectable?
     self.end_date < Date.today || !self.enabled

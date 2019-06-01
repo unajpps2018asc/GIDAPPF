@@ -2,9 +2,9 @@ class LockEmail
   LIST=
   [
     'john@example.com',# test user
-    'student@gidappf.edu.ar',# plantilla del perfil de estudiante
-    'docent@gidappf.edu.ar',# plantilla del perfil de docente
+    'administrator@gidappf.edu.ar',# plantilla del perfil de admin
     'secretary@gidappf.edu.ar',# plantilla del perfil de secretario
-    'administrator@gidappf.edu.ar'# plantilla del perfil de admin
+    'docent@gidappf.edu.ar',# plantilla del perfil de docente
+    'student@gidappf.edu.ar'# plantilla del perfil de estudiante
   ]
 end

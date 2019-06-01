@@ -2,14 +2,14 @@
 # Detalle del servidor de desarrollo utilizado en el proyecto GIDAPPF #
 #######################################################################
 $ uname -a
-Linux archlinux 5.0.7-arch1-1-ARCH #1 SMP PREEMPT Mon Apr 8 10:37:08 UTC
+Linux archlinux 5.1.2-arch1-1-ARCH #1 SMP PREEMPT Wed May 15 00:09:47 UTC
 2019 x86_64 GNU/Linux
 
 $ ruby --version
-ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-linux]
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
 
 $ docker --version
-Docker version 18.09.5-ce, build e8ff056dbc
+Docker version 18.09.6-ce, build 481bc77156
 
 $ docker-compose --version
 docker-compose version 1.24.0, build unknown
@@ -20,7 +20,7 @@ $ gem list .
 
 bigdecimal (1.4.3, default: 1.4.1)
 cmath (default: 1.0.0)
-csv (default: 3.0.4)
+csv (default: 3.0.9)
 date (default: 2.0.0)
 dbm (default: 1.0.0)
 e2mmap (default: 0.1.0)
@@ -77,9 +77,9 @@ activerecord (5.2.3)
 activestorage (5.2.3)
 activesupport (5.2.3)
 arel (9.0.0)
-autoprefixer-rails (9.5.1)
+autoprefixer-rails (9.5.1.1, 9.5.1)
 bcrypt (3.1.12)
-bigdecimal (default: 1.4.3, default: 1.4.1)
+bigdecimal (default: 1.4.4, default: 1.4.1)
 bootstrap-sass (3.4.1)
 builder (3.2.3)
 bundler (default: 2.0.1, default: 1.17.2)
@@ -88,7 +88,7 @@ cmath (default: 1.0.0)
 concurrent-ruby (1.1.5)
 connection_pool (2.2.2)
 crass (1.0.4)
-csv (default: 3.0.9, default: 3.0.4)
+csv (default: 3.1.1, default: 3.0.9)
 date (default: 2.0.0)
 dbm (default: 1.0.0)
 debug_inspector (0.0.3)
@@ -104,10 +104,10 @@ erubi (1.8.0)
 etc (default: 1.0.1)
 execjs (2.7.0)
 fcntl (default: 1.0.0)
-ffi (1.10.0)
+ffi (1.11.0, 1.10.0)
 fiddle (default: 1.0.0)
 fileutils (default: 1.2.0, default: 1.1.0)
-font-awesome-rails (4.7.0.4)
+font-awesome-rails (4.7.0.5, 4.7.0.4)
 forwardable (default: 1.2.0)
 gdbm (default: 2.0.0)
 globalid (0.4.2)
@@ -115,7 +115,7 @@ i18n (1.6.0)
 io-console (default: 0.4.7)
 ipaddr (default: 1.2.2)
 irb (default: 1.0.0)
-jbuilder (2.8.0)
+jbuilder (2.9.1, 2.8.0)
 jquery-rails (4.3.3)
 json (default: 2.2.0, default: 2.1.0)
 jwt (2.1.0)
@@ -134,7 +134,7 @@ multi_json (1.13.1)
 mutex_m (default: 0.1.0)
 net-telnet (0.2.0)
 nio4r (2.3.1)
-nokogiri (1.10.2)
+nokogiri (1.10.3, 1.10.2)
 openssl (default: 2.1.2)
 orm_adapter (0.5.0)
 ostruct (default: 0.1.0)
@@ -157,9 +157,9 @@ rake (12.3.2)
 rb-fsevent (0.10.3)
 rb-inotify (0.10.0)
 rdoc (default: 6.1.1, default: 6.1.0)
-redis (4.1.0)
+redis (4.1.1, 4.1.0)
 responders (2.4.1)
-rexml (default: 3.2.0, default: 3.1.9)
+rexml (default: 3.2.1, default: 3.1.9)
 rss (default: 0.2.8, default: 0.2.7)
 ruby_dep (1.5.0)
 sass (3.7.4)
@@ -169,7 +169,7 @@ sassc (2.0.1)
 scanf (default: 1.0.0)
 sdbm (default: 1.0.0)
 shell (default: 0.7)
-sidekiq (5.2.6)
+sidekiq (5.2.7, 5.2.6)
 spring (2.0.2)
 spring-watcher-listen (2.0.1)
 sprockets (3.7.2)
@@ -177,7 +177,7 @@ sprockets-rails (3.2.1)
 stringio (default: 0.0.2)
 strscan (default: 1.0.0)
 sync (default: 0.5.0)
-test-unit (default: 3.3.2, 3.2.9)
+test-unit (default: 3.3.3, 3.2.9)
 thor (0.20.3)
 thread_safe (0.3.6)
 thwait (default: 0.1.0)
@@ -198,5 +198,5 @@ xmlrpc (0.3.0)
 zlib (default: 1.0.0)
 
 ## Servidores añadidos a la imagen base de Docker mediante docker-compose ##
-image: 'postgres:11.2-alpine'
+image: 'postgres:11.3-alpine'
 image: 'redis:5.0-alpine'

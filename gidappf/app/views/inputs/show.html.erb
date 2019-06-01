@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>Title:<strong><%= @input.title %></strong></p>
+
+<p>Summary:<strong><%= @input.summary %></strong></p>
+
+<p>Author:<strong> Legajo nro. <%= @input.author %></strong></p>
+
+<% unless @input.grouping? %>
+  <% @input.info_keys.each do |s| %>
+    <p><%= s.key %>
+    <% s.info_values.each do |e| %>
+      <strong><span><%= e.value %></span></strong>
+    <% end %></p>
+  <% end %>
+<% else %>
+  <table>
+    <thead>
+       <tr>
+          <% @input.info_keys.each do |s| %>
+            <th><%= s.key.gsub ':','s' %></th>
+          <% end %>
+       </tr>
+    </thead>
+    <tbody remote="true">
+      <tr>
+        <% @input.info_keys.each do |s| %>
+          <td>
+            <% s.info_values.each do |e| %>
+              <% if e.value.to_s.first(6).eql?('gid://') then %>
+                <p><%= e.value.to_s.gsub(/[^0-9]/, '') %></p>
+              <% else %>
+                <p><%= e.value.to_s %></p>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+<%= link_to 'Edit', edit_input_path(@input) %> |
+<%= link_to 'Back', inputs_path %>

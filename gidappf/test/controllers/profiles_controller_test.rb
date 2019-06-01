@@ -42,8 +42,9 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   # Pendiente hacer compatible `template_of_merge' por que los Profile con id 1 y 2 son templates y no figuran en fixtures
   # test "should update profile" do
   #   sign_in users(:one)
+  #   @profile = profiles(:two)
   #   patch profile_url(@profile), params: { profile: { description: @profile.description, name: @profile.name, valid_from: @profile.valid_from, valid_to: @profile.valid_to } }
-  #   assert_redirected_to profile_url(@profile), headers: @auth_h_profile
+  #   assert_redirected_to profile_url(@profile)
   #   sign_out :one
   # end
 

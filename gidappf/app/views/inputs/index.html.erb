@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Inputs</h1>
+<% if @ins.include?(LockEmail::LIST[1]) %>
+  <%= render 'with_edit_column', inputs: @inputs %>
+<% else %>
+  <%= render 'without_edit_column', inputs: @inputs %>
+<% end %>
+
+<br>
+
+<% @templates.each do |t| %>
+  <p><%=link_to "New Input #{t.id}", new_input_path( input_id: t.id.to_s ) %></p>
+<% end %>

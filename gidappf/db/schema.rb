@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_001557) do
+ActiveRecord::Schema.define(version: 2019_05_17_135254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,8 +59,38 @@ ActiveRecord::Schema.define(version: 2019_05_06_001557) do
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "input_id"
+    t.index ["input_id"], name: "index_documents_on_input_id"
     t.index ["profile_id"], name: "index_documents_on_profile_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "info_keys", force: :cascade do |t|
+    t.string "key"
+    t.bigint "input_id"
+    t.bigint "client_side_validator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_side_validator_id"], name: "index_info_keys_on_client_side_validator_id"
+    t.index ["input_id"], name: "index_info_keys_on_input_id"
+  end
+
+  create_table "info_values", force: :cascade do |t|
+    t.text "value"
+    t.bigint "info_key_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["info_key_id"], name: "index_info_values_on_info_key_id"
+  end
+
+  create_table "inputs", force: :cascade do |t|
+    t.string "title"
+    t.text "summary"
+    t.boolean "grouping"
+    t.boolean "enable"
+    t.bigint "author"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "matters", force: :cascade do |t|
@@ -175,8 +205,12 @@ ActiveRecord::Schema.define(version: 2019_05_06_001557) do
   end
 
   add_foreign_key "commissions", "users"
+  add_foreign_key "documents", "inputs"
   add_foreign_key "documents", "profiles"
   add_foreign_key "documents", "users"
+  add_foreign_key "info_keys", "client_side_validators"
+  add_foreign_key "info_keys", "inputs"
+  add_foreign_key "info_values", "info_keys"
   add_foreign_key "profile_keys", "client_side_validators"
   add_foreign_key "profile_keys", "profiles"
   add_foreign_key "profile_values", "profile_keys"

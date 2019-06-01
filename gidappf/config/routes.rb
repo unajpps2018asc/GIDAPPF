@@ -13,6 +13,11 @@
 ###########################################################################
 
 Rails.application.routes.draw do
+  resources :inputs do
+    member do
+      get 'disable'
+    end
+  end
   resources :matters
   get 'campus_magnaments/set_campus_segmentation'
   get 'campus_magnaments/get_campus_segmentation'

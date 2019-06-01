@@ -472,10 +472,10 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
   u10.save
   Usercommissionrole.new(
     role_id: Role.find_by(level: 10, enabled: false).id,
-    user_id: u10.id, commission_id: Commission.first.id
+    user_id: u10.id, commission_id: 2
   ).save
   p10=Profile.new( name: "#{Profile.count+1}/#{u+1000000}", description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -490,7 +490,8 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p10, user: u10).save
+  # Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p10,u10)
 end
 
 ###########################################################################
@@ -504,7 +505,7 @@ end
     user_id: u10.id, commission_id: Commission.first.id
   ).save
   p10=Profile.new( name: "#{Profile.count+1}/#{u+2000000}", description: "A description user #{u+10}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -519,7 +520,8 @@ end
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p10, user: u10).save
+  # Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p10,u10)
 end
 
 ###########################################################################
@@ -533,7 +535,7 @@ end
     user_id: u5.id, commission_id: Commission.first.id
   ).save
   p5=Profile.new( name: "#{Profile.count+1}/#{u+3000000}", description: "A description user #{u+20}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -548,7 +550,8 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5).save
+  # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p5,u5)
 end
 
 #######################################################################################
@@ -562,7 +565,7 @@ end
     user_id: u5.id, commission_id: Commission.first.id
   ).save
   p5=Profile.new( name: "#{Profile.count+1}/#{u+4000000}", description: "A description user #{u+25}", valid_from: Date.today, valid_to: 1.year.after )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
@@ -577,7 +580,8 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5).save
+  # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p5,u5)
 end
 
 ###########################################################################
@@ -606,7 +610,8 @@ end
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p5, user: u5).save
+  # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p5,u5)
 end
 
 ###########################################################################
@@ -628,7 +633,7 @@ Matter.all.each_with_index do |matter, index|
     user_id: u2.id, commission_id: Commission.first.id
   ).save
   p2=Profile.new( name: "#{Profile.count+1}/#{index+6000000}", description: "A Docent of matter #{matter.name},  description user #{index+35}", valid_from: Date.today, valid_to: 1.year.after  )
-  User.find_by(email: LockEmail::LIST[2]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[3]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 43 #dni si es la clave 43 de la plantilla
@@ -643,7 +648,49 @@ Matter.all.each_with_index do |matter, index|
         p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end
   end
-  Document.new(profile: p2, user: u2).save
+  # Document.new(profile: p2, user: u2, input: Input.find_by(title: 'Admministrative rules')).save
+  Input.find_by(title: 'Administrative rules').documents.first.send_copy_first_document_to(p2,u2)
 end
 
 p "[GIDAPPF] Creados #{User.count} usuarios de muestra"
+
+#########################################################################################
+# Documentos 'Time sheet hour students list'                                            #
+# Cualquier perfil obligatoriamente tiene asociado este documento sin restricciones de  #
+# lectura. Los valores son referencias constantes para calculos estadisticos.           #
+#########################################################################################
+User.find_by(email: "docente35@gidappf.edu.ar").usercommissionroles.first.update(commission_id: 2)
+
+Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
+  last.time_sheet_hours.pluck(:from_hour,:from_min, :to_hour,:to_min).uniq.each do |hour|
+    in_each_hour=Input.new(
+      title: 'Time sheet hour students list',
+      summary: 'Un listado de horario iniciado',
+      grouping: true,
+      enable: true,
+      author: Input.find_by(title: 'Time sheet hour students list').author
+    )
+    #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
+    t=Input.where(title: 'Time sheet hour students list').first.info_keys
+    leg=in_each_hour.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
+    vac=in_each_hour.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
+    pr=in_each_hour.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
+    it_time_sheet_hour = Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
+      last.time_sheet_hours.where(from_hour: hour[0],from_min: hour[1], to_hour: hour[2],to_min: hour[3]).to_enum
+    Profile.where(
+      id: Document.where(user_id: User.where(id: Commission.find(2).usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
+    ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each do |p|
+      leg.info_values.build(:value => p.to_global_id )
+      vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id)
+      pr.info_values.build(:value => "link")
+    end
+    leg.save
+    vac.save
+    pr.save
+    Document.new(
+      profile: User.find_by(email: "docente35@gidappf.edu.ar").documents.first.profile,
+      user: User.find_by(email: "docente35@gidappf.edu.ar"),
+      input: in_each_hour
+    ).save
+    in_each_hour.update(summary: "Materia:#{it_time_sheet_hour.first.matter.name}.")
+end

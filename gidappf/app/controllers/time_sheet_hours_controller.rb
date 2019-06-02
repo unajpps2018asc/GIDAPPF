@@ -1,3 +1,5 @@
+require 'gidappf_templates_tools'
+
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,6 +15,7 @@
 ###########################################################################
 class TimeSheetHoursController < ApplicationController
   before_action :set_time_sheet_hour, only: [:show, :edit, :update, :destroy]
+  after_action :post_multiple, only: [:multiple_new]
 
   ###################################################################################
   # Prerequisitos:                                                                  #
@@ -161,6 +164,10 @@ class TimeSheetHoursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_sheet_hour_params
       params.require(:time_sheet_hour).permit(:matter_id, :vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+    end
+
+    def post_multiple
+      flash[:error] = GidappfTemplatesTools.students_list_to_circulate_at_hour(@time_sheet_hour)
     end
 
     def params_to_hash

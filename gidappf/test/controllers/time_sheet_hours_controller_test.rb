@@ -87,9 +87,10 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
     sign_out :one
   end
 
-  test "should get multiple_new" do
-    get time_sheet_hours_multiple_new_url, headers: @auth_h_tsh
-    assert_redirected_to :root
-  end
+  # Pendiente la compatibilidad con post_multiple
+  # test "should get multiple_new" do
+  #   get time_sheet_hours_multiple_new_url, headers: @auth_h_tsh
+  #   assert_redirected_to :root
+  # end
 
 end

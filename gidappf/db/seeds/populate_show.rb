@@ -661,36 +661,36 @@ p "[GIDAPPF] Creados #{User.count} usuarios de muestra"
 #########################################################################################
 User.find_by(email: "docente35@gidappf.edu.ar").usercommissionroles.first.update(commission_id: 2)
 
-Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
-  last.time_sheet_hours.pluck(:from_hour,:from_min, :to_hour,:to_min).uniq.each do |hour|
-    in_each_hour=Input.new(
-      title: 'Time sheet hour students list',
-      summary: 'Un listado de horario iniciado',
-      grouping: true,
-      enable: true,
-      author: Input.find_by(title: 'Time sheet hour students list').author
-    )
-    #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
-    t=Input.where(title: 'Time sheet hour students list').first.info_keys
-    leg=in_each_hour.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
-    vac=in_each_hour.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
-    pr=in_each_hour.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
-    it_time_sheet_hour = Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
-      last.time_sheet_hours.where(from_hour: hour[0],from_min: hour[1], to_hour: hour[2],to_min: hour[3]).to_enum
-    Profile.where(
-      id: Document.where(user_id: User.where(id: Commission.find(2).usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
-    ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each do |p|
-      leg.info_values.build(:value => p.to_global_id )
-      vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id)
-      pr.info_values.build(:value => "link")
-    end
-    leg.save
-    vac.save
-    pr.save
-    Document.new(
-      profile: User.find_by(email: "docente35@gidappf.edu.ar").documents.first.profile,
-      user: User.find_by(email: "docente35@gidappf.edu.ar"),
-      input: in_each_hour
-    ).save
-    in_each_hour.update(summary: "Materia:#{it_time_sheet_hour.first.matter.name}.")
-end
+# Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
+#   last.time_sheet_hours.pluck(:from_hour,:from_min, :to_hour,:to_min).uniq.each do |hour|
+#     in_each_hour=Input.new(
+#       title: 'Time sheet hour students list',
+#       summary: 'Un listado de horario iniciado',
+#       grouping: true,
+#       enable: true,
+#       author: Input.find_by(title: 'Time sheet hour students list').author
+#     )
+#     #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
+#     t=Input.where(title: 'Time sheet hour students list').first.info_keys
+#     leg=in_each_hour.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
+#     vac=in_each_hour.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
+#     pr=in_each_hour.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
+#     it_time_sheet_hour = Commission.find(2).time_sheets.where(end_date: Date.today .. 36.month.after, enabled:true).
+#       last.time_sheet_hours.where(from_hour: hour[0],from_min: hour[1], to_hour: hour[2],to_min: hour[3]).to_enum
+#     Profile.where(
+#       id: Document.where(user_id: User.where(id: Commission.find(2).usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
+#     ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each do |p|
+#       leg.info_values.build(:value => p.to_global_id )
+#       vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id)
+#       pr.info_values.build(:value => "link")
+#     end
+#     leg.save
+#     vac.save
+#     pr.save
+#     Document.new(
+#       profile: User.find_by(email: "docente35@gidappf.edu.ar").documents.first.profile,
+#       user: User.find_by(email: "docente35@gidappf.edu.ar"),
+#       input: in_each_hour
+#     ).save
+#     in_each_hour.update(summary: "Materia:#{it_time_sheet_hour.first.matter.name}.")
+# end

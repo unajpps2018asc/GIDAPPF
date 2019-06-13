@@ -5,8 +5,9 @@ class InputsController < ApplicationController
   # GET /inputs
   # GET /inputs.json
   def index
-    @ins=get_inputs_emails
-    unless current_user.documents.empty? then @ins << current_user.email end
+    @ins=get_inputs_emails # module RoleAccess
+    @ins << current_user.email
+    # unless current_user.documents.empty? then @ins << current_user.email end
     @inputs = get_not_templates(Input.all).where(id: Document.where(user: User.where(email: @ins)).pluck(:input_id))
     @templates = get_templates(Input.all)
     authorize @inputs

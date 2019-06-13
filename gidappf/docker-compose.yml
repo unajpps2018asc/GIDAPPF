@@ -11,6 +11,17 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 # Archivo GIDAPPF/docker-compose.yml                                      #
 ###########################################################################
+# Deploy:
+# $ docker-compose up --build -d && docker-compose exec website rails db:setup && docker-compose exec website rake documents_collector:schedule_init
+# Restart after poweroff:
+# $ docker-compose up -d && docker-compose exec website rake documents_collector:schedule_init
+# Populate db:
+# $ docker-compose exec website rake db:seed:populate_show && docker-compose exec website rake documents_collector:schedule_init
+# Stop and clean all :
+# $ docker-compose down -v
+# Stop:
+# $ docker-compose down
+
 version: '3'
 
 services:

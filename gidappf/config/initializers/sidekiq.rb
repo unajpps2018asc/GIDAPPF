@@ -7,5 +7,3 @@ end
 Sidekiq.configure_client do |config|
   config.redis = sidekiq_config
 end
-
-GidappfDocumentsCollectorJob.set(wait: 30.seconds).perform_later('0')

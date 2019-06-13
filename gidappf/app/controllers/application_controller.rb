@@ -27,10 +27,6 @@ class ApplicationController < ActionController::Base
 		##########################################################################
 		rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-		if Rails.env.development?
-	    Rack::MiniProfiler.authorize_request
-		end
-
 
 		private
 

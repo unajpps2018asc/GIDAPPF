@@ -1,5 +1,3 @@
-require 'sidekiq/api'
-
 module GidappfTemplatesTools
 #######################################################################################
 # Implementa comparación entre arrays para saber si todos los elementos de list están #
@@ -37,28 +35,28 @@ module GidappfTemplatesTools
       end
       e=time_sheet_hour.time_sheet.end_date.dup
       (Date.new(s.year, s.month, s.day) .. Date.new(e.year, e.month, e.day)).each do |current|
-          if time_sheet_hour.sunday? && current.wday.eql?(0) then
-            self.to_queue_sidekiq(current, time_sheet_hour)
-          end
-          if time_sheet_hour.monday && current.wday.eql?(1) then
-            self.to_queue_sidekiq(current, time_sheet_hour)
-          end
-          if time_sheet_hour.tuesday && current.wday.eql?(2) then
-            self.to_queue_sidekiq(current, time_sheet_hour)
-          end
-          if time_sheet_hour.wednesday && current.wday.eql?(3) then
-            self.to_queue_sidekiq(current, time_sheet_hour)
-          end
-          if time_sheet_hour.thursday && current.wday.eql?(4) then
-            self.to_queue_sidekiq(current, time_sheet_hour)
-          end
-          if time_sheet_hour.friday && current.wday.eql?(5) then
-            to_queue_sidekiq(current, time_sheet_hour)
-          end
-          if time_sheet_hour.saturday && current.wday.eql?(6) then
-            self.to_queue_sidekiq(current, time_sheet_hour)
-          end
+        if time_sheet_hour.sunday? && current.wday.eql?(0) then
+          self.to_queue_sidekiq(current, time_sheet_hour)
         end
+        if time_sheet_hour.monday && current.wday.eql?(1) then
+          self.to_queue_sidekiq(current, time_sheet_hour)
+        end
+        if time_sheet_hour.tuesday && current.wday.eql?(2) then
+          self.to_queue_sidekiq(current, time_sheet_hour)
+        end
+        if time_sheet_hour.wednesday && current.wday.eql?(3) then
+          self.to_queue_sidekiq(current, time_sheet_hour)
+        end
+        if time_sheet_hour.thursday && current.wday.eql?(4) then
+          self.to_queue_sidekiq(current, time_sheet_hour)
+        end
+        if time_sheet_hour.friday && current.wday.eql?(5) then
+          to_queue_sidekiq(current, time_sheet_hour)
+        end
+        if time_sheet_hour.saturday && current.wday.eql?(6) then
+          self.to_queue_sidekiq(current, time_sheet_hour)
+        end
+      end
     end
   end
 

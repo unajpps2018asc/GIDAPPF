@@ -15,4 +15,5 @@ class GidappfDocumentsCollectorJob < ApplicationJob
       end
     end
   end
+  
 end

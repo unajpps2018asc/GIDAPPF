@@ -6,18 +6,21 @@ class MattersControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @matter = matters(:one)
-    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_h_matter = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    # @auth_h_matter = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get index" do
-    get matters_url, headers: @auth_h_matter
+    sign_in users(:one)
+    get matters_url#, headers: @auth_h_matter
     assert_response :success
   end
 
   test "should get new" do
-    get new_matter_url, headers: @auth_h_matter
+    sign_in users(:one)
+    get new_matter_url#, headers: @auth_h_matter
     assert_response :success
+    sign_out :one
   end
 
   test "should create matter" do
@@ -31,13 +34,17 @@ class MattersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show matter" do
-    get matter_url(@matter), headers: @auth_h_matter
+    sign_in users(:one)
+    get matter_url(@matter)#, headers: @auth_h_matter
     assert_response :success
+    sign_out :one
   end
 
   test "should get edit" do
-    get edit_matter_url(@matter), headers: @auth_h_matter
+    sign_in users(:one)
+    get edit_matter_url(@matter)#, headers: @auth_h_matter
     assert_response :success
+    sign_out :one
   end
 
   test "should update matter" do
@@ -50,10 +57,10 @@ class MattersControllerTest < ActionDispatch::IntegrationTest
   test "should destroy matter" do
     sign_in users(:one)
     assert_difference('Matter.count', -1) do
-      delete matter_url(@matter), headers: @auth_h_matter
+      delete matter_url(@matter)#, headers: @auth_h_matter
     end
 
-    assert_response :no_content
+    assert_response :found
     sign_out :one
   end
 end

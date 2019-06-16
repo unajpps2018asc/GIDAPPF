@@ -6,19 +6,22 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @input = inputs(:one)
-    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_h_in = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    # @auth_h_in = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get index" do
+    sign_in users(:one)
     get inputs_url
-    assert_response :found
+    assert_response :success
+    sign_out :one
   end
 
   test "should get new" do
     sign_in users(:one)
-    get new_input_url, headers: @auth_h_in
+    get new_input_url#, headers: @auth_h_in
     assert_response :found
+    sign_out :one
   end
 
   test "should create input" do
@@ -35,13 +38,17 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show input" do
-    get input_url(@input), headers: @auth_h_in
+    sign_in users(:one)
+    get input_url(@input)#, headers: @auth_h_in
     assert_response :success
+    sign_out :one
   end
 
   test "should get edit" do
-    get edit_input_url(@input), headers: @auth_h_in
+    sign_in users(:one)
+    get edit_input_url(@input)#, headers: @auth_h_in
     assert_response :success
+    sign_out :one
   end
 
   # Pendiente hacer compatible `template_of_merge' por que los Profile con id 1 y 2 son templates y no figuran en fixtures
@@ -55,10 +62,10 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
   test "should destroy input" do
     sign_in users(:one)
     assert_difference('Input.count', -1) do
-      delete input_url(@input), headers: @auth_h_in
+      delete input_url(@input)#, headers: @auth_h_in
     end
 
-    assert_response :no_content
+    assert_response :found
     sign_out :one
   end
 end

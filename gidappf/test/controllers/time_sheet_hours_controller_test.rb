@@ -6,18 +6,22 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @time_sheet_hour = time_sheet_hours(:one)
-    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_h_tsh = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    # @auth_h_tsh = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get index" do
-    get time_sheet_hours_url, headers: @auth_h_tsh
+    sign_in users(:one)
+    get time_sheet_hours_url#, headers: @auth_h_tsh
     assert_response :success
+    sign_out :one
   end
 
   # test "should get new" do
+  #   sign_in users(:one)
   #   get new_time_sheet_hour_url, headers: @auth_h_tsh
   #   assert_response :success
+  #   sign_out :one
   # end
 
   test "should create time_sheet_hour" do
@@ -41,18 +45,22 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
           wednesday: @time_sheet_hour.wednesday
           } }
     end
-    assert_redirected_to time_sheet_hour_url(TimeSheetHour.last), headers: @auth_h_tsh
+    assert_redirected_to time_sheet_hour_url(TimeSheetHour.last)#, headers: @auth_h_tsh
     sign_out :one
   end
 
   test "should show time_sheet_hour" do
-    get time_sheet_hour_url(@time_sheet_hour), headers: @auth_h_tsh
+    sign_in users(:one)
+    get time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     assert_response :success
+    sign_out :one
   end
 
   test "should get edit" do
-    get edit_time_sheet_hour_url(@time_sheet_hour), headers: @auth_h_tsh
+    sign_in users(:one)
+    get edit_time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     assert_response :success
+    sign_out :one
   end
 
   test "should update time_sheet_hour" do
@@ -80,10 +88,10 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
   test "should destroy time_sheet_hour" do
     sign_in users(:one)
     assert_difference('TimeSheetHour.count', -1) do
-      delete time_sheet_hour_url(@time_sheet_hour), headers: @auth_h_tsh
+      delete time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     end
 
-    assert_response :no_content
+    assert_response :found
     sign_out :one
   end
 

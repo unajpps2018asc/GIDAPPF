@@ -9,7 +9,7 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/app/policies/matter_policy.rb                     #
+# Archivo GIDAPPF/gidappf/app/policies/matter_policy.rb                   #
 ###########################################################################
 class MatterPolicy < ApplicationPolicy
   ###########################################################################

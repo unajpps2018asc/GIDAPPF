@@ -20,12 +20,15 @@ class ApplicationController < ActionController::Base
 	###############################################
 	helper_method :get_user_links
 	protect_from_forgery with: :exception
-	before_action :authenticate_user!
+	# protect_from_forgery  unless: -> { request.format.json? }
+	prepend_before_action :authenticate_user!
 		##########################################################################
 		# Se  incluye el manejo de excepción provocado por intento de acceso     #
 		# si autorización segun las reglas de Pundit                             #
 		##########################################################################
 		rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+	  rescue_from ActionController::InvalidAuthenticityToken, with: :unblock_cookies
 
 
 		private
@@ -39,13 +42,15 @@ class ApplicationController < ActionController::Base
 	  #########################################################################################
 		def user_not_authorized(exception)
 			policy_name = exception.policy.class.to_s.underscore
-
 			flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
 			if !current_user.usercommissionroles.first.role.enabled then
-				reset_session
-				redirect_to new_user_password_path, notice: "Enter email to change passsword..."
+				redirect_to gidappf_catchs_exceptions_first_password_detect_path
 			else
 				redirect_to root_path
 		  end
+		end
+
+		def unblock_cookies
+			redirect_to gidappf_catchs_exceptions_disabled_cookies_detect_path
 		end
 end

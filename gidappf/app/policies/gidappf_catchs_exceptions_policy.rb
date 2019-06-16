@@ -9,16 +9,16 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/test/test_helper.rb                             #
+# Archivo GIDAPPF/gidappf/app/policies/gidappf_catchs_exceptions_policy.rb#
 ###########################################################################
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rails/test_help'
-# require 'devise/jwt/test_helpers' # Libreria que mantiene la sesion para todos los test
+class GidappfCatchsExceptionsControllerPolicy < ApplicationPolicy
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción index definida en ClassRoomInsituteController       #
+  # Devolución: true, todos pueden listar aulas                             #
+  ###########################################################################
+  def first_password_detect?
+    !@record.documents.first.user.usercommissionroles.first.role.enabled
+  end
 
-class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in abc order.
-  fixtures :all
-
-  # Add more helper methods to be used by all tests here...
 end

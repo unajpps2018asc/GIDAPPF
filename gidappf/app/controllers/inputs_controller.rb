@@ -5,9 +5,8 @@ class InputsController < ApplicationController
   # GET /inputs
   # GET /inputs.json
   def index
-    @ins=get_inputs_emails # module RoleAccess
+    @ins=RoleAccess.get_inputs_emails(current_user) # module RoleAccess
     @ins << current_user.email
-    # unless current_user.documents.empty? then @ins << current_user.email end
     @inputs = get_not_templates(Input.all).where(id: Document.where(user: User.where(email: @ins)).pluck(:input_id))
     @templates = get_templates(Input.all)
     authorize @inputs
@@ -112,7 +111,7 @@ class InputsController < ApplicationController
   #####################################################################################
     def get_not_templates(inputs)
       out = nil
-      if get_role_access < 30
+      if RoleAccess.get_role_access(current_user) < 30
         out = inputs.where.not(enable: false)
       else
         out = inputs

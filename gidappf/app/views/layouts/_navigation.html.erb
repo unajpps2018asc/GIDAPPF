@@ -28,7 +28,7 @@
         <!-- ############################################################### -->
         <!-- # Renderización del menú basado en roles                      # -->
         <!-- ############################################################### -->
-        <%= render get_user_links %>
+        <%= render RoleAccess.get_user_links(current_user) %>
       </ul>
     </div>
   </div>

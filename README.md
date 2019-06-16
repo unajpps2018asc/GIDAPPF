@@ -38,20 +38,19 @@ PARA SUMARSE AL DESARROLLO DEL PROYECTO, Y EJECUTAR EL PROYECTO, DESDE UNA TERMI
 * https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing
 * Luego continuar con el comando de despliegue:
 ``` [bash]
-  $ docker-compose up --build -d && docker-compose exec website rails db:setup\
-    && docker-compose exec website rake documents_collector:schedule_init
+  $ docker-compose up --build -d && docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
 ```
 
 * AHORA SE PUEDE VISITAR EL SITIO http://localhost:3000 y crear el primmer usuario admin.
 * En el caso de necesitar poblar la base de datos con valores de muestra, ingresar en la terminal:
 ``` [bash]
-  $ docker-compose exec website rake db:seed:populate_show\
-    && docker-compose exec website rake documents_collector:schedule_init
+  $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show
+    && docker-compose exec --user "$(id -u):$(id -g)"  website rake documents_collector:schedule_init
 ```
 
 * Si se apaga el servidor anfitrión y es necesario reiniciar el proyecto, en la terminal:
 ``` [bash]
-  $ docker-compose up -d && docker-compose exec website rake documents_collector:schedule_init
+  $ docker-compose up -d && docker-compose exec --user "$(id -u):$(id -g)"  website rake documents_collector:schedule_init
 ```
 
 En el caso en el que en el servidor anfitrión mantenga el servicio 'inode-tools', indicador de eventos de FileSystem los mensajes de este servicio se detendrán con:

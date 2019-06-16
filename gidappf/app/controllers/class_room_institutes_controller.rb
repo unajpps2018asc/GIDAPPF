@@ -20,7 +20,7 @@ class ClassRoomInstitutesController < ApplicationController
   # Acción diferenciada por get_role_access si es o no mayor a 30              #
   ##############################################################################
   def index
-    if get_role_access > 30.0
+    if RoleAccess.get_role_access(current_user) > 30.0
       @class_room_institutes = ClassRoomInstitute.all
     else
       @class_room_institutes = ClassRoomInstitute.where(enabled: true)

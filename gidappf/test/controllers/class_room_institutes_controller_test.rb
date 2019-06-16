@@ -6,18 +6,20 @@ class ClassRoomInstitutesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @class_room_institute = class_room_institutes(:one)
-    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_h_cri = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    # @auth_h_cri = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get index" do
-    get class_room_institutes_url, headers: @auth_h_cri
+    sign_in users(:one)
+    get class_room_institutes_url#, headers: @auth_h_cri
     assert_response :success
+    sign_out :one
   end
 
   test "should get new" do
     sign_in users(:one)
-    get class_room_institutes_url, headers: @auth_h_cri
+    get class_room_institutes_url#, headers: @auth_h_cri
     assert_response :success
     sign_out :one
   end
@@ -33,16 +35,18 @@ class ClassRoomInstitutesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show class_room_institute" do
-    get class_room_institute_url(@class_room_institute), headers: @auth_h_cri
+    sign_in users(:one)
+    get class_room_institute_url(@class_room_institute)#, headers: @auth_h_cri
     assert_response :success
+    sign_out :one
   end
 
   test "should get edit" do
     sign_in users(:one)
     @class_room_institute.enabled=true
-    get class_room_institute_url(@class_room_institute), headers: @auth_h_cri
+    get class_room_institute_url(@class_room_institute)#, headers: @auth_h_cri
     assert_response :success
-    get "/class_room_institutes#edit", headers: @auth_h_cri
+    get "/class_room_institutes#edit" #, headers: @auth_h_cri
     assert_response :success
     sign_out :one
   end
@@ -59,7 +63,7 @@ class ClassRoomInstitutesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('ClassRoomInstitute.count', -1) do
       delete class_room_institute_url(@class_room_institute), headers: @auth_h_cri
     end
-    assert_response :no_content
+    assert_response :found
     sign_out :one
   end
 end

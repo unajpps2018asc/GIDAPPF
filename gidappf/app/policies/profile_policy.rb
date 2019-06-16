@@ -106,6 +106,14 @@ class ProfilePolicy < ApplicationPolicy
     first?
   end
 
+  def first_password_detect?
+    out=false
+    unless @record.documents.first.nil?
+      out=!@record.documents.first.user.usercommissionroles.first.role.enabled
+    end
+    out
+  end
+
   private
 
   def is_my_profile?

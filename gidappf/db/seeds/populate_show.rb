@@ -29,7 +29,7 @@ gidappf_end_time = Time.rfc3339('3000-12-31T14:00:00-10:00')
 # Requisitos:                                                                         #
 #      1)Modelo de datos inicializado.                                                #
 # Ejecucion:                                                                          #
-# $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show #
+# $ docker-compose exec website rake db:seed:populate_show && docker-compose exec website rake documents_collector:schedule_init
 #######################################################################################
 
 ###########################################################################
@@ -50,7 +50,7 @@ aulas.first(9).each do |a|
       description: "#{a[2]} para la comisión.",
       start_date: gidappf_start_time,
       end_date: gidappf_end_time,
-      user_id: 1
+      user: User.find_by(email: LockEmail::LIST[2])
       }
     ])
 end

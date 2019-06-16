@@ -1,9 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  content_type: MyString1
-  script: MyText1
+  content_type: GIDAPPF words
+  script: client_side_validators/gidappf_words
 
 two:
-  content_type: MyString2
-  script: MyText2
+  content_type: GIDAPPF read only
+  script: client_side_validators/gidappf_read_onlys
+
+tree:
+  content_type: GIDAPPF alphanumerics
+  script: client_side_validators/gidappf_alphanumerics
+
+four:
+  content_type: GIDAPPF checks
+  script: client_side_validators/gidappf_checks
+
+five:
+  content_type: GIDAPPF dates
+  script: client_side_validators/gidappf_dates
+
+six:
+  content_type: GIDAPPF links
+  script: client_side_validators/gidappf_links
+
+seven:
+  content_type: GIDAPPF matters
+  script: client_side_validators/gidappf_matters
+
+eight:
+  content_type: GIDAPPF numbers
+  script: client_side_validators/gidappf_numbers
+
+nine:
+  content_type: GIDAPPF trayects
+  script: client_side_validators/gidappf_trayects
+
+ten:
+  content_type: GIDAPPF validator example
+  script: $(document).ready(function() {if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {$(event.target).val('');$( \"<p class='validation-error'>Error detected.</p>\" ).appendTo($(event.target).parent());}});

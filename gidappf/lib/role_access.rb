@@ -22,7 +22,7 @@ module RoleAccess
   #             10 si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez #
   #             -10 si el usercommisionrole no relaciona a @user en ninguna comision                                   #
   ######################################################################################################################
-  def get_role_access
+  def self.get_role_access(current_user)
     roleaccess=-10.0
     l= Usercommissionrole.where(user: current_user.id).joins(:role).
         select(:level).maximum("level")
@@ -41,10 +41,10 @@ module RoleAccess
   #             'layouts/ten_links' si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez    #
   #             'layouts/links_logout' si el usercommisionrole no relaciona a @user en ninguna comision                                    #
   ##########################################################################################################################################
-  def get_user_links
+  def self.get_user_links(current_user)
     out=''
     unless current_user.nil? then
-      l=get_role_access
+      l=self.get_role_access(current_user)
       if l >= 40.0 then
         out='layouts/forty_links'
       elsif l < 40.0 && l >= 30.0 then
@@ -62,8 +62,8 @@ module RoleAccess
     out
   end
 
-  def get_inputs_emails
-    acc = get_role_access
+  def self.get_inputs_emails(current_user)
+    acc = self.get_role_access(current_user)
     out=LockEmail::LIST.dup
     if acc < 30 && acc >= 29
       out.shift 2

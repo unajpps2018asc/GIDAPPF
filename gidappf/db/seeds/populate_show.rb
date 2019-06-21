@@ -101,7 +101,7 @@ p "[GIDAPPF] Creadas #{ClassRoomInstitute.count} Aulas"
 Vacancy.destroy_all
 ClassRoomInstitute.all.each do |a|
   12.times {|i|
-    Vacancy.create!([{class_room_institute_id: a.id, user_id: 1, occupant: nil, enabled: true}])
+    Vacancy.create!([{class_room_institute_id: a.id, occupant: nil, enabled: true}])
   }
 end
 p "[GIDAPPF] Creadas #{Vacancy.count} Vacantes" #requerido por cada aula

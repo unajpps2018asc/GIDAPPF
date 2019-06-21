@@ -5,12 +5,6 @@ class Vacancy < ApplicationRecord
   ########################################################################
   belongs_to :class_room_institute
 
-  ######################################################################
-  # Asociación muchos a uno:soporta muchos Vacancies pertenecientes    #
-  #                         a un User                                  #
-  ######################################################################
-  belongs_to :user
-
   #####################################################################
   # Asociación uno a muchos: soporta que un Aula sea asignada muchas  #
   #                          veces en la relación vacancy             #

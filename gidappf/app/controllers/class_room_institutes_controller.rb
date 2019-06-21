@@ -210,8 +210,7 @@ class ClassRoomInstitutesController < ApplicationController
         flash.now[:alert] = "Vacancy error option: #{x.to_s}."
     end
     if y > 0 then y.times {|i|
-      Vacancy.new(class_room_institute: @class_room_institute,
-        user: current_user, enabled: @class_room_institute.enabled).save}
+      Vacancy.new(class_room_institute: @class_room_institute, enabled: @class_room_institute.enabled).save}
     elsif y < 0
       Vacancy.where(class_room_institute: @class_room_institute).limit(y.abs).destroy_all
     end

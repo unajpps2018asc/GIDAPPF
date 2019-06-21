@@ -120,7 +120,7 @@ class ProfilePolicy < ApplicationPolicy
     @user.documents.present? &&
     @user.documents.first.present? &&
     @user.documents.first.profile.present? &&
-    @record.eql?(@user.documents.first.profile)
+    @record.eql?(@user.documents.first.profile) && @roleaccess>28.0
   end
 
 end

@@ -159,9 +159,13 @@ class InputsController < ApplicationController
     end
 
     def sync_slaves
-      if LockEmail::LIST.include?(@input.documents.first.user.email) &&
-        !InfoValue.where(info_key_id: @input.info_keys.pluck(:id)).empty? then
-        unless Input.find_by(title: 'Administrative rules').documents.first.update_in_all then
+      master=Document.where(
+        input_id: Input.where(title: @input.title).ids,
+        user_id: User.where(email: LockEmail::LIST)
+      ).first
+      if master.eql?(@input.documents.first) &&
+        !InfoValue.where(info_key_id: @input.info_keys.ids).empty? then
+        unless master.update_in_all then
           flash[:errors]="Not Synchronized"
         end
       end

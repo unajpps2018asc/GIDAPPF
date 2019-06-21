@@ -27,6 +27,7 @@ module GidappfTemplatesTools
 ######################################################################################
   def self.students_list_to_circulate_at_hour(time_sheet_hour)
     today= Date.today
+    out=false
     unless today > time_sheet_hour.time_sheet.end_date
       if today > time_sheet_hour.time_sheet.start_date
         s=today
@@ -37,27 +38,35 @@ module GidappfTemplatesTools
       (Date.new(s.year, s.month, s.day) .. Date.new(e.year, e.month, e.day)).each do |current|
         if time_sheet_hour.sunday? && current.wday.eql?(0) then
           self.to_queue_sidekiq(current, time_sheet_hour)
+          out=true
         end
         if time_sheet_hour.monday && current.wday.eql?(1) then
           self.to_queue_sidekiq(current, time_sheet_hour)
+          out=true
         end
         if time_sheet_hour.tuesday && current.wday.eql?(2) then
           self.to_queue_sidekiq(current, time_sheet_hour)
+          out=true
         end
         if time_sheet_hour.wednesday && current.wday.eql?(3) then
           self.to_queue_sidekiq(current, time_sheet_hour)
+          out=true
         end
         if time_sheet_hour.thursday && current.wday.eql?(4) then
           self.to_queue_sidekiq(current, time_sheet_hour)
+          out=true
         end
         if time_sheet_hour.friday && current.wday.eql?(5) then
-          to_queue_sidekiq(current, time_sheet_hour)
+          self.to_queue_sidekiq(current, time_sheet_hour)
+          out=true
         end
         if time_sheet_hour.saturday && current.wday.eql?(6) then
           self.to_queue_sidekiq(current, time_sheet_hour)
+          out=true
         end
       end
     end
+    out
   end
 
   ######################################################################################

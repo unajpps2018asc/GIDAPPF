@@ -28,7 +28,7 @@ class GidappfStudentsListDealerJob < ApplicationJob
         id: Document.where(user_id: User.where(id: time_sheet_hour.time_sheet.commission.usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
       ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each do |p|
         leg.info_values.build(:value => p.to_global_id )
-        vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id)
+        vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id.to_s)
         pr.info_values.build(:value => "No")
       end
       leg.save

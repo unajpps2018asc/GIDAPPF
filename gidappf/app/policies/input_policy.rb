@@ -71,7 +71,7 @@ class InputPolicy < ApplicationPolicy
     set_is_sysadmin
     set_roleaccess
     @user.email.eql?('john@example.com')||@issysadmin||
-    (is_my_profile? && is_not_master_document?)||@roleaccess>=40.0
+    (is_my_profile? && is_not_master_document?)||@roleaccess>=30.0
   end
 
   ###########################################################################

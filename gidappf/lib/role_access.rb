@@ -65,7 +65,7 @@ module RoleAccess
   def self.get_inputs_emails(current_user)
     acc = self.get_role_access(current_user)
     out=LockEmail::LIST.dup
-    if acc < 30 && acc >= 29
+    if acc < 40 && acc >= 29
       out.shift 2
     elsif acc < 29 && acc >= 20
       out.shift 3

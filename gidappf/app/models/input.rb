@@ -135,8 +135,10 @@ class Input < ApplicationRecord
     def present_each_vacancy
       if self.title.eql?('Time sheet hour students list') && self.grouping? then
         ungrouping_each_student_list.each do |u|
-          if u.last.last.upcase.eql?('Si'.upcase) then
-            Vacancy.find(u.last.first.to_i).update(occupant: u.first.to_i)
+          if u[0].upcase.eql?('Si'.upcase) then
+            pres = Vacancy.find(u[1].to_i)
+            pres.occupant = u[2].to_i
+            pres.save
           end
         end
       end
@@ -145,11 +147,11 @@ class Input < ApplicationRecord
 private
 
   def ungrouping_each_student_list
-    hash={}
+    hash=[]
     it_pr=self.info_keys.find_by(key: "Presente:").info_values.to_enum
     it_vac=self.info_keys.find_by(key: "Vacante:").info_values.to_enum
     self.info_keys.find_by(key: "Legajo:").info_values.each do |l|
-      hash[l.value]=[it_vac.next.value,it_pr.next.value]
+      hash << [ it_pr.next.value.dup, it_vac.next.value.dup, l.value.dup.gsub(/[^0-9]/, '') ]
     end
     hash
   end

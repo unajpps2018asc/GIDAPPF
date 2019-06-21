@@ -30,6 +30,9 @@ class ApplicationController < ActionController::Base
 
 	  rescue_from ActionController::InvalidAuthenticityToken, with: :unblock_cookies
 
+		def after_sign_out_path_for(*)
+	    new_user_session_path
+	  end
 
 		private
 

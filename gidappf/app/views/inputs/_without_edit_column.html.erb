@@ -8,7 +8,7 @@
   </thead>
 
   <tbody>
-    <% inputs.each do |input| %>
+    <% inputs.where(enable: true).each do |input| %>
       <tr>
         <td><%= link_to "#{input.title}", input %></td>
         <td><%= input.summary %></td>

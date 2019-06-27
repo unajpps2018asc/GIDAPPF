@@ -595,7 +595,7 @@ end
     user_id: u5.id, commission_id: Commission.find_by(name: "C. noche").id
   ).save
   p5=Profile.new( name: "#{Profile.count+1}/#{u+5000000}", description: "A description user #{u+30}", valid_from: 15.month.before, valid_to: 5.month.before )
-  User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.each do |i|
+  User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla

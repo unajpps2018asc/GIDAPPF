@@ -11,11 +11,12 @@ class GidappfStudentsListDealerJob < ApplicationJob
     nro=arg.first.to_i
     time_sheet_hour = TimeSheetHour.find(nro)
     if is_listable_time_sheet_hour?(time_sheet_hour)
+      docent_profile=User.find(time_sheet_hour.time_sheet.commission.usercommissionroles.find_by(role: Role.where(level: 29.0)).user_id).documents.first.profile
       in_each_hour=Input.new(
         title: 'Time sheet hour students list',
         summary:"Materia:#{time_sheet_hour.matter.name}, fecha: #{time_sheet_hour.created_at}, aula: #{time_sheet_hour.vacancy.class_room_institute.name}.",
         grouping: true,enable: true,
-        author: Input.find_by(title: 'Time sheet hour students list').author
+        author: docent_profile.id
       )
       #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
       t=Input.where(title: 'Time sheet hour students list').first.info_keys
@@ -31,11 +32,9 @@ class GidappfStudentsListDealerJob < ApplicationJob
         vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id.to_s)
         pr.info_values.build(:value => "No")
       end
-      leg.save
-      vac.save
-      pr.save
+      in_each_hour.save
       docent=User.find(time_sheet_hour.time_sheet.commission.usercommissionroles.find_by(role: Role.where(level: 29.0)).user_id)
-      Document.new(profile: docent.documents.first.profile, user: docent, input: in_each_hour).save
+      Document.new(profile: docent_profile, user: docent, input: in_each_hour).save
     end
   end
 

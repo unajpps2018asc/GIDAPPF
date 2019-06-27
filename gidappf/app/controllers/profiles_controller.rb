@@ -213,7 +213,6 @@ class ProfilesController < ApplicationController
   #             Descarta valores no inicializados.                                       #
   ########################################################################################
     def merge_profile_keys
-      @profile.merge_each_value
       @@template=@profile.template_to_merge
       @profile.merge_each_key(@@template)
     end

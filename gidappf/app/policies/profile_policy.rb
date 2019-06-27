@@ -39,9 +39,7 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: true, si roleaccess es mayor a 10                           #
   ###########################################################################
   def show?
-    self.set_is_sysadmin
-    self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||is_my_profile?||@issysadmin||@roleaccess>10.0
+    update?
   end
 
   ###########################################################################

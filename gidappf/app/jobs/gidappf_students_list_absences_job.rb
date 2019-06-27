@@ -21,17 +21,17 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
         end
       end
       unless to_justify.empty?
-        absence=Input.new(
+        absences=Input.new(
           title: 'Time sheet hour list absences',
           summary:"Materia:#{time_sheet_hour.matter.name}, fecha: #{time_sheet_hour.updated_at}, aula: #{time_sheet_hour.vacancy.class_room_institute.name}.",
           grouping: true,enable: true,author: Input.find_by(title: 'Time sheet hour list absences').author.to_i
         )
         #Legajo:t[0]GIDAPPF links 	Justificado:t[1]'GIDAPPF read only edit:t[2]GIDAPPF links destroy:t[3]GIDAPPF links
         t=Input.where(title: 'Time sheet hour list absences').first.info_keys
-        leg=absence.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
-        jus=absence.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
-        edi=absence.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
-        des=absence.info_keys.build(:key => t[3].key, :client_side_validator_id => t[3].client_side_validator_id)
+        leg=absences.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
+        jus=absences.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
+        edi=absences.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
+        des=absences.info_keys.build(:key => t[3].key, :client_side_validator_id => t[3].client_side_validator_id)
         to_justify.each do |p|
           doc=make_student_absence(p, time_sheet_hour)
           leg.info_values.build(:value => p.to_global_id)
@@ -39,21 +39,19 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
           edi.info_values.build(:value => doc.to_global_id)
           des.info_values.build(:value => doc.to_global_id)
         end
-        leg.save
-        jus.save
-        edi.save
-        des.save
+        absences.save
         Document.new(
           profile_id: User.find_by(email: LockEmail::LIST[2]).documents.first.profile_id,
           user_id: User.find_by(email: LockEmail::LIST[2]).id,
-          input_id: absence.id
+          input_id: absences.id
         ).save
-        list=Input.find_by(
+        old_list=Input.find_by(
           title: 'Time sheet hour students list',
           summary:"Materia:#{time_sheet_hour.matter.name}, fecha: #{time_sheet_hour.created_at}, aula: #{time_sheet_hour.vacancy.class_room_institute.name}.",
-          grouping: true,enable: true,
-          author: Input.find_by(title: 'Time sheet hour students list').author).documents
-        unless list.empty? || list.nil? || list.count > 1 then list.first.input_destroy end
+          grouping: true, enable: true)
+        unless old_list.nil? || old_list.documents.nil? || old_list.documents.empty? || old_list.documents.count > 1 then
+          old_list.documents.first.input_destroy
+        end
       end
     end
   end
@@ -109,14 +107,6 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
     end
     unless leads.nil? || leads.empty? then out = leads.count > 0 end
     out
-  end
-
-  def users_with_profiles
-    Document.where(
-      user_id: User.where(
-        id: time_sheet_hour.time_sheet.commission.usercommissionroles.pluck(:user_id)
-        )
-      ).distinct(:user_id).pluck(:profile_id)
   end
 
 end

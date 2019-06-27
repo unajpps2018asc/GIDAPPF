@@ -149,7 +149,6 @@ class InputsController < ApplicationController
   #             Descarta valores no inicializados.                                #
   #################################################################################
     def merge_info_keys
-      @input.merge_each_value
       @@template=@input.template_to_merge
       @input.merge_each_key(@@template)
       if @input.title.eql?('Time sheet hour students list') then
@@ -161,7 +160,7 @@ class InputsController < ApplicationController
     def sync_slaves
       master=Document.where(
         input_id: Input.where(title: @input.title).ids,
-        user_id: User.where(email: LockEmail::LIST)
+        user_id: User.where(email: LockEmail::LIST).ids
       ).first
       if master.eql?(@input.documents.first) &&
         !InfoValue.where(info_key_id: @input.info_keys.ids).empty? then

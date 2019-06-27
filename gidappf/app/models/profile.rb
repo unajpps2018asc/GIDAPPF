@@ -80,25 +80,6 @@ class Profile < ApplicationRecord
     end
 
   #########################################################################################
-  # Método privado: implementa merge para profile_value de cada profile_key.              #
-  # Prerequisitos:                                                                        #
-  #           1) Modelo de datos inicializado.                                            #
-  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
-  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
-  # Devolución: mantiene un único profile_value actualizado por cada profile_key.         #
-  #########################################################################################
-    def merge_each_value
-      self.profile_keys.each do |k|
-        if k.profile_values.count == 2 then
-          max=self.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.maximum('created_at'))
-          min=self.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.minimum('created_at'))
-          if max.value.empty? && !min.value.empty? then max.update(value: min.value) end
-          min.destroy
-        end
-      end
-    end
-
-  #########################################################################################
   # Método privado: implementa merge para profile_key del @profile seleccionado.          #
   # Prerequisitos:                                                                        #
   #           1) Modelo de datos inicializado.                                            #

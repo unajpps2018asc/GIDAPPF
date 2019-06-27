@@ -81,7 +81,7 @@ class InputPolicy < ApplicationPolicy
   def destroy?
     set_is_sysadmin
     set_roleaccess
-    @user.email.eql?('john@example.com')||(@roleaccess>39.9 && @record.eql?(Input.first))
+    @user.email.eql?('john@example.com')||(@roleaccess>39.9 && !@record.eql?(Input.find_by(title: "Administrative rules")))
   end
 
   ###########################################################################

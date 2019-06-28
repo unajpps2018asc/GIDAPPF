@@ -24,7 +24,7 @@ module RoleAccess
   ######################################################################################################################
   def self.get_role_access(current_user)
     roleaccess=-10.0
-    l= Usercommissionrole.where(user: current_user.id).joins(:role).
+    l= Usercommissionrole.where(user: current_user).joins(:role).
         select(:level).maximum("level")
     unless l.nil? then
       roleaccess=l
@@ -65,15 +65,18 @@ module RoleAccess
   def self.get_inputs_emails(current_user)
     acc = self.get_role_access(current_user)
     out=LockEmail::LIST.dup
-    if acc < 40 && acc >= 29
+    if acc < 40 && acc >= 30 #"secretary@gidappf.edu.ar"
       out.shift 2
-    elsif acc < 29 && acc >= 20
+    elsif acc < 30 && acc >= 29.0 #"docent@gidappf.edu.ar"
       out.shift 3
-    elsif acc < 20 && acc >= 10
+    elsif acc < 29 && acc >= 20 #"student@gidappf.edu.ar"
+      out.shift 4
+    elsif acc < 20 && acc >= 10 #"ingresant@gidappf.edu.ar"
       out.shift 4
     elsif acc < 10 && acc >= -20
       out.shift 5
     end
+    out << current_user.email
     out
   end
 

@@ -80,10 +80,11 @@ class Input < ApplicationRecord
   #           3) Asociacion un InfoKey a muchos InfoValue registrada en el modelo. #
   #           4) Existencia del arreglo estático LockEmail::LIST.                  #
   #           5) Existencia de la variable de clase @@template inicializada.       #
-  # Devolución: mantiene los elementos de info_keys equivalente al de @@templale.  #
+  #           6) Parametro template es un string numerico con el id del Input.     #
+  # Devolución: mantiene los elementos de info_keys equivalente al de templale.    #
   ##################################################################################
     def merge_each_key(template)
-      in1=Input.find(template)
+      in1=Input.find(template.to_i)
       if !self.grouping.eql?(in1.grouping?) then self.update(grouping: in1.grouping?) end
       in1.info_keys.each do |tik|
         if self.info_keys.where(key: tik.key).count == 2 then

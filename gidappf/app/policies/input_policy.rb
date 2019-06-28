@@ -41,7 +41,13 @@ class InputPolicy < ApplicationPolicy
   def show?
     set_is_sysadmin
     set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>19.9
+    @user.email.eql?('john@example.com')||(
+      (@issysadmin||@roleaccess>19.9)&&(
+        Input.where(id: Document.where(user: User.where(
+          email: RoleAccess.get_inputs_emails(@user))
+        ).pluck(:input_id)).include?(@record)
+      )
+    )
   end
 
   ###########################################################################
@@ -70,7 +76,11 @@ class InputPolicy < ApplicationPolicy
   def update?
     set_is_sysadmin
     set_roleaccess
-    @user.email.eql?('john@example.com')||@issysadmin||@roleaccess>19.9
+    @user.email.eql?('john@example.com')||(
+      (@issysadmin||@roleaccess>19.9)&&(
+      Input.where(id: Document.where(user: User.where(email: RoleAccess.get_inputs_emails(@user))).pluck(:input_id)).include?(@record))&&(
+        Profile.where(id: Document.where(user: User.where(email: RoleAccess.get_inputs_emails(@user))).pluck(:profile_id))).include?(Profile.find(@record.author))
+      )
   end
 
   ###########################################################################
@@ -81,7 +91,11 @@ class InputPolicy < ApplicationPolicy
   def destroy?
     set_is_sysadmin
     set_roleaccess
-    @user.email.eql?('john@example.com')||(@roleaccess>39.9 && !@record.eql?(Input.find_by(title: "Administrative rules")))
+    @user.email.eql?('john@example.com')||(
+      (@roleaccess>39.9 && !@record.eql?(Input.find_by(title: "Administrative rules")))&&(
+        Input.where(id: Document.where(user: User.where(email: RoleAccess.get_inputs_emails(@user))).pluck(:input_id)).include?(@record)
+      )
+    )
   end
 
   ###########################################################################

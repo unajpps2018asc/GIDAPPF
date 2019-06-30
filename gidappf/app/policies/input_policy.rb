@@ -45,7 +45,10 @@ class InputPolicy < ApplicationPolicy
       (@issysadmin||@roleaccess>19.9)&&(
         Input.where(id: Document.where(user: User.where(
           email: RoleAccess.get_inputs_emails(@user))
-        ).pluck(:input_id)).include?(@record)
+        ).pluck(:input_id)).include?(@record)||
+        Document.where(user: User.where(
+          email: RoleAccess.get_inputs_emails(@user))
+        ).pluck(:profile_id).include?(@record.author)
       )
     )
   end
@@ -77,9 +80,13 @@ class InputPolicy < ApplicationPolicy
     set_is_sysadmin
     set_roleaccess
     @user.email.eql?('john@example.com')||(
-      (@issysadmin||@roleaccess>19.9)&&(
-      Input.where(id: Document.where(user: User.where(email: RoleAccess.get_inputs_emails(@user))).pluck(:input_id)).include?(@record))&&(
-        Profile.where(id: Document.where(user: User.where(email: RoleAccess.get_inputs_emails(@user))).pluck(:profile_id))).include?(Profile.find(@record.author))
+        (
+          @issysadmin||@roleaccess>19.9
+        )&&(
+          Document.where(user: User.where(email: RoleAccess.get_inputs_emails(@user))).pluck(:input_id).include?(@record.template_to_merge)
+        )&&(
+          Profile.where(id: Document.where(user: User.where(email: RoleAccess.get_inputs_emails(@user))).pluck(:profile_id)).include?(Profile.find(@record.author))
+        )
       )
   end
 

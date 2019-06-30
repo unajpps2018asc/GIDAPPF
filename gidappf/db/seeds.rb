@@ -515,11 +515,7 @@ InfoKey.create!([# Un listado de justificaciones pendientes
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
 },{
-  key: 'edit',#3
-  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
-},{
-  key: 'destroy',#4
+  key: 'Acta:',#3
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 }

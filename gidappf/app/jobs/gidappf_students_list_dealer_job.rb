@@ -28,9 +28,11 @@ class GidappfStudentsListDealerJob < ApplicationJob
       Profile.where(
         id: Document.where(user_id: User.where(id: time_sheet_hour.time_sheet.commission.usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)
       ).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).each do |p|
-        leg.info_values.build(:value => p.to_global_id )
-        vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id.to_s)
-        pr.info_values.build(:value => "No")
+        if p.listable?
+          leg.info_values.build(:value => p.to_global_id )
+          vac.info_values.build(:value => it_time_sheet_hour.next.vacancy_id.to_s)
+          pr.info_values.build(:value => "No")
+        end
       end
       in_each_hour.save
       docent=User.find(time_sheet_hour.time_sheet.commission.usercommissionroles.find_by(role: Role.where(level: 29.0)).user_id)

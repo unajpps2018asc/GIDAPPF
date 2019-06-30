@@ -1,4 +1,5 @@
 require 'gidappf_templates_tools'
+require 'mins_day_tools'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,6 +14,7 @@ require 'gidappf_templates_tools'
 # Archivo GIDAPPF/gidappf/app/models/profile.rb                           #
 ###########################################################################
 class Profile < ApplicationRecord
+  include MinsDayTools, GidappfTemplatesTools
   ##########################account#####################################
   # Asociación uno a muchos: soporta que un perfil sea asignado muchas #
   #                          veces en distintos documents.             #
@@ -107,6 +109,25 @@ class Profile < ApplicationRecord
       end
     end
 
+  def listable?
+    out=true
+    absences = Input.where(id: self.documents.pluck(:input_id)).where(title: "Student absence")
+    unless absences.empty? then
+      mins=0
+      max=Input.find_by(title: "Administrative rules").
+          info_keys.find_by(key: "Minutos tolerados de ausencia injustificada:").
+            info_values.first.value.to_i
+      absences.each do |absence|
+        unless absence.info_keys.find_by(key: "Justificado:").info_values.first.value.upcase.eql?("Si".upcase) then
+          hour=absence.info_keys.find_by(key: "Horario:").info_values.first.value.split("~")
+          d = mins_duration(hour.last.split(":")[0].to_i,hour.last.split(":")[1].to_i,hour.first.split(":")[0].to_i,hour.first.split(":")[1].to_i)
+          mins += d
+        end
+      end
+      unless mins < max then out=false end
+    end
+    out
+  end
 
   private
   #######################################################################

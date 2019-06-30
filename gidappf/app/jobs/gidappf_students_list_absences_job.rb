@@ -26,18 +26,16 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
           summary:"Materia:#{time_sheet_hour.matter.name}, fecha: #{time_sheet_hour.updated_at}, aula: #{time_sheet_hour.vacancy.class_room_institute.name}.",
           grouping: true,enable: true,author: Input.find_by(title: 'Time sheet hour list absences').author.to_i
         )
-        #Legajo:t[0]GIDAPPF links 	Justificado:t[1]'GIDAPPF read only edit:t[2]GIDAPPF links destroy:t[3]GIDAPPF links
+        #Legajo:t[0]GIDAPPF links 	Justificado:t[1]'GIDAPPF read only Acta:t[2]GIDAPPF links
         t=Input.where(title: 'Time sheet hour list absences').first.info_keys
         leg=absences.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
         jus=absences.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
         edi=absences.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
-        des=absences.info_keys.build(:key => t[3].key, :client_side_validator_id => t[3].client_side_validator_id)
         to_justify.each do |p|
           doc=make_student_absence(p, time_sheet_hour)
           leg.info_values.build(:value => p.to_global_id)
           jus.info_values.build(:value => "No")
           edi.info_values.build(:value => doc.to_global_id)
-          des.info_values.build(:value => doc.to_global_id)
         end
         absences.save
         Document.new(

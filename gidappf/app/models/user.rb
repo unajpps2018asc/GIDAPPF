@@ -26,8 +26,7 @@ class User < ApplicationRecord
   #############################################################################
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
-
+  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable
   #############################################################################
   # Asociación uno a muchos: soporta que un usuario sea asignado muchas veces #
   #                          en la commision como el creador de la comision.  #

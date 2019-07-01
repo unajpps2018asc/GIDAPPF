@@ -1,6 +1,7 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>Title</th>
       <th>Summary</th>
       <th colspan="1"></th>
@@ -8,8 +9,9 @@
   </thead>
 
   <tbody>
-    <% inputs.each do |input| %>
+    <% inputs.where(enable: true).each do |input| %>
       <tr>
+        <td><%= input.documents.first.id %></td>
         <td><%= link_to "#{input.title}", input %></td>
         <td><%= input.summary %></td>
         <td><%= link_to 'Destroy', disable_input_path(input), data: { confirm: 'Are you sure?' } %></td>

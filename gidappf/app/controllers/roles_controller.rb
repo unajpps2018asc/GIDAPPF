@@ -17,7 +17,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    if get_role_access > 30.0
+    if RoleAccess.get_role_access(current_user) > 30.0
       @roles = Role.all
     else
       @roles = Role.where(enabled: true)

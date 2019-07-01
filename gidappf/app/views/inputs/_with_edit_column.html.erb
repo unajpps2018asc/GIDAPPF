@@ -1,6 +1,7 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>Title</th>
       <th>Summary</th>
       <th colspan="2"></th>
@@ -10,6 +11,7 @@
   <tbody>
     <% inputs.each do |input| %>
       <tr>
+        <td><%= input.documents.first.id %></td>
         <td><%= link_to "#{input.title}", input %></td>
         <td><%= input.summary %></td>
         <td><%= link_to 'Edit', edit_input_path(input) %></td>

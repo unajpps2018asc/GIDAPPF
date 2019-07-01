@@ -5,7 +5,7 @@ class MattersController < ApplicationController
   # GET /matters
   # GET /matters.json
   def index
-    if get_role_access > 30.0
+    if RoleAccess.get_role_access(current_user) > 30.0
       @matters = Matter.all
     else
       @matters = Matter.where(enable: true)

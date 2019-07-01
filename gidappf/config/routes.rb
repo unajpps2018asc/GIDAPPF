@@ -11,8 +11,14 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 # Archivo GIDAPPF/gidappf/config/routes.rb                                #
 ###########################################################################
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'gidappf_catchs_exceptions/disabled_cookies_detect'
+  get 'gidappf_catchs_exceptions/first_password_detect'
+  get 'gidappf_catchs_exeptions/disabled_cookies_detect'
+  get 'gidappf_catchs_exeptions/first_password_detect'
+  mount Sidekiq::Web => '/sidekiq'
   resources :inputs do
     member do
       get 'disable'

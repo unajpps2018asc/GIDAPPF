@@ -69,29 +69,7 @@ class Input < ApplicationRecord
   # Devolución: ActiveQuery con todos los docummentos vacios.                         #
   #####################################################################################
     def get_templates(inputs)
-      out=inputs.where(
-        id: (InfoKey.all-InfoKey.where(id: InfoValue.pluck(:info_key_id))).pluck(:input_id).uniq
-      )
-      out
-    end
-
-  ##################################################################################
-  # Implementa merge para info_value de cada info_key.                             #
-  # Prerequisitos:                                                                 #
-  #           1) Modelo de datos inicializado.                                     #
-  #           2) Asociacion un Input a muchos InfoKey registrada en el modelo.     #
-  #           3) Asociacion un InfoKey a muchos InfoValue registrada en el modelo. #
-  # Devolución: mantiene un único set de info_value actualizado por cada info_key. #
-  ##################################################################################
-    def merge_each_value
-      self.info_keys.each do |k|
-        if k.info_values.count == 2 then
-          max=self.info_keys.find(k.id).info_values.find_by(created_at: k.info_values.maximum('created_at'))
-          min=self.info_keys.find(k.id).info_values.find_by(created_at: k.info_values.minimum('created_at'))
-          if max.value.empty? && !min.value.empty? then max.update(value: min.value) end
-          min.destroy
-        end
-      end
+      inputs.where(id: InfoKey.where.not(id: InfoValue.pluck(:info_key_id)).pluck(:input_id).uniq)
     end
 
   ##################################################################################
@@ -102,7 +80,8 @@ class Input < ApplicationRecord
   #           3) Asociacion un InfoKey a muchos InfoValue registrada en el modelo. #
   #           4) Existencia del arreglo estático LockEmail::LIST.                  #
   #           5) Existencia de la variable de clase @@template inicializada.       #
-  # Devolución: mantiene los elementos de info_keys equivalente al de @@templale.  #
+  #           6) Parametro template es un string numerico con el id del Input.     #
+  # Devolución: mantiene los elementos de info_keys equivalente al de templale.    #
   ##################################################################################
     def merge_each_key(template)
       in1=Input.find(template.to_i)
@@ -135,8 +114,10 @@ class Input < ApplicationRecord
     def present_each_vacancy
       if self.title.eql?('Time sheet hour students list') && self.grouping? then
         ungrouping_each_student_list.each do |u|
-          if u.last.last.upcase.eql?('Si'.upcase) then
-            Vacancy.find(u.last.first.to_i).update(occupant: u.first.to_i)
+          if u[0].upcase.eql?('Si'.upcase) then
+            pres = Vacancy.find(u[1].to_i)
+            pres.occupant = u[2].to_i
+            pres.save
           end
         end
       end
@@ -145,11 +126,11 @@ class Input < ApplicationRecord
 private
 
   def ungrouping_each_student_list
-    hash={}
+    hash=[]
     it_pr=self.info_keys.find_by(key: "Presente:").info_values.to_enum
     it_vac=self.info_keys.find_by(key: "Vacante:").info_values.to_enum
     self.info_keys.find_by(key: "Legajo:").info_values.each do |l|
-      hash[l.value]=[it_vac.next.value,it_pr.next.value]
+      hash << [ it_pr.next.value.dup, it_vac.next.value.dup, l.value.dup.gsub(/[^0-9]/, '') ]
     end
     hash
   end

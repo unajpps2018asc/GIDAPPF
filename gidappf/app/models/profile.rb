@@ -1,4 +1,5 @@
 require 'gidappf_templates_tools'
+require 'mins_day_tools'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,6 +14,7 @@ require 'gidappf_templates_tools'
 # Archivo GIDAPPF/gidappf/app/models/profile.rb                           #
 ###########################################################################
 class Profile < ApplicationRecord
+  include MinsDayTools, GidappfTemplatesTools
   ##########################account#####################################
   # Asociación uno a muchos: soporta que un perfil sea asignado muchas #
   #                          veces en distintos documents.             #
@@ -80,25 +82,6 @@ class Profile < ApplicationRecord
     end
 
   #########################################################################################
-  # Método privado: implementa merge para profile_value de cada profile_key.              #
-  # Prerequisitos:                                                                        #
-  #           1) Modelo de datos inicializado.                                            #
-  #           2) Asociacion un Profile a muchos ProfileKey registrada en el modelo.       #
-  #           3) Asociacion un ProfileKey a muchos ProfileValue registrada en el modelo.  #
-  # Devolución: mantiene un único profile_value actualizado por cada profile_key.         #
-  #########################################################################################
-    def merge_each_value
-      self.profile_keys.each do |k|
-        if k.profile_values.count == 2 then
-          max=self.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.maximum('created_at'))
-          min=self.profile_keys.find(k.id).profile_values.find_by(created_at: k.profile_values.minimum('created_at'))
-          if max.value.empty? && !min.value.empty? then max.update(value: min.value) end
-          min.destroy
-        end
-      end
-    end
-
-  #########################################################################################
   # Método privado: implementa merge para profile_key del @profile seleccionado.          #
   # Prerequisitos:                                                                        #
   #           1) Modelo de datos inicializado.                                            #
@@ -126,6 +109,25 @@ class Profile < ApplicationRecord
       end
     end
 
+  def listable?
+    out=true
+    absences = Input.where(id: self.documents.pluck(:input_id)).where(title: "Student absence")
+    unless absences.empty? then
+      mins=0
+      max=Input.find_by(title: "Administrative rules").
+          info_keys.find_by(key: "Minutos tolerados de ausencia injustificada:").
+            info_values.first.value.to_i
+      absences.each do |absence|
+        unless absence.info_keys.find_by(key: "Justificado:").info_values.first.value.upcase.eql?("Si".upcase) then
+          hour=absence.info_keys.find_by(key: "Horario:").info_values.first.value.split("~")
+          d = mins_duration(hour.last.split(":")[0].to_i,hour.last.split(":")[1].to_i,hour.first.split(":")[0].to_i,hour.first.split(":")[1].to_i)
+          mins += d
+        end
+      end
+      unless mins < max then out=false end
+    end
+    out
+  end
 
   private
   #######################################################################

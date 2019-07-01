@@ -15,9 +15,11 @@
 
 <!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
 <% target_reg_exp_strategy = "$(document).ready(function() {
-    if( $(event.target).val().match(/^[a-zA-Z0-9\\s]+$/) == null ) {
+  str=String($(event.target).val());
+  rexp=String($(event.target).val().match(/[\\w\\W]+/gim));
+  if( str !== rexp ) {
       $(event.target).val('');
-      $( \"<p class='validation-error'>Alphanumeric error.</p>\" ).appendTo($(event.target).parent());
+      $( \"<p class='validation-error'>Matter error.</p>\" ).appendTo($(event.target).parent());
     }
   });"
 %>

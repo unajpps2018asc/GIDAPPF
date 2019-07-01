@@ -507,23 +507,15 @@ p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Time sheet hou
 
 InfoKey.create!([# Un listado de justificaciones pendientes
 {#REQUERIDO POR SISTEMA plantilla de asistencia
-  key: 'Legajos:',#1
+  key: 'Legajo:',#1
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
-  key: 'Vacantes:',#2
+  key: 'Justificado:',#2
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
 },{
-  key: 'Justificado:',#3
-  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
-},{
-  key: 'edit',#4
-  input_id: Input.find_by(title: 'Time sheet hour list absences').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
-},{
-  key: 'destroy',#5
+  key: 'Acta:',#3
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 }

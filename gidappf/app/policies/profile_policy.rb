@@ -39,9 +39,7 @@ class ProfilePolicy < ApplicationPolicy
   # Devolución: true, si roleaccess es mayor a 10                           #
   ###########################################################################
   def show?
-    self.set_is_sysadmin
-    self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||is_my_profile?||@issysadmin||@roleaccess>10.0
+    update?
   end
 
   ###########################################################################
@@ -106,13 +104,21 @@ class ProfilePolicy < ApplicationPolicy
     first?
   end
 
+  def first_password_detect?
+    out=false
+    unless @record.documents.first.nil?
+      out=!@record.documents.first.user.usercommissionroles.first.role.enabled
+    end
+    out
+  end
+
   private
 
   def is_my_profile?
     @user.documents.present? &&
     @user.documents.first.present? &&
     @user.documents.first.profile.present? &&
-    @record.eql?(@user.documents.first.profile)
+    @record.eql?(@user.documents.first.profile) && @roleaccess>28.0
   end
 
 end

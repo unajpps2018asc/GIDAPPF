@@ -22,9 +22,9 @@ module RoleAccess
   #             10 si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez #
   #             -10 si el usercommisionrole no relaciona a @user en ninguna comision                                   #
   ######################################################################################################################
-  def get_role_access
+  def self.get_role_access(current_user)
     roleaccess=-10.0
-    l= Usercommissionrole.where(user: current_user.id).joins(:role).
+    l= Usercommissionrole.where(user: current_user).joins(:role).
         select(:level).maximum("level")
     unless l.nil? then
       roleaccess=l
@@ -41,10 +41,10 @@ module RoleAccess
   #             'layouts/ten_links' si el usercommisionrole relaciona a @user en alguna de sus comisiones con el rol 3 al menos una vez    #
   #             'layouts/links_logout' si el usercommisionrole no relaciona a @user en ninguna comision                                    #
   ##########################################################################################################################################
-  def get_user_links
+  def self.get_user_links(current_user)
     out=''
     unless current_user.nil? then
-      l=get_role_access
+      l=self.get_role_access(current_user)
       if l >= 40.0 then
         out='layouts/forty_links'
       elsif l < 40.0 && l >= 30.0 then
@@ -62,18 +62,21 @@ module RoleAccess
     out
   end
 
-  def get_inputs_emails
-    acc = get_role_access
+  def self.get_inputs_emails(current_user)
+    acc = self.get_role_access(current_user)
     out=LockEmail::LIST.dup
-    if acc < 30 && acc >= 29
+    if acc < 40 && acc >= 30 #"secretary@gidappf.edu.ar"
       out.shift 2
-    elsif acc < 29 && acc >= 20
+    elsif acc < 30 && acc >= 29.0 #"docent@gidappf.edu.ar"
       out.shift 3
-    elsif acc < 20 && acc >= 10
+    elsif acc < 29 && acc >= 20 #"student@gidappf.edu.ar"
+      out.shift 4
+    elsif acc < 20 && acc >= 10 #"ingresant@gidappf.edu.ar"
       out.shift 4
     elsif acc < 10 && acc >= -20
       out.shift 5
     end
+    out << current_user.email
     out
   end
 

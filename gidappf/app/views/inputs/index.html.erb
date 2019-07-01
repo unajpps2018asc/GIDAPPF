@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Inputs</h1>
-<% if @ins.include?(LockEmail::LIST[1]) %>
+<% if RoleAccess.get_inputs_emails(current_user).include?(LockEmail::LIST[1]) %>
   <%= render 'with_edit_column', inputs: @inputs %>
 <% else %>
   <%= render 'without_edit_column', inputs: @inputs %>

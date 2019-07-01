@@ -6,13 +6,15 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @profile = profiles(:one)
-    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_h_profile = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    # @auth_h_profile = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get index" do
+    sign_in users(:one)
     get profiles_url
-    assert_response :found
+    assert_response :success
+    sign_out :one
   end
 
   test "should create profile" do
@@ -25,18 +27,22 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
          valid_to: 1.month.after } }
     end
 
-    assert_redirected_to profile_url(Profile.last), headers: @auth_h_profile
+    assert_redirected_to profile_url(Profile.last)#, headers: @auth_h_profile
     sign_out :one
   end
 
   test "should show profile" do
-    get profile_url(@profile), headers: @auth_h_profile
+    sign_in users(:one)
+    get profile_url(@profile)#, headers: @auth_h_profile
     assert_response :success
+    sign_out :one
   end
 
   test "should get edit" do
-    get edit_profile_url(@profile), headers: @auth_h_profile
+    sign_in users(:one)
+    get edit_profile_url(@profile)#, headers: @auth_h_profile
     assert_response :success
+    sign_out :one
   end
 
   # Pendiente hacer compatible `template_of_merge' por que los Profile con id 1 y 2 son templates y no figuran en fixtures
@@ -54,10 +60,10 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
       @profile.profile_keys.all.each do |e|
         e.profile_values.destroy_all
       end
-      delete profile_url(@profile), headers: @auth_h_profile
+      delete profile_url(@profile)#, headers: @auth_h_profile
     end
 
-    assert_response :no_content
+    assert_response :found
     sign_out :one
   end
 end

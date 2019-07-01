@@ -5,9 +5,7 @@ class InputsController < ApplicationController
   # GET /inputs
   # GET /inputs.json
   def index
-    @ins=get_inputs_emails
-    unless current_user.documents.empty? then @ins << current_user.email end
-    @inputs = get_not_templates(Input.all).where(id: Document.where(user: User.where(email: @ins)).pluck(:input_id))
+    @inputs = get_not_templates(Input.all).where(id: Document.where(user: User.where(email: RoleAccess.get_inputs_emails(current_user))).pluck(:input_id))
     @templates = get_templates(Input.all)
     authorize @inputs
   end
@@ -111,7 +109,7 @@ class InputsController < ApplicationController
   #####################################################################################
     def get_not_templates(inputs)
       out = nil
-      if get_role_access < 30
+      if RoleAccess.get_role_access(current_user) < 30
         out = inputs.where.not(enable: false)
       else
         out = inputs
@@ -149,7 +147,6 @@ class InputsController < ApplicationController
   #             Descarta valores no inicializados.                                #
   #################################################################################
     def merge_info_keys
-      @input.merge_each_value
       @@template=@input.template_to_merge
       @input.merge_each_key(@@template)
       if @input.title.eql?('Time sheet hour students list') then
@@ -159,9 +156,13 @@ class InputsController < ApplicationController
     end
 
     def sync_slaves
-      if LockEmail::LIST.include?(@input.documents.first.user.email) &&
-        !InfoValue.where(info_key_id: @input.info_keys.pluck(:id)).empty? then
-        unless Input.find_by(title: 'Administrative rules').documents.first.update_in_all then
+      master=Document.where(
+        input_id: Input.where(title: @input.title).ids,
+        user_id: User.where(email: LockEmail::LIST).ids
+      ).first
+      if master.eql?(@input.documents.first) &&
+        !InfoValue.where(info_key_id: @input.info_keys.ids).empty? then
+        unless master.update_in_all then
           flash[:errors]="Not Synchronized"
         end
       end

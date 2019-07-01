@@ -37,15 +37,15 @@ Devise.setup do |config|
   config.secret_key = '1604abd38f3a3ba71b18c68cfff0d615aaa819463d2c397ea8eaccc3b2165861f4d3297723c5737e7969d2a79e2032ebb4eb9b4e170a50cbc34a153637f18d72'
   config.mailer_sender = ENV['ACTION_MAILER_DEFAULT_FROM']
 
-  config.jwt do |jwt|
-    jwt.secret = 'Cl@v3_s3cr37@ d3 J50N w3b 70k3n5'
-    jwt.dispatch_requests = [
-        ['POST', %r{^/users/sign_in$}],
-        ['GET', %r{^/$}]
-    ]
-    jwt.request_formats = { user: [:json] }
-    jwt.expiration_time = 8.hours.to_i
-  end
+  # config.jwt do |jwt|
+  #   jwt.secret = 'Cl@v3_s3cr37@ d3 J50N w3b 70k3n5'
+  #   jwt.dispatch_requests = [
+  #       ['POST', %r{^/users/sign_in$}],
+  #       ['GET', %r{^/$}]
+  #   ]
+  #   jwt.request_formats = { user: [:json] }
+  #   jwt.expiration_time = 8.hours.to_i
+  # end
 ###########################################################################
 # Fin de configuracion GIDAPPF                                            #
 ###########################################################################

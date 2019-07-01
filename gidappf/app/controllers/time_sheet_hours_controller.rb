@@ -1,3 +1,5 @@
+require 'gidappf_templates_tools'
+
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,6 +15,7 @@
 ###########################################################################
 class TimeSheetHoursController < ApplicationController
   before_action :set_time_sheet_hour, only: [:show, :edit, :update, :destroy]
+  # after_action :post_multiple, only: [:multiple_new]
 
   ###################################################################################
   # Prerequisitos:                                                                  #
@@ -122,6 +125,7 @@ class TimeSheetHoursController < ApplicationController
         unless !@time_sheet_hour.save
           msg = "Created TSH{ ts_id=#{arr.last.first.id} vac_id=#{arr.first.first.vacancies.first.id} fh=#{@time_sheet_hour.from_hour} fm=#{@time_sheet_hour.from_min} th=#{@time_sheet_hour.to_hour} tm=#{@time_sheet_hour.to_min} mo=#{@time_sheet_hour.monday} tu=#{@time_sheet_hour.tuesday} we=#{@time_sheet_hour.wednesday} th=#{@time_sheet_hour.thursday} fr=#{@time_sheet_hour.friday} sa=#{@time_sheet_hour.saturday} su=#{@time_sheet_hour.sunday}}"
           rest_tsh(arr,@time_sheet_hour)
+          post_multiple
           format.html { redirect_to time_sheet_hours_path, notice: msg }
           format.json { render :renew_all, status: :ok}
         else
@@ -161,6 +165,11 @@ class TimeSheetHoursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_sheet_hour_params
       params.require(:time_sheet_hour).permit(:matter_id, :vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+    end
+
+    def post_multiple
+      out = GidappfTemplatesTools.students_list_to_circulate_at_hour(@time_sheet_hour)
+      if out != true then flash[:error]="Nothing planified ..." end
     end
 
     def params_to_hash

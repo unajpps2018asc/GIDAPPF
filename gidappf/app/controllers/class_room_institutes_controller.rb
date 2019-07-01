@@ -20,7 +20,7 @@ class ClassRoomInstitutesController < ApplicationController
   # Acción diferenciada por get_role_access si es o no mayor a 30              #
   ##############################################################################
   def index
-    if get_role_access > 30.0
+    if RoleAccess.get_role_access(current_user) > 30.0
       @class_room_institutes = ClassRoomInstitute.all
     else
       @class_room_institutes = ClassRoomInstitute.where(enabled: true)
@@ -210,8 +210,7 @@ class ClassRoomInstitutesController < ApplicationController
         flash.now[:alert] = "Vacancy error option: #{x.to_s}."
     end
     if y > 0 then y.times {|i|
-      Vacancy.new(class_room_institute: @class_room_institute,
-        user: current_user, enabled: @class_room_institute.enabled).save}
+      Vacancy.new(class_room_institute: @class_room_institute, enabled: @class_room_institute.enabled).save}
     elsif y < 0
       Vacancy.where(class_room_institute: @class_room_institute).limit(y.abs).destroy_all
     end

@@ -85,9 +85,8 @@ class InputsController < ApplicationController
   end
 
   def commission_qualification_list_students
-    @input=nil
     if RoleAccess.get_inputs_emails(current_user).include?("docent@gidappf.edu.ar") &&
-      !params[:tsh_id].to_i.nil? then
+      !params[:tsh_id].to_i.nil? && !current_user.documents.first.nil? then
       docent_profile=current_user.documents.first.profile
       time_sheet_hour=TimeSheetHour.find(params[:tsh_id].to_i)
       in_each_hour=new_calification_student_list(time_sheet_hour,docent_profile)
@@ -116,8 +115,9 @@ class InputsController < ApplicationController
       in_each_hour.save
       Document.new(profile: docent_profile, user: current_user, input: in_each_hour).save
       @input=in_each_hour
+    elsif current_user.documents.first.nil? then
+      redirect_back fallback_location: root_path, allow_other_host: false, alert: 'Please, generate profile before...'
     end
-    @input
   end
 
   # def commission_qualification_averanges

@@ -234,7 +234,7 @@ ClientSideValidator.create!([
     },
     {
       content_type: "GIDAPPF califications",#3
-      script: 'client_side_validators/giddappf_califications'
+      script: 'client_side_validators/gidappf_califications'
     },
     {
       content_type: "GIDAPPF checks",#4
@@ -642,11 +642,11 @@ InfoKey.create!([# Reporte de calificaciones individual
 },{
   key: 'Calificación:',#3
   input_id: Input.find_by(title: 'Student calification').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
 },{
   key: 'Observaciones:',#4
   input_id: Input.find_by(title: 'Student calification').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
 }
 ])
 #REQUERIDO POR SISTEMA

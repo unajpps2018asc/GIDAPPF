@@ -15,7 +15,7 @@
 <!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
 <% target_reg_exp_strategy = "$(document).ready(function() {
       str=String($(event.target).val());
-      if(Number.isNaN(parseFloat(str)) ) {
+      if(Number.isNaN(parseFloat(str)) || parseFloat(str) > 10 || parseFloat(str) < 1) {
           $(event.target).val('');
           $( \"<p class='validation-error'>Calification error.</p>\" ).appendTo($(event.target).parent());
         }
@@ -24,4 +24,4 @@
 %>
 
 <!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
-<%= valuable_gidappf_field.date_field :value, onfocusout: target_reg_exp_strategy %>
+<%= valuable_gidappf_field.text_field :value, onfocusout: target_reg_exp_strategy %>

@@ -84,6 +84,45 @@ class InputsController < ApplicationController
     end
   end
 
+  def commission_qualification_list_students
+    @input=nil
+    if RoleAccess.get_inputs_emails(current_user).include?("docent@gidappf.edu.ar") &&
+      !params[:tsh_id].to_i.nil? then
+      docent_profile=current_user.documents.first.profile
+      time_sheet_hour=TimeSheetHour.find(params[:tsh_id].to_i)
+      in_each_hour=new_calification_student_list(time_sheet_hour,docent_profile)
+ #Legajos:t[0] Calificación:t[1] Calificación_conceptual:t[2] Acta:t[3] Observaciones:t[4]
+      t=keys_calification_student_list('DocentProfile','Calification student list','docent@gidappf.edu.ar')
+      leg=in_each_hour.info_keys.build(:key => t[0].key,
+        :client_side_validator_id => t[0].client_side_validator_id)
+      cali=in_each_hour.info_keys.build(:key => t[1].key,
+        :client_side_validator_id => t[1].client_side_validator_id)
+      conc=in_each_hour.info_keys.build(:key => t[2].key,
+        :client_side_validator_id => t[2].client_side_validator_id)
+      act=in_each_hour.info_keys.build(:key => t[3].key,
+        :client_side_validator_id => t[3].client_side_validator_id)
+      obs=in_each_hour.info_keys.build(:key => t[4].key,
+        :client_side_validator_id => t[4].client_side_validator_id)
+      Profile.where(id: Document.where(user_id: User.where(id: time_sheet_hour.time_sheet.commission.usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).where.not(id: current_user.documents.pluck(:profile_id)).each do |p|
+        if p.listable? then
+          c = make_student_calification(p, time_sheet_hour, docent_profile)
+          leg.info_values.build(:value => p.to_global_id )
+          cali.info_values.build(:value => " " )
+          conc.info_values.build(:value => " " )
+          act.info_values.build(:value => c.to_global_id )
+          obs.info_values.build(:value => " " )
+        end
+      end
+      in_each_hour.save
+      Document.new(profile: docent_profile, user: current_user, input: in_each_hour).save
+      @input=in_each_hour
+    end
+    @input
+  end
+
+  # def commission_qualification_averanges
+  # end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_input
@@ -166,6 +205,80 @@ class InputsController < ApplicationController
           flash[:errors]="Not Synchronized"
         end
       end
+    end
+
+  ##############################################################################
+  # Método privado: genera un nuevo input para 'Calification student list'     #
+  #           1) Modelo de datos inicializado.                                 #
+  #           2) Asociacion un Input a muchos InfoKey registrada en el modelo. #
+  # Devolución: Nuevo input 'Calification student list'                        #
+  ##############################################################################
+    def new_calification_student_list(time_sheet_hour,docent_profile)
+      Input.new( title: 'Calification student list',
+        summary: "Materia:#{time_sheet_hour.matter.name}, fecha: #{
+        time_sheet_hour.created_at}, aula: #{time_sheet_hour.vacancy.
+        class_room_institute.name}.", grouping: true, enable: true,
+        author: docent_profile.id)
+    end
+
+  ################################################################################
+  # Método privado: patron ActiveRecord relation para 'Calification student list'#
+  #           1) Modelo de datos inicializado.                                   #
+  #           2) Asociacion un Input a muchos InfoKey registrada en el modelo.   #
+  # Devolución: Nuevo ActiveRecord relation para 'Calification student list'     #
+  ################################################################################
+    def keys_calification_student_list(name,title,email)
+      Document.find_by(profile: Profile.find_by( name: name),
+        input: Input.find_by(title: title), user: User.find_by(email: email)
+      ).input.info_keys
+    end
+
+  ################################################################################
+  # Método privado: patron ActiveRecord relation para 'Calification student list'#
+  #           1) Modelo de datos inicializado.                                   #
+  #           2) Asociacion un Input a muchos InfoKey registrada en el modelo.   #
+  # Devolución: Document 'Calification student list'                             #
+  ################################################################################
+    def make_student_calification(profile, time_sheet_hour, author)
+      out=nil
+      u=profile.documents.first.user
+      template=Input.where(title: 'Student calification').first
+      calification=Input.new( title: template.title, summary:
+        "#{template.summary} para: #{profile.name}, materia:#{time_sheet_hour.matter.name}.",
+        grouping: template.grouping, enable: true, author: author.id )
+      template.info_keys.each do |t|
+        calif_key = calification.info_keys.build(:key => t.key,
+          :client_side_validator_id => t.client_side_validator_id)
+        if t.key.eql?('Legajo:') then
+          calif_key.info_values.build(:value => profile.id)
+        end
+        if t.key.eql?('Nombre y apellido:') then
+          val = " "
+          unless profile.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value.nil? then
+            val << profile.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value
+          end
+          val << " "
+          unless profile.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value.nil? then
+            val << profile.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value
+          end
+          calif_key.info_values.build(:value => val)
+        end
+        if t.key.eql?('Calificación:') then
+          calif_key.info_values.build(:value => " ")
+        end
+        if t.key.eql?('Observaciones:') then
+          calif_key.info_values.build(:value => " ")
+        end
+        calif_key.save
+      end
+      calification.save
+      out=Document.new(
+        profile_id: u.documents.first.profile_id,
+        user_id: u.id,
+        input_id: calification.id
+      )
+      out.save
+      out.input
     end
 
 end

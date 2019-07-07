@@ -610,11 +610,11 @@ InfoKey.create!([# Un listado de calificaciones de estudiantes
   input_id: Input.find_by(title: 'Calification student list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
-  key: 'Calificación:',#2
+  key: 'Nota:',#2
   input_id: Input.find_by(title: 'Calification student list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
 },{
-  key: 'Calificación conceptual:',#3
+  key: 'Nota docente:',#3
   input_id: Input.find_by(title: 'Calification student list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
 },{
@@ -622,7 +622,7 @@ InfoKey.create!([# Un listado de calificaciones de estudiantes
   input_id: Input.find_by(title: 'Calification student list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
-  key: 'Observaciones:',#5
+  key: 'Comentario:',#5
   input_id: Input.find_by(title: 'Calification student list').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
 }
@@ -642,11 +642,11 @@ InfoKey.create!([# Reporte de calificaciones individual
 },{
   key: 'Calificación:',#3
   input_id: Input.find_by(title: 'Student calification').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Observaciones:',#4
   input_id: Input.find_by(title: 'Student calification').id,
-  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 }
 ])
 #REQUERIDO POR SISTEMA

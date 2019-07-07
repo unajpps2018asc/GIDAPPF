@@ -89,18 +89,18 @@ class InputsController < ApplicationController
       !params[:tsh_id].to_i.nil? && !current_user.documents.first.nil? then
       docent_profile=current_user.documents.first.profile
       time_sheet_hour=TimeSheetHour.find(params[:tsh_id].to_i)
-      in_each_hour=new_calification_student_list(time_sheet_hour,docent_profile)
- #Legajos:t[0] Calificación:t[1] Calificación_conceptual:t[2] Acta:t[3] Observaciones:t[4]
+      @input=new_calification_student_list(time_sheet_hour,docent_profile)
+      #Legajo:t[0] Nota:t[1] Nota docente:t[2] Acta:t[3] Comentario:t[4]
       t=keys_calification_student_list('DocentProfile','Calification student list','docent@gidappf.edu.ar')
-      leg=in_each_hour.info_keys.build(:key => t[0].key,
+      leg=@input.info_keys.build(:key => t[0].key,
         :client_side_validator_id => t[0].client_side_validator_id)
-      cali=in_each_hour.info_keys.build(:key => t[1].key,
+      cali=@input.info_keys.build(:key => t[1].key,
         :client_side_validator_id => t[1].client_side_validator_id)
-      conc=in_each_hour.info_keys.build(:key => t[2].key,
+      conc=@input.info_keys.build(:key => t[2].key,
         :client_side_validator_id => t[2].client_side_validator_id)
-      act=in_each_hour.info_keys.build(:key => t[3].key,
+      act=@input.info_keys.build(:key => t[3].key,
         :client_side_validator_id => t[3].client_side_validator_id)
-      obs=in_each_hour.info_keys.build(:key => t[4].key,
+      obs=@input.info_keys.build(:key => t[4].key,
         :client_side_validator_id => t[4].client_side_validator_id)
       Profile.where(id: Document.where(user_id: User.where(id: time_sheet_hour.time_sheet.commission.usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).where.not(id: current_user.documents.pluck(:profile_id)).each do |p|
         if p.listable? then
@@ -112,9 +112,8 @@ class InputsController < ApplicationController
           obs.info_values.build(:value => " " )
         end
       end
-      in_each_hour.save
-      Document.new(profile: docent_profile, user: current_user, input: in_each_hour).save
-      @input=in_each_hour
+      @input.save
+      Document.new(profile: docent_profile, user: current_user, input: @input).save
     elsif current_user.documents.first.nil? then
       redirect_back fallback_location: root_path, allow_other_host: false, alert: 'Please, generate profile before...'
     end
@@ -190,6 +189,8 @@ class InputsController < ApplicationController
       @input.merge_each_key(@@template)
       if @input.title.eql?('Time sheet hour students list') then
         @input.present_each_vacancy
+      elsif @input.title.eql?('Calification student list') then
+        @input.calif_each_act
       end
       sync_slaves
     end

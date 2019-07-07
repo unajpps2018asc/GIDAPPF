@@ -575,7 +575,7 @@ end
       when 24 #'Elección de turno desde[Hr]:'
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "7").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "22").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "23").save
       else
         p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end

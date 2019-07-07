@@ -113,26 +113,68 @@ class Input < ApplicationRecord
   ##################################################################################
     def present_each_vacancy
       if self.title.eql?('Time sheet hour students list') && self.grouping? then
-        ungrouping_each_student_list.each do |u|
-          if u[0].upcase.eql?('Si'.upcase) then
-            pres = Vacancy.find(u[1].to_i)
-            pres.occupant = u[2].to_i
-            pres.save
+        #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
+        rows_present_vacancy_profile_id_to_arr.each do |pre_vac_pro|
+          if pre_vac_pro[0].upcase.eql?('Si'.upcase) then
+            vacancy = Vacancy.find(pre_vac_pro[1].to_i)
+            vacancy.occupant = pre_vac_pro[2].to_i
+            vacancy.save
           end
+        end
+      end
+    end
+
+  ##################################################################################
+  # Implementa sincronismo con notas de cada acta de estudiante.                   #
+  # Prerequisitos:                                                                 #
+  #           1) Modelo de datos inicializado.                                     #
+  #           2) Asociacion un Input a muchos InfoKey registrada en el modelo.     #
+  #           3) Asociacion un InfoKey a muchos InfoValue registrada en el modelo. #
+  # Devolución: mantiene un único set de info_value actualizado por cada info_key. #
+  ##################################################################################
+    def calif_each_act
+      if self.title.eql?('Calification student list') && self.grouping? then
+        #Legajo:t[0] Nota:t[1] Nota docente:t[2] Acta:t[3] Comentario:t[4]
+        rows_profile_id_note_note_docent_act_comment_to_arr.each do |pro_note1_note2_act_comm|
+          act_calif=Input.find(pro_note1_note2_act_comm[3].to_i) #title: 'Student calification'
+          if !act_calif.nil? && pro_note1_note2_act_comm[0].eql?(
+            act_calif.info_keys.find_by(key: 'Legajo:').info_values.first.value) then
+            act_calif.info_keys.find_by(key: 'Calificación:').info_values.first.
+              update(value: pro_note1_note2_act_comm[1])
+            act_calif.info_keys.find_by(key: 'Observaciones:').info_values.first.
+              update(value: pro_note1_note2_act_comm[4])
+          end
+          act_calif.update(summary: "Reporte de calificaciones individual. "+self.summary)
         end
       end
     end
 
 private
 
-  def ungrouping_each_student_list
-    hash=[]
+  def rows_profile_id_note_note_docent_act_comment_to_arr
+    rows=[]
+    it_profile=self.info_keys.find_by(key: "Legajo:").info_values.to_enum
+    it_calif1=self.info_keys.find_by(key: "Nota:").info_values.to_enum
+    it_calif2=self.info_keys.find_by(key: "Nota docente:").info_values.to_enum
+    it_comm=self.info_keys.find_by(key: "Comentario:").info_values.to_enum
+    self.info_keys.find_by(key: "Acta:").info_values.each do |a|
+      rows << [ it_profile.next.value.dup.gsub(/[^0-9]/, ''),#0
+                it_calif1.next.value.dup,#1
+                it_calif2.next.value.dup,#2
+                a.value.dup.gsub(/[^0-9]/, ''),#3
+                it_comm.next.value.dup ]#4
+    end
+    rows
+  end
+
+  def rows_present_vacancy_profile_id_to_arr
+    rows=[]
     it_pr=self.info_keys.find_by(key: "Presente:").info_values.to_enum
     it_vac=self.info_keys.find_by(key: "Vacante:").info_values.to_enum
     self.info_keys.find_by(key: "Legajo:").info_values.each do |l|
-      hash << [ it_pr.next.value.dup, it_vac.next.value.dup, l.value.dup.gsub(/[^0-9]/, '') ]
+      rows << [ it_pr.next.value.dup, it_vac.next.value.dup, l.value.dup.gsub(/[^0-9]/, '') ]
     end
-    hash
+    rows
   end
 
 end

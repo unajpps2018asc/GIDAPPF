@@ -102,7 +102,10 @@ class InputsController < ApplicationController
         :client_side_validator_id => t[3].client_side_validator_id)
       obs=@input.info_keys.build(:key => t[4].key,
         :client_side_validator_id => t[4].client_side_validator_id)
-      Profile.where(id: Document.where(user_id: User.where(id: time_sheet_hour.time_sheet.commission.usercommissionroles.pluck(:user_id))).distinct(:user_id).pluck(:profile_id)).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).where.not(id: current_user.documents.pluck(:profile_id)).each do |p|
+      Profile.where(id: Document.where(user_id: User.where(id: time_sheet_hour.
+        time_sheet.commission.usercommissionroles.pluck(:user_id))).distinct(:user_id).
+        pluck(:profile_id)).where('valid_from <= ?', Date.today).where('valid_to >= ?', Date.today).
+        where.not(id: current_user.documents.pluck(:profile_id)).each do |p|
         if p.listable? then
           c = make_student_calification(p, time_sheet_hour, docent_profile)
           leg.info_values.build(:value => p.to_global_id )

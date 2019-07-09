@@ -33,6 +33,7 @@ class TimeSheetHoursController < ApplicationController
   # GET /time_sheet_hours
   # GET /time_sheet_hours.json
   def index
+    # @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id, from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday, thursday, friday, saturday, sunday, matter_id) *').all
     @time_sheet_hours = TimeSheetHour.all
     authorize @time_sheet_hours
     @time_sheet_hours -= @time_sheet_hours.where(from_hour: 0, from_min: 0, to_hour: 0, to_min: 0)
@@ -155,6 +156,28 @@ class TimeSheetHoursController < ApplicationController
     end
   end
   helper_method :disable_ts
+
+  def current_commissions
+    acc=RoleAccess.get_role_access(current_user)
+    if acc > 29.0
+      @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id,
+        from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
+        thursday, friday, saturday, sunday, matter_id) *').
+        where(time_sheet: TimeSheet.where(commission: Commission.where(user: current_user)).
+          where('start_date < ?',Date.today).where('end_date > ?',Date.today))
+    elsif acc == 29.0
+      @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id,
+        from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
+        thursday, friday, saturday, sunday, matter_id) *').
+        where(time_sheet: TimeSheet.where('start_date < ?',Date.today).
+        where('end_date > ?',Date.today).where(commission_id: current_user.
+          usercommissionroles.pluck(:commission_id).uniq))
+    else
+      @time_sheet_hours=TimeSheetHour.all
+    end
+    authorize @time_sheet_hours
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -123,4 +123,10 @@ class TimeSheetHourPolicy < ApplicationPolicy
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
   end
 
+  def current_commissions?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>28.9
+  end
+
 end

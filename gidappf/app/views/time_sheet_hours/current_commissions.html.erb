@@ -1,0 +1,31 @@
+
+<p id="notice"><%= notice %></p>
+<h1>Current commissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Commission</th>
+      <th>Classroom</th>
+      <th>Matter</th>
+      <th>Hour occupied</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @time_sheet_hours.each do |time_sheet_hour| %>
+      <tr>
+        <td><%= link_to time_sheet_hour.time_sheet.commission.name, time_sheet_hour %></td>
+        <td><%= time_sheet_hour.vacancy.class_room_institute.name %></td>
+        <td><%= time_sheet_hour.matter.name %></td>
+        <td><%= time_sheet_hour.occupied_hour_fmt %></td>
+        <td><%= link_to 'Qualify',commission_qualification_list_students_input_path(id:0,tsh_id:time_sheet_hour.id) %></td>
+        <td><%= link_to 'Edit', time_sheet_hour %></td>
+        <td><%= link_to 'Destroy', time_sheet_hour %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<div><%= link_to 'All commissions', commissions_path %></div>

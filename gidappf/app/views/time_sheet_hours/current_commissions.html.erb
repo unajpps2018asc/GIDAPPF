@@ -20,7 +20,7 @@
         <td><%= time_sheet_hour.matter.name %></td>
         <td><%= time_sheet_hour.occupied_hour_fmt %></td>
         <td><%= link_to 'Qualify',commission_qualification_list_students_input_path(id:0,tsh_id:time_sheet_hour.id) %></td>
-        <td><%= link_to 'Edit', time_sheet_hour %></td>
+        <td><%= link_to 'Members', members_current_path(tsh_id:time_sheet_hour.id) %></td>
         <td><%= link_to 'Destroy', time_sheet_hour %></td>
       </tr>
     <% end %>

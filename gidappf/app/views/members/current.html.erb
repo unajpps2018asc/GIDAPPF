@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= "Students" %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Valid to</th>
+      <th>Valid from</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profiles.each do |profile| %>
+      <tr>
+        <td><%= link_to "#{profile.name}", profile %></td>
+        <td><%= profile.description.first(50)+"…" %></td>
+        <td><%= profile.valid_to.strftime("%d/%m/%Y") %></td>
+        <td><%= profile.valid_from.strftime("%d/%m/%Y") %></td>
+        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
+        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div><%= link_to 'All members', profiles_path %></div>

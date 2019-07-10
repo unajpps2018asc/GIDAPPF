@@ -49,8 +49,10 @@ module RoleAccess
         out='layouts/forty_links'
       elsif l < 40.0 && l >= 30.0 then
         out='layouts/thirty_links'
-      elsif l < 30.0 && l >= 20.0 then
+      elsif l < 30.0 && l >= 29.0 then
         out='layouts/twenty_links'
+      elsif l < 29.0 && l >= 20.0 then
+        out='layouts/ten_links'
       elsif l < 20.0 && l >= 10.0 then
         out='layouts/ten_links'
       elsif l < 10.0 && l >= -10.0 then

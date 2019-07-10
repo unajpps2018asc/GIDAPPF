@@ -2,17 +2,17 @@
 # Detalle del servidor de desarrollo utilizado en el proyecto GIDAPPF #
 #######################################################################
 $ uname -a
-Linux archlinux 5.1.2-arch1-1-ARCH #1 SMP PREEMPT Wed May 15 00:09:47 UTC
+Linux archlinux 5.1.16-arch1-1-ARCH #1 SMP PREEMPT Wed Jul 3 20:23:07 UTC
 2019 x86_64 GNU/Linux
 
 $ ruby --version
 ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
 
 $ docker --version
-Docker version 18.09.6-ce, build 481bc77156
+Docker version 18.09.7-ce, build 2d0083d657
 
 $ docker-compose --version
-docker-compose version 1.24.0, build unknown
+docker-compose version 1.24.1, build unknown
 
 $ gem list .
 
@@ -59,7 +59,7 @@ zlib (default: 1.0.0)
 # Detalle de los servicios instalados en el proyecto GIDAPPF #
 ##############################################################
 
-Imagen Docker de base: ruby:2.6.1-alpine3.9
+Imagen Docker de base: ruby:2.6.3-alpine3.9
 
 ##Gemas instaladas dento de la imagen base##
 
@@ -77,8 +77,8 @@ activerecord (5.2.3)
 activestorage (5.2.3)
 activesupport (5.2.3)
 arel (9.0.0)
-autoprefixer-rails (9.5.1.1, 9.5.1)
-bcrypt (3.1.12)
+autoprefixer-rails (9.6.0)
+bcrypt (3.1.13)
 bigdecimal (default: 1.4.4, default: 1.4.1)
 bootstrap-sass (3.4.1)
 builder (3.2.3)
@@ -93,21 +93,16 @@ date (default: 2.0.0)
 dbm (default: 1.0.0)
 debug_inspector (0.0.3)
 devise (4.6.2)
-devise-jwt (0.5.9)
 did_you_mean (1.3.0)
-dry-auto_inject (0.6.1)
-dry-configurable (0.8.2)
-dry-container (0.7.0)
-dry-core (0.4.7)
 e2mmap (default: 0.1.0)
 erubi (1.8.0)
 etc (default: 1.0.1)
 execjs (2.7.0)
 fcntl (default: 1.0.0)
-ffi (1.11.0, 1.10.0)
+ffi (1.11.1)
 fiddle (default: 1.0.0)
 fileutils (default: 1.2.0, default: 1.1.0)
-font-awesome-rails (4.7.0.5, 4.7.0.4)
+font-awesome-rails (4.7.0.5)
 forwardable (default: 1.2.0)
 gdbm (default: 2.0.0)
 globalid (0.4.2)
@@ -115,10 +110,9 @@ i18n (1.6.0)
 io-console (default: 0.4.7)
 ipaddr (default: 1.2.2)
 irb (default: 1.0.0)
-jbuilder (2.9.1, 2.8.0)
-jquery-rails (4.3.3)
+jbuilder (2.9.1)
+jquery-rails (4.3.5)
 json (default: 2.2.0, default: 2.1.0)
-jwt (2.1.0)
 listen (3.1.5)
 logger (default: 1.3.0)
 loofah (2.2.3)
@@ -130,11 +124,10 @@ mimemagic (0.3.3)
 mini_mime (1.0.1)
 mini_portile2 (2.4.0)
 minitest (5.11.3)
-multi_json (1.13.1)
 mutex_m (default: 0.1.0)
 net-telnet (0.2.0)
 nio4r (2.3.1)
-nokogiri (1.10.3, 1.10.2)
+nokogiri (1.10.3)
 openssl (default: 2.1.2)
 orm_adapter (0.5.0)
 ostruct (default: 0.1.0)
@@ -157,7 +150,7 @@ rake (12.3.2)
 rb-fsevent (0.10.3)
 rb-inotify (0.10.0)
 rdoc (default: 6.1.1, default: 6.1.0)
-redis (4.1.1, 4.1.0)
+redis (4.1.2)
 responders (2.4.1)
 rexml (default: 3.2.1, default: 3.1.9)
 rss (default: 0.2.8, default: 0.2.7)
@@ -169,8 +162,8 @@ sassc (2.0.1)
 scanf (default: 1.0.0)
 sdbm (default: 1.0.0)
 shell (default: 0.7)
-sidekiq (5.2.7, 5.2.6)
-spring (2.0.2)
+sidekiq (5.2.7)
+spring (2.1.0)
 spring-watcher-listen (2.0.1)
 sprockets (3.7.2)
 sprockets-rails (3.2.1)
@@ -189,11 +182,10 @@ tzinfo (1.2.5)
 tzinfo-data (1.2019.1)
 uglifier (4.1.20)
 warden (1.2.8)
-warden-jwt_auth (0.3.6)
 web-console (3.3.1)
 webrick (default: 1.4.2)
-websocket-driver (0.7.0)
-websocket-extensions (0.1.3)
+websocket-driver (0.7.1)
+websocket-extensions (0.1.4)
 xmlrpc (0.3.0)
 zlib (default: 1.0.0)
 

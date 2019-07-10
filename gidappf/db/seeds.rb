@@ -148,30 +148,42 @@ p "[GIDAPPF] Creados #{Profile.count} Perfiles"
 ###########################################################
 Input.destroy_all
 Input.create!([
-{
+{#plantilla para el circuito de ausencias
   title: 'Student absence',
   summary: 'Un documento de ausencia',
   grouping: false,
   enable: true,
   author: Profile.find_by(name: 'SecretaryProfile').id
-},{
+},{#plantilla para el circuito de ausencias
   title: 'Time sheet hour students list',
   summary: 'Un listado de horario iniciado',
   grouping: true,
   enable: true,
   author: Profile.find_by(name: 'SecretaryProfile').id
-},{
+},{#plantilla para el circuito de ausencias
   title: 'Time sheet hour list absences',
   summary: 'Un listado de justificaciones',
   grouping: true,
   enable: true,
   author: Profile.find_by(name: 'SecretaryProfile').id
-},{
+},{#documento maestro del circuito administrativo
   title: 'Administrative rules',
   summary: 'Un listado de límites y tolerancias',
   grouping: false,
   enable: true,
   author: Profile.find_by(name: 'AdministratorProfile').id
+},{#plantilla para el circuito de calificaciones
+  title: 'Calification student list',
+  summary: 'Reporte de calificaciones',#instancia calificadora,fecha, materia, legajo
+  grouping: true,
+  enable: true,
+  author: Profile.find_by(name: 'DocentProfile').id #docente a cargo
+},{#plantilla para el circuito de calificaciones
+  title: 'Student calification',
+  summary: 'Reporte de calificaciones individual',#instancia calificadora,fecha, materia
+  grouping: false,
+  enable: true,
+  author: Profile.find_by(name: 'DocentProfile').id #docente a cargo
 }
 ])
 #REQUERIDO POR SISTEMA
@@ -193,9 +205,17 @@ Document.create!([
     input_id: Input.find_by(title: 'Time sheet hour list absences').id,#datos y
     user_id: User.find_by( email: LockEmail::LIST[2] ).id #usuario secretary@gidappf.edu.ar vinculados por Document3
   },{
+    profile_id: Profile.find_by(name: 'DocentProfile').id, #perfil,
+    input_id: Input.find_by(title: 'Calification student list').id, #datos y
+    user_id: User.find_by( email: LockEmail::LIST[3] ).id #usuario docent@gidappf.edu.ar vinculados por Document4
+  },{
+    profile_id: Profile.find_by(name: 'StudentProfile').id, #perfil,
+    input_id: Input.find_by(title: 'Student calification').id, #datos y
+    user_id: User.find_by( email: LockEmail::LIST[4] ).id #usuario student@gidappf.edu.ar vinculados por Document5
+  },{
     profile_id: Profile.find_by(name: 'AdministratorProfile').id, #perfil,
     input_id: Input.find_by(title: 'Administrative rules').id, #datos y
-    user_id: User.find_by( email: LockEmail::LIST[1] ).id #usuario administrator@gidappf.edu.ar vinculados por Document3
+    user_id: User.find_by( email: LockEmail::LIST[1] ).id #usuario administrator@gidappf.edu.ar vinculados por Document6
   }
 ])
 #REQUERIDO POR SISTEMA
@@ -213,35 +233,39 @@ ClientSideValidator.create!([
       script: 'client_side_validators/gidappf_alphanumerics'
     },
     {
-      content_type: "GIDAPPF checks",#3
+      content_type: "GIDAPPF califications",#3
+      script: 'client_side_validators/gidappf_califications'
+    },
+    {
+      content_type: "GIDAPPF checks",#4
       script: 'client_side_validators/gidappf_checks'
     },
     {
-      content_type: "GIDAPPF dates",#4
+      content_type: "GIDAPPF dates",#5
       script: 'client_side_validators/gidappf_dates'
     },
     {
-      content_type: "GIDAPPF links",#5
+      content_type: "GIDAPPF links",#6
       script: 'client_side_validators/gidappf_links'
     },
     {
-      content_type: "GIDAPPF matters",#6
+      content_type: "GIDAPPF matters",#7
       script: 'client_side_validators/gidappf_matters'
     },
     {
-      content_type: "GIDAPPF numbers",#7
+      content_type: "GIDAPPF numbers",#8
       script: 'client_side_validators/gidappf_numbers'
     },
     {
-      content_type: "GIDAPPF trayects",#8
+      content_type: "GIDAPPF trayects",#9
       script: 'client_side_validators/gidappf_trayects'
     },
     {
-      content_type: "GIDAPPF words",#9
+      content_type: "GIDAPPF words",#10
       script: 'client_side_validators/gidappf_words'
     },
     {
-      content_type: "GIDAPPF validator example",#10
+      content_type: "GIDAPPF validator example",#11
       script: "$(document).ready(function() {
         if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
             $(event.target).val('');
@@ -524,7 +548,7 @@ InfoKey.create!([# Un listado de justificaciones pendientes
 p "[GIDAPPF] Creados #{ InfoKey.where( input: Input.find_by( title: 'Time sheet hour list absences' ) ).count } campos de plantilla listado de justificaciones pendientes"
 
 InfoKey.create!([# Un documento de reglas administrativas
-{#REQUERIDO POR SISTEMA plantilla de asistencia
+{#REQUERIDO POR SISTEMA plantilla del documento maestro del circuito administrativo
   key: 'Introducción:',#1
   input_id: Input.find_by(title: 'Administrative rules').id,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
@@ -551,7 +575,7 @@ p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Admministrativ
 # lectura. Los valores son referencias constantes para calculos estadisticos.           #
 #########################################################################################
 InfoValue.create!([# Un documento de reglas administrativas
-{
+{#REQUERIDO POR SISTEMA valores iniciales del documento maestro del circuito administrativo
   value: "La administración considera que los siguientes items deben ser respetados por toda la comunidad:",
   info_key: InfoKey.find_by(
     key: 'Introducción:',
@@ -578,4 +602,52 @@ InfoValue.create!([# Un documento de reglas administrativas
 }
 ])
 #REQUERIDO POR SISTEMA
-p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Administrative rules')).count} valores del documento de reglas administrativas"
+p "[GIDAPPF] Creados #{InfoKey.where(input: Input.find_by(title: 'Administrative rules')).count} valores iniciales del documento maestro del circuito administrativo"
+
+InfoKey.create!([# Un listado de calificaciones de estudiantes
+{#REQUERIDO POR SISTEMA plantilla de calificaciones
+  key: 'Legajo:',#1
+  input_id: Input.find_by(title: 'Calification student list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
+},{
+  key: 'Nota:',#2
+  input_id: Input.find_by(title: 'Calification student list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
+},{
+  key: 'Nota docente:',#3
+  input_id: Input.find_by(title: 'Calification student list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
+},{
+  key: 'Acta:',#4
+  input_id: Input.find_by(title: 'Calification student list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
+},{
+  key: 'Comentario:',#5
+  input_id: Input.find_by(title: 'Calification student list').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+}
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{ InfoKey.where( input: Input.find_by( title: 'Calification student list' ) ).count } campos de plantilla listado de calificaciones"
+
+InfoKey.create!([# Reporte de calificaciones individual
+{#REQUERIDO POR SISTEMA plantilla de calificaciones individuales
+  key: 'Legajo:',#1
+  input_id: Input.find_by(title: 'Student calification').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
+},{
+  key: 'Nombre y apellido:',#2
+  input_id: Input.find_by(title: 'Student calification').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+},{
+  key: 'Calificación:',#3
+  input_id: Input.find_by(title: 'Student calification').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+},{
+  key: 'Observaciones:',#4
+  input_id: Input.find_by(title: 'Student calification').id,
+  client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
+}
+])
+#REQUERIDO POR SISTEMA
+p "[GIDAPPF] Creados #{ InfoKey.where( input: Input.find_by( title: 'Student calification' ) ).count } campos de plantilla listado de calificaciones individuales"

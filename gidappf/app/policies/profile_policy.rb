@@ -104,6 +104,10 @@ class ProfilePolicy < ApplicationPolicy
     first?
   end
 
+  def current?
+    index?
+  end
+
   def first_password_detect?
     out=false
     unless @record.documents.first.nil?

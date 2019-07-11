@@ -85,10 +85,11 @@ class InputsController < ApplicationController
   end
 
   def commission_qualification_list_students
+    time_sheet_hour=TimeSheetHour.find(params[:tsh_id].to_i)
+    authorize time_sheet_hour
     if RoleAccess.get_inputs_emails(current_user).include?("docent@gidappf.edu.ar") &&
       !params[:tsh_id].to_i.nil? && !current_user.documents.first.nil? then
       docent_profile=current_user.documents.first.profile
-      time_sheet_hour=TimeSheetHour.find(params[:tsh_id].to_i)
       @input=new_calification_student_list(time_sheet_hour,docent_profile)
       #Legajo:t[0] Nota:t[1] Nota docente:t[2] Acta:t[3] Comentario:t[4]
       t=keys_calification_student_list('DocentProfile','Calification student list','docent@gidappf.edu.ar')

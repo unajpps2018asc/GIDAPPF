@@ -129,4 +129,16 @@ class TimeSheetHourPolicy < ApplicationPolicy
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>28.9
   end
 
+  def report?
+    current_commissions?
+  end
+
+  def current?
+    current_commissions?
+  end
+
+  def commission_qualification_list_students?
+    current_commissions?
+  end
+
 end

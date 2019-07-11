@@ -8,6 +8,9 @@ class GidappfCatchsExceptionsController < ApplicationController
   def first_password_detect
   end
 
+  def not_record_found_detect
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_with_default_password

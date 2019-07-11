@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
 
 	  rescue_from ActionController::InvalidAuthenticityToken, with: :unblock_cookies
 
+		rescue_from ActiveRecord::RecordNotFound, with: :not_record_found
+
 		def after_sign_out_path_for(*)
 	    new_user_session_path
 	  end
@@ -55,5 +57,9 @@ class ApplicationController < ActionController::Base
 
 		def unblock_cookies
 			redirect_to gidappf_catchs_exceptions_disabled_cookies_detect_path
+		end
+
+		def not_record_found
+			redirect_to gidappf_catchs_exceptions_not_record_found_detect_path
 		end
 end

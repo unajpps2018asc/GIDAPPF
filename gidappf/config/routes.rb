@@ -59,6 +59,5 @@ Rails.application.routes.draw do
 	root to: "home#index"
   get 'gidappf_catchs_exceptions/disabled_cookies_detect'
   get 'gidappf_catchs_exceptions/first_password_detect'
-  get 'gidappf_catchs_exeptions/disabled_cookies_detect'
-  get 'gidappf_catchs_exeptions/first_password_detect'
+  get 'gidappf_catchs_exceptions/not_record_found_detect'
 end

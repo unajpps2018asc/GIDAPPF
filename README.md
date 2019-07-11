@@ -18,15 +18,13 @@ Además del proyecto de desarrollo de la aplicación web a medida del Plan Fines
 
 **Teniendo un linux con las siguientes dependencias:**
 * git
-* ruby
 * docker
 * docker-compose
 
 **Ultimas versiones Testeadas de las dependencias indicadas**
-* git version 2.21.0
-* ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
-* Docker version 18.09.6-ce, build 481bc77156
-* docker-compose version 1.24.0, build unknown
+* git version 2.22.0
+* Docker version 18.09.7-ce, build 2d0083d657
+* docker-compose version 1.24.1, build unknown
 
 PARA SUMARSE AL DESARROLLO DEL PROYECTO, Y EJECUTAR EL PROYECTO, DESDE UNA TERMINAL:
 ``` [bash]
@@ -44,8 +42,7 @@ PARA SUMARSE AL DESARROLLO DEL PROYECTO, Y EJECUTAR EL PROYECTO, DESDE UNA TERMI
 * AHORA SE PUEDE VISITAR EL SITIO http://localhost:3000 y crear el primmer usuario admin.
 * En el caso de necesitar poblar la base de datos con valores de muestra, ingresar en la terminal:
 ``` [bash]
-  $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show
-    && docker-compose exec --user "$(id -u):$(id -g)"  website rake documents_collector:schedule_init
+  $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show && docker-compose exec --user "$(id -u):$(id -g)"  website rake documents_collector:schedule_init
 ```
 
 * Si se apaga el servidor anfitrión y es necesario reiniciar el proyecto, en la terminal:

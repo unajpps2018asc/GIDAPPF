@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= "Reports" %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Students</th>
+      <th>Regular</th>
+      <th>Califications</th>
+      <th>Act Calif</th>
+      <th>Absences Days</th>
+      <th>[min]</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @documents.each do |document| %>
+      <tr>
+        <td><%= link_to "#{document[0].name}", document[0] %></td>
+        <td><%= if document[0].listable? then '✓' end %></td>
+        <td><%= document[1].count %></td>
+        <td><% document[1].each_with_index do |calif,index|%>
+          <%= link_to "#{(index+1).ordinalize}", calif %>
+          <% end %></td>
+        <td><% document[2].each do |abs|%>
+          <%= abs.created_at.strftime("%d/%m/%y") %>
+          <% end %></td>
+        <td><%= document[0].absence_mins %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div><%= link_to 'All members', profiles_path %></div>

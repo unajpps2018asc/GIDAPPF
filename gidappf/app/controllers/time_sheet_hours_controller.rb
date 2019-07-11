@@ -164,13 +164,13 @@ class TimeSheetHoursController < ApplicationController
         from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
         thursday, friday, saturday, sunday, matter_id) *').
         where(time_sheet: TimeSheet.where(commission: Commission.where(user: current_user)).
-          where('start_date < ?',Date.today).where('end_date > ?',Date.today))
+          where('start_date <= ?',Date.today).where('end_date >= ?',Date.today))
     elsif acc == 29.0
       @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id,
         from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
         thursday, friday, saturday, sunday, matter_id) *').
-        where(time_sheet: TimeSheet.where('start_date < ?',Date.today).
-        where('end_date > ?',Date.today).where(commission_id: current_user.
+        where(time_sheet: TimeSheet.where('start_date <= ?',Date.today).
+        where('end_date >= ?',Date.today).where(commission_id: current_user.
           usercommissionroles.pluck(:commission_id).uniq))
     else
       @time_sheet_hours=TimeSheetHour.all

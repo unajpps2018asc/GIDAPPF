@@ -9,7 +9,7 @@
       <th>Description</th>
       <th>Valid to</th>
       <th>Valid from</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -21,10 +21,9 @@
         <td><%= profile.valid_to.strftime("%d/%m/%Y") %></td>
         <td><%= profile.valid_from.strftime("%d/%m/%Y") %></td>
         <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<div><%= link_to 'All members', profiles_path %></div>
+<div><%= link_to 'All profiles', profiles_path %></div>

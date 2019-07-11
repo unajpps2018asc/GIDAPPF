@@ -16,6 +16,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   get 'members/current'
+  get 'members/report'
   resources :inputs do
     member do
       get 'disable'

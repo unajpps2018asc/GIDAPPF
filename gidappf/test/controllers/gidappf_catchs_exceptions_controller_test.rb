@@ -8,14 +8,14 @@ class GidappfCatchsExceptionsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get gidappf_catchs_exceptions_disabled_cookies_detect_url
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get first_password_detect" do
     sign_in users(:one)
     get gidappf_catchs_exceptions_first_password_detect_url
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
 end

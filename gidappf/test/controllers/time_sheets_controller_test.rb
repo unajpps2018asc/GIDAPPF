@@ -14,21 +14,21 @@ class TimeSheetsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get time_sheets_url#, headers: @auth_h_ts
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should show time_sheet_hour" do
     sign_in users(:one)
     get time_sheet_url(@time_sheet)#, headers: @auth_h_ts
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get associate" do
     sign_in users(:one)
     get time_sheets_associate_url#, headers: @auth_h_ts
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 
   test "should update time_sheet" do
@@ -41,7 +41,7 @@ class TimeSheetsControllerTest < ActionDispatch::IntegrationTest
           enabled: true
           } }
     assert_redirected_to time_sheet_url(@time_sheet)
-    sign_out :one
+    sign_out :user
   end
 
   test "should destroy time_sheet" do
@@ -51,7 +51,7 @@ class TimeSheetsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 
 end

@@ -65,15 +65,6 @@ class TimeSheetPolicy < ApplicationPolicy
   ###########################################################################
   def new?
     create?
-  end  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción index definida en RolesController                      #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 20.0                       #
-  ##############################################################################
-  def index?
-    show?
   end
 
   ##############################################################################
@@ -87,26 +78,6 @@ class TimeSheetPolicy < ApplicationPolicy
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>20.0
-  end
-
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción edit definida en CommissionsController              #
-  # Devolución: delega el valor de update, para editar roles                #
-  ###########################################################################
-  def edit?
-    create?
-  end
-
-  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción update definida en RolesController                     #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 20.0                       #
-  ##############################################################################
-  def update?
-    create?
   end
 
   ###########################################################################

@@ -7,7 +7,6 @@ class MembersController < ApplicationController
          User.where(id: tsh.time_sheet.commission.usercommissionroles.
            where.not(id: current_user.usercommissionroles.ids).pluck(:user_id))
        ).pluck(:profile_id).uniq)
-      authorize @profiles
     end
   end
 
@@ -17,12 +16,12 @@ class MembersController < ApplicationController
       authorize tsh
       @documents = []
       Profile.where(id: Document.where(user:
-         User.where(id: tsh.time_sheet.commission.usercommissionroles.
-           where.not(id: current_user.usercommissionroles.ids).pluck(:user_id))
+       User.where(id: tsh.time_sheet.commission.usercommissionroles.
+         where.not(id: current_user.usercommissionroles.ids).pluck(:user_id))
       ).pluck(:profile_id).uniq).each do |profile|
-       calif=Input.where(id: profile.documents.pluck(:input_id), title: "Student calification")
-       abse=Input.where(id: profile.documents.pluck(:input_id), title: "Student absence")
-       @documents << [profile, calif, abse]
+        calif=Input.where(id: profile.documents.pluck(:input_id), title: "Student calification")
+        abse=Input.where(id: profile.documents.pluck(:input_id), title: "Student absence")
+        @documents << [profile, calif, abse]
       end
     end
   end

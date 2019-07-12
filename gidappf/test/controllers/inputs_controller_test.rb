@@ -14,14 +14,14 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get inputs_url
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get new" do
     sign_in users(:one)
     get new_input_url#, headers: @auth_h_in
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 
   test "should create input" do
@@ -34,21 +34,21 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to input_url(Input.last)
-    sign_out :one
+    sign_out :user
   end
 
   test "should show input" do
     sign_in users(:one)
     get input_url(@input)#, headers: @auth_h_in
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get edit" do
     sign_in users(:one)
     get edit_input_url(@input)#, headers: @auth_h_in
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   # Pendiente hacer compatible `template_of_merge' por que los Profile con id 1 y 2 son templates y no figuran en fixtures
@@ -56,7 +56,7 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
   #   sign_in users(:one)
   #   patch input_url(@input), params: { input: { author: @input.author, enable: @input.enable, grouping: @input.grouping, summary: @input.summary, title: @input.title } }
   #   assert_redirected_to input_url(@input)
-  #   sign_out :one
+  #   sign_out :user
   # end
 
   test "should destroy input" do
@@ -66,6 +66,6 @@ class InputsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 end

@@ -14,6 +14,6 @@ class UsercommissionrolesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get edit_usercommissionrole_path(id: @usercommissionrole.id, radio_selected: roles(:one).id)#,headers:@auth_h_ucr
     assert_redirected_to  setsusersaccess_settings_path#, headers: @auth_h_ucr
-    sign_out :one
+    sign_out :user
   end
 end

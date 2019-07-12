@@ -18,7 +18,11 @@ class GidappfCatchsExceptionsControllerPolicy < ApplicationPolicy
   # Devolución: true, todos pueden listar aulas                             #
   ###########################################################################
   def first_password_detect?
-    !@record.documents.first.user.usercommissionroles.first.role.enabled
+    out=false
+    unless @record.documents.first.nil?
+      out=!@record.documents.first.user.usercommissionroles.first.role.enabled
+    end
+    out
   end
 
 end

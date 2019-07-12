@@ -14,28 +14,28 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get roles_url#, headers: @auth_h_role
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get index_unlogged" do
     # sign_in users(:one)
     get roles_url
     assert_response :found
-    # sign_out :one
+    # sign_out :user
   end
 
   test "should get new" do
     sign_in users(:one)
     get roles_url #, headers: @auth_h_role
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get new_unlogged" do
     sign_in users(:one)
     get new_role_url
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should create role" do
@@ -50,21 +50,21 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
                   }
     end
       assert_redirected_to role_url(Role.last)
-      sign_out :one
+      sign_out :user
     end
 
   test "should show role" do
     sign_in users(:one)
     get role_url(@role)#, headers: @auth_h_role
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should show role_unlogged" do
     sign_in users(:one)
     get role_url(@role)
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get edit" do
@@ -73,14 +73,14 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     get "/roles#edit" #, headers: @auth_h_role
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get edit_unlogged" do
     # sign_in users(:one)
     get edit_role_url(@role)
     assert_response :found
-    # sign_out :one
+    # sign_out :user
   end
 
   test "should update role" do
@@ -96,7 +96,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
         }
       }
     assert_redirected_to  role_url(@role)#, headers: @auth_h_role
-    sign_out :one
+    sign_out :user
   end
 
   test "should destroy role" do
@@ -110,6 +110,6 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
       delete role_url(@role)#, headers: @auth_h_role
     end
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 end

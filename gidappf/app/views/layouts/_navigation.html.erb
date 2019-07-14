@@ -30,6 +30,10 @@
         <!-- ############################################################### -->
         <%= render RoleAccess.get_user_links(current_user) %>
       </ul>
+      <ul>
+        <li><%= link_to 'English', root_path(locale: :en) %></li>
+        <li><%= link_to 'Español', root_path(locale: :es) %></li>
+      </ul>
     </div>
   </div>
 </nav>

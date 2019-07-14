@@ -85,8 +85,8 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update role" do
     sign_in users(:one)
-    patch role_url(@role,
-      headers: @auth_h_role),
+    patch role_url(@role),
+      #headers: @auth_h_role),
       params: {
         role: {
           created_at: Time.rfc3339('1999-12-31T14:00:00-10:00'),
@@ -95,7 +95,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
           name: 'Otro nombre lindo'
         }
       }
-    assert_redirected_to  role_url(@role)#, headers: @auth_h_role
+    assert_redirected_to  role_url(@role) #, headers: @auth_h_role
     sign_out :user
   end
 

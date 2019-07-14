@@ -1,0 +1,93 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/config/locales/device.es.yml                    #
+###########################################################################
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+es:
+  devise:
+    confirmations:
+      confirmed: "Tu dirección de correo electrónico ha sido confirmada con éxito."
+      send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo confirmar su dirección de correo electrónico en unos minutos."
+      send_paranoid_instructions: "Si su dirección de correo electrónico existe en nuestra base de datos, recibirá un correo electrónico con instrucciones sobre cómo confirmar su dirección de correo electrónico en unos minutos."
+    failure:
+      already_authenticated: "Ya estás conectado."
+      inactive: "Tu cuenta aún no está activada."
+      invalid: "%{authentication_keys} o contraseña no válidos."
+      locked: "Tu cuenta está bloqueada."
+      last_attempt: "Tienes un intento más antes de que se bloquee tu cuenta."
+      not_found_in_database: "%{authentication_keys} o contraseña no válidos."
+      timeout: "Expiró tu sesión. Por favor vuelve a ingresar para continuar."
+      unauthenticated: "Es necesario que te registres o que te conectes antes de continuar."
+      unconfirmed: "Debes confirmar tu dirección de correo electrónico antes de continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Instrucciones para la confirmación"
+      reset_password_instructions:
+        subject: "Instruciones para reiniciar la contraseña"
+      unlock_instructions:
+        subject: "Instrucciones para desbloqueo"
+      email_changed:
+        subject: "Email ha cambiado"
+      password_change:
+        subject: "Tu contraseña cambió"
+    omniauth_callbacks:
+      failure: "No se pudo autenticar desde %{kind} porque \"{reason}\"."
+      success: "Autentificado correctamente desde la cuenta %{kind}."
+    passwords:
+      no_token: "No podés acceder a esta página sin linkear de un correo electrónico de restablecimiento de contraseña. Si proviene de un correo electrónico de restablecimiento de contraseña, asegúrese de utilizar la URL completa provista."
+      send_instructions: "Recibirá un correo electrónico con instrucciones sobre cómo restablecer su contraseña en unos minutos."
+      send_paranoid_instructions: "Si tu dirección de correo electrónico existe en nuestra base de datos, recibirás un enlace de recuperación de contraseña en su dirección de correo electrónico en unos minutos.."
+      updated: "Tu contraseña fué cambiada correctamente. Conectate nuevamente."
+      updated_not_active: "Tu contraseña fué cambiada correctamente.."
+    registrations:
+      destroyed: "Hasta luego! Tu cuenta fué cancelada exitosamente. Volvé pronto."
+      signed_up: "Bienvenido! Te conectaste correctamente."
+      signed_up_but_inactive: "Te has registrado correctamente. Sin embargo, no pudimos iniciar sesión porque su cuenta aún no está activada."
+      signed_up_but_locked: "Te has registrado correctamente. Sin embargo, no pudimos iniciar sesión porque tu cuenta está bloqueada."
+      signed_up_but_unconfirmed: "Se ha enviado un mensaje con un enlace de confirmación a su dirección de correo electrónico. Por favor siga el enlace para activar su cuenta."
+      update_needs_confirmation: "Actualizó su cuenta con éxito, pero necesitamos verificar su nueva dirección de correo electrónico. Revise su correo electrónico y siga el enlace de confirmación para confirmar su nueva dirección de correo electrónico."
+      updated: "Tu cuenta fué registrada correctamente."
+    sessions:
+      signed_in: "Te conectaste correctamente."
+      signed_out: "Desconexión correcta."
+      already_signed_out: "Ya estas desconectado."
+    unlocks:
+      send_instructions: "Recibirá un correo electrónico con instrucciones sobre cómo desbloquear su cuenta en unos minutos."
+      send_paranoid_instructions: "Si su cuenta existe, recibirá un correo electrónico con instrucciones sobre cómo desbloquearla en unos minutos."
+      unlocked: "Su cuenta ha sido desbloqueada con éxito. Por favor inicie sesión para continuar."
+  errors:
+    messages:
+      already_confirmed: "ya fue confirmado, por favor intente iniciar sesión"
+      confirmation_period_expired: "debe confirmarse dentro de %{period}, solicite uno nuevo"
+      expired: "ha expirado, por favor solicite una nueva"
+      not_found: "no encontrado"
+      not_locked: "no estaba bloqueado"
+      not_saved:
+        one: "Una validación evitó que se guardara este %{resource}:"
+        other: "%{count} validaciones evitaron que se guardaran este %{resource}:"
+###########################################################################
+# Mensajes de manejo de excepciones producidas por ingresssos de valores  #
+# no validos en el modelo user de devise                                  #
+###########################################################################
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: 'No puede ser un campo vacío'
+            current_password:
+                blank: 'No puede ser un campo vacío'
+                invalid: 'Contraseña incorrecta'
+            password_confirmation:
+              confirmation: 'Es obligatorio confirmar la nueva contraseña'

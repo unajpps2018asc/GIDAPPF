@@ -9,17 +9,15 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/test/test_helper.rb                             #
+# Archivo GIDAPPF/gidappf/config/locales/pundit.en.yml                    #
 ###########################################################################
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rails/test_help'
-# require 'devise/jwt/test_helpers' # Gema devise-jwt que mantiene la sesion para todos los test en api mode
-require 'minitest/utils/rails/locale' # Gema minitest-utils, da soporte I18n a los test
-
-class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in abc order.
-  fixtures :all
-
-  # Add more helper methods to be used by all tests here...
-end
+es:
+###########################################################################
+# Mensajes de manejo de excepciones producidas por intentos de acceso     #
+# no autorizados en pundit                                                #
+###########################################################################
+  pundit:
+   default: 'No podés realizar esta acción.'
+   post_policy:
+     update?: 'No podés editar esta publicación!'
+     create?: 'No podés crear esta publicación!'

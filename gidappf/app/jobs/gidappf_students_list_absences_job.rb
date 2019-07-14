@@ -60,7 +60,7 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
     template=Input.where(title: 'Student absence').first
     absence=Input.new(
       title: template.title,
-      summary: "#{template.summary} para: #{profile.name}, materia:#{time_sheet_hour.matter.name}.",
+      summary: "#{template.summary} para: #{profile.name}, materia:#{time_sheet_hour.matter.name}, Día:#{ Date.today.to_s}.",
       grouping: template.grouping,
       enable: true,
       author: Profile.find_by(name: 'SecretaryProfile').id

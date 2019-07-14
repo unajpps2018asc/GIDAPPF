@@ -61,7 +61,7 @@ class ClassRoomInstitutesControllerTest < ActionDispatch::IntegrationTest
   test "should destroy class_room_institute" do
     sign_in users(:one)
     assert_difference('ClassRoomInstitute.count', -1) do
-      delete class_room_institute_url(@class_room_institute), headers: @auth_h_cri
+      delete class_room_institute_url(@class_room_institute)#, headers: @auth_h_cri
     end
     assert_response :found
     sign_out :user

@@ -14,10 +14,74 @@
 en:
   layout:
     nav:
-      link_label:
-        sets_u_acc: 'Sets users access'
+      part:
+        link_40:
+          sets_u_acc: 'Sets users access'
+          campus_s: 'Campus students'
+          campus_d: 'Campus docents'
+          stu_list: 'Students'
+          dcn_list: 'Docents'
+          comm_list: 'Commissions'
+          hr_list: 'Hours'
+          ts_list: 'Seasons'
+          cri_list: 'Classrooms'
+          mt_list: 'Matters'
+          rl_list: 'Roles'
+          in_list: 'Inputs'
+        link_30:
+          campus_s: 'Campus students'
+          campus_d: 'Campus docents'
+          stu_list: 'Students'
+          dcn_list: 'Docents'
+          comm_list: 'Commissions'
+          hr_list: 'Hours'
+          ts_list: 'Seasons'
+          cri_list: 'Classrooms'
+          in_list: 'Inputs'
+        link_20:
+          stu_list: 'Students'
+          dcn_list: 'Docents'
+          comm_list: 'Commissions'
+          hr_list: 'Hours'
+          cri_list: 'Classrooms'
+          in_list: 'Inputs'
+        link_10:
+          comm_list: 'Commissions'
+          hr_list: 'Hours'
+          cri_list: 'Classrooms'
+          in_list: 'Notifications'
   body:
-    entity:
-    action:
+    common_entity:
+      action:
+        new: 'New'
+        new_her: 'New'
+        edit: 'Edit'
+        show: 'Show'
+        destroy: 'Destroy'
+        back: 'Back'
+        submint: 'Submint'
+        comfirm_msg: 'Are you sure?'
+    gidappf_entity:
+      class_room_institute:
+        model: 'Class Room Institute'
+        models: 'Class Rooms Institute'
+        attributes:
+          name: 'Name'
+          ubication: 'Ubication'
+          description: 'Description'
+          available_from: 'From'
+          available_to: 'To'
+          available_monday: 'Available monday'
+          available_tuesday: 'Available tuesday'
+          available_wednesday: 'Available wednesday'
+          available_thursday: 'Available thursday'
+          available_friday: 'Available friday'
+          available_saturday: 'Available saturday'
+          available_sunday: 'Available sunday'
+          hours_disp: 'Disponibility'
+          vacancies_disp: 'Capacity'
+          enable: 'Habilitado'
   sidebar:
+    bar: 'bar'
   footer:
+    mesg_foot: 'message'

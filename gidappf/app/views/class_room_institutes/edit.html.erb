@@ -1,6 +1,6 @@
-<h1>Editing Class Room Institute</h1>
+<h1><%= "#{t('body.common_entity.action.edit')} #{t('body.gidappf_entity.class_room_institute.model')}"  %></h1>
 
 <%= render 'form', class_room_institute: @class_room_institute %>
 
-<%= link_to 'Show', @class_room_institute %> |
-<%= link_to 'Back', class_room_institutes_path %>
+<%= link_to t('body.common_entity.action.show'), @class_room_institute %> |
+<%= link_to t('body.common_entity.action.back'), class_room_institutes_path %>

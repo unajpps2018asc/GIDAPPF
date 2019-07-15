@@ -12,77 +12,77 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.name') %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.description') %>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :ubication %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.ubication') %>
     <%= form.text_area :ubication %>
   </div>
 
   <div class="field">
-    <%= form.label :available_from %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_from') %>
     <%= form.datetime_select :available_from %>
   </div>
 
   <div class="field">
-    <%= form.label :available_to %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_to') %>
     <%= form.datetime_select :available_to %>
   </div>
 
   <div class="field">
-    <%= form.label :available_monday %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_monday') %>
     <%= form.check_box :available_monday %>
   </div>
 
   <div class="field">
-    <%= form.label :available_tuesday %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_tuesday') %>
     <%= form.check_box :available_tuesday %>
   </div>
 
   <div class="field">
-    <%= form.label :available_wednesday %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_wednesday') %>
     <%= form.check_box :available_wednesday %>
   </div>
 
   <div class="field">
-    <%= form.label :available_thursday %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_thursday') %>
     <%= form.check_box :available_thursday %>
   </div>
 
   <div class="field">
-    <%= form.label :available_friday %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_friday') %>
     <%= form.check_box :available_friday %>
   </div>
 
   <div class="field">
-    <%= form.label :available_saturday %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_saturday') %>
     <%= form.check_box :available_saturday %>
   </div>
 
   <div class="field">
-    <%= form.label :available_sunday %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.available_sunday') %>
     <%= form.check_box :available_sunday %>
   </div>
 
   <div class="field">
-    <%= form.label "Disponibilidad" %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.hours_disp') %>
     <%= form.select :available_time, @selection_available_time %>
   </div>
 
   <div class="field">
-    <%= form.label :capacity %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.vacancies_disp') %>
     <%= form.select :capacity, @selection_capacity %>
   </div>
 
   <div class="field">
-    <%= form.label :enabled %>
+    <%= form.label t('body.gidappf_entity.class_room_institute.attributes.enable') %>
     <%= form.check_box :enabled %>
   </div>
 

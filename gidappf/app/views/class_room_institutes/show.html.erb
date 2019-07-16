@@ -1,74 +1,74 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @class_room_institute.name %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.name')}:"  %>
+  <strong><%= @class_room_institute.name %></strong>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @class_room_institute.description %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.description')}:"  %>
+  <strong><%= @class_room_institute.description %></strong>
 </p>
 
 <p>
-  <strong>Ubication:</strong>
-  <%= @class_room_institute.ubication %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.ubication')}:"  %>
+  <strong><%= @class_room_institute.ubication %></strong>
 </p>
 
 <p>
-  <strong>Available from:</strong>
-  <%= @class_room_institute.available_from %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_from')}:"  %>
+  <strong><%= @class_room_institute.available_from %></strong>
 </p>
 
 <p>
-  <strong>Available to:</strong>
-  <%= @class_room_institute.available_to %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_to')}:"  %>
+  <strong><%= @class_room_institute.available_to %></strong>
 </p>
 
 <p>
-  <strong>Available monday:</strong>
-  <%= @class_room_institute.available_monday %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_monday')}:"  %>
+  <strong><%= @class_room_institute.available_monday %></strong>
 </p>
 
 <p>
-  <strong>Available tuesday:</strong>
-  <%= @class_room_institute.available_tuesday %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')}:"  %>
+  <strong><%= @class_room_institute.available_tuesday %></strong>
 </p>
 
 <p>
-  <strong>Available wednesday:</strong>
-  <%= @class_room_institute.available_wednesday %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')}:"  %>
+  <strong><%= @class_room_institute.available_wednesday %></strong>
 </p>
 
 <p>
-  <strong>Available thursday:</strong>
-  <%= @class_room_institute.available_thursday %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_thursday')}:"  %>
+  <strong><%= @class_room_institute.available_thursday %></strong>
 </p>
 
 <p>
-  <strong>Available friday:</strong>
-  <%= @class_room_institute.available_friday %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_friday')}:"  %>
+  <strong><%= @class_room_institute.available_friday %></strong>
 </p>
 
 <p>
-  <strong>Available saturday:</strong>
-  <%= @class_room_institute.available_saturday %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_saturday')}:"  %>
+  <strong><%= @class_room_institute.available_saturday %></strong>
 </p>
 
 <p>
-  <strong>Available sunday:</strong>
-  <%= @class_room_institute.available_sunday %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.available_sunday')}:"  %>
+  <strong><%= @class_room_institute.available_sunday %></strong>
 </p>
 
 <p>
-  <strong>Available time:</strong>
-  <%= @ctl_available_time %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.hours_disp')}:"  %>
+  <strong><%= @ctl_available_time %></strong>
 </p>
 
 <p>
-  <strong>Capacity:</strong>
-  <%= @ctl_capacity %>
+  <%= "#{t('body.gidappf_entity.class_room_institute.attributes.vacancies_disp')}:"  %>
+  <strong><%= @ctl_capacity %></strong>
 </p>
 
-<%= link_to 'Edit', edit_class_room_institute_path(@class_room_institute) %> |
-<%= link_to 'Back', class_room_institutes_path %>
+<%= link_to t('body.common_entity.action.edit'), edit_class_room_institute_path(@class_room_institute) %> |
+<%= link_to t('body.common_entity.action.back'), class_room_institutes_path %>

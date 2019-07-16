@@ -50,7 +50,24 @@ en:
           hr_list: 'Hours'
           cri_list: 'Classrooms'
           in_list: 'Notifications'
+
+  gidappf_catchs_exception:
+    disabled_cookies_detect:
+      title: "Gidappf can't deliver cookie..."
+      summary: 'Cookies are disabled in your web browser, please activate in preferences:'
+      line1: 'In Firefox: Menu(&#9776;)&rarr;Preferences&rarr;Privacy & security(&#128274;)&rarr;Content Blocking: Click in Strict or Standard'
+      line2: 'in navigation bar and click in switch lock'
+      line3: 'In Chrome: type'
+    first_password_detect:
+      title: 'Welcome, user with profile:'
+      summary: 'First time with default access, change password to continue... '
+      link1: 'Change default credentials'
+    not_record_found_detect:
+      title: 'Sorry, record not found... '
+      summary: 'Cookies are disabled in your web browser, please activate in preferences'
+
   body:
+
     common_entity:
       action:
         new: 'New'
@@ -61,10 +78,11 @@ en:
         back: 'Back'
         submint: 'Submint'
         comfirm_msg: 'Are you sure?'
+
     gidappf_entity:
       class_room_institute:
         model: 'Class Room Institute'
-        models: 'Class Rooms Institute'
+        models: 'Class Rooms Institutes'
         attributes:
           name: 'Name'
           ubication: 'Ubication'
@@ -81,6 +99,17 @@ en:
           hours_disp: 'Disponibility'
           vacancies_disp: 'Capacity'
           enable: 'Habilitado'
+
+      commission:
+        model: 'Commission'
+        models: 'Commissions'
+        attributes:
+          name: 'Name'
+          ubication: 'Ubication'
+          description: 'Description'
+          start_date: 'From'
+          end_date: 'To'
+
   sidebar:
     bar: 'bar'
   footer:

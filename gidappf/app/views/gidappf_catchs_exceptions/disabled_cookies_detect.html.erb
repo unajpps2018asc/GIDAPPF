@@ -1,12 +1,12 @@
-<h1>Gidappf can't deliver cookie...</h1>
-<p>Cookies are disabled in your web browser, please activate in preferences</p>
+<h1><%= t ('gidappf_catchs_exception.disabled_cookies_detect.title') %></h1>
+<p><%= t ('gidappf_catchs_exception.summary') %></p>
 <p class="lead">
   <ul>
     <li>
-      <p> In Firefox: Menu(&#9776;)&rarr;Preferences&rarr;Privacy & security(&#128274;)&rarr;Content Blocking: Click in Strict or Standard</p>
+      <p><%= t ('gidappf_catchs_exception.line1') %></p>
     </li>
     <li>
-      <p> In Chrome: type <%= link_to 'chrome://settings/content/cookies','chrome://settings/content/cookies'%> in navigation bar and click in switch lock</p>
+      <p> <%= t ('gidappf_catchs_exception.line2') link_to 'chrome://settings/content/cookies','chrome://settings/content/cookies'%> <%= t ('gidappf_catchs_exception.line3') %></p>
     </li>
   </ul>
 </p>

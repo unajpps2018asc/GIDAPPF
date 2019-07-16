@@ -1,24 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @commission.name %>
+  <%= "#{t('body.gidappf_entity.commission.attributes.name')}:"  %>
+  <strong><%= @commission.name %></strong>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @commission.description %>
+  <%= "#{t('body.gidappf_entity.commission.attributes.description')}:"  %>
+  <strong><%= @commission.description %></strong>
 </p>
 
 <p>
-  <strong>Start date:</strong>
-  <%= @commission.start_date %>
+  <%= "#{t('body.gidappf_entity.commission.attributes.start_date')}:"  %>
+  <strong><%= @commission.start_date %></strong>
 </p>
 
 <p>
-  <strong>End date:</strong>
-  <%= @commission.end_date %>
+  <%= "#{t('body.gidappf_entity.commission.attributes.end_date')}:"  %>
+  <strong><%= @commission.end_date %></strong>
 </p>
 
-<%= link_to 'Edit', edit_commission_path(@commission) %> |
-<%= link_to 'Back', commissions_path %>
+<%= link_to t('body.common_entity.action.edit'), edit_commission_path(@commission) %> |
+<%= link_to t('body.common_entity.action.back'), commissions_path %>

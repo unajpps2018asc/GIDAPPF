@@ -26,24 +26,24 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label t('body.gidappf_entity.input.attributes.title') %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :summary %>
+    <%= form.label t('body.gidappf_entity.input.attributes.summary') %>
     <%= form.text_area :summary %>
   </div>
 
   <div class="field">
-    <%= form.label :enable %>
+    <%= form.label  t('body.gidappf_entity.input.attributes.enable') %>
     <%= form.check_box :enable %>
   </div>
 
   <%= form.hidden_field :grouping %>
 
   <div class="field">
-    <%= form.label :author %>
+    <%= form.label  t('body.gidappf_entity.input.attributes.author') %>
     <%= form.text_field :author %>
   </div>
   <% if form.object.grouping? %>

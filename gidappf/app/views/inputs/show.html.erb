@@ -1,10 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>Title:<strong><%= @input.title %></strong></p>
+<p>
+  <%= "#{t('body.gidappf_entity.input.attributes.title')}:"  %>
+  <strong><%= @input.title %></strong>
+</p>
 
-<p>Summary:<strong><%= @input.summary %></strong></p>
+<p>
+  <%= "#{t('body.gidappf_entity.input.attributes.summary')}:"  %>
+  <strong><%= @input.summary %></strong>
+</p>
 
-<p>Author:<strong> Legajo nro. <%= @input.author %></strong></p>
+<p>
+  <%= "#{t('body.gidappf_entity.input.attributes.author')}:"  %>
+  <strong> Legajo nro. <%= @input.author %></strong>
+</p>
 
 <% unless @input.grouping? %>
   <% @input.info_keys.each do |s| %>

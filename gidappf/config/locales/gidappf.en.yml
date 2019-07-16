@@ -127,6 +127,15 @@ en:
           enable: 'Enable'
           author: 'Author'
 
+      matter:
+        model: 'Matter'
+        models: 'Matters'
+        attributes:
+          name: 'Name'
+          description: 'Description'
+          trayect: 'Trayect'
+          enable: 'Enable'
+
   sidebar:
     bar: 'bar'
   footer:

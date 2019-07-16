@@ -25,9 +25,9 @@ es:
           hr_list: 'Horarios'
           ts_list: 'Temporadas'
           cri_list: 'Aulas'
-          mt_list: 'Matters'
+          mt_list: 'Materias'
           rl_list: 'Roles'
-          in_list: 'Inputs'
+          in_list: 'Entradas'
         link_30:
           campus_s: 'Campus de estudiantes'
           campus_d: 'Campus de docentes'
@@ -125,6 +125,15 @@ es:
           summary: 'Resumen'
           enable: 'Habilitado'
           author: 'Autor'
+
+      matter:
+        model: 'Materia'
+        models: 'Materias'
+        attributes:
+          name: 'Nombre'
+          description: 'Descripión'
+          trayect: 'Trayecto'
+          enable: 'Habilitar'
 
   sidebar:
     bar: 'barra '

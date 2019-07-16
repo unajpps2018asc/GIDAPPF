@@ -51,6 +51,11 @@ es:
           cri_list: 'Aulas'
           in_list: 'Notificaciones'
 
+    home:
+      title: 'Bienvenido, ahora podés'
+      element1: 'Ver tu perfil'
+      element2: 'Generar tu perfil'
+
   gidappf_catchs_exception:
     disabled_cookies_detect:
       title: 'Gidappf no puede distribuir la cookie...'
@@ -75,6 +80,7 @@ es:
         show: 'Ver'
         destroy: 'Borrar'
         back: 'Atrás'
+        log_out: 'Desconectar'
         submint: 'Enviar'
         comfirm_msg: '¿Estás seguro?'
 
@@ -108,8 +114,19 @@ es:
           description: 'Descripción'
           start_date: 'Desde'
           end_date: 'Hasta'
+          validations:
+            check_date_interval: 'Debe ser una fecha válida'
+
+      input:
+        model: 'Entrada'
+        models: 'Entradas'
+        attributes:
+          title: 'Título'
+          summary: 'Resumen'
+          enable: 'Habilitado'
+          author: 'Autor'
 
   sidebar:
     bar: 'barra '
   footer:
-    mesg_foot: 'mensaje'
+    mesg_foot: 'Está licenciado bajo la GNU Lesser General Public License v3.0'

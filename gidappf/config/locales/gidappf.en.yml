@@ -51,6 +51,11 @@ en:
           cri_list: 'Classrooms'
           in_list: 'Notifications'
 
+    home:
+      title: 'Welcome! Now, you can'
+      element1: 'View your profile'
+      element2: 'Generate profile'
+
   gidappf_catchs_exception:
     disabled_cookies_detect:
       title: "Gidappf can't deliver cookie..."
@@ -76,6 +81,7 @@ en:
         show: 'Show'
         destroy: 'Destroy'
         back: 'Back'
+        log_out: 'Log out'
         submint: 'Submint'
         comfirm_msg: 'Are you sure?'
 
@@ -109,8 +115,19 @@ en:
           description: 'Description'
           start_date: 'From'
           end_date: 'To'
+          validations:
+            check_date_interval: 'Must be a valid datetime'
+
+      input:
+        model: 'Input'
+        models: 'Inputs'
+        attributes:
+          title: 'Title'
+          summary: 'Summary'
+          enable: 'Enable'
+          author: 'Author'
 
   sidebar:
     bar: 'bar'
   footer:
-    mesg_foot: 'message'
+    mesg_foot: 'Is licensed under the GNU Lesser General Public License v3.0'

@@ -2,8 +2,8 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Title</th>
-      <th>Summary</th>
+      <th><%= t('body.gidappf_entity.input.attributes.title')  %></th>
+      <th><%= t('body.gidappf_entity.input.attributes.summary')  %></th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -14,7 +14,7 @@
         <td><%= input.documents.first.id %></td>
         <td><%= link_to "#{input.title}", input %></td>
         <td><%= input.summary %></td>
-        <td><%= link_to 'Destroy', disable_input_path(input), data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), disable_input_path(input), data: { confirm: t('body.common_entity.action.comfirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>

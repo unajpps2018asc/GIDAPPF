@@ -15,21 +15,21 @@
 
 <h1>
   <% if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
-    <%= "Students" %>
+    <%= t('body.gidappf_entity.profile.action.index.student') %>
   <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) %>
-    <%= "Docents" %>
+    <%= t('body.gidappf_entity.profile.action.index.docent') %>
   <% else %>
-    <%= "Profiles" %>
+    <%= t('body.gidappf_entity.profile.models') %>
   <% end %>
 </h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Valid to</th>
-      <th>Valid from</th>
+      <th><%= t('body.gidappf_entity.profile.attributes.name') %></th>
+      <th><%= t('body.gidappf_entity.profile.attributes.description') %></th>
+      <th><%= t('body.gidappf_entity.profile.attributes.valid_to') %></th>
+      <th><%= t('body.gidappf_entity.profile.attributes.valid_from') %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -38,11 +38,17 @@
     <% @profiles.each do |profile| %>
       <tr>
         <td><%= link_to "#{profile.name}", profile %></td>
-        <td><%= profile.description.first(50)+"…" %></td>
+        <td>
+          <% if profile.description.length > 50 then %>
+            <%= profile.description.first(50)+"…" %>
+          <% else %>
+            <%= profile.description %>
+          <% end %>
+        </td>
         <td><%= profile.valid_to.strftime("%d/%m/%Y") %></td>
         <td><%= profile.valid_from.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('body.common_entity.action.edit'), edit_profile_path(profile) %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), profile, method: :delete, data: { confirm: t('body.common_entity.action.comfirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -54,7 +60,7 @@
 <!-- # Creación de perfil basado en el parámetro pointer.          # -->
 <!-- ############################################################### -->
 <% if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
-<%= link_to 'New Student', profiles_first_path(pointer: LockEmail::LIST[4]) %>
+  <%= link_to t('body.gidappf_entity.profile.action.new.student'), profiles_first_path(pointer: LockEmail::LIST[4]) %>
 <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) %>
-<%= link_to 'New Docent', profiles_first_path(pointer: LockEmail::LIST[3]) %>
+  <%= link_to t('body.gidappf_entity.profile.action.new.docent'), profiles_first_path(pointer: LockEmail::LIST[3]) %>
 <% end %>

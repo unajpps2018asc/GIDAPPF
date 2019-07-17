@@ -41,7 +41,7 @@ class InputsController < ApplicationController
     authorize @input
     respond_to do |format|
       if @input.save
-        format.html { redirect_to @input, notice: 'Input was successfully created.' }
+        format.html { redirect_to @input, notice: t('body.gidappf_entity.input.action.new.notice') }
         format.json { render :show, status: :created, location: @input }
       else
         format.html { render :new }
@@ -55,7 +55,7 @@ class InputsController < ApplicationController
   def update
     respond_to do |format|
       if @input.update(input_params)
-        format.html { redirect_to @input, notice: 'Input was successfully updated.' }
+        format.html { redirect_to @input, notice: t('body.gidappf_entity.input.action.update.notice') }
         format.json { render :show, status: :ok, location: @input }
       else
         format.html { render :edit }
@@ -69,7 +69,7 @@ class InputsController < ApplicationController
   def destroy
     @input.destroy
     respond_to do |format|
-      format.html { redirect_to inputs_url, notice: 'Input was successfully destroyed.' }
+      format.html { redirect_to inputs_url, notice: t('body.gidappf_entity.input.action.destroy.notice') }
       format.json { head :no_content }
     end
   end

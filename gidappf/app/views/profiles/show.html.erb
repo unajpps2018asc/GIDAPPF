@@ -1,18 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Profile name:
+<h3>
+  <%= "#{t('body.gidappf_entity.profile.attributes.name')}:"  %>
   <strong><%= @profile.name %></strong>
 </h3>
 
-<p>Description:
+<p>
+  <%= "#{t('body.gidappf_entity.profile.attributes.description')}:"  %>
   <strong><%= @profile.description %></strong>
 </p>
 
-<p>Valid to:
+<p>
+  <%= "#{t('body.gidappf_entity.profile.attributes.valid_to')}:"  %>
   <strong><%= @profile.valid_to %></strong>
 </p>
 
-<p>Valid from:
+<p>
+  <%= "#{t('body.gidappf_entity.profile.attributes.valid_from')}:"  %>
   <strong><%= @profile.valid_from %></strong>
 </p>
 
@@ -23,5 +27,5 @@
   <% end %></p>
 <% end %>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<%= link_to  t('body.common_entity.action.edit'), edit_profile_path(@profile) %> |
+<%= link_to  t('body.common_entity.action.back'), profiles_path %>

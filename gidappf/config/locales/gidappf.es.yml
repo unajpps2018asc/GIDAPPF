@@ -104,6 +104,13 @@ es:
           hours_disp: 'Disponibilidad'
           vacancies_disp: 'Capacidad'
           enable: 'Habilitado'
+        action:
+          new:
+            notice: 'Aula creada correctamente.'
+          update:
+            notice: 'Aula actualizada correctamente.'
+          destroy:
+            notice: 'Aula borrada.'
 
       commission:
         model: 'Comisión'
@@ -116,6 +123,13 @@ es:
           end_date: 'Hasta'
           validations:
             check_date_interval: 'Debe ser una fecha válida'
+        action:
+          new:
+            notice: 'Comisión creada correctamente.'
+          update:
+            notice: 'Comisión actualizada correctamente.'
+          destroy:
+            notice: 'Comisión borrada.'
 
       input:
         model: 'Entrada'
@@ -125,6 +139,14 @@ es:
           summary: 'Resumen'
           enable: 'Habilitado'
           author: 'Autor'
+        action:
+          new:
+            notice: 'Entrada creada correctamente.'
+          update:
+            notice: 'Entrada actualizada correctamente.'
+          destroy:
+            notice: 'Entrada borrada.'
+
 
       matter:
         model: 'Materia'
@@ -134,6 +156,44 @@ es:
           description: 'Descripión'
           trayect: 'Trayecto'
           enable: 'Habilitar'
+        action:
+          new:
+            notice: 'Materia creada exitosamente.'
+          update:
+            notice: 'Materia actualizada correctamente.'
+          destroy:
+            notice: 'Materia borrada.'
+
+      profile:
+        model: 'Perfil'
+        models: 'Perfiles'
+        attributes:
+          name: 'Nombre'
+          description: 'Descripción'
+          valid_from: 'Desde'
+          valid_to: 'Hasta'
+          validations:
+            check_date_interval: 'Debe ser una fecha válida'
+        action:
+          first:
+            msg1: 'Usuario creado, id='
+            msg2: ' Rol='
+            msg3: 'Email o '
+            msg4: 'está registrado y debe ser único.'
+          second:
+            alert: 'No se encuentra identificacion del usuario!'
+          new:
+            student: 'Nuevo Estudiante'
+            docent: 'Nuevo docente'
+            notice: 'Perfil creado exitosamente.'
+          index:
+            student: 'Estudiantes'
+            docent: 'Docentes'
+          update:
+            notice: 'Perfil actualizado correctamente.'
+          destroy:
+            notice: 'Perfil borrado.'
+
 
   sidebar:
     bar: 'barra '

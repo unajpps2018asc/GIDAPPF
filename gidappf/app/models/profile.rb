@@ -149,6 +149,6 @@ class Profile < ApplicationRecord
   # Usado en la validacion.                                             #
   #######################################################################
   def check_date_interval
-    errors.add(:valid_to, 'must be a valid datetime') unless Date.parse(valid_to.to_s) > Date.parse(valid_from.to_s)
+    errors.add(:valid_to, t('body.gidappf_entity.profile.attributes.validations.check_date_interval')) unless Date.parse(valid_to.to_s) > Date.parse(valid_from.to_s)
   end
 end

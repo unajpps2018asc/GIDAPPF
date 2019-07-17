@@ -105,6 +105,13 @@ en:
           hours_disp: 'Disponibility'
           vacancies_disp: 'Capacity'
           enable: 'Habilitado'
+        action:
+          new:
+            notice: 'Class room was successfully created.'
+          update:
+            notice: 'Class room was successfully updated.'
+          destroy:
+            notice: 'Class room was successfully destroyed.'
 
       commission:
         model: 'Commission'
@@ -117,6 +124,13 @@ en:
           end_date: 'To'
           validations:
             check_date_interval: 'Must be a valid datetime'
+        action:
+          new:
+            notice: 'Commission was successfully created.'
+          update:
+            notice: 'Commission was successfully updated.'
+          destroy:
+            notice: 'Commission was successfully destroyed.'
 
       input:
         model: 'Input'
@@ -126,6 +140,13 @@ en:
           summary: 'Summary'
           enable: 'Enable'
           author: 'Author'
+        action:
+          new:
+            notice: 'Input was successfully created.'
+          update:
+            notice: 'Input was successfully updated.'
+          destroy:
+            notice: 'Input was successfully destroyed.'
 
       matter:
         model: 'Matter'
@@ -135,6 +156,44 @@ en:
           description: 'Description'
           trayect: 'Trayect'
           enable: 'Enable'
+        action:
+          new:
+            notice: 'Matter was successfully created.'
+          update:
+            notice: 'Matter was successfully updated.'
+          destroy:
+            notice: 'Matter was successfully destroyed.'
+
+      profile:
+        model: 'Profile'
+        models: 'Profiles'
+        attributes:
+          name: 'Name'
+          description: 'Description'
+          valid_from: 'From'
+          valid_to: 'To'
+          validations:
+            check_date_interval: 'Must be a valid datetime'
+        action:
+          first:
+            msg1: 'User created id='
+            msg2: ' role='
+            msg3: 'Email or '
+            msg4: 'is allready registred.'
+          second:
+            alert: 'Not User identification found!'
+          new:
+            student: 'New student'
+            docent: 'New docent'
+            notice: 'Profile was successfully created.'
+          index:
+            student: 'Students'
+            docent: 'Docents'
+          update:
+            notice: 'Profile was successfully updated.'
+          destroy:
+            notice: 'Profile was successfully destroyed.'
+
 
   sidebar:
     bar: 'bar'

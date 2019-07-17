@@ -194,6 +194,22 @@ es:
           destroy:
             notice: 'Perfil borrado.'
 
+      role:
+        model: 'Rol'
+        models: 'Roles'
+        attributes:
+          name: 'Nombre'
+          description: 'Descripción'
+          enabled: 'Habilitado'
+          level: 'Nivel de acceso'
+          created_at: 'Desde'
+        action:
+          new:
+            notice: 'Rol creado exitosamente.'
+          update:
+            notice: 'Rol actualizado correctamente.'
+          destroy:
+            notice: 'Rol borrado.'
 
   sidebar:
     bar: 'barra '

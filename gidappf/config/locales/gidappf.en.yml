@@ -194,6 +194,22 @@ en:
           destroy:
             notice: 'Profile was successfully destroyed.'
 
+      role:
+        model: 'Role'
+        models: 'Roles'
+        attributes:
+          name: 'Name'
+          description: 'Description'
+          enabled: 'Enabled'
+          level: 'Access level'
+          created_at: 'From'
+        action:
+          new:
+            notice: 'Role was successfully created.'
+          update:
+            notice: 'Role was successfully updated.'
+          destroy:
+            notice: 'Role was successfully destroyed.'
 
   sidebar:
     bar: 'bar'

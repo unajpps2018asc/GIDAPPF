@@ -49,12 +49,14 @@ class Input < ApplicationRecord
   # Devolución: Rol para asociarlo al nuevo perfil.                                       #
   #########################################################################################
     def template_to_merge
-      out=Input.find_by(title: 'Administrative rules').id
-      t1=self.info_keys.pluck(:key)#array de info_keys
-      templates=get_templates(Input.all)
-      templates.each do |t|
-        if GidappfTemplatesTools.compare_templates_do(t1, InfoKey.where(input: t).pluck(:key)) then
-          out = t.id
+      out=Input.where(title: 'Administrative rules').minimum('id')
+      if out != self.id then
+        t1=self.info_keys.pluck(:key)#array de info_keys
+        templates=get_templates(Input.all)
+        templates.each do |t|
+          if GidappfTemplatesTools.compare_templates_do(t1, InfoKey.where(input: t).pluck(:key)) then
+            out = t.id
+          end
         end
       end
       out

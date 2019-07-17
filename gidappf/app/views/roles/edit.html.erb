@@ -1,6 +1,6 @@
-<h1>Editing Role</h1>
+<h1><%= "#{t('body.common_entity.action.edit')} #{t('body.gidappf_entity.role.model')}"  %></h1>
 
 <%= render 'form', role: @role %>
 
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>
+<%= link_to  t('body.common_entity.action.show'), @role %> |
+<%= link_to  t('body.common_entity.action.edit'), roles_path %>

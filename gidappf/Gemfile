@@ -78,6 +78,10 @@ group :test do
   # gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
+  ###########################################################################
+  # Gemas GIDAFFP: minitest-utils, da soporte I18n a los test               #
+  ###########################################################################
+  gem 'minitest-utils'
 end
 
 group :development do

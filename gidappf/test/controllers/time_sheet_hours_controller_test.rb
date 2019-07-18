@@ -14,14 +14,14 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get time_sheet_hours_url#, headers: @auth_h_tsh
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   # test "should get new" do
   #   sign_in users(:one)
   #   get new_time_sheet_hour_url, headers: @auth_h_tsh
   #   assert_response :success
-  #   sign_out :one
+  #   sign_out :user
   # end
 
   test "should create time_sheet_hour" do
@@ -46,21 +46,21 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
           } }
     end
     assert_redirected_to time_sheet_hour_url(TimeSheetHour.last)#, headers: @auth_h_tsh
-    sign_out :one
+    sign_out :user
   end
 
   test "should show time_sheet_hour" do
     sign_in users(:one)
     get time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get edit" do
     sign_in users(:one)
     get edit_time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should update time_sheet_hour" do
@@ -82,7 +82,7 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
         wednesday: @time_sheet_hour.wednesday
         } }
     assert_redirected_to time_sheet_hour_url(@time_sheet_hour)
-    sign_out :one
+    sign_out :user
   end
 
   test "should destroy time_sheet_hour" do
@@ -92,12 +92,12 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 
   # Pendiente la compatibilidad con post_multiple
   # test "should get multiple_new" do
-  #   get time_sheet_hours_multiple_new_url, headers: @auth_h_tsh
+  #   get time_sheet_hours_multiple_new_url#, headers: @auth_h_tsh
   #   assert_redirected_to :root
   # end
 

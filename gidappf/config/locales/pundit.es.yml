@@ -9,20 +9,15 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/app/policies/gidappf_catchs_exceptions_policy.rb#
+# Archivo GIDAPPF/gidappf/config/locales/pundit.en.yml                    #
 ###########################################################################
-class GidappfCatchsExceptionsControllerPolicy < ApplicationPolicy
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción index definida en ClassRoomInsituteController       #
-  # Devolución: true, todos pueden listar aulas                             #
-  ###########################################################################
-  def first_password_detect?
-    out=false
-    unless @record.documents.first.nil?
-      out=!@record.documents.first.user.usercommissionroles.first.role.enabled
-    end
-    out
-  end
-
-end
+es:
+###########################################################################
+# Mensajes de manejo de excepciones producidas por intentos de acceso     #
+# no autorizados en pundit                                                #
+###########################################################################
+  pundit:
+   default: 'No podés realizar esta acción.'
+   post_policy:
+     update?: 'No podés editar esta publicación!'
+     create?: 'No podés crear esta publicación!'

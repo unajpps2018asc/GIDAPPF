@@ -75,9 +75,9 @@ class MatterPolicy < ApplicationPolicy
   #           1) Acción parametrize definida en ClassRoomInsituteController #
   # Devolución: delega el valor de create, para nuevas aulas                #
   ###########################################################################
-  def parametrize?
-    show?
-  end
+  # def parametrize?
+  #   show?
+  # end
   ###########################################################################
   # Prerequisitos:                                                          #
   #           1) Acción create definida en ClassRoomInsituteController      #

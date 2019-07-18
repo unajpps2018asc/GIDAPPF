@@ -16,6 +16,6 @@ class SetsusersaccessControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get setsusersaccess_settings_url#, headers: @auth_h_sets
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 end

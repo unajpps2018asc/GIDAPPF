@@ -8,7 +8,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get members_current_url tsh_id: time_sheet_hours(:one).id
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
 end

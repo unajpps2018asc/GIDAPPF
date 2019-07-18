@@ -14,7 +14,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get profiles_url
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should create profile" do
@@ -28,21 +28,21 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to profile_url(Profile.last)#, headers: @auth_h_profile
-    sign_out :one
+    sign_out :user
   end
 
   test "should show profile" do
     sign_in users(:one)
     get profile_url(@profile)#, headers: @auth_h_profile
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get edit" do
     sign_in users(:one)
     get edit_profile_url(@profile)#, headers: @auth_h_profile
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   # Pendiente hacer compatible `template_of_merge' por que los Profile con id 1 y 2 son templates y no figuran en fixtures
@@ -51,7 +51,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   #   @profile = profiles(:two)
   #   patch profile_url(@profile), params: { profile: { description: @profile.description, name: @profile.name, valid_from: @profile.valid_from, valid_to: @profile.valid_to } }
   #   assert_redirected_to profile_url(@profile)
-  #   sign_out :one
+  #   sign_out :user
   # end
 
   test "should destroy profile" do
@@ -64,6 +64,6 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 end

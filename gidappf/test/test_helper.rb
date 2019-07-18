@@ -14,7 +14,8 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
-# require 'devise/jwt/test_helpers' # Libreria que mantiene la sesion para todos los test
+# require 'devise/jwt/test_helpers' # Gema devise-jwt que mantiene la sesion para todos los test en api mode
+require 'minitest/utils/rails/locale' # Gema minitest-utils, da soporte I18n a los test
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in abc order.

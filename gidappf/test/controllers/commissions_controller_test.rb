@@ -14,28 +14,28 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
     get commissions_url#, headers: @auth_h_commission
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get index_unlogged" do
     sign_in users(:one)
     get commissions_url
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get new" do
     sign_in users(:one)
     get commissions_url#, headers: @auth_h_commission
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get new_unlogged" do
     sign_in users(:one)
     get new_commission_url
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should create commission" do
@@ -53,14 +53,14 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
       end
     com=Commission.last
     assert_redirected_to time_sheets_associate_path commission_id: com.id.to_s, commission_name: com.name, notice: 'Commission was successfully created.'
-    sign_out :one
+    sign_out :user
   end
 
   test "should show commission" do
     sign_in users(:one)
     get commission_url(@commission)#, headers: @auth_h_commission
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should get edit" do
@@ -74,7 +74,7 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     get "/commissions#edit" #, headers: @auth_h_commission
     assert_response :success
-    sign_out :one
+    sign_out :user
   end
 
   test "should update commission" do
@@ -88,7 +88,7 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
             start_date: Time.now
             }
           }
-    sign_out :one
+    sign_out :user
   end
 
   test "should destroy commission" do
@@ -105,6 +105,6 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :found
-    sign_out :one
+    sign_out :user
   end
 end

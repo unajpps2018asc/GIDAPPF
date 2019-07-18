@@ -68,7 +68,7 @@ class TimeSheetHoursController < ApplicationController
     authorize @time_sheet_hour = TimeSheetHour.new(time_sheet_hour_params)
     respond_to do |format|
       if @time_sheet_hour.save
-        format.html { redirect_to @time_sheet_hour, notice: 'Time sheet hour was successfully created.' }
+        format.html { redirect_to @time_sheet_hour, notice: t('body.gidappf_entity.time_sheet_hour.action.new.notice') }
         format.json { render :show, status: :created, location: @time_sheet_hour }
       else
         format.html { render :new }
@@ -82,7 +82,7 @@ class TimeSheetHoursController < ApplicationController
   def update
     respond_to do |format|
       if @time_sheet_hour.update(time_sheet_hour_params)
-        format.html { redirect_to @time_sheet_hour, notice: 'Time sheet hour was successfully updated.' }
+        format.html { redirect_to @time_sheet_hour, notice: t('body.gidappf_entity.time_sheet_hour.action.update.notice') }
         format.json { render :show, status: :ok, location: @time_sheet_hour }
       else
         format.html { render :edit }
@@ -96,7 +96,7 @@ class TimeSheetHoursController < ApplicationController
   def destroy
     authorize @time_sheet_hour.destroy
     respond_to do |format|
-      format.html { redirect_to time_sheet_hours_url, notice: 'Time sheet hour was successfully destroyed.' }
+      format.html { redirect_to time_sheet_hours_url, notice:  t('body.gidappf_entity.time_sheet_hour.action.destroy.notice')  }
       format.json { head :no_content }
     end
   end#destroy
@@ -124,10 +124,9 @@ class TimeSheetHoursController < ApplicationController
         )
       respond_to do |format|
         unless !@time_sheet_hour.save
-          msg = "Created TSH{ ts_id=#{arr.last.first.id} vac_id=#{arr.first.first.vacancies.first.id} fh=#{@time_sheet_hour.from_hour} fm=#{@time_sheet_hour.from_min} th=#{@time_sheet_hour.to_hour} tm=#{@time_sheet_hour.to_min} mo=#{@time_sheet_hour.monday} tu=#{@time_sheet_hour.tuesday} we=#{@time_sheet_hour.wednesday} th=#{@time_sheet_hour.thursday} fr=#{@time_sheet_hour.friday} sa=#{@time_sheet_hour.saturday} su=#{@time_sheet_hour.sunday}}"
           rest_tsh(arr,@time_sheet_hour)
           post_multiple
-          format.html { redirect_to time_sheet_hours_path, notice: msg }
+          format.html { redirect_to time_sheet_hours_path, notice: t('body.gidappf_entity.time_sheet_hour.action.new.notice') }
           format.json { render :renew_all, status: :ok}
         else
           format.html { render :multiple_new}
@@ -135,7 +134,7 @@ class TimeSheetHoursController < ApplicationController
         end
       end
     else
-      redirect_back fallback_location: '/', allow_other_host: false, notice: 'Unrelationable_entitys.'
+      redirect_back fallback_location: '/', allow_other_host: false, notice: t('body.gidappf_entity.time_sheet_hour.action.error.notice') 
     end
   end
 
@@ -164,13 +163,13 @@ class TimeSheetHoursController < ApplicationController
         from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
         thursday, friday, saturday, sunday, matter_id) *').
         where(time_sheet: TimeSheet.where(commission: Commission.where(user: current_user)).
-          where('start_date < ?',Date.today).where('end_date > ?',Date.today))
+          where('start_date <= ?',Date.today).where('end_date >= ?',Date.today))
     elsif acc == 29.0
       @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id,
         from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
         thursday, friday, saturday, sunday, matter_id) *').
-        where(time_sheet: TimeSheet.where('start_date < ?',Date.today).
-        where('end_date > ?',Date.today).where(commission_id: current_user.
+        where(time_sheet: TimeSheet.where('start_date <= ?',Date.today).
+        where('end_date >= ?',Date.today).where(commission_id: current_user.
           usercommissionroles.pluck(:commission_id).uniq))
     else
       @time_sheet_hours=TimeSheetHour.all

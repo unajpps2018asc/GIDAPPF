@@ -61,7 +61,7 @@ class ClassRoomInstitutesController < ApplicationController
 
     respond_to do |format|
       if @class_room_institute.save
-        format.html { redirect_to @class_room_institute, notice: 'Class room institute was successfully created.' }
+        format.html { redirect_to @class_room_institute, notice: t('body.gidappf_entity.class_room_institute.action.new.notice') }
         format.json { render :show, status: :created, location: @class_room_institute }
       else
         format.html { render :new }
@@ -75,7 +75,7 @@ class ClassRoomInstitutesController < ApplicationController
   def update
     respond_to do |format|
       if @class_room_institute.update(class_room_institute_params)
-        format.html { redirect_to @class_room_institute, notice: 'Class room institute was successfully updated.' }
+        format.html { redirect_to @class_room_institute, notice: t('body.gidappf_entity.class_room_institute.action.update.notice') }
         format.json { render :show, status: :ok, location: @class_room_institute }
       else
         format.html { render :edit }
@@ -95,7 +95,7 @@ class ClassRoomInstitutesController < ApplicationController
       @class_room_institute.destroy
     end
     respond_to do |format|
-      format.html { redirect_to class_room_institutes_url, notice: 'Class room institute was successfully destroyed.' }
+      format.html { redirect_to class_room_institutes_url, notice: t('body.gidappf_entity.class_room_institute.action.destroy.notice') }
       format.json { head :no_content }
     end
   end

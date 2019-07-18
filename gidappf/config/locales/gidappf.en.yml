@@ -1,0 +1,317 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/config/locales/gidappf.en.yml                   #
+###########################################################################
+en:
+  layout:
+    nav:
+      part:
+        link_40:
+          sets_u_acc: 'Sets users access'
+          campus_s: 'Campus students'
+          campus_d: 'Campus docents'
+          stu_list: 'Students'
+          dcn_list: 'Docents'
+          comm_list: 'Commissions'
+          hr_list: 'Schedules'
+          ts_list: 'Seasons'
+          cri_list: 'Classrooms'
+          mt_list: 'Matters'
+          rl_list: 'Roles'
+          in_list: 'Inputs'
+        link_30:
+          campus_s: 'Campus students'
+          campus_d: 'Campus docents'
+          stu_list: 'Students'
+          dcn_list: 'Docents'
+          comm_list: 'Commissions'
+          hr_list: 'Schedules'
+          ts_list: 'Seasons'
+          cri_list: 'Classrooms'
+          in_list: 'Inputs'
+        link_20:
+          stu_list: 'Students'
+          dcn_list: 'Docents'
+          comm_list: 'Commissions'
+          hr_list: 'Schedules'
+          cri_list: 'Classrooms'
+          in_list: 'Inputs'
+        link_10:
+          comm_list: 'Commissions'
+          hr_list: 'Schedules'
+          cri_list: 'Classrooms'
+          in_list: 'Notifications'
+
+    home:
+      title: 'Welcome! Now, you can'
+      element1: 'View your profile'
+      element2: 'Generate profile'
+
+  gidappf_catchs_exception:
+    disabled_cookies_detect:
+      title: "Gidappf can't deliver cookie..."
+      summary: 'Cookies are disabled in your web browser, please activate in preferences:'
+      line1: 'In Firefox: Menu(&#9776;)&rarr;Preferences&rarr;Privacy & security(&#128274;)&rarr;Content Blocking: Click in Strict or Standard'
+      line2: 'in navigation bar and click in switch lock'
+      line3: 'In Chrome: type'
+    first_password_detect:
+      title: 'Welcome, user with profile:'
+      summary: 'First time with default access, change password to continue... '
+      link1: 'Change default credentials'
+    not_record_found_detect:
+      title: 'Sorry, record not found... '
+      summary: 'Cookies are disabled in your web browser, please activate in preferences'
+
+  body:
+
+    common_entity:
+      action:
+        new: 'New'
+        new_her: 'New'
+        new_pl: 'New'
+        edit: 'Edit'
+        show: 'Show'
+        destroy: 'Destroy'
+        back: 'Back'
+        log_out: 'Log out'
+        submint: 'Submint'
+        confirm_msg: 'Are you sure?'
+
+    gidappf_entity:
+      campus_magnament:
+        model: 'Campus magnament'
+        models: 'Campus magnaments'
+        action:
+          get_campus_segmentation:
+            link: 'Campus segmentation'
+            title: 'Assign commissions'
+            notice:
+              msg1: 'Group by'
+          set_campus_segmentation:
+            notice:
+              msg1: 'Commission of'
+              msg2: ' was successfully change to '
+            error:
+              msg1: 'Profile '
+              msg2: ' schedule previously assigned for this'
+
+      class_room_institute:
+        model: 'Class Room Institute'
+        models: 'Class Rooms Institutes'
+        attributes:
+          name: 'Name'
+          ubication: 'Ubication'
+          description: 'Description'
+          available_from: 'From'
+          available_to: 'To'
+          available_monday: 'Available monday'
+          available_tuesday: 'Available tuesday'
+          available_wednesday: 'Available wednesday'
+          available_thursday: 'Available thursday'
+          available_friday: 'Available friday'
+          available_saturday: 'Available saturday'
+          available_sunday: 'Available sunday'
+          hours_disp: 'Disponibility'
+          vacancies_disp: 'Capacity'
+          enable: 'Habilitado'
+        action:
+          new:
+            notice: 'Class room was successfully created.'
+          update:
+            notice: 'Class room was successfully updated.'
+          destroy:
+            notice: 'Class room was successfully destroyed.'
+
+      commission:
+        model: 'Commission'
+        models: 'Commissions'
+        attributes:
+          name: 'Name'
+          ubication: 'Ubication'
+          description: 'Description'
+          start_date: 'From'
+          end_date: 'To'
+          validations:
+            check_date_interval: 'Must be a valid datetime'
+        action:
+          new:
+            notice: 'Commission was successfully created.'
+          update:
+            notice: 'Commission was successfully updated.'
+          destroy:
+            notice: 'Commission was successfully destroyed.'
+
+      current_commission:
+        link: 'Current Commissions'
+        action:
+          current:
+            notice: 'Hour was successfully created.'
+          report:
+            notice: 'Hour was successfully updated.'
+
+      input:
+        model: 'Input'
+        models: 'Inputs'
+        attributes:
+          title: 'Title'
+          summary: 'Summary'
+          enable: 'Enable'
+          author: 'Author'
+        action:
+          new:
+            notice: 'Input was successfully created.'
+          update:
+            notice: 'Input was successfully updated.'
+          destroy:
+            notice: 'Input was successfully destroyed.'
+          commission_qualification_list_students:
+            link: 'Qualify'
+            title: 'Qualification sudent list.'
+
+      matter:
+        model: 'Matter'
+        models: 'Matters'
+        attributes:
+          name: 'Name'
+          description: 'Description'
+          trayect: 'Trayect'
+          enable: 'Enable'
+        action:
+          new:
+            notice: 'Matter was successfully created.'
+          update:
+            notice: 'Matter was successfully updated.'
+          destroy:
+            notice: 'Matter was successfully destroyed.'
+
+      member:
+        model: 'Member'
+        models: 'Members'
+        action:
+          report:
+            link: 'Report'
+            title: 'Reports'
+            student: 'Student'
+            regular: 'Regular'
+            inst: 'Instances'
+            act: 'Acts'
+            abs: 'Abscences'
+
+      profile:
+        model: 'Profile'
+        models: 'Profiles'
+        attributes:
+          name: 'Name'
+          description: 'Description'
+          valid_from: 'From'
+          valid_to: 'To'
+          validations:
+            check_date_interval: 'Must be a valid datetime'
+        action:
+          first:
+            msg1: 'User created id='
+            msg2: ' role='
+            msg3: 'Email or '
+            msg4: 'is allready registred.'
+          second:
+            alert: 'Not User identification found!'
+          new:
+            student: 'New student'
+            docent: 'New docent'
+            notice: 'Profile was successfully created.'
+          index:
+            student: 'Students'
+            docent: 'Docents'
+          update:
+            notice: 'Profile was successfully updated.'
+          destroy:
+            notice: 'Profile was successfully destroyed.'
+
+      role:
+        model: 'Role'
+        models: 'Roles'
+        attributes:
+          name: 'Name'
+          description: 'Description'
+          enabled: 'Enabled'
+          level: 'Access level'
+          created_at: 'From'
+        action:
+          new:
+            notice: 'Role was successfully created.'
+          update:
+            notice: 'Role was successfully updated.'
+          destroy:
+            notice: 'Role was successfully destroyed.'
+
+      setsusersaccess:
+        model: 'Sets users access'
+        models: 'Sets users access'
+        action:
+          edit:
+            notice1: "Role was successfully updated at "
+            notice2: "Same role!"
+
+      time_sheet_hour:
+        model: 'Schedule'
+        models: 'Schedules'
+        attributes:
+          from_min: 'Minutes from'
+          from_hour: 'Hours from'
+          to_min: 'Minutes to'
+          to_hour: 'Hours to'
+          monday: 'Monday'
+          tuesday: 'Tuesday'
+          wednesday: 'Wednesday'
+          thursday: 'Thursday'
+          friday: 'Friday'
+          saturday: 'Saturday'
+          sunday: 'Sunday'
+          matter: 'Matter'
+          hour_occupied: 'Time band'
+        action:
+          new:
+            notice: 'Schedule was successfully created.'
+          update:
+            notice: 'Schedule was successfully updated.'
+          destroy:
+            notice: 'Schedule was successfully destroyed.'
+          error:
+            notice: 'Unrelationable_entitys.'
+          current_commission: 'Current commission.'
+
+      time_sheet:
+        model: 'Season'
+        models: 'Seasons'
+        attributes:
+          start_date: 'From'
+          end_date: 'To'
+          enabled: 'Enabled'
+        action:
+          new:
+            notice: 'Season was successfully created.'
+          update:
+            notice: 'Season was successfully updated.'
+          destroy:
+            notice: 'Season was successfully destroyed.'
+          associate:
+            title: 'TimeSheets associate with commission'
+          renew:
+            link: 'Renew all'
+            title: 'Renew all Seasons'
+          index:
+            expired: 'Expired Seasons'
+
+  sidebar:
+    bar: 'bar'
+  footer:
+    mesg_foot: 'Is licensed under the GNU Lesser General Public License v3.0'

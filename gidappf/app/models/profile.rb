@@ -129,11 +129,26 @@ class Profile < ApplicationRecord
     out
   end
 
+  def absence_mins
+    mins=0
+    absences = Input.where(id: self.documents.pluck(:input_id)).where(title: "Student absence")
+    unless absences.empty? then
+      absences.each do |absence|
+        unless absence.info_keys.find_by(key: "Justificado:").info_values.first.value.upcase.eql?("Si".upcase) then
+          hour=absence.info_keys.find_by(key: "Horario:").info_values.first.value.split("~")
+          d = mins_duration(hour.last.split(":")[0].to_i,hour.last.split(":")[1].to_i,hour.first.split(":")[0].to_i,hour.first.split(":")[1].to_i)
+          mins += d
+        end
+      end
+    end
+    mins
+  end
+
   private
   #######################################################################
   # Usado en la validacion.                                             #
   #######################################################################
   def check_date_interval
-    errors.add(:valid_to, 'must be a valid datetime') unless Date.parse(valid_to.to_s) > Date.parse(valid_from.to_s)
+    errors.add(:valid_to, t('body.gidappf_entity.profile.attributes.validations.check_date_interval')) unless Date.parse(valid_to.to_s) > Date.parse(valid_from.to_s)
   end
 end

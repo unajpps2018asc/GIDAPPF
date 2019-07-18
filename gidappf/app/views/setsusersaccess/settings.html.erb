@@ -1,11 +1,13 @@
-<h1>Setsusersaccess#settings</h1>
+<h1><%= t('body.gidappf_entity.setsusersaccess.model') %></h1>
 <table>
   <thead>
     <tr>
-      <th>Profile</th>
+      <th><%= t('body.gidappf_entity.profile.models') %></th>
       <th>Email</th>
-      <th>Commission</th>
-      <th colspan=".<%= @roleOpts.count.to_s %>." >Role:</th>
+      <th><%= t('body.gidappf_entity.commission.models') %></th>
+      <th colspan=".<%= @roleOpts.count.to_s %>." >
+        <%= t('body.gidappf_entity.role.models') %>
+      </th>
     </tr>
   </thead>
 

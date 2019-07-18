@@ -26,9 +26,9 @@ class UsercommissionrolesController < ApplicationController
     r=params[:radio_selected]
     unless u.role.id.to_s.eql?(r.to_s) then
       u.update(role: Role.find_by(id:r))
-      redirect_to setsusersaccess_settings_path, notice: "Role was successfully updated..."
+      redirect_to setsusersaccess_settings_path, notice: "#{t('body.gidappf_entity.setsusersaccess.action.edit.notice1')} #{u.user.email}"
     else
-      redirect_to setsusersaccess_settings_path, notice: "Same role!"
+      redirect_to setsusersaccess_settings_path, notice: t('body.gidappf_entity.setsusersaccess.action.edit.notice2')
     end
   end
 

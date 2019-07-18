@@ -1,6 +1,6 @@
-<h1>Editing Time Sheet Hour</h1>
+<h1><%= "#{t('body.common_entity.action.edit')} #{t('body.gidappf_entity.time_sheet_hour.model')}"  %></h1>
 
 <%= render 'form', time_sheet_hour: @time_sheet_hour %>
 
-<%= link_to 'Show', @time_sheet_hour %> |
-<%= link_to 'Back', time_sheet_hours_path %>
+<%= link_to t('body.common_entity.action.show'), @time_sheet_hour %> |
+<%= link_to t('body.common_entity.action.back'), time_sheet_hours_path %>

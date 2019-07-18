@@ -45,7 +45,7 @@ class MattersController < ApplicationController
 
     respond_to do |format|
       if @matter.save
-        format.html { redirect_to @matter, notice: 'Matter was successfully created.' }
+        format.html { redirect_to @matter, notice: t('body.gidappf_entity.matter.action.new.notice') }
         format.json { render :show, status: :created, location: @matter }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class MattersController < ApplicationController
   def update
     respond_to do |format|
       if @matter.update(matter_params)
-        format.html { redirect_to @matter, notice: 'Matter was successfully updated.' }
+        format.html { redirect_to @matter, notice: t('body.gidappf_entity.profile.action.update.notice') }
         format.json { render :show, status: :ok, location: @matter }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class MattersController < ApplicationController
   def destroy
     @matter.destroy
     respond_to do |format|
-      format.html { redirect_to matters_url, notice: 'Matter was successfully destroyed.' }
+      format.html { redirect_to matters_url, notice: t('body.gidappf_entity.matter.action.destroy.notice') }
       format.json { head :no_content }
     end
   end

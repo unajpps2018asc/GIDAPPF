@@ -65,7 +65,7 @@ class ProfilesController < ApplicationController
     authorize @profile #inicialización del nivel de acceso
     respond_to do |format|
       if @profile.save then
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to @profile, notice: t('body.gidappf_entity.profile.action.new.notice') }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render new_profile_path }
@@ -80,7 +80,7 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if @profile.update(profile_params)
         merge_profile_keys
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to @profile, notice: t('body.gidappf_entity.profile.action.update.notice') }
         format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit }
@@ -94,7 +94,7 @@ class ProfilesController < ApplicationController
   def destroy
     @profile.destroy
     respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
+      format.html { redirect_to profiles_url, notice: t('body.gidappf_entity.profile.action.destroy.notice') }
       format.json { head :no_content }
     end
   end
@@ -125,14 +125,14 @@ class ProfilesController < ApplicationController
             end
           end
           respond_to do |format|
-            msg = "User created id=#{@user.id} role=#{@user.usercommissionroles.first.role.name}"
+            msg = "#{t('body.gidappf_entity.profile.action.first.msg1')}#{@user.id}#{t('body.gidappf_entity.profile.action.first.msg2')}#{@user.usercommissionroles.first.role.name}"
             format.html { redirect_to profiles_second_path(id_user: @user.id.to_s, user_dni: params[:dni_profile]), notice: msg }
             format.json { render :second, status: :ok}
           end
         end
       else
         redirect_back fallback_location: '/profiles', allow_other_host: false,
-        alert: "Email or #{User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.find(3).key} is allready registred."
+        alert: "#{t('body.gidappf_entity.profile.action.first.msg3')} #{User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.find(3).key} #{t('body.gidappf_entity.profile.action.first.msg4')}"
       end
     end
   end
@@ -164,10 +164,10 @@ class ProfilesController < ApplicationController
         end
         redirect_to edit_profile_path(@profile) #redirige al rellenado de valores
       else
-        redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Not User identification found!'
+        redirect_back fallback_location: '/profiles', allow_other_host: false, alert: t('body.gidappf_entity.profile.action.second.alert')
       end
     else
-      redirect_back fallback_location: '/profiles', allow_other_host: false, alert: 'Not User identification found!'
+      redirect_back fallback_location: '/profiles', allow_other_host: false, alert: t('body.gidappf_entity.profile.action.second.alert')
     end
   end
 

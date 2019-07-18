@@ -1,6 +1,6 @@
-<h1>Editing Time Sheet <%= params[:commission_name] %></h1>
+<h1><%= t('body.gidappf_entity.time_sheet.action.update.notice') %><%= params[:commission_name] %></h1>
 
 <%= render 'form', time_sheet: @time_sheet %>
 
-<%= link_to 'Show', @time_sheet %> |
-<%= link_to 'Back', time_sheets_path %>
+<%= link_to t('body.common_entity.action.show'), @time_sheet %> |
+<%= link_to t('body.common_entity.action.back'), time_sheets_path %>

@@ -12,22 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label t('body.gidappf_entity.matter.attributes.name') %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label t('body.gidappf_entity.matter.attributes.description') %>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label "trayect" %>
+    <%= form.label t('body.gidappf_entity.matter.attributes.trayect') %>
     <%= form.select :trayect, @selection_trayect %>
   </div>
 
   <div class="field">
-    <%= form.label :enable %>
+    <%= form.label t('body.gidappf_entity.matter.attributes.enable') %>
     <%= form.check_box :enable %>
   </div>
 

@@ -1,2 +1,2 @@
-<h1>TimeSheets associate with commission <%= params[:commission_name] %></h1>
+<h1><%= t('body.gidappf_entity.time_sheet.action.associate.title') %><%= params[:commission_name] %></h1>
 <%= render 'form', time_sheet: @time_sheet, commission_id: params[:commission_id] %>

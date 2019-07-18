@@ -11,53 +11,55 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 # Archivo GIDAPPF/gidappf/config/routes.rb                                #
 ###########################################################################
-require 'sidekiq/web'
 
+# require 'sidekiq/web'
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
-  get 'members/current'
-  resources :inputs do
-    member do
-      get 'disable'
-      get 'commission_qualification_list_students'
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    # mount Sidekiq::Web => '/sidekiq'
+    get 'members/current'
+    get 'members/report'
+    resources :inputs do
+      member do
+        get 'disable'
+        get 'commission_qualification_list_students'
+      end
     end
-  end
-  resources :matters
-  get 'campus_magnaments/set_campus_segmentation'
-  get 'campus_magnaments/get_campus_segmentation'
-  get 'profiles/second'
-  get 'profiles/first'
-  post 'profiles/first'
-  resources :profiles
-  get 'time_sheet_hours/current_commissions'
-  get 'time_sheet_hours/multiple_new'
-  post 'time_sheet_hours/multiple_new'
-  resources :time_sheet_hours, only:[:create, :index, :show, :edit, :destroy, :update]
-  get 'time_sheets/associate'
-  get 'time_sheets/renew_all'
-  post 'time_sheets/renew_all'
-  resources :time_sheets,only:[:create, :index, :show, :edit, :destroy, :update] do
-    member do
-      get 'parametrize'
+    resources :matters
+    get 'campus_magnaments/set_campus_segmentation'
+    get 'campus_magnaments/get_campus_segmentation'
+    get 'profiles/second'
+    get 'profiles/first'
+    post 'profiles/first'
+    resources :profiles
+    get 'time_sheet_hours/current_commissions'
+    get 'time_sheet_hours/multiple_new'
+    post 'time_sheet_hours/multiple_new'
+    resources :time_sheet_hours, only:[:create, :index, :show, :edit, :destroy, :update]
+    get 'time_sheets/associate'
+    get 'time_sheets/renew_all'
+    post 'time_sheets/renew_all'
+    resources :time_sheets,only:[:create, :index, :show, :edit, :destroy, :update] do
+      member do
+        get 'parametrize'
+      end
     end
-  end
-  resources :vacancies
-  resources :class_room_institutes do
-    member do
-      get 'parametrize'
+    resources :vacancies
+    resources :class_room_institutes do
+      member do
+        get 'parametrize'
+      end
     end
+    devise_for :users, controllers: {
+      registrations: 'user/registrations',
+      sessions: 'user/sessions'
+    }
+    resources :usercommissionroles,only:[:edit]
+    get 'setsusersaccess/settings'
+    resources :commissions
+    resources :roles
+  	root to: "home#index"
+    get 'gidappf_catchs_exceptions/disabled_cookies_detect'
+    get 'gidappf_catchs_exceptions/first_password_detect'
+    get 'gidappf_catchs_exceptions/not_record_found_detect'
   end
-  devise_for :users, controllers: {
-    registrations: 'user/registrations',
-    sessions: 'user/sessions'
-  }
-  resources :usercommissionroles,only:[:edit]
-  get 'setsusersaccess/settings'
-  resources :commissions
-  resources :roles
-	root to: "home#index"
-  get 'gidappf_catchs_exceptions/disabled_cookies_detect'
-  get 'gidappf_catchs_exceptions/first_password_detect'
-  get 'gidappf_catchs_exeptions/disabled_cookies_detect'
-  get 'gidappf_catchs_exeptions/first_password_detect'
 end

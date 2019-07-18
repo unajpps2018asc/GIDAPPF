@@ -1,6 +1,6 @@
-<h1>Editing Matter</h1>
+<h1><%= "#{t('body.common_entity.action.edit')} #{t('body.gidappf_entity.matter.model')}"  %></h1>
 
 <%= render 'form', matter: @matter %>
 
-<%= link_to 'Show', @matter %> |
-<%= link_to 'Back', matters_path %>
+<%= link_to t('body.common_entity.action.show'), @matter %> |
+<%= link_to t('body.common_entity.action.back'), matters_path %>

@@ -247,6 +247,14 @@ es:
           destroy:
             notice: 'Rol borrado.'
 
+      setsusersaccess:
+        model: 'Establecer accesos de usuarios'
+        models: 'Establecer accesos de usuarios'
+        action:
+          edit:
+            notice1: "El rol ha sido actualizado en "
+            notice2: "Mismo rol!"
+
       time_sheet_hour:
         model: 'Horario'
         models: 'Horarios'

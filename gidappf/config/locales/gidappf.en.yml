@@ -253,6 +253,14 @@ en:
           destroy:
             notice: 'Role was successfully destroyed.'
 
+      setsusersaccess:
+        model: 'Sets users access'
+        models: 'Sets users access'
+        action:
+          edit:
+            notice1: "Role was successfully updated at "
+            notice2: "Same role!"
+
       time_sheet_hour:
         model: 'Schedule'
         models: 'Schedules'

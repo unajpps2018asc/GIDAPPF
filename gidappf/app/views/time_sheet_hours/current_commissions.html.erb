@@ -20,7 +20,7 @@
         <td><%= time_sheet_hour.matter.name %></td>
         <td><%= time_sheet_hour.occupied_hour_fmt %></td>
         <td><%= link_to t('body.gidappf_entity.input.action.commission_qualification_list_students.link'),commission_qualification_list_students_input_path(id:0,tsh_id:time_sheet_hour.id) %></td>
-        <td><%= link_to t('body.gidappf_entity.member.members'), members_current_path(tsh_id:time_sheet_hour.id) %></td>
+        <td><%= link_to t('body.gidappf_entity.member.models'), members_current_path(tsh_id:time_sheet_hour.id) %></td>
         <td><%= link_to t('body.gidappf_entity.member.action.report.link'), members_report_path(tsh_id:time_sheet_hour.id) %></td>
       </tr>
     <% end %>

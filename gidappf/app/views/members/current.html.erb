@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= "Students" %></h1>
+<h1><%= t('body.gidappf_entity.profile.action.index.student') %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Valid to</th>
-      <th>Valid from</th>
+      <th><%= t('body.gidappf_entity.profile.attributes.name') %></th>
+      <th><%= t('body.gidappf_entity.profile.attributes.description') %></th>
+      <th><%= t('body.gidappf_entity.profile.attributes.valid_to') %></th>
+      <th><%= t('body.gidappf_entity.profile.attributes.valid_from') %></th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -20,10 +20,10 @@
         <td><%= profile.description.first(50)+"…" %></td>
         <td><%= profile.valid_to.strftime("%d/%m/%Y") %></td>
         <td><%= profile.valid_from.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
+        <td><%= link_to t('body.common_entity.action.edit'), edit_profile_path(profile) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<div><%= link_to 'All profiles', profiles_path %> | <%= link_to 'Current Commissions', time_sheet_hours_current_commissions_path %> </div>
+<div><%= link_to t('body.gidappf_entity.profile.models'), profiles_path %> | <%= link_to t('body.gidappf_entity.current_commission.link'), time_sheet_hours_current_commissions_path %> </div>

@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Expired time sheets</h1>
+<h1><%= t('body.gidappf_entity.time_sheet.action.index.expired')  %></h1>
 <p>Start: 13 months ago ~ today & End: 1 month ago ~ today</p>
 
 <table>
   <thead>
     <tr>
-      <th>Commission</th>
-      <th>Start date</th>
-      <th>End date</th>
+      <th><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
+      <th><%= t('body.gidappf_entity.time_sheet.attributes.start_date')  %></th>
+      <th><%= t('body.gidappf_entity.time_sheet.attributes.end_date')  %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -19,23 +19,23 @@
         <td><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
         <td><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
         <td><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
-        <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('body.common_entity.action.edit'), edit_time_sheet_path(time_sheet) %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), time_sheet, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Renew all', time_sheets_renew_all_path %>
+<%= link_to t('body.gidappf_entity.time_sheet.action.renew.link'), time_sheets_renew_all_path %>
 <hr>
-<h1>All</h1>
+<h1><%= t('body.gidappf_entity.time_sheet.models')  %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Commission</th>
-      <th>Start date</th>
-      <th>End date</th>
+      <th><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
+      <th><%= t('body.gidappf_entity.time_sheet.attributes.start_date')  %></th>
+      <th><%= t('body.gidappf_entity.time_sheet.attributes.end_date')  %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -46,8 +46,8 @@
         <td><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
         <td><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
         <td><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
-        <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('body.common_entity.action.edit'), edit_time_sheet_path(time_sheet) %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), time_sheet, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>

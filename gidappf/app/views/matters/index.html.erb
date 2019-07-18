@@ -20,7 +20,7 @@
         <td><%= matter.enable %></td>
         <td><%= link_to t('body.common_entity.action.show'), matter %></td>
         <td><%= link_to t('body.common_entity.action.edit'), edit_matter_path(matter) %></td>
-        <td><%= link_to t('body.common_entity.action.destroy'), matter, method: :delete, data: { confirm: t('body.common_entity.action.comfirm_msg') } %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), matter, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>

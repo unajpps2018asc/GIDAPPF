@@ -21,7 +21,7 @@
         <td><%= commission.start_date.strftime("%d/%m/%Y") %></td>
         <td><%= commission.end_date.strftime("%d/%m/%Y") %></td>
         <td><%= link_to link_to t('body.common_entity.action.edit'), edit_commission_path(commission) %></td>
-        <td><%= link_to t('body.common_entity.action.destroy'), commission, method: :delete, data: { confirm: t('body.common_entity.action.comfirm_msg') } %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), commission, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>

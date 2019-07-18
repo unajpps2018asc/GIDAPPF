@@ -84,7 +84,7 @@ en:
         back: 'Back'
         log_out: 'Log out'
         submint: 'Submint'
-        comfirm_msg: 'Are you sure?'
+        confirm_msg: 'Are you sure?'
 
     gidappf_entity:
       class_room_institute:
@@ -134,6 +134,7 @@ en:
             notice: 'Commission was successfully destroyed.'
 
       current_commission:
+        link: 'Current Commissions'
         action:
           current:
             notice: 'Hour was successfully created.'
@@ -262,6 +263,28 @@ en:
           error:
             notice: 'Unrelationable_entitys.'
           current_commission: 'Current commission.'
+
+      time_sheet:
+        model: 'Season'
+        models: 'Seasons'
+        attributes:
+          start_date: 'From'
+          end_date: 'To'
+          enabled: 'Enabled'
+        action:
+          new:
+            notice: 'Season was successfully created.'
+          update:
+            notice: 'Season was successfully updated.'
+          destroy:
+            notice: 'Season was successfully destroyed.'
+          associate:
+            title: 'TimeSheets associate with commission'
+          renew:
+            link: 'Renew all'
+            title: 'Renew all Seasons'
+          index:
+            expired: 'Expired Seasons'
 
   sidebar:
     bar: 'bar'

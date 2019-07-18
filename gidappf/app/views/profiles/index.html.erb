@@ -48,7 +48,7 @@
         <td><%= profile.valid_to.strftime("%d/%m/%Y") %></td>
         <td><%= profile.valid_from.strftime("%d/%m/%Y") %></td>
         <td><%= link_to t('body.common_entity.action.edit'), edit_profile_path(profile) %></td>
-        <td><%= link_to t('body.common_entity.action.destroy'), profile, method: :delete, data: { confirm: t('body.common_entity.action.comfirm_msg') } %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), profile, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>

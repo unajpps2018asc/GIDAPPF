@@ -83,7 +83,7 @@ es:
         back: 'Atrás'
         log_out: 'Desconectar'
         submint: 'Enviar'
-        comfirm_msg: '¿Estás seguro?'
+        confirm_msg: '¿Estás seguro?'
 
     gidappf_entity:
       class_room_institute:
@@ -131,6 +131,9 @@ es:
             notice: 'Comisión actualizada correctamente.'
           destroy:
             notice: 'Comisión borrada.'
+
+      current_commission:
+        link: 'Comisiones actuales'
 
       input:
         model: 'Entrada'
@@ -254,6 +257,28 @@ es:
           error:
             notice: 'Entidades no relacionables.'
           current_commission: 'Comisión actual'
+
+      time_sheet:
+        model: 'Temporada'
+        models: 'Temporadas'
+        attributes:
+          start_date: 'Desde'
+          end_date: 'Hasta'
+          enabled: 'Habilitado'
+        action:
+          new:
+            notice: 'Nueva Temporada creada exitosamente.'
+          update:
+            notice: 'Temporada actualizada correctamente.'
+          destroy:
+            notice: 'Temporada borrada.'
+          associate:
+            title: 'Asociar temporada con la comisión'
+          renew:
+            link: 'Renovar todas'
+            title: 'Renovar todas las temporadas'
+          index:
+            expired: 'Temporadas que expiran'
 
   sidebar:
     bar: 'barra '

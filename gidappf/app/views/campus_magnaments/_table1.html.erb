@@ -14,8 +14,13 @@
 <table>
   <thead>
      <tr>
-      <th><%= params[:profile_type].first(params[:profile_type].index("@")).capitalize + ":" %></th>
-      <th colspan=".<%= comms_period.count.to_s %>." >Commission:</th>
+        <% if params[:profile_type].eql?(LockEmail::LIST[4]) then  %>
+          <th><%= t('body.gidappf_entity.profile.action.index.student') %></th>
+          <th colspan=".<%= comms_period.count.to_s %>." ><%= t('body.gidappf_entity.commission.model')  %></th>
+        <% elsif params[:profile_type].eql?(LockEmail::LIST[3]) then  %>
+          <th><%= t('body.gidappf_entity.profile.action.index.docent') %></th>
+          <th colspan=".<%= comms_period.count.to_s %>." ><%= t('body.gidappf_entity.commission.models')  %></th>
+        <% end %>
      </tr>
   </thead>
 

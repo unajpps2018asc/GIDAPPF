@@ -87,6 +87,23 @@ en:
         confirm_msg: 'Are you sure?'
 
     gidappf_entity:
+      campus_magnament:
+        model: 'Campus magnament'
+        models: 'Campus magnaments'
+        action:
+          get_campus_segmentation:
+            link: 'Campus segmentation'
+            title: 'Assign commissions'
+            notice:
+              msg1: 'Group by'
+          set_campus_segmentation:
+            notice:
+              msg1: 'Commission of'
+              msg2: ' was successfully change to '
+            error:
+              msg1: 'Profile '
+              msg2: ' schedule previously assigned for this'
+
       class_room_institute:
         model: 'Class Room Institute'
         models: 'Class Rooms Institutes'

@@ -86,6 +86,23 @@ es:
         confirm_msg: '¿Estás seguro?'
 
     gidappf_entity:
+      campus_magnament:
+        model: 'Gestión del campus'
+        models: 'Gestiones del campus'
+        action:
+          get_campus_segmentation:
+            link: 'Segmentation del campus'
+            title: 'Asignación de comisiones'
+            notice:
+              msg1: 'Agrupados por'
+          set_campus_segmentation:
+            notice:
+              msg1: 'Comisión de'
+              msg2: ' correctamente cambiado a '
+            error:
+              msg1: 'Perfil '
+              msg2: ' horario previamente asignado por '
+
       class_room_institute:
         model: 'Aula'
         models: 'Aulas'

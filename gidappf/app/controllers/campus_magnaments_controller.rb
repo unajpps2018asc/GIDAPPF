@@ -67,9 +67,9 @@ class CampusMagnamentsController < ApplicationController
       redirect_to campus_magnaments_get_campus_segmentation_path(
         def_period: params[:def_period],
         profile_type: params[:profile_type]),
-        notice: "Profile #{p.name} change to #{ts.commission.name}"
+        notice: "#{t('body.gidappf_entity.profile.model')} #{p.name} #{t('body.gidappf_entity.campus_magnament.action.set_campus_segmentation.notice.msg2')} #{ts.commission.name}"
     else
-      flash[:errors] = "Profile #{p.name}, schedule previously assigned for this #{params[:profile_type].first(params[:profile_type].index("@")).capitalize}…"
+      flash[:errors] = "#{t('body.gidappf_entity.profile.model')} #{p.name}, #{t('body.gidappf_entity.campus_magnament.action.set_campus_segmentation.error.msg2')} #{params[:profile_type].first(params[:profile_type].index("@")).capitalize}…"
       redirect_to campus_magnaments_get_campus_segmentation_path(
         def_period: params[:def_period],
         profile_type: params[:profile_type])
@@ -150,11 +150,11 @@ class CampusMagnamentsController < ApplicationController
   def table_metadata_maker(time_categ, trayect, profile_type)
     out=[]
     if profile_type.eql?(LockEmail::LIST[4]) then
-      out.push("Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
+      out.push("#{t('body.gidappf_entity.campus_magnament.action.get_campus_segmentation.notice.msg1')} #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
         +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
         time_sheet_from_commissions_in_period(time_categ, trayect))
     elsif profile_type.eql?(LockEmail::LIST[3]) then
-      out.push("Group by #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
+      out.push("#{t('body.gidappf_entity.campus_magnament.action.get_campus_segmentation.notice.msg1')} #{trayect} "+Time.new(2000,1,1,time_categ[0].to_i,time_categ[1].to_i).strftime('%R') +
         +' ~ '+Time.new(2000,1,1,time_categ[2].to_i,time_categ[3].to_i).strftime('%R'),
         time_sheet_hour_from_commissions_in_period(time_categ, trayect))
     end

@@ -1,14 +1,14 @@
 
 <p id="notice"><%= notice %></p>
-<h1>Current commissions</h1>
+<h1><%= t('body.gidappf_entity.time_sheet_hour.action.current_commission')%></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Commission</th>
-      <th>Classroom</th>
-      <th>Matter</th>
-      <th>Hour occupied</th>
+      <th><%= t('body.gidappf_entity.commission.model') %></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.model') %></th>
+      <th><%= t('body.gidappf_entity.matter.model') %></th>
+      <th><%= t('body.gidappf_entity.time_sheet_hour.attributes.hour_occupied') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,13 +19,13 @@
         <td><%= time_sheet_hour.vacancy.class_room_institute.name %></td>
         <td><%= time_sheet_hour.matter.name %></td>
         <td><%= time_sheet_hour.occupied_hour_fmt %></td>
-        <td><%= link_to 'Qualify',commission_qualification_list_students_input_path(id:0,tsh_id:time_sheet_hour.id) %></td>
-        <td><%= link_to 'Members', members_current_path(tsh_id:time_sheet_hour.id) %></td>
-        <td><%= link_to 'Report', members_report_path(tsh_id:time_sheet_hour.id) %></td>
+        <td><%= link_to t('body.gidappf_entity.input.action.commission_qualification_list_students.link'),commission_qualification_list_students_input_path(id:0,tsh_id:time_sheet_hour.id) %></td>
+        <td><%= link_to t('body.gidappf_entity.member.members'), members_current_path(tsh_id:time_sheet_hour.id) %></td>
+        <td><%= link_to t('body.gidappf_entity.member.action.report.link'), members_report_path(tsh_id:time_sheet_hour.id) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
 
-<div><%= link_to 'All commissions', commissions_path %></div>
+<div><%= link_to t('body.gidappf_entity.commission.models'), commissions_path %></div>

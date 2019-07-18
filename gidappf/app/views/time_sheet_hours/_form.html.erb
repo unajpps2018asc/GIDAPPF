@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label "Matter" %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.matter') %>
     <%= form.select :matter_id, Matter.where(enable: true).collect { |m| [ m.name, m.id ] }, include_blank: true %>
   </div>
 
@@ -27,57 +27,57 @@
   </div>
 
   <div class="field">
-    <%= form.label :from_hour %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.from_hour') %>
     <%= form.number_field :from_hour %>
   </div>
 
   <div class="field">
-    <%= form.label :from_min %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.from_min') %>
     <%= form.number_field :from_min %>
   </div>
 
   <div class="field">
-    <%= form.label :to_hour %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.to_hour') %>
     <%= form.number_field :to_hour %>
   </div>
 
   <div class="field">
-    <%= form.label :to_min %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.to_min') %>
     <%= form.number_field :to_min %>
   </div>
 
   <div class="field">
-    <%= form.label :monday %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.monday') %>
     <%= form.check_box :monday %>
   </div>
 
   <div class="field">
-    <%= form.label :tuesday %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.tuesday') %>
     <%= form.check_box :tuesday %>
   </div>
 
   <div class="field">
-    <%= form.label :wednesday %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.wednesday') %>
     <%= form.check_box :wednesday %>
   </div>
 
   <div class="field">
-    <%= form.label :thursday %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.thursday') %>
     <%= form.check_box :thursday %>
   </div>
 
   <div class="field">
-    <%= form.label :friday %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.friday') %>
     <%= form.check_box :friday %>
   </div>
 
   <div class="field">
-    <%= form.label :saturday %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.saturday') %>
     <%= form.check_box :saturday %>
   </div>
 
   <div class="field">
-    <%= form.label :sunday %>
+    <%= t('body.gidappf_entity.time_sheet_hour.attributes.sunday') %>
     <%= form.check_box :sunday %>
   </div>
 

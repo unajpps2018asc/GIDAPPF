@@ -22,7 +22,7 @@ en:
           stu_list: 'Students'
           dcn_list: 'Docents'
           comm_list: 'Commissions'
-          hr_list: 'Hours'
+          hr_list: 'Schedules'
           ts_list: 'Seasons'
           cri_list: 'Classrooms'
           mt_list: 'Matters'
@@ -34,7 +34,7 @@ en:
           stu_list: 'Students'
           dcn_list: 'Docents'
           comm_list: 'Commissions'
-          hr_list: 'Hours'
+          hr_list: 'Schedules'
           ts_list: 'Seasons'
           cri_list: 'Classrooms'
           in_list: 'Inputs'
@@ -42,12 +42,12 @@ en:
           stu_list: 'Students'
           dcn_list: 'Docents'
           comm_list: 'Commissions'
-          hr_list: 'Hours'
+          hr_list: 'Schedules'
           cri_list: 'Classrooms'
           in_list: 'Inputs'
         link_10:
           comm_list: 'Commissions'
-          hr_list: 'Hours'
+          hr_list: 'Schedules'
           cri_list: 'Classrooms'
           in_list: 'Notifications'
 
@@ -77,6 +77,7 @@ en:
       action:
         new: 'New'
         new_her: 'New'
+        new_pl: 'New'
         edit: 'Edit'
         show: 'Show'
         destroy: 'Destroy'
@@ -132,6 +133,13 @@ en:
           destroy:
             notice: 'Commission was successfully destroyed.'
 
+      current_commission:
+        action:
+          current:
+            notice: 'Hour was successfully created.'
+          report:
+            notice: 'Hour was successfully updated.'
+
       input:
         model: 'Input'
         models: 'Inputs'
@@ -147,6 +155,9 @@ en:
             notice: 'Input was successfully updated.'
           destroy:
             notice: 'Input was successfully destroyed.'
+          commission_qualification_list_students:
+            link: 'Qualify'
+            title: 'Qualification sudent list.'
 
       matter:
         model: 'Matter'
@@ -163,6 +174,19 @@ en:
             notice: 'Matter was successfully updated.'
           destroy:
             notice: 'Matter was successfully destroyed.'
+
+      member:
+        model: 'Member'
+        models: 'Members'
+        action:
+          report:
+            link: 'Report'
+            title: 'Reports'
+            student: 'Student'
+            regular: 'Regular'
+            inst: 'Instances'
+            act: 'Acts'
+            abs: 'Abscences'
 
       profile:
         model: 'Profile'
@@ -210,6 +234,34 @@ en:
             notice: 'Role was successfully updated.'
           destroy:
             notice: 'Role was successfully destroyed.'
+
+      time_sheet_hour:
+        model: 'Schedule'
+        models: 'Schedules'
+        attributes:
+          from_min: 'Minutes from'
+          from_hour: 'Hours from'
+          to_min: 'Minutes to'
+          to_hour: 'Hours to'
+          monday: 'Monday'
+          tuesday: 'Tuesday'
+          wednesday: 'Wednesday'
+          thursday: 'Thursday'
+          friday: 'Friday'
+          saturday: 'Saturday'
+          sunday: 'Sunday'
+          matter: 'Matter'
+          hour_occupied: 'Time band'
+        action:
+          new:
+            notice: 'Schedule was successfully created.'
+          update:
+            notice: 'Schedule was successfully updated.'
+          destroy:
+            notice: 'Schedule was successfully destroyed.'
+          error:
+            notice: 'Unrelationable_entitys.'
+          current_commission: 'Current commission.'
 
   sidebar:
     bar: 'bar'

@@ -76,6 +76,7 @@ es:
       action:
         new: 'Nuevo'
         new_her: 'Nueva'
+        new_pl: 'Nuevos'
         edit: 'Editar'
         show: 'Ver'
         destroy: 'Borrar'
@@ -146,7 +147,9 @@ es:
             notice: 'Entrada actualizada correctamente.'
           destroy:
             notice: 'Entrada borrada.'
-
+          commission_qualification_list_students:
+            link: 'Calificar'
+            title: 'Lista de calificación de estudiantes.'
 
       matter:
         model: 'Materia'
@@ -163,6 +166,19 @@ es:
             notice: 'Materia actualizada correctamente.'
           destroy:
             notice: 'Materia borrada.'
+
+      member:
+        model: 'Miembro'
+        models: 'Miembros'
+        action:
+          report:
+            link: 'Reporte'
+            title: 'Reportes'
+            student: 'Estudiante'
+            regular: 'Regular'
+            inst: 'Instancias'
+            act: 'Actas'
+            abs: 'Ausencias'
 
       profile:
         model: 'Perfil'
@@ -210,6 +226,34 @@ es:
             notice: 'Rol actualizado correctamente.'
           destroy:
             notice: 'Rol borrado.'
+
+      time_sheet_hour:
+        model: 'Horario'
+        models: 'Horarios'
+        attributes:
+          from_min: 'Minutos desde'
+          from_hour: 'Hora desde'
+          to_min: 'Minutos hasta'
+          to_hour: 'Hora hasta'
+          monday: 'Lunes'
+          tuesday: 'Martes'
+          wednesday: 'Miércoles'
+          thursday: 'Jueves'
+          friday: 'Viernes'
+          saturday: 'Sábado'
+          sunday: 'Domingo'
+          matter: 'Materia'
+          hour_occupied: 'Banda horaria'
+        action:
+          new:
+            notice: 'Nuevo horario creado.'
+          update:
+            notice: 'Horario actualizado.'
+          destroy:
+            notice: 'Horario borrado.'
+          error:
+            notice: 'Entidades no relacionables.'
+          current_commission: 'Comisión actual'
 
   sidebar:
     bar: 'barra '

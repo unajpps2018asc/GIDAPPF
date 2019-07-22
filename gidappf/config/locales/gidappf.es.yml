@@ -309,19 +309,12 @@ es:
       client_side_validator:
         error:
           alphanumeric_error: 'Error de alfanumérico.'
-        error:
-          alphanumeric_error: 'Error de calificación.'
-        error:
+          calification_error: 'Error de calificación.'
           check_error: 'Error de chequeo.'
-        error:
           date_error: 'Error de formato de días.'
-        error:
           matter_error: 'Error de materia.'
-        error:
           number_error: 'Error numérico.'
-        error:
           trayect_error: 'Elegir uno de'
-        error:
           words_error: 'Error de frase.'
 
   sidebar:

@@ -315,19 +315,12 @@ en:
       client_side_validator:
         error:
           alphanumeric_error: 'Alphanumeric error.'
-        error:
-          alphanumeric_error: 'Calification error.'
-        error:
+          calification_error: 'Calification error.'
           check_error: 'Check error.'
-        error:
           date_error: 'Date error.'
-        error:
           matter_error: 'Matter error.'
-        error:
           number_error: 'Number error.'
-        error:
           trayect_error: 'Choose one of'
-        error:
           words_error: 'Words error'
 
 

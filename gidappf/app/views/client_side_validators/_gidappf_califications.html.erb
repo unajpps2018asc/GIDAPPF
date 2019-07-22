@@ -17,7 +17,7 @@
       str=String($(event.target).val());
       if(Number.isNaN(parseFloat(str)) || parseFloat(str) > 10 || parseFloat(str) < 1) {
           $(event.target).val('');
-          $( \"<p class='validation-error'>Calification error.</p>\" ).appendTo($(event.target).parent());
+          $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.calification_error')}</p>\" ).appendTo($(event.target).parent());
         }
       else {$(event.target).val(parseFloat(str).toPrecision(3));}
       });"

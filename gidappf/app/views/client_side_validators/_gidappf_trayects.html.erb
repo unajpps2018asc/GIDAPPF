@@ -18,7 +18,7 @@
   target_reg_exp_strategy = "$(document).ready(function() {
   if( jQuery.inArray( $(event.target).val(), ['#{Matter.pluck(:trayect).uniq.join("','")}'] )  < 0 ) {
       $(event.target).val('');
-      $( \"<p class='validation-error'>Choose one of ['#{Matter.pluck(:trayect).uniq.join("','")}']</p>\" ).appendTo($(event.target).parent());
+      $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.trayect_error')} ['#{Matter.pluck(:trayect).uniq.join("','")}']</p>\" ).appendTo($(event.target).parent());
     }
   });"
 %>

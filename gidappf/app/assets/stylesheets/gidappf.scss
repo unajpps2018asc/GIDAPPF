@@ -62,3 +62,22 @@ $percent13: #233b6e;
     color: $percent40;
     background-color: tranparent;
   }
+
+  body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-alert{
+    margin-top: 1%;
+    border-color: $percent13;
+    box-shadow: 7px 7px;
+  }
+
+  body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-notice{
+    margin-top: 1%;
+    border-color: $percent13;
+    box-shadow: 7px 7px;
+  }
+
+  html body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-error{
+    margin-top: 1%;
+    background-color: rosybrown; /* For browsers that do not support gradients */
+    border-color: $percent13;
+    box-shadow: 7px 7px;
+  }

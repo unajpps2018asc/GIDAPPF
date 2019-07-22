@@ -17,7 +17,7 @@
   target_reg_exp_strategy = "$(document).ready(function() {
     if( $(event.target).val().match(/no|si/i/) == null ) {
       $(event.target).val('');
-      $( \"<p class='validation-error'>Check error.</p>\" ).appendTo($(event.target).parent());
+      $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.check_error')}</p>\" ).appendTo($(event.target).parent());
     }
   });"
 %>

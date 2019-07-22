@@ -22,4 +22,6 @@
   <!-- archivo _table1.html.erb por cada profiles_time_cat-->
   <%= render 'table1', profiles_period: profiles_time_cat.drop(1),
         comms_period: profiles_time_cat.first.last, title: profiles_time_cat.first.first %>
+  <br>
+  <hr>
 <% end %>

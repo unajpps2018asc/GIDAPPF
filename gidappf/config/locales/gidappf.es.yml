@@ -95,6 +95,7 @@ es:
             title: 'Asignación de comisiones'
             notice:
               msg1: 'Agrupados por'
+            current: 'en comisión:'
           set_campus_segmentation:
             notice:
               msg1: 'Comisión de'

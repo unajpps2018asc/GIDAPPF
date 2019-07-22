@@ -10,8 +10,8 @@
 <!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
 <!-- # Archivo GIDAPPF/gidappf/app/views/campus_magnaments/_table1.html.erb   # -->
 <!-- ########################################################################## -->
-<h3><%= title %></h3>
-<table>
+<h3><strong><%= title %></strong></h3>
+<table class='gidappf-table'>
   <thead>
      <tr>
         <% if params[:profile_type].eql?(LockEmail::LIST[4]) then  %>
@@ -31,7 +31,7 @@
         <td>
           <% p.documents.first.user.usercommissionroles.each do |ucr| %>
             <div class="field">
-              <p><%= "#{p.documents.first.user.usercommissionroles.index(ucr)+1}. #{ucr.role.name} at commission: #{ucr.commission.name}" %></p>
+              <p><%= "#{p.documents.first.user.usercommissionroles.index(ucr)+1}. #{ucr.role.name} #{t('body.gidappf_entity.campus_magnament.action.get_campus_segmentation.current')} #{ucr.commission.name}" %></p>
             </div>
             <div class="field">
               <% if params[:profile_type].eql?(LockEmail::LIST[4]) then  %>

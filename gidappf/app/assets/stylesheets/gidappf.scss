@@ -1,0 +1,64 @@
+// Place all the styles related to the inputs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// link https://colorhunt.co/palette/62241
+
+$percent40: #eff0f4;
+$percent27: #d3d6db;
+$percent20: #415f9d;
+$percent13: #233b6e;
+
+.gidappf-background {background-color: $percent13;}
+.gidappf-main {
+  background-color: $percent27; /* For browsers that do not support gradients */
+  background-image: linear-gradient($percent27, $percent40); /* Standard syntax (must be last) */
+  }
+
+ body.gidappf-background main.container.gidappf-main.container {
+    width: 96%;
+  }
+
+  .gidappf-table {
+    color: $percent40;
+    background-color: $percent20;
+    width: -moz-available;
+  }
+
+  .gidappf-table thead tr th {
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
+    width: max-content;
+    text-align: center;
+  }
+
+  .gidappf-table thead tr th:empty {
+    width: 90px;
+  }
+
+  .gidappf-table tbody tr td {
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    padding-bottom: 0.05%;
+    padding-top: 0.05%;
+    a:hover {
+        color: $percent40;
+        background-color: $percent13;
+      }
+    width: max-content;
+    text-align: center;
+  }
+  .gidappf-table tbody tr:nth-child(even) {
+    background: $percent40;
+    color: black;
+  }
+  .gidappf-table tbody tr:nth-child(odd) {
+    background: $percent27;
+    color: black;
+  }
+
+  .gidappf-footer {
+    color: $percent40;
+    background-color: tranparent;
+  }

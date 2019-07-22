@@ -60,7 +60,7 @@ en:
     disabled_cookies_detect:
       title: "Gidappf can't deliver cookie..."
       summary: 'Cookies are disabled in your web browser, please activate in preferences:'
-      line1: 'In Firefox: Menu(&#9776;)&rarr;Preferences&rarr;Privacy & security(&#128274;)&rarr;Content Blocking: Click in Strict or Standard'
+      line1: 'In Firefox: Menu->Preferences->Privacy & security -> Content Blocking: Click in Strict or Standard'
       line2: 'in navigation bar and click in switch lock'
       line3: 'In Chrome: type'
     first_password_detect:
@@ -96,6 +96,7 @@ en:
             title: 'Assign commissions'
             notice:
               msg1: 'Group by'
+            current: 'in commission:'
           set_campus_segmentation:
             notice:
               msg1: 'Commission of'

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang=<%= params[:locale] %>>
 <head>
   <title><%= yield :title %></title>
   <meta charset="utf-8"/>
@@ -25,21 +25,18 @@
   <![endif]-->
 </head>
 
-<body>
+<body class='gidappf-background'>
   <%= render 'layouts/google_analytics' %>
   <header>
     <%= render 'layouts/navigation' %>
   </header>
 
-  <main role="main" class="container">
-    <div class="page-header">
-      <h1><%= yield :heading %></h1>
-    </div>
+  <main role="main" class="container gidappf-main">
     <%= render 'layouts/flash' %>
     <%= yield %>
   </main>
 
-  <footer>
+  <footer class="gidappf-footer">
     <hr/>
     <div class="container">
       <%= render 'layouts/footer' %>

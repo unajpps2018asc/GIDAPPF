@@ -10,21 +10,25 @@ $percent13: #233b6e;
 
 .gidappf-background {background-color: $percent13;}
 .gidappf-main {
-  background-color: $percent27; /* For browsers that do not support gradients */
-  background-image: linear-gradient($percent27, $percent40); /* Standard syntax (must be last) */
+    background-color: $percent27; /* For browsers that do not support gradients */
+    background-image: linear-gradient($percent27, $percent40); /* Standard syntax (must be last) */
   }
 
- body.gidappf-background main.container.gidappf-main.container {
+#gidappf_lang_dropdown{
+    margin: 1%;
+  }
+
+body.gidappf-background main.container.gidappf-main.container {
     width: 96%;
   }
 
-  .gidappf-table {
+.gidappf-table {
     color: $percent40;
     background-color: $percent20;
     width: -moz-available;
   }
 
-  .gidappf-table thead tr th {
+.gidappf-table thead tr th {
     padding-left: 0.5%;
     padding-right: 0.5%;
     padding-bottom: 0.5%;
@@ -33,11 +37,11 @@ $percent13: #233b6e;
     text-align: center;
   }
 
-  .gidappf-table thead tr th:empty {
+.gidappf-table thead tr th:empty {
     width: 90px;
   }
 
-  .gidappf-table tbody tr td {
+.gidappf-table tbody tr td {
     padding-left: 0.5%;
     padding-right: 0.5%;
     padding-bottom: 0.05%;
@@ -49,7 +53,8 @@ $percent13: #233b6e;
     width: max-content;
     text-align: center;
   }
-  .gidappf-table tbody tr:nth-child(even) {
+
+.gidappf-table tbody tr:nth-child(even) {
     background: $percent40;
     color: black;
   }
@@ -58,24 +63,24 @@ $percent13: #233b6e;
     color: black;
   }
 
-  .gidappf-footer {
+.gidappf-footer {
     color: $percent40;
     background-color: tranparent;
   }
 
-  body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-alert{
+body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-alert{
     margin-top: 1%;
     border-color: $percent13;
     box-shadow: 7px 7px;
   }
 
-  body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-notice{
+body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-notice{
     margin-top: 1%;
     border-color: $percent13;
     box-shadow: 7px 7px;
   }
 
-  html body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-error{
+html body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-error{
     margin-top: 1%;
     background-color: rosybrown; /* For browsers that do not support gradients */
     border-color: $percent13;

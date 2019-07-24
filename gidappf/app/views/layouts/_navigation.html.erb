@@ -29,16 +29,16 @@
         <!-- # Renderización del menú basado en roles                      # -->
         <!-- ############################################################### -->
         <%= render RoleAccess.get_user_links(current_user) %>
+        <li><%= if I18n.locale.eql?(I18n.available_locales.first) then
+              select_tag "gidappf_lang_dropdown",
+                options_from_collection_for_select(I18n.available_locales, "to_s", "to_s"),
+                onchange:  "$(document).ready(function() {window.location.href= '/?locale='+$(event.target).val();});"
+            else
+              select_tag "gidappf_lang_dropdown",
+                options_from_collection_for_select(I18n.available_locales.rotate, "to_s", "to_s"),
+                onchange:  "$(document).ready(function() {window.location.href= '/?locale='+$(event.target).val();});"
+            end %></li>
       </ul>
-      <%= if I18n.locale.eql?(I18n.available_locales.first) then
-            select_tag "gidappf_lang_dropdown",
-              options_from_collection_for_select(I18n.available_locales, "to_s", "to_s"),
-              onchange:  "$(document).ready(function() {window.location.href= '/?locale='+$(event.target).val();});"
-          else
-            select_tag "gidappf_lang_dropdown",
-              options_from_collection_for_select(I18n.available_locales.rotate, "to_s", "to_s"),
-              onchange:  "$(document).ready(function() {window.location.href= '/?locale='+$(event.target).val();});"
-          end %>
     </div>
   </div>
 </nav>

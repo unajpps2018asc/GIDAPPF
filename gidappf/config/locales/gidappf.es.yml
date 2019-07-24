@@ -177,7 +177,7 @@ es:
         models: 'Materias'
         attributes:
           name: 'Nombre'
-          description: 'Descripión'
+          description: 'Descripción'
           trayect: 'Trayecto'
           enable: 'Habilitar'
         action:

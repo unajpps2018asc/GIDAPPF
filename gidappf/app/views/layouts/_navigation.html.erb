@@ -29,15 +29,12 @@
         <!-- # Renderización del menú basado en roles                      # -->
         <!-- ############################################################### -->
         <%= render RoleAccess.get_user_links(current_user) %>
-        <li><%= if I18n.locale.eql?(I18n.available_locales.first) then
-              select_tag "gidappf_lang_dropdown",
-                options_from_collection_for_select(I18n.available_locales, "to_s", "to_s"),
-                onchange:  "$(document).ready(function() {window.location.href= '/?locale='+$(event.target).val();});"
-            else
-              select_tag "gidappf_lang_dropdown",
-                options_from_collection_for_select(I18n.available_locales.rotate, "to_s", "to_s"),
-                onchange:  "$(document).ready(function() {window.location.href= '/?locale='+$(event.target).val();});"
-            end %></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=I18n.locale%><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "English", root_path(locale: :en) %></li>
+            <li><%= link_to "Español", root_path(locale: :es) %></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

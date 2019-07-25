@@ -14,6 +14,9 @@
 en:
   layout:
     nav:
+      dropdown:
+        site: 'Institute'
+        yours: 'In charge of'
       part:
         link_40:
           sets_u_acc: 'Sets users access'

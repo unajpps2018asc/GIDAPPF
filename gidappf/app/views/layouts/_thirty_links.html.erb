@@ -11,12 +11,20 @@
 <!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
 <!-- # Archivo GIDAPPF/gidappf/app/views/layouts/_thirty_links.html.erb       # -->
 <!-- ########################################################################## -->
-<li><%= link_to t('layout.nav.part.link_30.campus_s'), campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[4]) %></li>
-<li><%= link_to t('layout.nav.part.link_30.campus_d'), campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[3]) %></li>
-<li><%= link_to t('layout.nav.part.link_30.stu_list'), profiles_path(role_ids: [Role.find_by(enabled: true, level: 10.0).id,Role.find_by(enabled: true, level: 20.0).id,Role.find_by(enabled: false, level: 10.0).id,Role.find_by(enabled: false, level: 20.0).id]) %></li>
-<li><%= link_to t('layout.nav.part.link_30.dcn_list'), profiles_path(role_ids: [Role.find_by(enabled: true, level: 29.0).id,Role.find_by(enabled: false, level: 29.0).id]) %></li>
-<li><%= link_to t('layout.nav.part.link_30.comm_list'), time_sheet_hours_current_commissions_path %></li>
-<li><%= link_to t('layout.nav.part.link_30.hr_list'), time_sheet_hours_path %></li>
-<li><%= link_to t('layout.nav.part.link_30.ts_list'), time_sheets_path %></li>
-<li><%= link_to t('layout.nav.part.link_30.cri_list'), class_room_institutes_path %></li>
-<li><%= link_to t('layout.nav.part.link_30.in_list'), inputs_path %></li>
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=t('layout.nav.dropdown.site')%><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><%= link_to t('layout.nav.part.link_20.hr_list'), time_sheet_hours_path %></li>
+    <li><%= link_to t('layout.nav.part.link_20.cri_list'), class_room_institutes_path %></li>
+    <li><%= link_to t('layout.nav.part.link_30.stu_list'), profiles_path(role_ids: [Role.find_by(enabled: true, level: 10.0).id,Role.find_by(enabled: true, level: 20.0).id,Role.find_by(enabled: false, level: 10.0).id,Role.find_by(enabled: false, level: 20.0).id]) %></li>
+    <li><%= link_to t('layout.nav.part.link_30.dcn_list'), profiles_path(role_ids: [Role.find_by(enabled: true, level: 29.0).id,Role.find_by(enabled: false, level: 29.0).id]) %></li>
+    <li><%= link_to t('layout.nav.part.link_30.ts_list'), time_sheets_path %></li>
+  </ul>
+</li>
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=t('layout.nav.dropdown.yours')%><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><%= link_to t('layout.nav.part.link_30.campus_s'), campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[4]) %></li>
+    <li><%= link_to t('layout.nav.part.link_30.campus_d'), campus_magnaments_get_campus_segmentation_path(profile_type: LockEmail::LIST[3]) %></li>
+    <li><%= link_to t('layout.nav.part.link_20.comm_list'), time_sheet_hours_current_commissions_path %></li>
+    <li><%= link_to t('layout.nav.part.link_20.in_list'), inputs_path %></li>
+  </ul>
+</li>

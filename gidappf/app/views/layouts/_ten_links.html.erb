@@ -11,7 +11,11 @@
 <!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
 <!-- # Archivo GIDAPPF/gidappf/app/views/layouts/_ten_links.html.erb          # -->
 <!-- ########################################################################## -->
-<li><%= link_to t('layout.nav.part.link_10.comm_list'), commissions_path %></li>
-<li><%= link_to t('layout.nav.part.link_10.hr_list'), time_sheet_hours_path %></li>
-<li><%= link_to t('layout.nav.part.link_10.cri_list'), class_room_institutes_path %></li>
+<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><%=t('layout.nav.dropdown.site')%><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><%= link_to t('layout.nav.part.link_20.hr_list'), time_sheet_hours_path %></li>
+    <li><%= link_to t('layout.nav.part.link_20.cri_list'), class_room_institutes_path %></li>
+    <li><%= link_to t('layout.nav.part.link_10.comm_list'), commissions_path %></li>
+  </ul>
+</li>
 <li><%= link_to t('layout.nav.part.link_10.in_list'), inputs_path %></li>

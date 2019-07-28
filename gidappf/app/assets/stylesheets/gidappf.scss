@@ -58,9 +58,9 @@ body.gidappf-background main.container.gidappf-main.container {
     background: $percent40;
     color: black;
   }
-  .gidappf-table tbody tr:nth-child(odd) {
-    background: $percent27;
-    color: black;
+.gidappf-table tbody tr:nth-child(odd) {
+  background: $percent27;
+  color: black;
   }
 
 .gidappf-footer {
@@ -86,3 +86,31 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
     border-color: $percent13;
     box-shadow: 7px 7px;
   }
+
+#ModalClassRooms.modal.fade.in div.modal-dialog {
+    width: min-content;
+}
+
+#ModalClassRooms.modal.fade.in div.modal-dialog div.modal-content div.modal-header h4#exampleModalLabel.modal-title{
+    float: inline-start;
+}
+
+#ModalClassRooms.modal.fade.in div.modal-dialog div.modal-content div.modal-header button.close{
+    float: inline-end;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog{
+    width: 95%;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-header h4#exampleModalLabel.modal-title{
+    float: inline-start;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-header button.close{
+    float: inline-end;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-footer a.btn.btn-info{
+  color: $percent13;
+}

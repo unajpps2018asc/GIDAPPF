@@ -286,6 +286,13 @@ es:
           error:
             notice: 'Entidades no relacionables.'
           current_commission: 'Comisión actual'
+          multiple_new:
+            cri_modal:
+              title: 'Elegí una o varias aulas correspondientes'
+            comm_modal:
+              title: 'Elegí una o varias comisiones'
+              button: 'Asignación de aulas'
+            
 
       time_sheet:
         model: 'Temporada'

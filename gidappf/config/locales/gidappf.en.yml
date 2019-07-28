@@ -292,6 +292,12 @@ en:
           error:
             notice: 'Unrelationable_entitys.'
           current_commission: 'Current commission.'
+          multiple_new:
+            cri_modal:
+              title: 'Choose one or more corresponding classrooms'
+            comm_modal:
+              title: 'Choose one or more commissions'
+              button: 'Assignment of classrooms'
 
       time_sheet:
         model: 'Season'

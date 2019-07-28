@@ -66,12 +66,13 @@ class TimeSheetHoursController < ApplicationController
   # POST /time_sheet_hours.json
   def create
     authorize @time_sheet_hour = TimeSheetHour.new(time_sheet_hour_params)
+    @matters=Matter.where(enable: true)
     respond_to do |format|
       if @time_sheet_hour.save
         format.html { redirect_to @time_sheet_hour, notice: t('body.gidappf_entity.time_sheet_hour.action.new.notice') }
         format.json { render :show, status: :created, location: @time_sheet_hour }
       else
-        format.html { render :new }
+        format.html { render :multiple_new_modal }
         format.json { render json: @time_sheet_hour.errors, status: :unprocessable_entity }
       end
     end
@@ -102,11 +103,13 @@ class TimeSheetHoursController < ApplicationController
   end#destroy
 
   # post /time_sheet_hours/multiple_new/params
+  # http://181.31.66.61:3000/es/time_sheet_hours?map_sel[]=id_ts35&map_sel[]=35&?map_sel[]=id_ts5&map_sel[]=5
   def multiple_new
     @matters=Matter.where(enable: true)
     arr=time_sheet_each_vacancy(get_ts_and_cri,"id_cri","id_ts")
+    authorize @time_sheet_hour=TimeSheetHour.first
     unless arr.nil? || arr.first.empty? || arr.last.empty? then
-      authorize @time_sheet_hour=TimeSheetHour.new(
+      @time_sheet_hour=TimeSheetHour.new(
           time_sheet_id: arr.last.first.id,
           vacancy_id: arr.first.first.vacancies.first.id,
           matter_id: params[:matter_id].to_i,
@@ -123,18 +126,18 @@ class TimeSheetHoursController < ApplicationController
           sunday: params[:sunday]
         )
       respond_to do |format|
-        unless !@time_sheet_hour.save
+        if @time_sheet_hour.save
           rest_tsh(arr,@time_sheet_hour)
           post_multiple
           format.html { redirect_to time_sheet_hours_path, notice: t('body.gidappf_entity.time_sheet_hour.action.new.notice') }
-          format.json { render :renew_all, status: :ok}
+          format.json { render :index, status: :ok}
         else
           format.html { render :multiple_new}
           format.json { render json: @time_sheet_hour.errors, status: :unprocessable_entity }
         end
       end
     else
-      redirect_back fallback_location: '/', allow_other_host: false, notice: t('body.gidappf_entity.time_sheet_hour.action.error.notice') 
+      redirect_back fallback_location: '/', allow_other_host: false, notice: t('body.gidappf_entity.time_sheet_hour.action.error.notice')
     end
   end
 

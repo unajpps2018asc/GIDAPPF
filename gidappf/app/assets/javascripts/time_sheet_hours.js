@@ -6,6 +6,7 @@ $('document').ready(function() {
       $("#ModalCommissions").modal("show");
     }
   }
+  $('[data-toggle="tooltip"]').tooltip();   
 });
 
 function getUrlVars()

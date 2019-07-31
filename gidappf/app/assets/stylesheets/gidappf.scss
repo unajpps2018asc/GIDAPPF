@@ -33,13 +33,13 @@ body.gidappf-background main.container.gidappf-main.container {
     padding-right: 0.5%;
     padding-bottom: 0.5%;
     padding-top: 0.5%;
-    width: max-content;
+    width: -moz-available;
     text-align: center;
   }
 
-.gidappf-table thead tr th:empty {
-    width: 90px;
-  }
+// .gidappf-table thead tr th:empty {
+//     width: 90px;
+//   }
 
 .gidappf-table tbody tr td {
     padding-left: 0.5%;
@@ -50,7 +50,7 @@ body.gidappf-background main.container.gidappf-main.container {
         color: $percent40;
         background-color: $percent13;
       }
-    width: max-content;
+    width: -moz-available;
     text-align: center;
   }
 
@@ -114,3 +114,33 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
 #ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-footer a.btn.btn-info{
   color: $percent13;
 }
+
+.gidappf-table tbody tr td div.tablemodal{
+  overflow-x:auto;
+  width: 120px;
+}
+
+.gidappf-table tbody tr td div.tablemodal table tbody tr{
+  background-color: transparent;
+}
+
+.gidappf-table tbody tr td div.tablemodal table thead tr{
+  background-color: transparent;
+}
+
+.gidappf-table tbody tr td div.tablemodal table tbody tr td{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+// .gidappf-table tbody tr td div.tablemodal table tbody tr td{
+//   width: -moz-available;
+// }
+//
+// .gidappf-table tbody tr td div.tablemodal table thead tr td{
+//   width: -moz-available;
+// }
+
+// .gidappf-table tbody tr td div.tablemodal table{
+//   width: inherit;
+// }

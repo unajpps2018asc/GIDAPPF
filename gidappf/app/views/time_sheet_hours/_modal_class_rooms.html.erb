@@ -20,13 +20,7 @@
               <thead>
                 <tr>
                   <th><%= t('body.gidappf_entity.class_room_institute.models')  %></th>
-                  <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_monday')).split(' ').last.capitalize %></th>
-                  <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')).split(' ').last.capitalize  %></th>
-                  <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')).split(' ').last.capitalize  %></th>
-                  <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_thursday')).split(' ').last.capitalize  %></th>
-                  <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_friday')).split(' ').last.capitalize  %></th>
-                  <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_saturday')).split(' ').last.capitalize  %></th>
-                  <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_sunday')).split(' ').last.capitalize  %></th>
+                  <th><%= t('body.gidappf_entity.time_sheet_hour.models') %></th>
                   <th colspan="3"></th>
                 </tr>
               </thead>
@@ -34,9 +28,26 @@
                 <% @class_room_institutes.each do |class_room_institute| %>
                   <tr>
                     <td><%= button_to( class_room_institute.to_list, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
-                    <% 7.times do |i_day|%>
-                      <td><%= class_room_institute.free_time(i_day) %></td>
-                    <% end %>
+                    <td>
+                      <div class="tablemodal">
+                        <table>
+                          <thead data-toggle="tooltip" data-placement="left" data-html="true" data-original-title="<%= class_room_institute.to_tooltip %>" >
+                            <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_monday')).split(' ').last.capitalize %></th>
+                            <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')).split(' ').last.capitalize  %></th>
+                            <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')).split(' ').last.capitalize  %></th>
+                            <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_thursday')).split(' ').last.capitalize  %></th>
+                            <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_friday')).split(' ').last.capitalize  %></th>
+                            <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_saturday')).split(' ').last.capitalize  %></th>
+                            <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_sunday')).split(' ').last.capitalize  %></th>
+                          </thead>
+                          <tbody >
+                            <% 7.times do |i_day|%>
+                              <td><%= class_room_institute.free_time(i_day) %></td>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
                     <td><%= link_to t('body.common_entity.action.show'), class_room_institute %></td>
                     <td><%= link_to t('body.common_entity.action.edit'), edit_class_room_institute_path(class_room_institute) %></td>
                     <td><%= link_to t('body.common_entity.action.destroy'), class_room_institute, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>

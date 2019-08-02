@@ -2,6 +2,8 @@ Rails.application.configure do
   # Settings specified here will take precedence over those
   # in config/application.rb.
 
+  config.require_master_key = true
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -86,8 +88,8 @@ Rails.application.configure do
       address:              ENV['SMTP_ADDRESS'],
       port:                 ENV['SMTP_PORT'].to_i,
       domain:               ENV['SMTP_DOMAIN'],
-      user_name:            ENV['SMTP_USERNAME'],
-      password:             ENV['SMTP_PASSWORD'],
+      user_name:            Rails.application.credentials.production[:smtp_username],
+      password:             Rails.application.credentials.production[:smtp_password],
       authentication:       ENV['SMTP_AUTH'],
       enable_starttls_auto: ENV['SMTP_ENABLE_STARTTLS_AUTO'] == 'true'
   }

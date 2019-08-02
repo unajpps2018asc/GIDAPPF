@@ -14,6 +14,8 @@ require 'mins_day_tools'
 # Archivo GIDAPPF/gidappf/app/models/profile.rb                           #
 ###########################################################################
 class Profile < ApplicationRecord
+  has_one_attached :cover_photo
+  
   include MinsDayTools, GidappfTemplatesTools
   ##########################account#####################################
   # Asociación uno a muchos: soporta que un perfil sea asignado muchas #

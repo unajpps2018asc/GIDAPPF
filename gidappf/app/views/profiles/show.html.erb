@@ -5,6 +5,11 @@
   <strong><%= @profile.name %></strong>
 </h3>
 
+<% if @profile.cover_photo.attached? then %>
+  <%= image_tag url_for(@profile.cover_photo) %>
+  <%= link_to @profile.cover_photo.filename, rails_blob_path(@profile.cover_photo, disposition: "attachment") %>
+<% end %>
+
 <p>
   <%= "#{t('body.gidappf_entity.profile.attributes.description')}:"  %>
   <strong><%= @profile.description %></strong>

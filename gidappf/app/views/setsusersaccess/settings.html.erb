@@ -1,11 +1,11 @@
 <h1><%= t('body.gidappf_entity.setsusersaccess.model') %></h1>
-<table class='gidappf-table'>
+<table class='gidappf-table gidappf-index'' style="width: 1209px;">
   <thead>
     <tr>
-      <th><%= t('body.gidappf_entity.profile.models') %></th>
-      <th>Email</th>
-      <th><%= t('body.gidappf_entity.commission.models') %></th>
-      <th colspan=".<%= @roleOpts.count.to_s %>." >
+      <th style="width: 6.9%;"><%= t('body.gidappf_entity.profile.models') %></th>
+      <th style="width: 10.9%;">Email</th>
+      <th style="width: 8.9%;"><%= t('body.gidappf_entity.commission.models') %></th>
+      <th style="width: 8.9%;" colspan=".<%= @roleOpts.count.to_s %>." >
         <%= t('body.gidappf_entity.role.models') %>
       </th>
     </tr>
@@ -14,14 +14,14 @@
   <tbody remote="true">
     <% @usercommissionroles.each do |u| %>
       <tr>
-        <td><%= unless u.user.documents.empty? then
+        <td style="width: 6.9%;"><%= unless u.user.documents.empty? then
           link_to "#{u.user.documents.first.profile.name}", profile_path(id:u.user.documents.first.profile.id)
           end
           %></td>
-        <td><%= u.user.email.first(15)+"…" %></td>
-        <td><%= u.commission.name %></td>
+        <td style="width: 10.9%;"><%= u.user.email.first(15)+"…" %></td>
+        <td style="width: 8.9%;"><%= u.commission.name %></td>
         <% @roleOpts.each do |r| %>
-            <td>
+            <td style="width: 8.9%;">
               <%=
                 radio_button_tag(
                   "u_"+u.id.to_s+"_"+:radio_selected.to_s,

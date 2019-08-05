@@ -1,27 +1,27 @@
-<table class='gidappf-table'>
+<table class='gidappf-table gidappf-index gidappf-index'>
   <thead>
     <tr>
-      <th>Id</th>
-      <th><%= t('body.gidappf_entity.input.attributes.title')  %></th>
-      <th><%= t('body.gidappf_entity.input.attributes.summary')  %></th>
+      <th style="width: 10%;">Id</th>
+      <th style="width: 30%;"><%= t('body.gidappf_entity.input.attributes.title')  %></th>
+      <th style="width: 40%;"><%= t('body.gidappf_entity.input.attributes.summary')  %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="gidappf-row-body">
     <% inputs.each do |input| %>
       <tr>
-        <td><%= input.documents.first.id %></td>
-        <td><%= link_to "#{input.title}", input %></td>
-        <td>
+        <td style="width: 10%;"><%= input.documents.first.id %></td>
+        <td style="width: 30%;"><%= link_to "#{input.title}", input %></td>
+        <td style="width: 40%;">
           <% if input.summary.length > 50 then %>
             <%= input.summary.first(50)+"…" %>
           <% else %>
             <%= input.summary %>
           <% end %>
         </td>
-        <td><%= link_to t('body.common_entity.action.edit'), edit_input_path(input) %></td>
-        <td><%= link_to t('body.common_entity.action.destroy'), disable_input_path(input), data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+        <td style="width: 10%;"><%= link_to t('body.common_entity.action.edit'), edit_input_path(input) %></td>
+        <td style="width: 10%;"><%= link_to t('body.common_entity.action.destroy'), disable_input_path(input), data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>

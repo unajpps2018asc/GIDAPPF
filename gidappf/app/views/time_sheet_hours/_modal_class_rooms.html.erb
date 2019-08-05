@@ -1,4 +1,3 @@
-
     <!-- Button trigger modal -->
     <a type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalClassRooms">
       <%= "#{t('body.gidappf_entity.time_sheet_hour.action.multiple_new.comm_modal.button')} "  %>
@@ -19,16 +18,16 @@
             <table class='gidappf-table'>
               <thead>
                 <tr>
-                  <th><%= t('body.gidappf_entity.class_room_institute.models')  %></th>
-                  <th><%= t('body.gidappf_entity.time_sheet_hour.models') %></th>
+                  <th style="width: 20%;"><%= t('body.gidappf_entity.class_room_institute.models')  %></th>
+                  <th style="width: 20%;"><%= t('body.gidappf_entity.time_sheet_hour.models') %></th>
                   <th colspan="3"></th>
                 </tr>
               </thead>
               <tbody>
                 <% @class_room_institutes.each do |class_room_institute| %>
                   <tr>
-                    <td><%= button_to( class_room_institute.to_list, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
-                    <td>
+                    <td style="width: 35%;"><%= button_to( class_room_institute.to_list, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
+                    <td style="width: 35%;">
                       <div class="tablemodal">
                         <table>
                           <thead data-toggle="tooltip" data-placement="left" data-html="true" data-original-title="<%= class_room_institute.to_tooltip %>" >
@@ -48,9 +47,9 @@
                         </table>
                       </div>
                     </td>
-                    <td><%= link_to t('body.common_entity.action.show'), class_room_institute %></td>
-                    <td><%= link_to t('body.common_entity.action.edit'), edit_class_room_institute_path(class_room_institute) %></td>
-                    <td><%= link_to t('body.common_entity.action.destroy'), class_room_institute, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+                    <td style="width: 10%;"><%= link_to t('body.common_entity.action.show'), class_room_institute %></td>
+                    <td style="width: 10%;"><%= link_to t('body.common_entity.action.edit'), edit_class_room_institute_path(class_room_institute) %></td>
+                    <td style="width: 10%;"><%= link_to t('body.common_entity.action.destroy'), class_room_institute, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
                   </tr>
                 <% end %>
               </tbody>

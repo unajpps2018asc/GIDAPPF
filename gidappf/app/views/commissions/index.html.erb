@@ -2,13 +2,13 @@
 
 <h1><%= t('body.gidappf_entity.commission.models') %></h1>
 
-<table class='gidappf-table'>
+<table class='gidappf-table gidappf-index'>
   <thead>
     <tr>
-      <th><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
-      <th><%= t('body.gidappf_entity.commission.attributes.description')  %></th>
-      <th><%= t('body.gidappf_entity.commission.attributes.start_date')  %></th>
-      <th><%= t('body.gidappf_entity.commission.attributes.end_date')  %></th>
+      <th style="width: 16.6%;"><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
+      <th style="width: 36.4%;"><%= t('body.gidappf_entity.commission.attributes.description')  %></th>
+      <th style="width: 10%;"><%= t('body.gidappf_entity.commission.attributes.start_date')  %></th>
+      <th style="width: 16.6%;"><%= t('body.gidappf_entity.commission.attributes.end_date')  %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -16,12 +16,12 @@
   <tbody>
     <% @commissions.each do |commission| %>
       <tr>
-        <td><%= link_to "#{commission.name}", commission %></td>
-        <td><%= commission.description %></td>
-        <td><%= commission.start_date.strftime("%d/%m/%Y") %></td>
-        <td><%= commission.end_date.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to link_to t('body.common_entity.action.edit'), edit_commission_path(commission) %></td>
-        <td><%= link_to t('body.common_entity.action.destroy'), commission, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+        <td style="width: 16.6%;"><%= link_to "#{commission.name}", commission %></td>
+        <td style="width: 36.4%;"><%= commission.description %></td>
+        <td style="width: 10%;"><%= commission.start_date.strftime("%d/%m/%Y") %></td>
+        <td style="width: 16.6%;"><%= commission.end_date.strftime("%d/%m/%Y") %></td>
+        <td style="width: 10%;"><%= link_to link_to t('body.common_entity.action.edit'), edit_commission_path(commission) %></td>
+        <td style="width: 10%;"><%= link_to t('body.common_entity.action.destroy'), commission, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to "#{t('body.common_entity.action.new_her')} #{t('body.gidappf_entity.commission.model')}", new_commission_path %>
+<%= link_to " ", new_commission_path, class: "gidappf-plus-button gidappf-plus-button--large" %>

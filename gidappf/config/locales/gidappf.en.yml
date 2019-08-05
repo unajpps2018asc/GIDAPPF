@@ -214,7 +214,7 @@ en:
         model: 'Profile'
         models: 'Profiles'
         attributes:
-          name: 'Name'
+          name: 'Profile'
           description: 'Description'
           valid_from: 'From'
           valid_to: 'To'

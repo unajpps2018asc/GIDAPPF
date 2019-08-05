@@ -208,7 +208,7 @@ es:
         model: 'Perfil'
         models: 'Perfiles'
         attributes:
-          name: 'Nombre'
+          name: 'Perfil'
           description: 'Descripción'
           valid_from: 'Desde'
           valid_to: 'Hasta'
@@ -292,7 +292,7 @@ es:
             comm_modal:
               title: 'Elegí una o varias comisiones'
               button: 'Asignación de aulas'
-            
+
 
       time_sheet:
         model: 'Temporada'

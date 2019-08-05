@@ -475,6 +475,7 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
     user_id: u10.id, commission_id: 2
   ).save
   p10=Profile.new( name: "#{Profile.count+1}/#{u+1000000}", description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
+  p10.cover_photo.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'init')
   User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x

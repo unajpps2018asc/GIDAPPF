@@ -52,3 +52,4 @@ build-iPhoneSimulator/
 # Ignore uploaded files in development
 /gidappf/storage/*
 !/gidappf/storage/.keep
+!/gidappf/storage/seeds/images/icons/*

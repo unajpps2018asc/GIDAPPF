@@ -30,7 +30,7 @@
                     <td style="width: 35%;">
                       <div class="tablemodal">
                         <table>
-                          <thead data-toggle="tooltip" data-placement="left" data-html="true" data-original-title="<%= class_room_institute.to_tooltip %>" >
+                          <thead>
                             <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_monday')).split(' ').last.capitalize %></th>
                             <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')).split(' ').last.capitalize  %></th>
                             <th><%= (t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')).split(' ').last.capitalize  %></th>
@@ -41,7 +41,7 @@
                           </thead>
                           <tbody >
                             <% 7.times do |i_day|%>
-                              <td><%= class_room_institute.free_time(i_day) %></td>
+                              <td data-toggle="tooltip" data-placement="right" data-html="true" data-original-title="<%= class_room_institute.to_tooltip %>" ><%= class_room_institute.free_time(i_day) %></td>
                             <% end %>
                           </tbody>
                         </table>

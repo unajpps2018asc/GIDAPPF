@@ -92,6 +92,10 @@ body.gidappf-background main.container.gidappf-main.container {
   color: black;
   }
 
+html body.gidappf-background main.container.gidappf-main table.gidappf-table.gidappf-index tbody tr td label{
+  display: block;
+}
+
 .gidappf-footer {
     color: $percent40;
     background-color: tranparent;
@@ -129,7 +133,7 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
 }
 
 #ModalCommissions.modal.fade.in div.modal-dialog{
-    width: 95%;
+    width: 75%;
 }
 
 #ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-header h4#exampleModalLabel.modal-title{

@@ -487,6 +487,9 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "8").save
       when 25 #'Elección de turno hasta[Hr]:'
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "12").save
+      when 41 #'Foto del perfil:'
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "photo").save
+        p10.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.first.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
       else
         p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
     end

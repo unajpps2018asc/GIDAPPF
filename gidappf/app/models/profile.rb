@@ -15,7 +15,7 @@ require 'mins_day_tools'
 ###########################################################################
 class Profile < ApplicationRecord
   has_one_attached :cover_photo
-  
+
   include MinsDayTools, GidappfTemplatesTools
   ##########################account#####################################
   # Asociación uno a muchos: soporta que un perfil sea asignado muchas #
@@ -101,10 +101,18 @@ class Profile < ApplicationRecord
           min=keys.find_by(key: tpk.key,created_at: keys.minimum('created_at'))
           read_only_or_link=ClientSideValidator.where(content_type: "GIDAPPF links").
             or(ClientSideValidator.where(content_type: "GIDAPPF read only")).include?(min.client_side_validator)
-          if max.client_side_validator_id.nil? && !read_only_or_link then
+          attacher_attrib=ClientSideValidator.where(content_type: "GIDAPPF attacher").include?(min.client_side_validator)
+          if max.client_side_validator_id.nil? && !read_only_or_link && !attacher_attrib then
             max.update(client_side_validator_id: tpk.client_side_validator_id)
             min.destroy
-          elsif read_only_or_link then
+          elsif attacher_attrib && !read_only_or_link  then
+            max.profile_values.first.active_stored.attach(params[:active_stored])
+            if min.profile_values.first.active_stored.attached?
+              unless min.profile_values.first.active_stored.filename.eql?('profile-init.png') then
+                min.profile_values.first.active_stored.purge
+              end
+            end
+          elsif read_only_or_link && !attacher_attrib  then
             max.destroy
           end
         end

@@ -26,10 +26,17 @@
 </p>
 
 <% @profile.profile_keys.each do |s| %>
-  <p><%= s.key %>
-  <% s.profile_values.each do |e| %>
-    <strong><span><%= e.value %></span></strong>
-  <% end %></p>
+  <p>
+    <%= s.key %>
+    <% s.profile_values.each do |e| %>
+      <% if e.active_stored.attached? then %>
+        <%= image_tag url_for(e.active_stored) %>
+        <%= link_to e.active_stored.filename, rails_blob_path(e.active_stored, disposition: "attachment") %>
+      <% else %>
+        <strong><span><%= e.value %></span></strong>
+      <% end %>
+    <% end %>
+  </p>
 <% end %>
 
 <%= link_to  t('body.common_entity.action.edit'), edit_profile_path(@profile) %> |

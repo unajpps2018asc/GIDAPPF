@@ -233,39 +233,43 @@ ClientSideValidator.create!([
       script: 'client_side_validators/gidappf_alphanumerics'
     },
     {
-      content_type: "GIDAPPF califications",#3
+      content_type: "GIDAPPF attachers",#3
+      script: 'client_side_validators/gidappf_attachs'
+    },
+    {
+      content_type: "GIDAPPF califications",#4
       script: 'client_side_validators/gidappf_califications'
     },
     {
-      content_type: "GIDAPPF checks",#4
+      content_type: "GIDAPPF checks",#5
       script: 'client_side_validators/gidappf_checks'
     },
     {
-      content_type: "GIDAPPF dates",#5
+      content_type: "GIDAPPF dates",#6
       script: 'client_side_validators/gidappf_dates'
     },
     {
-      content_type: "GIDAPPF links",#6
+      content_type: "GIDAPPF links",#7
       script: 'client_side_validators/gidappf_links'
     },
     {
-      content_type: "GIDAPPF matters",#7
+      content_type: "GIDAPPF matters",#8
       script: 'client_side_validators/gidappf_matters'
     },
     {
-      content_type: "GIDAPPF numbers",#8
+      content_type: "GIDAPPF numbers",#9
       script: 'client_side_validators/gidappf_numbers'
     },
     {
-      content_type: "GIDAPPF trayects",#9
+      content_type: "GIDAPPF trayects",#10
       script: 'client_side_validators/gidappf_trayects'
     },
     {
-      content_type: "GIDAPPF words",#10
+      content_type: "GIDAPPF words",#11
       script: 'client_side_validators/gidappf_words'
     },
     {
-      content_type: "GIDAPPF validator example",#11
+      content_type: "GIDAPPF validator example",#12
       script: "$(document).ready(function() {
         if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
             $(event.target).val('');
@@ -439,6 +443,10 @@ ProfileKey.create!([
       key: 'Comentarios adicionales:',#40
       profile_id: Profile.first.id,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+    },{
+      key: 'Foto del perfil:',#41
+      profile_id: Profile.first.id,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF attachers').id
     }
 ])
 

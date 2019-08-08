@@ -27,7 +27,13 @@
   <tbody remote="true">
     <% profiles_period.each do |p| %>
       <tr>
-        <td><%= link_to "#{p.name}", profile_path(id: p.id) %></td>
+        <td>
+          <% if "#{p.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value} #{p.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value}".eql?(" ") %>
+          <%= link_to "#{p.name}", profile_path(id: p.id) %>
+          <% else %>
+          <%= link_to "#{p.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value} #{p.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value}", profile_path(id: p.id) %>
+          <% end %>
+        </td>
         <td>
           <% p.documents.first.user.usercommissionroles.each do |ucr| %>
             <div class="field">

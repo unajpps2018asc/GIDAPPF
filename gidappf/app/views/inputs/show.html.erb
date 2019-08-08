@@ -16,7 +16,7 @@
 </p>
 
 <% unless @input.grouping? %>
-  <% @input.info_keys.each do |s| %>
+  <% @input.info_keys.order(:attrib_id).each do |s| %>
     <p><%= s.key %>
     <% s.info_values.each do |e| %>
       <strong><span><%= e.value %></span></strong>
@@ -26,14 +26,14 @@
   <table>
     <thead>
        <tr>
-          <% @input.info_keys.each do |s| %>
+          <% @input.info_keys.order(:attrib_id).each do |s| %>
             <th><%= s.key.gsub ':','s' %></th>
           <% end %>
        </tr>
     </thead>
     <tbody remote="true">
       <tr>
-        <% @input.info_keys.each do |s| %>
+        <% @input.info_keys.order(:attrib_id).each do |s| %>
           <td>
             <% s.info_values.each do |e| %>
               <% if e.value.to_s.first(6).eql?('gid://') then %>

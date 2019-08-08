@@ -196,7 +196,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name, :description, :valid_to, :valid_from, :cover_photo,
+      params.require(:profile).permit(:name, :description, :valid_to, :valid_from, #:cover_photo,
         :profile_keys_attributes => [:key, :client_side_validator_id,
           :profile_values_attributes => [:value,:active_stored]
           ])

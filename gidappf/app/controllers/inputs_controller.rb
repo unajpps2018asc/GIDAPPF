@@ -137,7 +137,7 @@ class InputsController < ApplicationController
     def input_params
       params.require(:input).permit(:title, :summary, :grouping, :enable, :author,
         :info_keys_attributes => [:key, :client_side_validator_id,
-          :info_values_attributes => [:value]
+          :info_values_attributes => [:value,:active_stored]
           ])
     end
 

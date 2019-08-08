@@ -1,14 +1,22 @@
+<!--#############################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                     #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática            #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018    #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                 #-->
+<!--# Tutores:                                                                  #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                       #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                              #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                 #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                         #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                       #-->
+<!--# Archivo: GIDAPPF/gidappf/gidappf/app/views/profiles/show.html.erb         #-->
+<!--#############################################################################-->
 <p id="notice"><%= notice %></p>
 
 <h3>
   <%= "#{t('body.gidappf_entity.profile.attributes.name')}:"  %>
   <strong><%= @profile.name %></strong>
 </h3>
-
-<% if @profile.cover_photo.attached? then %>
-  <%= image_tag url_for(@profile.cover_photo) %>
-  <%= link_to @profile.cover_photo.filename, rails_blob_path(@profile.cover_photo, disposition: "attachment") %>
-<% end %>
 
 <p>
   <%= "#{t('body.gidappf_entity.profile.attributes.description')}:"  %>
@@ -25,7 +33,7 @@
   <strong><%= @profile.valid_from %></strong>
 </p>
 
-<% @profile.profile_keys.each do |s| %>
+<% @profile.profile_keys.order(:attrib_id).each do |s| %>
   <p>
     <%= s.key %>
     <% s.profile_values.each do |e| %>

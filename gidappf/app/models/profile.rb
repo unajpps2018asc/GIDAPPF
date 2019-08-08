@@ -14,7 +14,7 @@ require 'mins_day_tools'
 # Archivo GIDAPPF/gidappf/app/models/profile.rb                           #
 ###########################################################################
 class Profile < ApplicationRecord
-  has_one_attached :cover_photo
+  # has_one_attached :cover_photo
 
   include MinsDayTools, GidappfTemplatesTools
   ##########################account#####################################
@@ -55,9 +55,13 @@ class Profile < ApplicationRecord
     if self.profile_keys.empty? then #copia claves del perfil si no tiene
       User.find_by(email: template).documents.first.profile.profile_keys.each do |i|
         unless i.key.eql?(User.find_by(email: template).documents.first.profile.profile_keys.find(index+2).key) then
-          self.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+          self.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => nil).save
+          if i.attrib_id == 0 && i.client_side_validator_id == 3 then
+            self.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.first.active_stored.
+              attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
+          end
         else #copia el valor del dni si es la clave 3 de la plantilla
-          self.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => key3).save
+          self.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => key3).save
         end
       end
     end
@@ -101,16 +105,16 @@ class Profile < ApplicationRecord
           min=keys.find_by(key: tpk.key,created_at: keys.minimum('created_at'))
           read_only_or_link=ClientSideValidator.where(content_type: "GIDAPPF links").
             or(ClientSideValidator.where(content_type: "GIDAPPF read only")).include?(min.client_side_validator)
-          attacher_attrib=ClientSideValidator.where(content_type: "GIDAPPF attacher").include?(min.client_side_validator)
+          attacher_attrib=ClientSideValidator.where(content_type: "GIDAPPF attachers").include?(min.client_side_validator)
           if max.client_side_validator_id.nil? && !read_only_or_link && !attacher_attrib then
-            max.update(client_side_validator_id: tpk.client_side_validator_id)
+            max.update(client_side_validator_id: min.client_side_validator_id, attrib_id: min.attrib_id)
             min.destroy
-          elsif attacher_attrib && !read_only_or_link  then
-            max.profile_values.first.active_stored.attach(params[:active_stored])
-            if min.profile_values.first.active_stored.attached?
-              unless min.profile_values.first.active_stored.filename.eql?('profile-init.png') then
-                min.profile_values.first.active_stored.purge
-              end
+          elsif attacher_attrib && !read_only_or_link then
+            if max.profile_values.first.active_stored.attached?
+              max.update(client_side_validator_id: min.client_side_validator_id, attrib_id: min.attrib_id)
+              min.destroy
+            elsif min.profile_values.first.active_stored.attached?
+              max.destroy
             end
           elsif read_only_or_link && !attacher_attrib  then
             max.destroy

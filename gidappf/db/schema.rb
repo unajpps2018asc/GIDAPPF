@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2019_08_02_115559) do
   create_table "info_keys", force: :cascade do |t|
     t.string "key"
     t.bigint "input_id"
+    t.bigint "attrib_id"
     t.bigint "client_side_validator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(version: 2019_08_02_115559) do
   create_table "profile_keys", force: :cascade do |t|
     t.string "key"
     t.bigint "profile_id"
+    t.bigint "attrib_id"
     t.bigint "client_side_validator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

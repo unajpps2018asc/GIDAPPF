@@ -192,6 +192,8 @@ class InputsController < ApplicationController
         @input.present_each_vacancy
       elsif @input.title.eql?('Calification student list') then
         @input.calif_each_act
+      elsif @input.title.eql?('Student absence') then
+        @input.update_group
       end
       sync_slaves
     end

@@ -20,9 +20,9 @@ class GidappfStudentsListDealerJob < ApplicationJob
       )
       #Legajos:t[0] 	Vacantes:t[1] 	Presente:t[2]
       t=Input.where(title: 'Time sheet hour students list').first.info_keys
-      leg=in_each_hour.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
-      vac=in_each_hour.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
-      pr=in_each_hour.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
+      leg=in_each_hour.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id, :attrib_id => t[0].attrib_id)
+      vac=in_each_hour.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id, :attrib_id => t[1].attrib_id)
+      pr=in_each_hour.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id, :attrib_id => t[2].attrib_id)
       it_time_sheet_hour = time_sheet_hour.time_sheet.time_sheet_hours.where(
         from_hour: time_sheet_hour.from_hour,from_min: time_sheet_hour.from_min, to_hour: time_sheet_hour.to_hour,to_min: time_sheet_hour.to_min).to_enum
       Profile.where(

@@ -159,6 +159,20 @@ class Input < ApplicationRecord
       end
     end
 
+    def update_group
+      unless (self.info_keys.find_by(key: "Justificado:")).info_values.first.value.eql?("No") then
+        count=0
+        list=InfoValue.where(info_key_id: InfoKey.where(key: "Acta:").ids, value: "gid://gidappf/Input/#{self.id}").first.info_key.input
+        list.info_keys.find_by(key: "Acta:").info_values.each_with_index do |e, index|
+          if e.value.eql?("gid://gidappf/Input/#{self.id}") then count=index end
+        end
+        list.info_keys.find_by(key: "Justificado:").info_values.each_with_index do |e, index|
+          if count == index then e.update(value: "Si") end
+        end
+      end
+    end
+
+
 private
 
   def rows_profile_id_note_note_docent_act_comment_to_arr

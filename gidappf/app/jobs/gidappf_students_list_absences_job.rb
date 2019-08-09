@@ -28,9 +28,9 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
         )
         #Legajo:t[0]GIDAPPF links 	Justificado:t[1]'GIDAPPF read only Acta:t[2]GIDAPPF links
         t=Input.where(title: 'Time sheet hour list absences').first.info_keys
-        leg=absences.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id)
-        jus=absences.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id)
-        edi=absences.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id)
+        leg=absences.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id, :attrib_id => t[0].attrib_id)
+        jus=absences.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id, :attrib_id => t[1].attrib_id)
+        edi=absences.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id, :attrib_id => t[2].attrib_id)
         to_justify.each do |p|
           doc=make_student_absence(p, time_sheet_hour)
           leg.info_values.build(:value => p.to_global_id)
@@ -66,7 +66,7 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
       author: Profile.find_by(name: 'SecretaryProfile').id
     )
     template.info_keys.each do |t|
-      abs_key=absence.info_keys.build(:key => t.key, :client_side_validator_id => t.client_side_validator_id)
+      abs_key=absence.info_keys.build(:key => t.key, :client_side_validator_id => t.client_side_validator_id, :attrib_id => t.attrib_id)
       if t.key.eql?('Horario:')
         abs_key.info_values.build(:value => time_sheet_hour.occupied_hour_fmt)
       end

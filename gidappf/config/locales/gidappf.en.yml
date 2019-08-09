@@ -180,6 +180,10 @@ en:
           commission_qualification_list_students:
             link: 'Qualify'
             title: 'Qualification sudent list.'
+            alert: 'Please, generate profile before...'
+        documents:
+          master_sync_error: 'Not Synchronized'
+          master_sync_ok: 'Synchronized'
 
       matter:
         model: 'Matter'

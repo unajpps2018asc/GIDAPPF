@@ -24,7 +24,7 @@
           <% unless @my_profile.nil? then %>
             <strong><%= link_to t('layout.home.element1'), @my_profile %> </strong>
           <% else %>
-            <strong><%= link_to t('layout.home.element2'), new_profile_url %> </strong>
+            <strong><%= link_to t('layout.home.element2'), profiles_generate_path %> </strong>
           <% end %>
         </li>
       </ul>

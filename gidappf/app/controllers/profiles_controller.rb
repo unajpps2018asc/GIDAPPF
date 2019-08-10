@@ -28,6 +28,29 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def generate
+    if RoleAccess.get_inputs_emails(current_user).include?("docent@gidappf.edu.ar") then
+      @@template="docent@gidappf.edu.ar"
+    else
+      @@template="student@gidappf.edu.ar"
+    end
+    @user=current_user
+    authorize @user.usercommissionroles.first
+    unless params[:dni_profile].nil? || params[:email_profile].nil? then
+      used = ProfileValue.find_by(value: params[:dni_profile].to_s)
+      if (used.nil? || !used.profile_key.key.eql?(Profile.first.profile_keys.find(3).key)) then
+        respond_to do |format|
+          msg = "#{t('body.gidappf_entity.profile.action.first.msg1')}#{@user.id}#{t('body.gidappf_entity.profile.action.first.msg2')}#{@user.usercommissionroles.first.role.name}"
+          format.html { redirect_to profiles_second_path(id_user: @user.id.to_s, user_dni: params[:dni_profile]), notice: msg }
+          format.json { render :second, status: :ok}
+        end
+      else
+        redirect_back fallback_location: '/profiles', allow_other_host: false,
+        alert: "#{t('body.gidappf_entity.profile.action.first.msg3')} #{User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.find(3).key} #{t('body.gidappf_entity.profile.action.first.msg4')}"
+      end
+    end
+  end
+
   # GET /profiles
   # GET /profiles.json
   def index

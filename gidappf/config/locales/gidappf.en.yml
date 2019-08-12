@@ -318,7 +318,8 @@ en:
           destroy:
             notice: 'Season was successfully destroyed.'
           associate:
-            title: 'TimeSheets associate with commission'
+            title: 'TimeSheets associate with commission '
+            obsevations: 'Seasons that began 13 months ago or less and end in a month or less.'
           renew:
             link: 'Renew all'
             title: 'Renew all Seasons'

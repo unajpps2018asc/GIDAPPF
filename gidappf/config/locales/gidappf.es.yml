@@ -313,7 +313,8 @@ es:
           destroy:
             notice: 'Temporada borrada.'
           associate:
-            title: 'Asociar temporada con la comisión'
+            title: 'Asociar temporada con la comisión '
+            obsevations: 'Temporadas que comenzaron hace 13 meses o menos y terminan en un mes o menos.'
           renew:
             link: 'Renovar todas'
             title: 'Renovar todas las temporadas'

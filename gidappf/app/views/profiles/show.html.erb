@@ -37,9 +37,11 @@
   <p>
     <%= s.key %>
     <% s.profile_values.each do |e| %>
-      <% if e.active_stored.attached? then %>
+      <% if e.active_stored.attached? && !s.key.eql?("Materias:") then %>
         <%= image_tag url_for(e.active_stored) %>
         <%= link_to e.active_stored.filename, rails_blob_path(e.active_stored, disposition: "attachment") %>
+      <% elsif !e.active_stored.attached? && s.key.eql?("Materias:") && e.value.to_i >0 then%>
+        <strong><span><%= Matter.find(e.value.to_i).name %></span></strong>
       <% else %>
         <strong><span><%= e.value %></span></strong>
       <% end %>

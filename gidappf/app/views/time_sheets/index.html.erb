@@ -2,7 +2,7 @@
 
 <% if RoleAccess.get_role_access(current_user) > 39.0 then %>
   <h1><%= t('body.gidappf_entity.time_sheet.action.index.expired')  %></h1>
-  <p>Start: 13 months ago ~ today & End: 1 month ago ~ today</p>
+  <p><%= t('body.gidappf_entity.time_sheet.action.associate.obsevations') %></p>
 
   <table class='gidappf-table'>
     <thead>

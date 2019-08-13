@@ -50,16 +50,6 @@ class TimeSheetHourPolicy < ApplicationPolicy
     create?
   end
 
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción new definida en TimeSheetHourController             #
-  # Devolución: delega el valor de create, para nuevos roles                #
-  ###########################################################################
-  def multiple_new?
-    create?
-  end
-
-  ##############################################################################
   # Prerequisitos:                                                             #
   #           1) Acción show definida en RolesController                       #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                            #

@@ -33,8 +33,8 @@ class TimeSheetHoursController < ApplicationController
   # GET /time_sheet_hours
   # GET /time_sheet_hours.json
   def index
-    # @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id, from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday, thursday, friday, saturday, sunday, matter_id) *').all
-    @time_sheet_hours = TimeSheetHour.all
+    @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id, from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday, thursday, friday, saturday, sunday, matter_id) *').all
+    # @time_sheet_hours = TimeSheetHour.all
     authorize @time_sheet_hours
     @time_sheet_hours -= @time_sheet_hours.where(from_hour: 0, from_min: 0, to_hour: 0, to_min: 0)
     @time_sheets = TimeSheet.where(end_date: Date.today .. 36.month.after).where(enabled:true).where.not(commission: Commission.first)
@@ -106,8 +106,8 @@ class TimeSheetHoursController < ApplicationController
   # http://181.31.66.61:3000/es/time_sheet_hours?map_sel[]=id_ts35&map_sel[]=35&?map_sel[]=id_ts5&map_sel[]=5
   def multiple_new
     @matters=Matter.where(enable: true)
+    authorize @matters
     arr=time_sheet_each_vacancy(get_ts_and_cri,"id_cri","id_ts")
-    authorize @time_sheet_hour=TimeSheetHour.first
     unless arr.nil? || arr.first.empty? || arr.last.empty? then
       @time_sheet_hour=TimeSheetHour.new(
           time_sheet_id: arr.last.first.id,

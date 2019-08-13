@@ -90,5 +90,16 @@ class MatterPolicy < ApplicationPolicy
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
   end
+  
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción new definida en TimeSheetHourController             #
+  # Devolución: delega el valor de create, para nuevos roles                #
+  ###########################################################################
+  def multiple_new?
+    create?
+  end
+
+  ##############################################################################
 
 end

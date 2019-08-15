@@ -134,7 +134,7 @@ class CampusMagnamentsController < ApplicationController
   def all_time_categories
     out=[]
     a=[]
-    TimeSheet.where.not(id: TimeSheet.first.id).find_each do |c|
+    TimeSheet.find_each do |c|
       a << c.time_category
     end
     a.uniq.each do |f|

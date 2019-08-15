@@ -96,6 +96,7 @@ es:
           get_campus_segmentation:
             link: 'Segmentation del campus'
             title: 'Asignación de comisiones'
+            subtitle: 'Su validez empieza desde 30 dias antes hasta 30 dias despues del seleccionado y su validez termina desde 30 dias antes hasta 30 dias despues del seleccionado'
             notice:
               msg1: 'Agrupados por'
             current: 'en comisión:'
@@ -305,6 +306,8 @@ es:
           start_date: 'Desde'
           end_date: 'Hasta'
           enabled: 'Habilitado'
+          validations:
+            check_date_interval: 'Debe ser una fecha válida'
         action:
           new:
             notice: 'Nueva Temporada creada exitosamente.'

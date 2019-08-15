@@ -97,6 +97,7 @@ en:
           get_campus_segmentation:
             link: 'Campus segmentation'
             title: 'Assign commissions'
+            subtitle: 'Its validity starts from 30 days before until 30 days after the selected one and its validity ends from 30 days before until 30 days after the selected one'
             notice:
               msg1: 'Group by'
             current: 'in commission:'
@@ -310,6 +311,8 @@ en:
           start_date: 'From'
           end_date: 'To'
           enabled: 'Enabled'
+          validations:
+            check_date_interval: 'Must be a valid datetime'
         action:
           new:
             notice: 'Season was successfully created.'

@@ -45,6 +45,8 @@
             <%= link_to val, profile %>
           <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && val.eql?(' ') %>
             <%= link_to "#{profile.name}", profile %>
+          <% else %>
+            <%= link_to "#{profile.id.to_s}", profile %>
           <% end %>
         </td>
         <td style="width: 29.8%;">

@@ -35,8 +35,12 @@ class GidappfStudentsListDealerJob < ApplicationJob
         end
       end
       in_each_hour.save
-      docent=User.find(time_sheet_hour.time_sheet.commission.usercommissionroles.find_by(role: Role.where(level: 29.0)).user_id)
-      Document.new(profile: docent_profile, user: docent, input: in_each_hour).save
+      docents= User.find(time_sheet_hour.time_sheet.commission.usercommissionroles.where(role: Role.where(level: 29.0)).pluck(:user_id))
+      docents.each do |docent|
+        if docent.documents.first.profile.profile_keys.find_by(key: "Materias:").profile_values.first.value.to_i.eql?(time_sheet_hour.matter_id) then
+          Document.new(profile: docent_profile, user: docent, input: in_each_hour).save
+        end
+      end
     end
   end
 
@@ -45,7 +49,8 @@ class GidappfStudentsListDealerJob < ApplicationJob
   def is_listable_time_sheet_hour?(time_sheet_hour)
     !time_sheet_hour.nil? &&
     !time_sheet_hour.time_sheet.commission.usercommissionroles.find_by(role: Role.where(level: 29.0)).nil? &&
-    !User.find(time_sheet_hour.time_sheet.commission.usercommissionroles.find_by(role: Role.where(level: 29.0)).user_id).documents.nil?
+    !User.find(time_sheet_hour.time_sheet.commission.usercommissionroles.find_by(role: Role.where(level: 29.0)).user_id).documents.nil? &&
+    time_sheet_hour.created_at.eql?(time_sheet_hour.updated_at)
   end
 
 end

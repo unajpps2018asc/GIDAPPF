@@ -1,0 +1,34 @@
+<!--##############################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                      #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática             #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018     #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                  #-->
+<!--# Tutores:                                                                   #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                        #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                               #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                  #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                          #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                        #-->
+<!--# Archivo:                                                                   #-->
+<!--#GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_attachs.html.erb #-->
+<!--##############################################################################-->
+
+<!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<% target_reg_exp_strategy = "$(document).ready(function() {
+    if(Number.isNaN((new Date($(event.target).val())).getTime()) ) {
+        $(event.target).val('');
+        $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.date_error')}</p>\" ).appendTo($(event.target).parent());
+      }
+    });"
+%>
+
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<%=
+  # if valuable_gidappf_field.object.value.nil?  then
+  #   valuable_gidappf_field.date_field :value, onfocusout: target_reg_exp_strategy
+  # else
+  #   valuable_gidappf_field.date_field :value, onfocusout: target_reg_exp_strategy,
+  #     value: valuable_gidappf_field.object.value.to_date
+  # end
+  valuable_gidappf_field.file_field :active_stored
+%>

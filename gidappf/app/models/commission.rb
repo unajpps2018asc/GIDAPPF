@@ -41,6 +41,6 @@ class Commission < ApplicationRecord
   # Usado en la validacion.                                             #
   #######################################################################
   def check_date_interval
-    errors.add(:end_date, t('body.gidappf_entity.commission.attributes.validations.check_date_interval')) unless Date.parse(end_date.to_s) > Date.parse(start_date.to_s)
+    errors.add(:end_date, I18n.t('body.gidappf_entity.commission.attributes.validations.check_date_interval')) unless Date.parse(end_date.to_s) > Date.parse(start_date.to_s)
   end
 end

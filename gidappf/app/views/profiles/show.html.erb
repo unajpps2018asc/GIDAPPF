@@ -1,3 +1,16 @@
+<!--#############################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                     #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática            #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018    #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                 #-->
+<!--# Tutores:                                                                  #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                       #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                              #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                 #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                         #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                       #-->
+<!--# Archivo: GIDAPPF/gidappf/gidappf/app/views/profiles/show.html.erb         #-->
+<!--#############################################################################-->
 <p id="notice"><%= notice %></p>
 
 <h3>
@@ -20,11 +33,20 @@
   <strong><%= @profile.valid_from %></strong>
 </p>
 
-<% @profile.profile_keys.each do |s| %>
-  <p><%= s.key %>
-  <% s.profile_values.each do |e| %>
-    <strong><span><%= e.value %></span></strong>
-  <% end %></p>
+<% @profile.profile_keys.order(:attrib_id).each do |s| %>
+  <p>
+    <%= s.key %>
+    <% s.profile_values.each do |e| %>
+      <% if e.active_stored.attached? && !s.key.eql?("Materias:") then %>
+        <%= image_tag url_for(e.active_stored) %>
+        <%= link_to e.active_stored.filename, rails_blob_path(e.active_stored, disposition: "attachment") %>
+      <% elsif !e.active_stored.attached? && s.key.eql?("Materias:") && e.value.to_i >0 then%>
+        <strong><span><%= Matter.find(e.value.to_i).name %></span></strong>
+      <% else %>
+        <strong><span><%= e.value %></span></strong>
+      <% end %>
+    <% end %>
+  </p>
 <% end %>
 
 <%= link_to  t('body.common_entity.action.edit'), edit_profile_path(@profile) %> |

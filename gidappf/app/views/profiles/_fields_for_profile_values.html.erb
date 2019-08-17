@@ -13,12 +13,12 @@
 <!-- # GIDAPPF/gidappf/app/views/profiles/_fields_for_profile_values.html.erb # -->
 <!-- ########################################################################## -->
 <div class="field">
-  <%= form.label Profile.find(profile_id).profile_keys[nested_index].key %>
-  <% if Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id > ClientSideValidator.find_by(content_type: 'GIDAPPF words').id then %>
+  <%= form.label Profile.find(profile_id).profile_keys.order(:attrib_id)[nested_index].key %>
+  <% if Profile.find(profile_id).profile_keys.order(:attrib_id)[nested_index].client_side_validator_id > ClientSideValidator.find_by(content_type: 'GIDAPPF words').id then %>
     <!-- En el caso de un client_side_validator customizado -->
-    <%= form.text_field :value, onfocusout: ClientSideValidator.find(Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id).script %>
+    <%= form.text_field :value, onfocusout: ClientSideValidator.find(Profile.find(profile_id).profile_keys.order(:attrib_id)[nested_index].client_side_validator_id).script %>
   <% else %>
     <!-- En el caso de los client_side_validators definidos en el controlador -->
-    <%= render ClientSideValidator.find(Profile.find(profile_id).profile_keys[nested_index].client_side_validator_id).script, valuable_gidappf_field: form %>
+    <%= render ClientSideValidator.find(Profile.find(profile_id).profile_keys.order(:attrib_id)[nested_index].client_side_validator_id).script, valuable_gidappf_field: form %>
   <% end %>
 </div>

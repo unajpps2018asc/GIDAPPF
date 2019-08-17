@@ -80,7 +80,7 @@ class ProfilePolicy < ApplicationPolicy
   def destroy?
     self.set_is_sysadmin
     self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>29.9
   end
 
   ##############################################################################
@@ -92,7 +92,7 @@ class ProfilePolicy < ApplicationPolicy
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||
-    @issysadmin||is_my_profile?||@roleaccess>30.0
+    @issysadmin||is_my_profile?||@roleaccess>29.9
   end
 
   ##############################################################################

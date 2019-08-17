@@ -15,6 +15,7 @@
 
 <h1><%= t('body.gidappf_entity.campus_magnament.action.get_campus_segmentation.title') %></h1>
 <!-- <p><% @msg %></p><!-- Variable de pruebas-->
+<p><%= t('body.gidappf_entity.campus_magnament.action.get_campus_segmentation.subtitle') %></p><!-- Variable de pruebas-->
 
 <%= render 'periods', str_periods: @opt_periods.uniq %> <!-- archivo _periods.html.erb -->
 
@@ -22,4 +23,6 @@
   <!-- archivo _table1.html.erb por cada profiles_time_cat-->
   <%= render 'table1', profiles_period: profiles_time_cat.drop(1),
         comms_period: profiles_time_cat.first.last, title: profiles_time_cat.first.first %>
+  <br>
+  <hr>
 <% end %>

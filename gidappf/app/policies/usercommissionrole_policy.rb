@@ -43,4 +43,8 @@ class UsercommissionrolePolicy < ApplicationPolicy
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>29.0
   end
 
+  def generate?
+    set_campus_segmentation?
+  end
+
 end

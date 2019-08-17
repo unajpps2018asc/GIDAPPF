@@ -475,19 +475,23 @@ p "[GIDAPPF] Creados #{TimeSheetHour.count} horarios de muestra"
     user_id: u10.id, commission_id: 2
   ).save
   p10=Profile.new( name: "#{Profile.count+1}/#{u+1000000}", description: "A description user #{u}", valid_from: Date.today, valid_to: 1.year.after )
+  # p10.cover_photo.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'init')
   User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+1000000).to_s).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => (u+1000000).to_s).save
       when 23 #"Se inscribe a cursar:"
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "PRIMERO").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "PRIMERO").save
       when 24 #'Elección de turno desde[Hr]:'
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "8").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "8").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "12").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "12").save
+      when 41 #'Foto del perfil:'
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "photo").save
+        p10.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.first.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
       else
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => nil).save
     end
   end
   # Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
@@ -509,15 +513,18 @@ end
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+2000000).to_s).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => (u+2000000).to_s).save
       when 23 #"Se inscribe a cursar:"
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "Segundo").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "Segundo").save
       when 24 #'Elección de turno desde[Hr]:'
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "13").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "13").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "17").save
+      when 41 #'Foto del perfil:'
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "photo").save
+        p10.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.first.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
       else
-        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p10.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => nil).save
     end
   end
   # Document.new(profile: p10, user: u10, input: Input.find_by(title: 'Admministrative rules')).save
@@ -539,15 +546,18 @@ end
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+3000000).to_s).save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => (u+3000000).to_s).save
       when 23 #"Se inscribe a cursar:"
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "primero").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "primero").save
       when 24 #'Elección de turno desde[Hr]:'
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "17").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "22").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "22").save
+      when 41 #'Foto del perfil:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "photo").save
+        p5.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.first.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
       else
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => nil).save
     end
   end
   # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
@@ -569,15 +579,18 @@ end
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+4000000).to_s).save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => (u+4000000).to_s).save
       when 23 #"Se inscribe a cursar:"
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "tercero").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "tercero").save
       when 24 #'Elección de turno desde[Hr]:'
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "7").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "7").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "23").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "23").save
+      when 41 #'Foto del perfil:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "photo").save
+        p5.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.first.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
       else
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => nil).save
     end
   end
   # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
@@ -599,15 +612,18 @@ end
     x=i.id
     case x
       when 3 #dni si es la clave 3 de la plantilla
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (u+5000000).to_s).save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => (u+5000000).to_s).save
       when 23 #"Se inscribe a cursar:"
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "tercero").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "tercero").save
       when 24 #'Elección de turno desde[Hr]:'
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "17").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "17").save
       when 25 #'Elección de turno hasta[Hr]:'
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "22").save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "22").save
+      when 41 #'Foto del perfil:'
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "photo").save
+        p5.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.first.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
       else
-        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p5.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => nil).save
     end
   end
   # Document.new(profile: p5, user: u5, input: Input.find_by(title: 'Admministrative rules')).save
@@ -636,16 +652,19 @@ Matter.all.each_with_index do |matter, index|
   User.find_by(email: LockEmail::LIST[3]).documents.first.profile.profile_keys.each do |i|
     x=i.id
     case x
-      when 43 #dni si es la clave 43 de la plantilla
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => (index+6000000).to_s).save
-      when 48 #'Materias'
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => matter.id.to_s).save
-      when 49 #'Elección de turno desde[Hr]:'
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "5").save
-      when 50 #'Elección de turno hasta[Hr]:'
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => "23").save
+    when 44 #dni si es la clave 44 de la plantilla
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => (index+6000000).to_s).save
+      when 49 #'Materias'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => matter.id.to_s).save
+      when 50 #'Elección de turno desde[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "5").save
+      when 51 #'Elección de turno hasta[Hr]:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "23").save
+      when 52 #'Foto del perfil:'
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => "photo").save
+        p2.profile_keys.find_by(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.first.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/profile-init.png")), filename: 'profile')
       else
-        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id).profile_values.build(:value => nil).save
+        p2.profile_keys.build(:key => i.key, :client_side_validator_id => i.client_side_validator_id, :attrib_id => i.attrib_id).profile_values.build(:value => nil).save
     end
   end
   # Document.new(profile: p2, user: u2, input: Input.find_by(title: 'Admministrative rules')).save

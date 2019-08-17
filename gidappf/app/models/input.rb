@@ -95,10 +95,18 @@ class Input < ApplicationRecord
           min=keys.find_by(key: tik.key,created_at: keys.minimum('created_at'))
           read_only_or_link=ClientSideValidator.where(content_type: "GIDAPPF links").
             or(ClientSideValidator.where(content_type: "GIDAPPF read only")).include?(min.client_side_validator)
-          if max.client_side_validator_id.nil? && !read_only_or_link then
-            max.update(client_side_validator_id: min.client_side_validator_id)
+          attacher_attrib=ClientSideValidator.where(content_type: "GIDAPPF attachers").include?(min.client_side_validator)
+          if max.client_side_validator_id.nil? && !read_only_or_link && !attacher_attrib then
+            max.update(client_side_validator_id: min.client_side_validator_id, attrib_id: min.attrib_id)
             min.destroy
-          elsif read_only_or_link then
+          elsif attacher_attrib && !read_only_or_link then
+            if max.info_values.first.active_stored.attached?
+              max.update(client_side_validator_id: min.client_side_validator_id, attrib_id: min.attrib_id)
+              min.destroy
+            elsif min.info_values.first.active_stored.attached?
+              max.destroy
+            end
+          elsif read_only_or_link && !attacher_attrib  then
             max.destroy
           end
         end
@@ -150,6 +158,20 @@ class Input < ApplicationRecord
         end
       end
     end
+
+    def update_group
+      unless (self.info_keys.find_by(key: "Justificado:")).info_values.first.value.eql?("No") then
+        count=0
+        list=InfoValue.where(info_key_id: InfoKey.where(key: "Acta:").ids, value: "gid://gidappf/Input/#{self.id}").first.info_key.input
+        list.info_keys.find_by(key: "Acta:").info_values.each_with_index do |e, index|
+          if e.value.eql?("gid://gidappf/Input/#{self.id}") then count=index end
+        end
+        list.info_keys.find_by(key: "Justificado:").info_values.each_with_index do |e, index|
+          if count == index then e.update(value: "Si") end
+        end
+      end
+    end
+
 
 private
 

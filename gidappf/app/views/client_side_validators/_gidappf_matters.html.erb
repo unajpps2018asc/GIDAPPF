@@ -19,7 +19,7 @@
   rexp=String($(event.target).val().match(/[\\w\\W]+/gim));
   if( str !== rexp ) {
       $(event.target).val('');
-      $( \"<p class='validation-error'>Matter error.</p>\" ).appendTo($(event.target).parent());
+      $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.matter_error')}</p>\" ).appendTo($(event.target).parent());
     }
   });"
 %>

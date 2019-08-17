@@ -1,41 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= t('body.gidappf_entity.time_sheet.action.index.expired')  %></h1>
-<p>Start: 13 months ago ~ today & End: 1 month ago ~ today</p>
+<% if RoleAccess.get_role_access(current_user) > 39.0 then %>
+  <h1><%= t('body.gidappf_entity.time_sheet.action.index.expired')  %></h1>
+  <p><%= t('body.gidappf_entity.time_sheet.action.associate.obsevations') %></p>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
-      <th><%= t('body.gidappf_entity.time_sheet.attributes.start_date')  %></th>
-      <th><%= t('body.gidappf_entity.time_sheet.attributes.end_date')  %></th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @time_sheets.each do |time_sheet| %>
+  <table class='gidappf-table'>
+    <thead>
       <tr>
-        <td><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
-        <td><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
-        <td><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to t('body.common_entity.action.edit'), edit_time_sheet_path(time_sheet) %></td>
-        <td><%= link_to t('body.common_entity.action.destroy'), time_sheet, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+        <th style="width: 20%;"><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
+        <th style="width: 20%;"><%= t('body.gidappf_entity.time_sheet.attributes.start_date')  %></th>
+        <th style="width: 20%;"><%= t('body.gidappf_entity.time_sheet.attributes.end_date')  %></th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<%= link_to t('body.gidappf_entity.time_sheet.action.renew.link'), time_sheets_renew_all_path %>
-<hr>
+    <tbody>
+      <% @time_sheets.each do |time_sheet| %>
+        <tr>
+          <td style="width: 20%;"><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
+          <td style="width: 20%;"><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
+          <td style="width: 20%;"><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
+          <td style="width: 20%;"><%= link_to t('body.common_entity.action.edit'), edit_time_sheet_path(time_sheet) %></td>
+          <td style="width: 20%;"><%= link_to t('body.common_entity.action.destroy'), time_sheet, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to t('body.gidappf_entity.time_sheet.action.renew.link'), time_sheets_renew_all_path %>
+  <hr>
+<% end %>
 <h1><%= t('body.gidappf_entity.time_sheet.models')  %></h1>
 
-<table>
+<table class='gidappf-table gidappf-index'>
   <thead>
     <tr>
-      <th><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
-      <th><%= t('body.gidappf_entity.time_sheet.attributes.start_date')  %></th>
-      <th><%= t('body.gidappf_entity.time_sheet.attributes.end_date')  %></th>
+      <th style="width: 30%;"><%= t('body.gidappf_entity.commission.attributes.name')  %></th>
+      <th style="width: 20%;"><%= t('body.gidappf_entity.time_sheet.attributes.start_date')  %></th>
+      <th style="width: 30%;"><%= t('body.gidappf_entity.time_sheet.attributes.end_date')  %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -43,11 +47,11 @@
   <tbody>
     <% @time_sheets1.each do |time_sheet| %>
       <tr>
-        <td><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
-        <td><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
-        <td><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to t('body.common_entity.action.edit'), edit_time_sheet_path(time_sheet) %></td>
-        <td><%= link_to t('body.common_entity.action.destroy'), time_sheet, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+        <td style="width: 30%;"><%= link_to "#{time_sheet.commission.name}", time_sheet %></td>
+        <td style="width: 20%;"><%= time_sheet.start_date.strftime("%d/%m/%Y") %></td>
+        <td style="width: 30%;"><%= time_sheet.end_date.strftime("%d/%m/%Y") %></td>
+        <td style="width: 10%;"><%= link_to t('body.common_entity.action.edit'), edit_time_sheet_path(time_sheet) %></td>
+        <td style="width: 10%;"><%= link_to t('body.common_entity.action.destroy'), time_sheet, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>

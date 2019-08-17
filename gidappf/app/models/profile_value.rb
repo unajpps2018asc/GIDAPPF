@@ -17,6 +17,7 @@ class ProfileValue < ApplicationRecord
   #      ProfileKey, opcional para que funcione accepts_nested_attributes_for.#
   #############################################################################
   belongs_to :profile_key, optional: true
+  has_one_attached :active_stored
 
   def gidappf_readonly?
     self.profile_key.profile_values.count > 0 &&

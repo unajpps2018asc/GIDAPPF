@@ -12,8 +12,10 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     sign_in users(:one)
-    get profiles_url
+    get matters_url#, headers: @auth_h_matter
     assert_response :success
+    get profiles_path
+    assert_redirected_to gidappf_catchs_exceptions_not_record_found_detect_path
     sign_out :user
   end
 

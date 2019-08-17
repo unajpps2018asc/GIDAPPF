@@ -14,6 +14,9 @@
 en:
   layout:
     nav:
+      dropdown:
+        site: 'Institute'
+        yours: 'In charge of'
       part:
         link_40:
           sets_u_acc: 'Sets users access'
@@ -60,7 +63,7 @@ en:
     disabled_cookies_detect:
       title: "Gidappf can't deliver cookie..."
       summary: 'Cookies are disabled in your web browser, please activate in preferences:'
-      line1: 'In Firefox: Menu(&#9776;)&rarr;Preferences&rarr;Privacy & security(&#128274;)&rarr;Content Blocking: Click in Strict or Standard'
+      line1: 'In Firefox: Menu->Preferences->Privacy & security -> Content Blocking: Click in Strict or Standard'
       line2: 'in navigation bar and click in switch lock'
       line3: 'In Chrome: type'
     first_password_detect:
@@ -94,8 +97,10 @@ en:
           get_campus_segmentation:
             link: 'Campus segmentation'
             title: 'Assign commissions'
+            subtitle: 'Its validity starts from 30 days before until 30 days after the selected one and its validity ends from 30 days before until 30 days after the selected one'
             notice:
               msg1: 'Group by'
+            current: 'in commission:'
           set_campus_segmentation:
             notice:
               msg1: 'Commission of'
@@ -176,6 +181,10 @@ en:
           commission_qualification_list_students:
             link: 'Qualify'
             title: 'Qualification sudent list.'
+            alert: 'Please, generate profile before...'
+        documents:
+          master_sync_error: 'Not Synchronized'
+          master_sync_ok: 'Synchronized'
 
       matter:
         model: 'Matter'
@@ -210,7 +219,7 @@ en:
         model: 'Profile'
         models: 'Profiles'
         attributes:
-          name: 'Name'
+          name: 'Profile'
           description: 'Description'
           valid_from: 'From'
           valid_to: 'To'
@@ -288,6 +297,12 @@ en:
           error:
             notice: 'Unrelationable_entitys.'
           current_commission: 'Current commission.'
+          multiple_new:
+            cri_modal:
+              title: 'Choose one or more corresponding classrooms'
+            comm_modal:
+              title: 'Choose one or more commissions'
+              button: 'Assignment of classrooms'
 
       time_sheet:
         model: 'Season'
@@ -296,6 +311,8 @@ en:
           start_date: 'From'
           end_date: 'To'
           enabled: 'Enabled'
+          validations:
+            check_date_interval: 'Must be a valid datetime'
         action:
           new:
             notice: 'Season was successfully created.'
@@ -304,12 +321,25 @@ en:
           destroy:
             notice: 'Season was successfully destroyed.'
           associate:
-            title: 'TimeSheets associate with commission'
+            title: 'TimeSheets associate with commission '
+            obsevations: 'Seasons that began 13 months ago or less and end in a month or less.'
           renew:
             link: 'Renew all'
             title: 'Renew all Seasons'
           index:
             expired: 'Expired Seasons'
+
+      client_side_validator:
+        error:
+          alphanumeric_error: 'Alphanumeric error.'
+          calification_error: 'Calification error.'
+          check_error: 'Check error.'
+          date_error: 'Date error.'
+          matter_error: 'Matter error.'
+          number_error: 'Number error.'
+          trayect_error: 'Choose one of'
+          words_error: 'Words error'
+
 
   sidebar:
     bar: 'bar'

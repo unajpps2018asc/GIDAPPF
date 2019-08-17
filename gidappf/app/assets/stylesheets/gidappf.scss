@@ -1,0 +1,229 @@
+// Place all the styles related to the inputs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// link https://colorhunt.co/palette/62241
+
+
+$percent40: #eff0f4;
+$percent27: #d3d6db;
+$percent20: #415f9d;
+$percent13: #233b6e;
+
+//layout nav
+header nav.navbar.navbar-default div.container div.navbar-header button.navbar-toggle{
+  float: right;
+}
+header nav.navbar.navbar-default div.container div.navbar-collapse.collapse ul.nav.navbar-nav{
+  float: right;
+}
+
+header nav.navbar.navbar-default{
+  margin-bottom: 0;
+}
+
+#gidappf-setup{
+  margin-bottom: 3%;
+  width: 1209px;
+}
+
+.gidappf-background {background-color: $percent13;}
+.gidappf-main {
+    background-color: $percent27; /* For browsers that do not support gradients */
+    background-image: linear-gradient($percent27, $percent40); /* Standard syntax (must be last) */
+  }
+
+#gidappf_lang_dropdown{
+    margin: 1%;
+  }
+
+body.gidappf-background main.container.gidappf-main.container {
+    width: inherit;
+  }
+
+.gidappf-table {
+    color: $percent40;
+    background-color: $percent20;
+    width: -moz-available;
+    text-align: center;
+  }
+
+.gidappf-table thead tr th {
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
+    text-align: center;
+  }
+
+.gidappf-index {
+    color: $percent40;
+    background-color: $percent20; /* For browsers that do not support gradients */
+    background-image: linear-gradient($percent20, $percent40); /* Standard syntax (must be last) */
+    width: 98%;
+  }
+
+.gidappf-index tbody {
+    height: 445px;
+    overflow-y: auto;
+  }
+
+
+.gidappf-index thead, .gidappf-index tbody, .gidappf-index tr, .gidappf-index td, .gidappf-index th {
+  display: flow-root;
+}
+
+.gidappf-index tbody td, .gidappf-index thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+
+.gidappf-table tbody tr td {
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
+    a:hover {
+        color: $percent40;
+        background-color: $percent13;
+      }
+  }
+
+.gidappf-table tbody tr:nth-child(even) {
+    background: $percent40;
+    color: black;
+  }
+.gidappf-table tbody tr:nth-child(odd) {
+  background: $percent27;
+  color: black;
+  }
+
+html body.gidappf-background main.container.gidappf-main table.gidappf-table.gidappf-index tbody tr td label{
+  display: block;
+}
+
+.gidappf-footer {
+    color: $percent40;
+    background-color: tranparent;
+  }
+
+body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-alert{
+    margin-top: 1%;
+    border-color: $percent13;
+    box-shadow: 7px 7px;
+  }
+
+body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-notice{
+    margin-top: 1%;
+    border-color: $percent13;
+    box-shadow: 7px 7px;
+  }
+
+html body.gidappf-background main.container.gidappf-main div.alert.alert-dismissable.alert-error{
+    margin-top: 1%;
+    background-color: rosybrown;
+    border-color: $percent13;
+    box-shadow: 7px 7px;
+  }
+
+#ModalClassRooms.modal.fade.in div.modal-dialog {
+    width: min-content;
+}
+
+#ModalClassRooms.modal.fade.in div.modal-dialog div.modal-content div.modal-header h4#exampleModalLabel.modal-title{
+    float: inline-start;
+}
+
+#ModalClassRooms.modal.fade.in div.modal-dialog div.modal-content div.modal-header button.close{
+    float: inline-end;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog{
+    width: 75%;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-header h4#exampleModalLabel.modal-title{
+    float: inline-start;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-header button.close{
+    float: inline-end;
+}
+
+#ModalCommissions.modal.fade.in div.modal-dialog div.modal-content div.modal-footer a.btn.btn-info{
+  color: $percent13;
+}
+
+.gidappf-table tbody tr td div.tablemodal{
+  overflow-x:auto;
+  width: 120px;
+}
+
+.gidappf-table tbody tr td div.tablemodal table tbody tr{
+  background-color: transparent;
+}
+
+.gidappf-table tbody tr td div.tablemodal table thead tr{
+  background-color: transparent;
+}
+
+.gidappf-table tbody tr td div.tablemodal table tbody tr td{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.gidappf-plus-button {
+	border: 2px solid lightgrey;
+	background-color: #fff;
+	font-size: 16px;
+	height: 2.5em;
+	width: 2.5em;
+	border-radius: 999px;
+	position: relative;
+  float: right;
+  margin-right: 3%;
+  margin-bottom: 2%;
+  margin-top: -4%;
+
+	&:after,
+	&:before {
+		content: "";
+		display: block;
+		background-color: grey;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	&:before {
+		height: 1em;
+		width: 0.2em;
+	}
+
+	&:after {
+		height: 0.2em;
+		width: 1em;
+	}
+}
+
+.gidappf-plus-button--small {
+	font-size: 12px;
+}
+
+.gidappf-plus-button--large {
+	font-size: 22px;
+}
+
+.gidappf-background footer.gidappf-footer hr{
+  margin-top: 0.5%;
+  margin-bottom: 1%;
+}
+
+.gidappf-background main.container.gidappf-main form select{
+  margin-bottom: 1%;
+}
+
+.container.gidappf-main p img{
+  width: 130px;
+  height: 130px;
+}

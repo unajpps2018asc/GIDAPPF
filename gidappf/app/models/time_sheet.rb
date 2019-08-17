@@ -112,7 +112,7 @@ class TimeSheet < ApplicationRecord
   # Usado en la validacion.                                             #
   #######################################################################
   def check_date_interval
-    errors.add(:end_date, 'must be a valid datetime') unless Date.parse(end_date.to_s) > Date.parse(start_date.to_s)
+    errors.add(:end_date,  I18n.t('body.gidappf_entity.time_sheet.attributes.validations.check_date_interval')) unless Date.parse(end_date.to_s) > Date.parse(start_date.to_s)
   end
 
 end

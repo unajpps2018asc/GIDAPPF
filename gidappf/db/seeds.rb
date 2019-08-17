@@ -233,39 +233,43 @@ ClientSideValidator.create!([
       script: 'client_side_validators/gidappf_alphanumerics'
     },
     {
-      content_type: "GIDAPPF califications",#3
+      content_type: "GIDAPPF attachers",#3
+      script: 'client_side_validators/gidappf_attachs'
+    },
+    {
+      content_type: "GIDAPPF califications",#4
       script: 'client_side_validators/gidappf_califications'
     },
     {
-      content_type: "GIDAPPF checks",#4
+      content_type: "GIDAPPF checks",#5
       script: 'client_side_validators/gidappf_checks'
     },
     {
-      content_type: "GIDAPPF dates",#5
+      content_type: "GIDAPPF dates",#6
       script: 'client_side_validators/gidappf_dates'
     },
     {
-      content_type: "GIDAPPF links",#6
+      content_type: "GIDAPPF links",#7
       script: 'client_side_validators/gidappf_links'
     },
     {
-      content_type: "GIDAPPF matters",#7
+      content_type: "GIDAPPF matters",#8
       script: 'client_side_validators/gidappf_matters'
     },
     {
-      content_type: "GIDAPPF numbers",#8
+      content_type: "GIDAPPF numbers",#9
       script: 'client_side_validators/gidappf_numbers'
     },
     {
-      content_type: "GIDAPPF trayects",#9
+      content_type: "GIDAPPF trayects",#10
       script: 'client_side_validators/gidappf_trayects'
     },
     {
-      content_type: "GIDAPPF words",#10
+      content_type: "GIDAPPF words",#11
       script: 'client_side_validators/gidappf_words'
     },
     {
-      content_type: "GIDAPPF validator example",#11
+      content_type: "GIDAPPF validator example",#12
       script: "$(document).ready(function() {
         if($(event.target).val().match(/^[a-zA-Z\\s]+$/) == null) {
             $(event.target).val('');
@@ -282,207 +286,267 @@ ProfileKey.create!([
     {#REQUERIDO POR SISTEMA
       key: 'Nombre:',#1
       profile_id: Profile.first.id,
+      attrib_id: 1,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Apellido:',#2
       profile_id: Profile.first.id,
+      attrib_id: 2,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{ #REQUERIDO POR SISTEMA
       key: 'DNI:',#3
       profile_id: Profile.first.id,
+      attrib_id: 3,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
     },{
       key: 'Fecha de Nacimiento:',#4
       profile_id: Profile.first.id,
+      attrib_id: 4,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF dates').id
     },{
       key: 'CUIL:',#5
       profile_id: Profile.first.id,
+      attrib_id: 5,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Grupo sanguíneo:',#6
       profile_id: Profile.first.id,
+      attrib_id: 6,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Dirección:',#7
       profile_id: Profile.first.id,
+      attrib_id: 7,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     },{
       key: 'Barrio:',#8
       profile_id: Profile.first.id,
+      attrib_id: 8,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Localidad:',#9
       profile_id: Profile.first.id,
+      attrib_id: 9,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'CP:',#10
       profile_id: Profile.first.id,
+      attrib_id: 10,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     },{
       key: 'Teléfono:',#11
       profile_id: Profile.first.id,
+      attrib_id: 11,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Cobertura médica:',#12
       profile_id: Profile.first.id,
+      attrib_id: 12,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: '1)Lugar de atención médica en caso de emergencia:',#13
       profile_id: Profile.first.id,
+      attrib_id: 13,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Dirección de (1):',#14
       profile_id: Profile.first.id,
+      attrib_id: 14,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     },{
       key: 'Barrio de (1):',#15
       profile_id: Profile.first.id,
+      attrib_id: 15,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Localidad de (1):',#16
       profile_id: Profile.first.id,
+      attrib_id: 16,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Teléfono de (1):',#17
       profile_id: Profile.first.id,
+      attrib_id: 17,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: '2)Trabaja actualmente en:',#18
       profile_id: Profile.first.id,
+      attrib_id: 18,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Horario de trabajo (2):',#19
       profile_id: Profile.first.id,
+      attrib_id: 19,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
     },{
       key: 'Busca trabajo:',#20
       profile_id: Profile.first.id,
+      attrib_id: 20,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: '3) Últimos estudios cursados:',#21
       profile_id: Profile.first.id,
+      attrib_id: 21,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Establecimiento de (3):',#22
       profile_id: Profile.first.id,
+      attrib_id: 22,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{ #REQUERIDO POR SISTEMA
       key: 'Se inscribe a cursar:',#23
       profile_id: Profile.first.id,
+      attrib_id: 23,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF trayects').id
     },{ #REQUERIDO POR SISTEMA
       key: 'Elección de turno desde[Hr]:',#24
       profile_id: Profile.first.id,
+      attrib_id: 24,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{ #REQUERIDO POR SISTEMA
       key: 'Elección de turno hasta[Hr]:',#25
       profile_id: Profile.first.id,
+      attrib_id: 25,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Segunda opción de turno desde[Hr]:',#26
       profile_id: Profile.first.id,
+      attrib_id: 26,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Segunda opción de turno hasta[Hr]:',#27
       profile_id: Profile.first.id,
+      attrib_id: 27,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
     },{
       key: 'Hijos:',#28
       profile_id: Profile.first.id,
+      attrib_id: 28,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Padece enfermedad:',#29
       profile_id: Profile.first.id,
+      attrib_id: 29,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Toma medicación:',#30
       profile_id: Profile.first.id,
+      attrib_id: 30,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Alérgico/a a:',#31
       profile_id: Profile.first.id,
+      attrib_id: 31,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Dejó de estudiar aproximadamente hace:',#32
       profile_id: Profile.first.id,
+      attrib_id: 32,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Materia que le cuesta más:',#33
       profile_id: Profile.first.id,
+      attrib_id: 33,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
     },{
       key: 'Luego de egresar continuaría estudiando:',#34
       profile_id: Profile.first.id,
+      attrib_id: 34,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de DNI presentada:',#35
       profile_id: Profile.first.id,
+      attrib_id: 35,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de partida de nacimiento presentada:',#36
       profile_id: Profile.first.id,
+      attrib_id: 36,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de constancia de CUIL presentada:',#37
       profile_id: Profile.first.id,
+      attrib_id: 37,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Copia de constancia de estudios previos presentada:',#38
       profile_id: Profile.first.id,
+      attrib_id: 38,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: '2 Fotos 4x4 precentadas:',#39
       profile_id: Profile.first.id,
+      attrib_id: 39,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
     },{
       key: 'Comentarios adicionales:',#40
       profile_id: Profile.first.id,
+      attrib_id: 40,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
+    },{
+      key: 'Foto del perfil:',#41
+      profile_id: Profile.first.id,
+      attrib_id: 0,
+      client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF attachers').id
     }
 ])
 
 ProfileKey.create!([
     {#REQUERIDO POR SISTEMA
-      key: ProfileKey.find(1).key,#1 'Nombre:'
+      key: ProfileKey.find(1).key,#42 'Nombre:'
       profile_id: 2,
+      attrib_id: 1,
       client_side_validator_id: ProfileKey.find(1).client_side_validator_id
     },{
-      key: ProfileKey.find(2).key,#2 'Apellido:'
+      key: ProfileKey.find(2).key,#43 'Apellido:'
       profile_id: 2,
+      attrib_id: 2,
       client_side_validator_id: ProfileKey.find(2).client_side_validator_id
     },{ #REQUERIDO POR SISTEMA
-      key: ProfileKey.find(3).key,#3 DNI:
+      key: ProfileKey.find(3).key,#44 DNI:
       profile_id: 2,
+      attrib_id: 3,
       client_side_validator_id: ProfileKey.find(3).client_side_validator_id
     },{
-      key: ProfileKey.find(4).key,#4 'Fecha de Nacimiento:',
+      key: ProfileKey.find(4).key,#45 'Fecha de Nacimiento:',
       profile_id: 2,
+      attrib_id: 4,
       client_side_validator_id: ProfileKey.find(4).client_side_validator_id
     },{
-      key: ProfileKey.find(5).key,#'CUIL:',#5
+      key: ProfileKey.find(5).key,#'CUIL:',#46
       profile_id: 2,
+      attrib_id: 5,
       client_side_validator_id: ProfileKey.find(5).client_side_validator_id
     },{
-      key: ProfileKey.find(6).key,#'Dirección:',#6
+      key: ProfileKey.find(6).key,#'Dirección:',#47
       profile_id: 2,
+      attrib_id: 6,
       client_side_validator_id: ProfileKey.find(6).client_side_validator_id
     },{
-      key: ProfileKey.find(11).key,#'Teléfono:',#7
+      key: ProfileKey.find(11).key,#'Teléfono:',#48
       profile_id: 2,
+      attrib_id: 7,
       client_side_validator_id: ProfileKey.find(11).client_side_validator_id
     },{
-      key: 'Materias:',#8
+      key: 'Materias:',#49
       profile_id: 2,
+      attrib_id: 8,
       client_side_validator_id:ClientSideValidator.find_by(content_type: 'GIDAPPF matters').id
     },{
-      key: ProfileKey.find(24).key,#'Elección de turno desde[Hr]:',#9
+      key: ProfileKey.find(24).key,#'Elección de turno desde[Hr]:',#50
       profile_id: 2,
+      attrib_id: 9,
       client_side_validator_id: ProfileKey.find(24).client_side_validator_id
     },{ #REQUERIDO POR SISTEMA
-      key: ProfileKey.find(25).key,#'Elección de turno hasta[Hr]:',#10
+      key: ProfileKey.find(25).key,#'Elección de turno hasta[Hr]:',#51
       profile_id: 2,
+      attrib_id: 10,
       client_side_validator_id: ProfileKey.find(25).client_side_validator_id
+    },{
+      key: ProfileKey.find(41).key,#52
+      profile_id: 2,
+      attrib_id: 0,
+      client_side_validator_id: ProfileKey.find(41).client_side_validator_id
     }
 ])
 
@@ -493,18 +557,22 @@ InfoKey.create!([#Un documento de ausencia
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Horario:',#1
   input_id: Input.find_by(title: 'Student absence').id,
+  attrib_id: 0,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Justificante:',#2
   input_id: Input.find_by(title: 'Student absence').id,
+  attrib_id: 1,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
 },{
   key: 'Justificado:',#3
   input_id: Input.find_by(title: 'Student absence').id,
+  attrib_id: 2,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
 },{
   key: 'Observaciones:',#4
   input_id: Input.find_by(title: 'Student absence').id,
+  attrib_id: 3,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
 }
 ])
@@ -515,14 +583,17 @@ InfoKey.create!([# Un listado de horario iniciado generado por el docente
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Legajo:',#1
   input_id: Input.find_by(title: 'Time sheet hour students list').id,
+  attrib_id: 0,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'Vacante:',#2
   input_id: Input.find_by(title: 'Time sheet hour students list').id,
+  attrib_id: 1,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Presente:',#3
   input_id: Input.find_by(title: 'Time sheet hour students list').id,
+  attrib_id: 2,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF checks').id
   }
 ])
@@ -533,14 +604,17 @@ InfoKey.create!([# Un listado de justificaciones pendientes
 {#REQUERIDO POR SISTEMA plantilla de asistencia
   key: 'Legajo:',#1
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
+  attrib_id: 0,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'Justificado:',#2
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
+  attrib_id: 1,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
 },{
   key: 'Acta:',#3
   input_id: Input.find_by(title: 'Time sheet hour list absences').id,
+  attrib_id: 2,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 }
 ])
@@ -551,18 +625,22 @@ InfoKey.create!([# Un documento de reglas administrativas
 {#REQUERIDO POR SISTEMA plantilla del documento maestro del circuito administrativo
   key: 'Introducción:',#1
   input_id: Input.find_by(title: 'Administrative rules').id,
+  attrib_id: 0,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF words').id
 },{
   key: 'Minutos tolerados de ausencia injustificada:',#2
   input_id: Input.find_by(title: 'Administrative rules').id,
+  attrib_id: 1,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 },{
   key: 'Nota de aprobación:',#3
   input_id: Input.find_by(title: 'Administrative rules').id,
+  attrib_id: 2,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 },{
   key: 'Nota de promoción:',#4
   input_id: Input.find_by(title: 'Administrative rules').id,
+  attrib_id: 3,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF numbers').id
 }
 ])
@@ -608,22 +686,27 @@ InfoKey.create!([# Un listado de calificaciones de estudiantes
 {#REQUERIDO POR SISTEMA plantilla de calificaciones
   key: 'Legajo:',#1
   input_id: Input.find_by(title: 'Calification student list').id,
+  attrib_id: 0,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'Nota:',#2
   input_id: Input.find_by(title: 'Calification student list').id,
+  attrib_id: 1,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
 },{
   key: 'Nota docente:',#3
   input_id: Input.find_by(title: 'Calification student list').id,
+  attrib_id: 2,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF califications').id
 },{
   key: 'Acta:',#4
   input_id: Input.find_by(title: 'Calification student list').id,
+  attrib_id: 3,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'Comentario:',#5
   input_id: Input.find_by(title: 'Calification student list').id,
+  attrib_id: 4,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF alphanumerics').id
 }
 ])
@@ -634,18 +717,22 @@ InfoKey.create!([# Reporte de calificaciones individual
 {#REQUERIDO POR SISTEMA plantilla de calificaciones individuales
   key: 'Legajo:',#1
   input_id: Input.find_by(title: 'Student calification').id,
+  attrib_id: 0,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF links').id
 },{
   key: 'Nombre y apellido:',#2
   input_id: Input.find_by(title: 'Student calification').id,
+  attrib_id: 1,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Calificación:',#3
   input_id: Input.find_by(title: 'Student calification').id,
+  attrib_id: 2,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 },{
   key: 'Observaciones:',#4
   input_id: Input.find_by(title: 'Student calification').id,
+  attrib_id: 3,
   client_side_validator_id: ClientSideValidator.find_by(content_type: 'GIDAPPF read only').id
 }
 ])

@@ -16,7 +16,7 @@
 <% target_reg_exp_strategy = "$(document).ready(function() {
       if(Number.isNaN((new Date($(event.target).val())).getTime()) ) {
           $(event.target).val('');
-          $( \"<p class='validation-error'>Date error.</p>\" ).appendTo($(event.target).parent());
+          $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.date_error')}</p>\" ).appendTo($(event.target).parent());
         }
       });"
 %>

@@ -2,35 +2,34 @@
 
 <h1><%= t('body.gidappf_entity.class_room_institute.models')  %></h1>
 
-<table>
+<table class='gidappf-table'>
   <thead>
     <tr>
       <th><%= t('body.gidappf_entity.class_room_institute.attributes.name')  %></th>
       <th><%= t('body.gidappf_entity.class_room_institute.attributes.ubication')  %></th>
-      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_monday')  %></th>
-      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')  %></th>
-      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')  %></th>
-      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_thursday')  %></th>
-      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_friday')  %></th>
-      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_saturday')  %></th>
-      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_sunday')  %></th>
-      <th colspan="3"></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_monday').split(' ').last.first(3).capitalize  %></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_tuesday').split(' ').last.first(3).capitalize  %></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_wednesday').split(' ').last.first(3).capitalize  %></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_thursday').split(' ').last.first(3).capitalize  %></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_friday').split(' ').last.first(3).capitalize  %></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_saturday').split(' ').last.first(3).capitalize %></th>
+      <th><%= t('body.gidappf_entity.class_room_institute.attributes.available_sunday').split(' ').last.first(3).capitalize %></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @class_room_institutes.each do |class_room_institute| %>
       <tr>
-        <td><%= class_room_institute.name %></td>
+        <td><%= link_to "#{class_room_institute.name}", class_room_institute %></td>
         <td><%= class_room_institute.ubication %></td>
-        <td><%= class_room_institute.available_monday %></td>
-        <td><%= class_room_institute.available_tuesday %></td>
-        <td><%= class_room_institute.available_wednesday %></td>
-        <td><%= class_room_institute.available_thursday %></td>
-        <td><%= class_room_institute.available_friday %></td>
-        <td><%= class_room_institute.available_saturday %></td>
-        <td><%= class_room_institute.available_sunday %></td>
-        <td><%= link_to t('body.common_entity.action.show'), class_room_institute %></td>
+        <td><%= if class_room_institute.available_monday then '✓' end %></td>
+        <td><%= if class_room_institute.available_tuesday then '✓' end %></td>
+        <td><%= if class_room_institute.available_wednesday then '✓' end %></td>
+        <td><%= if class_room_institute.available_tuesday then '✓' end %></td>
+        <td><%= if class_room_institute.available_friday then '✓' end %></td>
+        <td><%= if class_room_institute.available_saturday then '✓' end %></td>
+        <td><%= if class_room_institute.available_sunday then '✓' end %></td>
         <td><%= link_to t('body.common_entity.action.edit'), edit_class_room_institute_path(class_room_institute) %></td>
         <td><%= link_to t('body.common_entity.action.destroy'), class_room_institute, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
@@ -40,4 +39,4 @@
 
 <br>
 
-<%= link_to "#{t('body.common_entity.action.new_her')} #{t('body.gidappf_entity.class_room_institute.model')}", new_class_room_institute_path %>
+<%= link_to " ", new_class_room_institute_path, class: "gidappf-plus-button gidappf-plus-button--large" %>

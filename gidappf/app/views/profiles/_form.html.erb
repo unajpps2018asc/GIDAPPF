@@ -16,6 +16,7 @@
       <%= form.object.name  %>
     </p>
   </div>
+
   <div class="field"><%= form.label t('body.gidappf_entity.profile.attributes.description') %><%= form.text_area :description %></div>
   <div class="field"><%= form.label t('body.gidappf_entity.profile.attributes.valid_to') %>
     <%= form.date_field :valid_to, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>

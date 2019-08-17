@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get 'profiles/second'
     get 'profiles/first'
     post 'profiles/first'
+    get 'profiles/generate'
+    post 'profiles/generate'
     resources :profiles
     get 'time_sheet_hours/current_commissions'
     get 'time_sheet_hours/multiple_new'

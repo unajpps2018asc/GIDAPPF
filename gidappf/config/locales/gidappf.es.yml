@@ -14,6 +14,9 @@
 es:
   layout:
     nav:
+      dropdown:
+        site: 'Instituto'
+        yours: 'A cargo de'
       part:
         link_40:
           sets_u_acc: 'Accesos de usuarios'
@@ -93,8 +96,10 @@ es:
           get_campus_segmentation:
             link: 'Segmentation del campus'
             title: 'Asignación de comisiones'
+            subtitle: 'Su validez empieza desde 30 dias antes hasta 30 dias despues del seleccionado y su validez termina desde 30 dias antes hasta 30 dias despues del seleccionado'
             notice:
               msg1: 'Agrupados por'
+            current: 'en comisión:'
           set_campus_segmentation:
             notice:
               msg1: 'Comisión de'
@@ -170,13 +175,17 @@ es:
           commission_qualification_list_students:
             link: 'Calificar'
             title: 'Lista de calificación de estudiantes.'
+            alert: 'Por favor, genere su perfil antes...'
+          documents:
+            master_sync_error: 'No sincronizado'
+            master_sync_ok: 'Sincronizado'
 
       matter:
         model: 'Materia'
         models: 'Materias'
         attributes:
           name: 'Nombre'
-          description: 'Descripión'
+          description: 'Descripción'
           trayect: 'Trayecto'
           enable: 'Habilitar'
         action:
@@ -204,7 +213,7 @@ es:
         model: 'Perfil'
         models: 'Perfiles'
         attributes:
-          name: 'Nombre'
+          name: 'Perfil'
           description: 'Descripción'
           valid_from: 'Desde'
           valid_to: 'Hasta'
@@ -282,6 +291,13 @@ es:
           error:
             notice: 'Entidades no relacionables.'
           current_commission: 'Comisión actual'
+          multiple_new:
+            cri_modal:
+              title: 'Elegí una o varias aulas correspondientes'
+            comm_modal:
+              title: 'Elegí una o varias comisiones'
+              button: 'Asignación de aulas'
+
 
       time_sheet:
         model: 'Temporada'
@@ -290,6 +306,8 @@ es:
           start_date: 'Desde'
           end_date: 'Hasta'
           enabled: 'Habilitado'
+          validations:
+            check_date_interval: 'Debe ser una fecha válida'
         action:
           new:
             notice: 'Nueva Temporada creada exitosamente.'
@@ -298,12 +316,24 @@ es:
           destroy:
             notice: 'Temporada borrada.'
           associate:
-            title: 'Asociar temporada con la comisión'
+            title: 'Asociar temporada con la comisión '
+            obsevations: 'Temporadas que comenzaron hace 13 meses o menos y terminan en un mes o menos.'
           renew:
             link: 'Renovar todas'
             title: 'Renovar todas las temporadas'
           index:
             expired: 'Temporadas que expiran'
+
+      client_side_validator:
+        error:
+          alphanumeric_error: 'Error de alfanumérico.'
+          calification_error: 'Error de calificación.'
+          check_error: 'Error de chequeo.'
+          date_error: 'Error de formato de días.'
+          matter_error: 'Error de materia.'
+          number_error: 'Error numérico.'
+          trayect_error: 'Elegir uno de'
+          words_error: 'Error de frase.'
 
   sidebar:
     bar: 'barra '

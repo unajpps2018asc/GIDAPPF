@@ -79,7 +79,7 @@ class InputsController < ApplicationController
   def disable
     @input.update(enable: false)
     respond_to do |format|
-      format.html { redirect_to inputs_url, notice: 'Input was successfully destroyed.' }
+      format.html { redirect_to inputs_url, notice: t('body.gidappf_entity.input.action.destroy.notice') }
       format.json { head :no_content }
     end
   end
@@ -119,12 +119,9 @@ class InputsController < ApplicationController
       @input.save
       Document.new(profile: docent_profile, user: current_user, input: @input).save
     elsif current_user.documents.first.nil? then
-      redirect_back fallback_location: root_path, allow_other_host: false, alert: 'Please, generate profile before...'
+      redirect_back fallback_location: root_path, allow_other_host: false, alert: t('body.gidappf_entity.input.action.commission_qualification_list_students.alert')
     end
   end
-
-  # def commission_qualification_averanges
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -137,7 +134,7 @@ class InputsController < ApplicationController
     def input_params
       params.require(:input).permit(:title, :summary, :grouping, :enable, :author,
         :info_keys_attributes => [:key, :client_side_validator_id,
-          :info_values_attributes => [:value]
+          :info_values_attributes => [:value,:active_stored]
           ])
     end
 
@@ -195,6 +192,8 @@ class InputsController < ApplicationController
         @input.present_each_vacancy
       elsif @input.title.eql?('Calification student list') then
         @input.calif_each_act
+      elsif @input.title.eql?('Student absence') then
+        @input.update_group
       end
       sync_slaves
     end
@@ -207,7 +206,7 @@ class InputsController < ApplicationController
       if master.eql?(@input.documents.first) &&
         !InfoValue.where(info_key_id: @input.info_keys.ids).empty? then
         unless master.update_in_all then
-          flash[:errors]="Not Synchronized"
+          flash[:errors]= t('body.gidappf_entity.input.action.documents.master_sync_error')
         end
       end
     end

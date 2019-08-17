@@ -1,5 +1,6 @@
 class InfoValue < ApplicationRecord
   belongs_to :info_key, optional: true
+  has_one_attached :active_stored
 
   def gidappf_readonly?
     self.info_key.info_values.count > 0 &&

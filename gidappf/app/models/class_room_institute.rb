@@ -76,6 +76,36 @@ class ClassRoomInstitute < ApplicationRecord
   #######################################################################
   # Usado en hole_from_to                                               #
   #######################################################################
+  def to_tooltip
+    out ="<div>"
+    7.times do |i|
+      unless self.free_time(i).eql?(" - ")
+        case i
+          when 0
+            out +="<p>#{(I18n.t('body.gidappf_entity.class_room_institute.attributes.available_monday')).split(' ').last.capitalize}</p>"
+          when 1
+            out +="<p>#{(I18n.t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')).split(' ').last.capitalize}</p>"
+          when 2
+            out +="<p>#{(I18n.t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')).split(' ').last.capitalize}</p>"
+          when 3
+            out +="<p>#{(I18n.t('body.gidappf_entity.class_room_institute.attributes.available_thursday')).split(' ').last.capitalize}</p>"
+          when 4
+            out +="<p>#{(I18n.t('body.gidappf_entity.class_room_institute.attributes.available_friday')).split(' ').last.capitalize }</p>"
+          when 5
+            out +="<p>#{(I18n.t('body.gidappf_entity.class_room_institute.attributes.available_saturday')).split(' ').last.capitalize}</p>"
+          when 6
+            out +="<p>#{(I18n.t('body.gidappf_entity.class_room_institute.attributes.available_sunday')).split(' ').last.capitalize}</p>"
+        end
+        out += "<p>"+self.free_time(i)+"</p>"
+      end
+    end
+    out += "</div>"
+  end
+
+
+  #######################################################################
+  # Usado en hole_from_to                                               #
+  #######################################################################
   def days_week_available
     week=Array.new
     week << self.available_monday

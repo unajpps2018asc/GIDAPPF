@@ -1,7 +1,7 @@
 <% unless profile.errors.any? then %>
-  <%= form.fields_for :profile_keys, profile.profile_keys do |nested| %>
-    <%= nested.hidden_field :key, :value => profile.profile_keys[nested.index].key %>
-    <%= nested.fields_for :profile_values, profile.profile_keys[nested.index].profile_values do |nested2| %>
+  <%= form.fields_for :profile_keys, profile.profile_keys.order(:attrib_id) do |nested| %>
+    <%= nested.hidden_field :key, :value => profile.profile_keys.order(:attrib_id)[nested.index].key %>
+    <%= nested.fields_for :profile_values, profile.profile_keys.order(:attrib_id)[nested.index].profile_values do |nested2| %>
         <%= render "fields_for_profile_values", form: nested2, profile_id: profile.id, nested_index: nested.index %>
       <% end %>
   <% end %>

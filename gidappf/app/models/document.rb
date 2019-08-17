@@ -54,7 +54,9 @@ class Document < ApplicationRecord
   #######################################################################################
   def update_in_all
     out = true
-    User.where.not(email: LockEmail::LIST).each do |user|
+    User.where.not(email: LockEmail::LIST).where.not(
+      id: Usercommissionrole.where(role_id: 4).pluck(:user_id)
+    ).each do |user|
       unless user.documents.empty?
         profile=user.documents.first.profile
         d=user.documents.find_by(input_id: Input.where(title:self.input.title).pluck(:id))

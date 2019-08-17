@@ -27,37 +27,37 @@
 
 <p>
   <%= "#{t('body.gidappf_entity.time_sheet_hour.attributes.monday')}:"  %>
-  <strong><%= @time_sheet_hour.monday %></strong>
+  <strong><%= if @time_sheet_hour.monday then '✓' end %></strong>
 </p>
 
 <p>
   <%= "#{t('body.gidappf_entity.time_sheet_hour.attributes.tuesday')}:"  %>
-  <strong><%= @time_sheet_hour.tuesday %></strong>
+  <strong><%= if @time_sheet_hour.tuesday then '✓' end %></strong>
 </p>
 
 <p>
   <%= "#{t('body.gidappf_entity.time_sheet_hour.attributes.wednesday')}:"  %>
-  <strong><%= @time_sheet_hour.wednesday %></strong>
+  <strong><%= if @time_sheet_hour.wednesday then '✓' end %></strong>
 </p>
 
 <p>
   <%= "#{t('body.gidappf_entity.time_sheet_hour.attributes.thursday')}:"  %>
-  <strong><%= @time_sheet_hour.thursday %></strong>
+  <strong><%= if @time_sheet_hour.thursday then '✓' end %></strong>
 </p>
 
 <p>
   <%= "#{t('body.gidappf_entity.time_sheet_hour.attributes.friday')}:"  %>
-  <strong><%= @time_sheet_hour.friday %></strong>
+  <strong><%= if @time_sheet_hour.friday then '✓' end %></strong>
 </p>
 
 <p>
   <%= "#{t('body.gidappf_entity.time_sheet_hour.attributes.saturday')}:"  %>
-  <strong><%= @time_sheet_hour.saturday %></strong>
+  <strong><%= if @time_sheet_hour.saturday then '✓' end %></strong>
 </p>
 
 <p>
   <%= "#{t('body.gidappf_entity.time_sheet_hour.attributes.sunday')}:"  %>
-  <strong><%= @time_sheet_hour.sunday %></strong>
+  <strong><%= if @time_sheet_hour.sunday then '✓' end %></strong>
 </p>
 
 <%= link_to t('body.common_entity.action.edit'), edit_time_sheet_hour_path(@time_sheet_hour) %> |

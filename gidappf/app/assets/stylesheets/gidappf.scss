@@ -153,6 +153,18 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
   color: $percent13;
 }
 
+#ModalAcademicHistory.modal.fade.in div.modal-dialog div.modal-content div.modal-header h4#exampleModalLabel.modal-title{
+    float: inline-start;
+}
+
+#ModalAcademicHistory.modal.fade.in div.modal-dialog div.modal-content div.modal-header button.close{
+    float: inline-end;
+}
+
+#ModalAcademicHistory.modal.fade.in div.modal-dialog div.modal-content div.modal-footer a.btn.btn-info{
+  color: $percent13;
+}
+
 .gidappf-table tbody tr td div.tablemodal{
   overflow-x:auto;
   width: 120px;

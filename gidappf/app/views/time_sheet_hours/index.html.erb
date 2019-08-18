@@ -4,41 +4,40 @@
 <table class='gidappf-table gidappf-index'>
   <thead>
     <tr>
-      <th style="width: 8.3%;"><%= t('body.gidappf_entity.commission.model')  %></th>
-      <th style="width: 8.3%;"> pid </th>
-      <th style="width: 8.3%;"><%= t('body.gidappf_entity.time_sheet_hour.attributes.hour_occupied')  %></th>
-      <th style="width: 8.3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_monday')).split(' ').last.first(3).capitalize  %></th>
-      <th style="width: 8.3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')).split(' ').last.first(3).capitalize  %></th>
-      <th style="width: 8.3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')).split(' ').last.first(3).capitalize  %></th>
-      <th style="width: 8.3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_thursday')).split(' ').last.first(3).capitalize  %></th>
-      <th style="width: 8.3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_friday')).split(' ').last.first(3).capitalize  %></th>
-      <th style="width: 8.3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_saturday')).split(' ').last.first(3).capitalize  %></th>
-      <th style="width: 8.3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_sunday')).split(' ').last.first(3).capitalize  %></th>
-      <th colspan="2"></th>
+      <th style="width: 38%;"><%= t('body.gidappf_entity.commission.model')  %></th>
+      <th style="width: 5%;"> pid </th>
+      <th style="width: 21%;"><%= t('body.gidappf_entity.time_sheet_hour.attributes.hour_occupied')  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_monday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_thursday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_friday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_saturday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_sunday')).split(' ').last.first(3).capitalize  %></th>
+      <th colspan="1" style="width: 15%;"></th>
     </tr>
   </thead>
   <tbody>
     <% @time_sheet_hours.each do |time_sheet_hour| %>
       <tr>
-        <td style="width: 8.3%;"><%= link_to "#{time_sheet_hour.time_sheet.commission.name}",time_sheet_hour %></td>
-        <td style="width: 8.3%;"><%= time_sheet_hour.vacancy.occupant %></td>
-        <td style="width: 8.3%;"><%= time_sheet_hour.occupied_hour_fmt %></td>
-        <td style="width: 8.3%;"><%= if time_sheet_hour.monday then ' ✓ ' else ' x ' end %></td>
-        <td style="width: 8.3%;"><%= if time_sheet_hour.tuesday then ' ✓ ' else ' x '  end %></td>
-        <td style="width: 8.3%;"><%= if time_sheet_hour.wednesday then ' ✓ ' else ' x '  end %></td>
-        <td style="width: 8.3%;"><%= if time_sheet_hour.thursday then ' ✓ ' else ' x '  end %></td>
-        <td style="width: 8.3%;"><%= if time_sheet_hour.friday then ' ✓ ' else ' x '  end %></td>
-        <td style="width: 8.3%;"><%= if time_sheet_hour.saturday then ' ✓ ' else ' x '  end %></td>
-        <td style="width: 8.3%;"><%= if time_sheet_hour.sunday then ' ✓ ' else ' x '  end %></td>
-        <td style="width: 8.3%;"><%= link_to t('body.common_entity.action.edit'), edit_time_sheet_hour_path(time_sheet_hour) %></td>
-        <td style="width: 8.3%;"><%= link_to t('body.common_entity.action.destroy'), time_sheet_hour, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+        <td style="width: 38%;"><%= link_to "#{time_sheet_hour.vacancy_id}: #{time_sheet_hour.time_sheet.commission.name}, #{time_sheet_hour.matter.name}",time_sheet_hour %></td>
+        <td style="width: 5%;"><%= time_sheet_hour.vacancy.occupant %></td>
+        <td style="width: 21%;"><%= time_sheet_hour.occupied_hour_fmt %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.monday then ' ✓ ' else ' x ' end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.tuesday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.wednesday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.thursday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.friday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.saturday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.sunday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 15%;"><%= link_to t('body.common_entity.action.destroy'), time_sheet_hour, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <% if RoleAccess.get_role_access(current_user) > 39.0 then %>
 
-  <%= render 'modal_commissions' %>
+  <%= render 'modal_commissions', time_sheets: @time_sheets , class_room_institutes: @class_room_institutes %>
 
 <% end %>
 <br>

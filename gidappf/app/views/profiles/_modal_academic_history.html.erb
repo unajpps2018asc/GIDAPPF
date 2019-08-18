@@ -1,0 +1,55 @@
+    <!-- Button trigger modal -->
+    <a type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalAcademicHistory">
+      Ver historia académica de <%= profile.name %>
+      <strong>&raquo;</strong>
+    </a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalAcademicHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel" >Historia Académica de  <%= "#{profile.name}, #{profile.name_and_lastname}" %></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class='gidappf-table gidappf-index'>
+              <thead>
+                <tr>
+                  <th style="width: 50%;">Instancias calificatorias</th>
+                  <th style="width: 50%;">Ausencias</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 50%;">
+                    <ul>
+                      <% Input.where(id: profile.documents.pluck(:input_id), title: "Student calification").each do |act| %>
+                        <li><p><%="#{act.summary.split('Reporte de calificaciones individual. ')[1]} "%></p>
+                        <p><%="Nota: #{act.info_keys.find_by(key:"Calificación:").info_values.first.value}"%></p></li>
+                      <% end %>
+                    </ul>
+                  </td>
+                  <td style="width: 50%;">
+                    <ul>
+                      <% Input.where(id: profile.documents.pluck(:input_id), title: "Student absence").each do |abs| %>
+                        <li><p>Fecha: <%=abs.created_at.strftime("%d/%m/%Y") %>
+                          Horario: <%=abs.info_keys.find_by(key: "Horario:").info_values.first.value%></p>
+                        <p>Justificado: <%= abs.info_keys.find_by(key: "Justificado:").info_values.first.value%></p></li>
+                      <% end %>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+              <span aria-hidden="true">Cerrar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>

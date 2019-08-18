@@ -22,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @time_sheets.each do |time_sheet| %>
+            <% time_sheets.each do |time_sheet| %>
               <tr>
                 <td style="width: 70%;"><%= button_to( time_sheet.commission.name, parametrize_time_sheet_path(time_sheet), :method => :get, :disabled => disable_ts(time_sheet.id) ) %></td>
                 <td style="width: 10%;"><%= link_to t('body.common_entity.action.show'), time_sheet %></td>
@@ -34,7 +34,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <%= render 'modal_class_rooms' %>
+        <%= render 'modal_class_rooms', class_room_institutes_2_modal: class_room_institutes %>
       </div>
     </div>
   </div>

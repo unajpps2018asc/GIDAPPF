@@ -71,6 +71,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @acts = @profile.documents
   end
 
   # GET /profiles/1/edit

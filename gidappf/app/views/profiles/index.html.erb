@@ -38,11 +38,10 @@
     <% @profiles.each do |profile| %>
       <tr>
         <td style="width: 16.6%;">
-          <% val="#{profile.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value} #{profile.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value}"
-          if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
+          <% if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
             <%= link_to "#{profile.name}", profile %>
           <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && !val.eql?(' ') %>
-            <%= link_to val, profile %>
+            <%= link_to profile.name_and_lastname, profile %>
           <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && val.eql?(' ') %>
             <%= link_to "#{profile.name}", profile %>
           <% else %>

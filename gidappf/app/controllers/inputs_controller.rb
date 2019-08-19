@@ -257,15 +257,7 @@ class InputsController < ApplicationController
           calif_key.info_values.build(:value => profile.id)
         end
         if t.key.eql?('Nombre y apellido:') then
-          val = " "
-          unless profile.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value.nil? then
-            val << profile.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value
-          end
-          val << " "
-          unless profile.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value.nil? then
-            val << profile.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value
-          end
-          calif_key.info_values.build(:value => val)
+          calif_key.info_values.build(:value => profile.name_and_lastname)
         end
         if t.key.eql?('Calificación:') then
           calif_key.info_values.build(:value => " ")

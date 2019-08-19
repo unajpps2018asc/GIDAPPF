@@ -40,9 +40,9 @@
         <td style="width: 16.6%;">
           <% if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
             <%= link_to "#{profile.name}", profile %>
-          <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && !val.eql?(' ') %>
+          <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && !profile.name_and_lastname.eql?('  ') %>
             <%= link_to profile.name_and_lastname, profile %>
-          <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && val.eql?(' ') %>
+          <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && profile.name_and_lastname.eql?('  ') %>
             <%= link_to "#{profile.name}", profile %>
           <% else %>
             <%= link_to "#{profile.id.to_s}", profile %>

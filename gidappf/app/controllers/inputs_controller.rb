@@ -234,7 +234,7 @@ class InputsController < ApplicationController
     def keys_calification_student_list(name,title,email)
       Document.find_by(profile: Profile.find_by( name: name),
         input: Input.find_by(title: title), user: User.find_by(email: email)
-      ).input.info_keys
+      ).input.info_keys.order(:id)
     end
 
   ################################################################################

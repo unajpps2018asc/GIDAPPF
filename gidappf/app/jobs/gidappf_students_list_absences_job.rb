@@ -27,7 +27,7 @@ class GidappfStudentsListAbsencesJob < ApplicationJob
           grouping: true,enable: true,author: Input.find_by(title: 'Time sheet hour list absences').author.to_i
         )
         #Legajo:t[0]GIDAPPF links 	Justificado:t[1]'GIDAPPF read only Acta:t[2]GIDAPPF links
-        t=Input.where(title: 'Time sheet hour list absences').first.info_keys
+        t=Input.where(title: 'Time sheet hour list absences').first.info_keys.order(:id)
         leg=absences.info_keys.build(:key => t[0].key, :client_side_validator_id => t[0].client_side_validator_id, :attrib_id => t[0].attrib_id)
         jus=absences.info_keys.build(:key => t[1].key, :client_side_validator_id => t[1].client_side_validator_id, :attrib_id => t[1].attrib_id)
         edi=absences.info_keys.build(:key => t[2].key, :client_side_validator_id => t[2].client_side_validator_id, :attrib_id => t[2].attrib_id)

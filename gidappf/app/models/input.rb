@@ -88,9 +88,9 @@ class Input < ApplicationRecord
     def merge_each_key(template)
       in1=Input.find(template.to_i)
       if !self.grouping.eql?(in1.grouping?) then self.update(grouping: in1.grouping?) end
-      in1.info_keys.each do |tik|
-        if self.info_keys.where(key: tik.key).count == 2 then
-          keys=self.info_keys.where(key: tik.key)
+      in1.info_keys.order(:id).each do |tik|
+        if self.info_keys.order(:id).where(key: tik.key).count == 2 then
+          keys=self.info_keys.order(:id).where(key: tik.key)
           max=keys.find_by(key: tik.key,created_at: keys.maximum('created_at'))
           min=keys.find_by(key: tik.key,created_at: keys.minimum('created_at'))
           read_only_or_link=ClientSideValidator.where(content_type: "GIDAPPF links").

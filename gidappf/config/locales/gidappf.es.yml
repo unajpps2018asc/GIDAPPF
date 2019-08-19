@@ -89,6 +89,7 @@ es:
         confirm_msg: '¿Estás seguro?'
 
     gidappf_entity:
+
       campus_magnament:
         model: 'Gestión del campus'
         models: 'Gestiones del campus'
@@ -238,6 +239,11 @@ es:
             notice: 'Perfil actualizado correctamente.'
           destroy:
             notice: 'Perfil borrado.'
+          academic_history:
+            button: 'Ver historia académica de '
+            title: 'Historia académica de '
+            thead_calif: 'Instancias de calificaciones'
+            thead_abs: 'Ausencias'
 
       role:
         model: 'Rol'
@@ -297,7 +303,6 @@ es:
             comm_modal:
               title: 'Elegí una o varias comisiones'
               button: 'Asignación de aulas'
-
 
       time_sheet:
         model: 'Temporada'

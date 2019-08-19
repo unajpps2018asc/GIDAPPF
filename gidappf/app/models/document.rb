@@ -88,7 +88,7 @@ class Document < ApplicationRecord
       grouping: self.input.grouping, enable: self.input.enable,
       author: self.input.author
     )
-    self.input.info_keys.each do |k|
+    self.input.info_keys.order(:id).each do |k|
       out_key = out.info_keys.build(
         :key => k.key, :client_side_validator => k.client_side_validator
       )

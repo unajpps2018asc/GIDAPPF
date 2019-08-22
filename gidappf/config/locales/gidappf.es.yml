@@ -340,7 +340,13 @@ es:
           trayect_error: 'Elegir uno de'
           words_error: 'Error de frase.'
 
-  sidebar:
-    bar: 'barra '
+  home:
+    action:
+      search:
+        text: 'Perfiles'
+        button: 'Buscar'
+        result: 'Resultados de '
+        empty: 'No hay coincidencias'
+
   footer:
     mesg_foot: 'Está licenciado bajo la GNU Lesser General Public License v3.0'

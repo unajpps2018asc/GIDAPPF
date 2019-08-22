@@ -346,8 +346,13 @@ en:
           trayect_error: 'Choose one of'
           words_error: 'Words error'
 
+  home:
+    action:
+      search:
+        text: 'Profiles'
+        button: 'Search'
+        result: 'Result of '
+        empty: 'Not found'
 
-  sidebar:
-    bar: 'bar'
   footer:
     mesg_foot: 'Is licensed under the GNU Lesser General Public License v3.0'

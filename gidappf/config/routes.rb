@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     resources :commissions
     resources :roles
   	root to: "home#index"
+    get "home/search"
     get 'gidappf_catchs_exceptions/disabled_cookies_detect'
     get 'gidappf_catchs_exceptions/first_password_detect'
     get 'gidappf_catchs_exceptions/not_record_found_detect'

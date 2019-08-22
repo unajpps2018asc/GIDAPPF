@@ -26,8 +26,8 @@
         <%= form.fields_for :info_keys, input.info_keys.order(:id) do |nested| %>
           <%= nested.hidden_field :key, :value => input.info_keys.order(:id)[nested.index].key %>
             <td>
-              <%= nested.fields_for :info_values, input.info_keys.order(:id)[nested.index].info_values do |nested2| %>
-                <p><%= render "fields_for_info_values", form: nested2, input_id: input.id, nested_index: nested.index %></p>
+              <%= nested.fields_for :info_values, input.info_keys.order(:id)[nested.index].info_values.order(:id) do |nested2| %>
+                <%= render "fields_for_info_values", form: nested2, input_id: input.id, nested_index: nested.index %>
               <% end %>
             </td>
           <% end %>

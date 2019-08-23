@@ -1,0 +1,28 @@
+<!--###################################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                           #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática                  #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018          #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                       #-->
+<!--# Tutores:                                                                        #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                             #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                                    #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                       #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                               #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                             #-->
+<!--#Archivo:GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_words.html.erb#-->
+<!--###################################################################################-->
+
+<!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<%
+  target_reg_exp_strategy = "$(document).ready(function() {
+    str=String($(event.target).val());
+    rexp=String($(event.target).val().match(/[\\D\\s]+/gim));
+    if( rexp !== str) {
+      $(event.target).val('');
+      $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.words_error')}</p>\" ).appendTo($(event.target).parent());
+    };
+  });"
+%>
+
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<%= valuable_gidappf_field.text_field :value, onfocusout: target_reg_exp_strategy %>

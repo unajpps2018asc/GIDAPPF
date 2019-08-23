@@ -6,23 +6,29 @@ class TimeSheetsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @time_sheet = time_sheets(:one)
-    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_h_ts = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    # @auth_h_ts = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get index" do
-    get time_sheets_url, headers: @auth_h_ts
+    sign_in users(:one)
+    get time_sheets_url#, headers: @auth_h_ts
     assert_response :success
+    sign_out :user
   end
 
   test "should show time_sheet_hour" do
-    get time_sheet_url(@time_sheet), headers: @auth_h_ts
+    sign_in users(:one)
+    get time_sheet_url(@time_sheet)#, headers: @auth_h_ts
     assert_response :success
+    sign_out :user
   end
 
   test "should get associate" do
-    get time_sheets_associate_url, headers: @auth_h_ts
-    assert_response :success
+    sign_in users(:one)
+    get time_sheets_associate_url#, headers: @auth_h_ts
+    assert_response :found
+    sign_out :user
   end
 
   test "should update time_sheet" do
@@ -35,17 +41,17 @@ class TimeSheetsControllerTest < ActionDispatch::IntegrationTest
           enabled: true
           } }
     assert_redirected_to time_sheet_url(@time_sheet)
-    sign_out :one
+    sign_out :user
   end
 
   test "should destroy time_sheet" do
     sign_in users(:one)
     assert_difference('TimeSheetHour.count', -1) do
-      delete time_sheet_url(@time_sheet), headers: @auth_h_ts
+      delete time_sheet_url(@time_sheet)#, headers: @auth_h_ts
     end
 
-    assert_response :no_content
-    sign_out :one
+    assert_response :found
+    sign_out :user
   end
 
 end

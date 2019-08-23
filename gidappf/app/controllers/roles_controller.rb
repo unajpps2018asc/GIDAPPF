@@ -1,4 +1,3 @@
-require 'role_access'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,13 +12,13 @@ require 'role_access'
 # Archivo GIDAPPF/gidappf/app/controllers/roles_controller.rb             #
 ###########################################################################
 class RolesController < ApplicationController
-  include RoleAccess
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /roles
   # GET /roles.json
   def index
-    if get_role_access > 30.0
+    params[:heading]="Roles"
+    if RoleAccess.get_role_access(current_user) > 30.0
       @roles = Role.all
     else
       @roles = Role.where(enabled: true)
@@ -35,6 +34,7 @@ class RolesController < ApplicationController
   # GET /roles/new
   def new
     @role = Role.new
+    authorize @role
   end
 
   # GET /roles/1/edit
@@ -49,7 +49,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
+        format.html { redirect_to @role, notice: t('body.gidappf_entity.role.action.new.notice') }
         format.json { render :show, status: :created, location: @role }
       else
         format.html { render :new }
@@ -63,7 +63,7 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to @role, notice: 'Role was successfully updated.' }
+        format.html { redirect_to @role, notice: t('body.gidappf_entity.role.action.update.notice') }
         format.json { render :show, status: :ok, location: @role }
       else
         format.html { render :edit }
@@ -77,7 +77,7 @@ class RolesController < ApplicationController
   def destroy
     @role.destroy
     respond_to do |format|
-      format.html { redirect_to roles_url, notice: 'Role was successfully destroyed.' }
+      format.html { redirect_to roles_url, notice: t('body.gidappf_entity.role.action.destroy.notice') }
       format.json { head :no_content }
     end
   end

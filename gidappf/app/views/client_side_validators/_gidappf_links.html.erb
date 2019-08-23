@@ -1,0 +1,20 @@
+<!--Definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<%= valuable_gidappf_field.hidden_field :value, value: valuable_gidappf_field.object.value %>
+
+<!--############################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                    #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática           #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018   #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                #-->
+<!--# Tutores:                                                                 #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                      #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                             #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                        #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                      #-->
+<!--# Archivo:                                                                 #-->
+<!--#GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_links.html.erb #-->
+<!--############################################################################-->
+<!-- Datos inmodificables-->
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<strong class="client_side_validator-link"><%= link_to valuable_gidappf_field.object.value.to_s.gsub(/[^0-9]/, ''),GlobalID::Locator.locate(valuable_gidappf_field.object.value)  %></strong>

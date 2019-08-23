@@ -15,19 +15,19 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción index definida en RolesController                   #
-  # Devolución: true, todos pueden listar roles                             #
+  #           1) Acción new definida en ProfilesController                  #
+  # Devolución: delega el valor de new, para update profiles                #
   ###########################################################################
-  def index?
-    show?
+  def new?
+    false
   end
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción show definida en RolesController                    #
-  # Devolución: true, todos pueden ver en detalle roles                     #
+  #           1) Acción index definida en ProfilesController                #
+  # Devolución: delega el valor de index, para show profiles                #
   ###########################################################################
-  def show?
+  def index?
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>10.0
@@ -35,8 +35,17 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción edit definida en RolesController                    #
-  # Devolución: delega el valor de update, para editar roles                #
+  #           1) Acción show definida en ProfilesController                 #
+  # Devolución: true, si roleaccess es mayor a 10                           #
+  ###########################################################################
+  def show?
+    update?
+  end
+
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción edit definida en ProfilesController                 #
+  # Devolución: delega el valor de edit, para update profiles               #
   ###########################################################################
   def edit?
     update?
@@ -44,41 +53,72 @@ class ProfilePolicy < ApplicationPolicy
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción update definida en RolesController                  #
-  # Devolución: false, salvo para john@example.com de los testings          #
+  #           1) Acción create definida en ProfilesController               #
+  # Devolución: delega el valor de edit, para update profiles               #
+  ###########################################################################
+  def create?
+    first?
+  end
+
+  ###########################################################################
+  # Prerequisitos:                                                          #
+  #           1) Acción update definida en ProfilesController               #
+  # Devolución: true, si roleaccess es mayor a 20                           #
   ###########################################################################
   def update?
     self.set_is_sysadmin
     self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>20.0
+    @user.email.eql?( 'john@example.com')||
+    @issysadmin||is_my_profile?||@roleaccess>20.0
   end
 
   ###########################################################################
   # Prerequisitos:                                                          #
-  #           1) Acción destroy definida en RolesController                 #
-  # Devolución: delega el valor de update, para borrar roles                #
+  #           1) Acción destroy definida en ProfilesController              #
+  # Devolución: true, si roleaccess es mayor a 30                           #
   ###########################################################################
   def destroy?
-    update?
-  end
-
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción new definida en RolesController                     #
-  # Devolución: delega el valor de create, para nuevos roles                #
-  ###########################################################################
-  def new?
-    create?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>29.9
   end
 
   ##############################################################################
   # Prerequisitos:                                                             #
-  #           1) Acción create definida en RolesController                     #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: Crea un nuevo rol si @user el el de testeo o @issadmin es true #
+  #           1) Acción first definida en ProfilesController                   #
+  # Devolución: delega el valor de edit, para update profiles                  #
   ##############################################################################
-  def create?
-    update?
+  def first?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||
+    @issysadmin||is_my_profile?||@roleaccess>29.9
+  end
+
+  ##############################################################################
+  # Prerequisitos:                                                             #
+  #           1) Acción second definida en ProfilesController                  #
+  # Devolución: delega el valor de edit, para update profiles                  #
+  ##############################################################################
+  def second?
+    first?
+  end
+
+  def first_password_detect?
+    out=false
+    unless @record.documents.first.nil?
+      out=!@record.documents.first.user.usercommissionroles.first.role.enabled
+    end
+    out
+  end
+
+  private
+
+  def is_my_profile?
+    @user.documents.present? &&
+    @user.documents.first.present? &&
+    @user.documents.first.profile.present? &&
+    @record.eql?(@user.documents.first.profile) && @roleaccess>28.0
   end
 
 end

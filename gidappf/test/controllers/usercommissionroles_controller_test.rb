@@ -6,14 +6,14 @@ class UsercommissionrolesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @usercommissionrole = usercommissionroles(:two)
-    headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    @auth_h_ucr = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+    # @auth_h_ucr = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
   end
 
   test "should get edit" do
-    # sign_in users(:one)
-    get edit_usercommissionrole_path(id: @usercommissionrole.id, radio_selected: roles(:one).id),headers:@auth_h_ucr
-    assert_redirected_to  setsusersaccess_settings_path, headers: @auth_h_ucr
-    # sign_out :one
+    sign_in users(:one)
+    get edit_usercommissionrole_path(id: @usercommissionrole.id, radio_selected: roles(:one).id)#,headers:@auth_h_ucr
+    assert_redirected_to  setsusersaccess_settings_path#, headers: @auth_h_ucr
+    sign_out :user
   end
 end

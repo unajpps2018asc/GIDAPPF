@@ -25,10 +25,26 @@ class UsercommissionrolePolicy < ApplicationPolicy
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
   end
 
+  #########################################################################
+  # Políticas de acceso para setsusersaccess_controller                   #
+  #########################################################################
   def settings?
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
+  end
+
+  #########################################################################
+  # Políticas de acceso para campus_magnaments_controller                 #
+  #########################################################################
+  def set_campus_segmentation?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>29.0
+  end
+
+  def generate?
+    set_campus_segmentation?
   end
 
 end

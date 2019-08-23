@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= "#{t('body.gidappf_entity.matter.attributes.name')}:"  %>
+  <strong><%= @matter.name %></strong>
+</p>
+
+<p>
+  <%= "#{t('body.gidappf_entity.matter.attributes.description')}:"  %>
+  <strong><%= @matter.description %></strong>
+</p>
+
+<p>
+  <%= "#{t('body.gidappf_entity.matter.attributes.trayect')}:"  %>
+  <strong><%= @matter.trayect %></strong>
+</p>
+
+<p>
+  <%= "#{t('body.gidappf_entity.matter.attributes.enable')}:"  %>
+  <strong><%= if @matter.enable then '✓' end %></strong>
+</p>
+
+<%= link_to t('body.common_entity.action.edit'), edit_matter_path(@matter) %> |
+<%= link_to t('body.common_entity.action.back'), matters_path %>

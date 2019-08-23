@@ -21,9 +21,9 @@ class ProfileKey < ApplicationRecord
   ##########################account#########################################
   # Asociación uno a muchos: soporta que un ProfileKey sea asignado muchas #
   #                          veces en distintos profile_values.            #
-  #                          Si se borra, lo hacen profile_values.         #
+  #                          Si se borra, se anulan en profile_values.     #
   ##########################################################################
-  has_many :profile_values, dependent: :delete_all
+  has_many :profile_values, dependent: :nullify
 
   ##########################account#########################################
   # Configuracion dependencia de atributos:                                #

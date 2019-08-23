@@ -1,27 +1,57 @@
+<!--#############################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                     #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática            #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018    #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                 #-->
+<!--# Tutores:                                                                  #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                       #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                              #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                 #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                         #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                       #-->
+<!--# Archivo: GIDAPPF/gidappf/gidappf/app/views/profiles/show.html.erb         #-->
+<!--#############################################################################-->
 <p id="notice"><%= notice %></p>
 
-<h3>Profile name:
+<h3>
+  <%= "#{t('body.gidappf_entity.profile.attributes.name')}:"  %>
   <strong><%= @profile.name %></strong>
 </h3>
 
-<p>Description:
+<p>
+  <%= "#{t('body.gidappf_entity.profile.attributes.description')}:"  %>
   <strong><%= @profile.description %></strong>
 </p>
 
-<p>Valid to:
+<p>
+  <%= "#{t('body.gidappf_entity.profile.attributes.valid_to')}:"  %>
   <strong><%= @profile.valid_to %></strong>
 </p>
 
-<p>Valid from:
+<p>
+  <%= "#{t('body.gidappf_entity.profile.attributes.valid_from')}:"  %>
   <strong><%= @profile.valid_from %></strong>
 </p>
 
-<% @profile.profile_keys.each do |s| %>
-  <p><%= s.key %>
-  <% s.profile_values.each do |e| %>
-    <strong><span><%= e.value %></span></strong>
-  <% end %></p>
+<% if @profile.is_student then %>
+  <%= render 'modal_academic_history', profile: @profile %>
 <% end %>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<% @profile.profile_keys.order(:attrib_id).each do |s| %>
+  <p>
+    <%= s.key %>
+    <% s.profile_values.each do |e| %>
+      <% if e.active_stored.attached? && !s.key.eql?("Materias:") then %>
+        <%= image_tag url_for(e.active_stored) %>
+        <%= link_to e.active_stored.filename, rails_blob_path(e.active_stored, disposition: "attachment") %>
+      <% elsif !e.active_stored.attached? && s.key.eql?("Materias:") && e.value.to_i >0 then%>
+        <strong><span><%= Matter.find(e.value.to_i).name %></span></strong>
+      <% else %>
+        <strong><span><%= e.value %></span></strong>
+      <% end %>
+    <% end %>
+  </p>
+<% end %>
+
+<%= link_to  t('body.common_entity.action.edit'), edit_profile_path(@profile) %> |
+<%= link_to  t('body.common_entity.action.back'), profiles_path %>

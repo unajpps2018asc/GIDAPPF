@@ -58,7 +58,7 @@ gem 'jquery-rails', '~> 4.3'
 gem 'turbolinks', '~> 5'
 
 # Use Bootstrap SASS for Bootstrap support
-gem 'sassc', '~> 2.0'
+gem 'sassc', '>= 2.0.1'
 gem 'bootstrap-sass', '~> 3.4.1'
 
 # Use Font Awesome Rails for Font Awesome icons
@@ -78,6 +78,10 @@ group :test do
   # gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
+  ###########################################################################
+  # Gemas GIDAFFP: minitest-utils, da soporte I18n a los test               #
+  ###########################################################################
+  gem 'minitest-utils'
 end
 
 group :development do
@@ -103,4 +107,5 @@ gem 'tzinfo-data'
 gem "pundit"
 gem "rack", ">= 2.0.6"
 gem 'devise'
-gem 'devise-jwt'
+gem "nokogiri", ">= 1.10.4"
+#gem 'devise-jwt'

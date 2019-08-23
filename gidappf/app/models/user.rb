@@ -26,8 +26,7 @@ class User < ApplicationRecord
   #############################################################################
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable, :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
-
+  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable
   #############################################################################
   # Asociación uno a muchos: soporta que un usuario sea asignado muchas veces #
   #                          en la commision como el creador de la comision.  #
@@ -70,7 +69,7 @@ class User < ApplicationRecord
   def is_usable_password?
     out = true
     unless LockEmail::LIST.include?(self.email) then
-      dni = User.find_by(email: LockEmail::LIST[1]).documents.first.profile.profile_keys.find(3).key
+      dni = User.find_by(email: LockEmail::LIST[4]).documents.first.profile.profile_keys.find(3).key
       if self.documents.present? &&
         self.documents.first.profile.profile_keys.find_by(key: dni).profile_values.present? then
         if self.documents.first.profile.profile_keys.find_by(key: dni).

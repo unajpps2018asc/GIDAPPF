@@ -1,0 +1,24 @@
+<!-- ########################################################################## -->
+<!-- # Universidad Nacional Arturo Jauretche                                  # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática         # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018 # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>              # -->
+<!-- # Tutores:                                                               # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                    # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                           # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                              # -->
+<!-- #    - TAPTA: Dra. Ferrari, Mariela                                      # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
+<!-- # Archivo:                                                               # -->
+<!-- # GIDAPPF/gidappf/app/views/inputs/_fields_for_info_values.html.erb      # -->
+<!-- ########################################################################## -->
+<div class="field">
+  <%= form.label Input.find(input_id).info_keys.order(:id,:attrib_id)[nested_index].key %>
+  <% if Input.find(input_id).info_keys.order(:id,:attrib_id)[nested_index].client_side_validator_id > ClientSideValidator.find_by(content_type: 'GIDAPPF words').id then %>
+    <!-- En el caso de un client_side_validator customizado -->
+    <%= form.text_field :value, onfocusout: ClientSideValidator.find(Input.find(input_id).info_keys.order(:id,:attrib_id)[nested_index].client_side_validator_id).script %>
+  <% else %>
+    <!-- En el caso de los client_side_validators definidos en el controlador -->
+    <%= render ClientSideValidator.find(Input.find(input_id).info_keys.order(:id,:attrib_id)[nested_index].client_side_validator_id).script, valuable_gidappf_field: form %>
+  <% end %>
+</div>

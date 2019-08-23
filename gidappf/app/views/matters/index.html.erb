@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= t('body.gidappf_entity.matter.models')  %></h1>
+
+<table class='gidappf-table'>
+  <thead>
+    <tr>
+      <th><%= t('body.gidappf_entity.matter.attributes.name')  %></th>
+      <th><%= t('body.gidappf_entity.matter.attributes.description')  %></th>
+      <th><%= t('body.gidappf_entity.matter.attributes.enable')  %></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matters.each do |matter| %>
+      <tr>
+        <td><%= link_to "#{matter.name}", matter %></td>
+        <td><%= matter.description %></td>
+        <td><%= if matter.enable then '✓' end %></td>
+        <td><%= link_to t('body.common_entity.action.edit'), edit_matter_path(matter) %></td>
+        <td><%= link_to t('body.common_entity.action.destroy'), matter, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to " ", new_matter_path, class: "gidappf-plus-button gidappf-plus-button--large" %>

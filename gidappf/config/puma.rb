@@ -13,7 +13,7 @@ bind "tcp://#{ENV['BIND_ON']}"
 # it based on your app's demands.
 #
 # RAILS_MAX_THREADS will match the default thread size for Active Record.
-threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i
+threads_count = ENV.fetch('RAILS_MAX_THREADS') { 2 }.to_i
 threads threads_count, threads_count
 
 # Puma supports spawning multiple workers. It will fork out a process at the

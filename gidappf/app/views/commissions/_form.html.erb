@@ -12,22 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label t('body.gidappf_entity.commission.attributes.name') %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label t('body.gidappf_entity.commission.attributes.description') %>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :start_date %>
+    <%= form.label t('body.gidappf_entity.commission.attributes.start_date') %>
     <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :end_date %>
+    <%= form.label t('body.gidappf_entity.commission.attributes.end_date') %>
     <%= form.date_field :end_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
   </div>
 

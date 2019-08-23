@@ -11,5 +11,24 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 ###########################################################################
 %>
+<div class="row">
+  <div class="col-sm-8">
+    <h1><%= t('layout.home.title') %> <%= link_to t('body.common_entity.action.log_out'), destroy_user_session_url, method: :delete %></h1>
 
-<h1>Welcome! Now, you can <%= link_to 'Log Out', destroy_user_session_url, method: :delete %></h1>
+    <p class="lead">
+      <ul>
+        <li>
+          <%= link_to t('body.common_entity.action.log_out'), destroy_user_session_url, method: :delete %>
+        </li>
+        <li>
+          <% unless @my_profile.nil? then %>
+            <strong><%= link_to t('layout.home.element1'), @my_profile %> </strong>
+          <% else %>
+            <strong><%= link_to t('layout.home.element2'), profiles_generate_path %> </strong>
+          <% end %>
+        </li>
+      </ul>
+    </p>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

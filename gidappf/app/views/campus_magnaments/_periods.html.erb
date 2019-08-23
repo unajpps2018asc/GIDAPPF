@@ -1,0 +1,37 @@
+<!-- ########################################################################### -->
+<!-- # Universidad Nacional Arturo Jauretche                                   # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               # -->
+<!-- # Tutores:                                                                # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                     # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/campus_magnaments/_periods.html.erb       # -->
+<!-- ########################################################################### -->
+<%= form_tag campus_magnaments_get_campus_segmentation_path do %>
+  <%= label_tag "#{t('body.gidappf_entity.time_sheet.models')}:" %>
+  <!-- redirecciona a la accion change_commission con el parametro def_period con valor elegido por event.target -->
+  <% if str_periods.count > 1 %>
+  <%=
+    select_tag nil,
+    options_from_collection_for_select(str_periods,  "to_s", "to_s", params[:def_period]),
+    {
+      onchange:  "$(document).ready(function() {
+        window.location.href='/#{params[:locale]}/campus_magnaments/get_campus_segmentation?profile_type=#{params[:profile_type]}&def_period='+ $(event.target).val();
+      });"
+    }
+    %>
+    <% else %>
+    <%=
+      select_tag nil,
+      options_from_collection_for_select(str_periods,  "to_s", "to_s", params[:def_period]),
+      {
+        onclick:  "$(document).ready(function() {
+          window.location.href='/#{params[:locale]}/campus_magnaments/get_campus_segmentation?profile_type=#{params[:profile_type]}&def_period='+ $(event.target).val();
+        });"
+      }
+      %>
+    <% end %>
+<% end %>

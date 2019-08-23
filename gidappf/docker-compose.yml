@@ -11,18 +11,29 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 # Archivo GIDAPPF/docker-compose.yml                                      #
 ###########################################################################
-version: '2'
+# Deploy:
+# $ docker-compose up --build -d && docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
+# Restart after poweroff:
+# $ docker-compose up -d && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
+# Populate db:
+# $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
+# Stop and clean all :
+# $ docker-compose down -v
+# Stop:
+# $ docker-compose down
+
+version: '3'
 
 services:
   postgres:
-    image: 'postgres:10.3-alpine'
+    image: 'postgres:11.3-alpine'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
     env_file:
       - '.env'
 
   redis:
-    image: 'redis:4.0-alpine'
+    image: 'redis:5.0-alpine'
     env_file:
       - '.env'
     command: redis-server --requirepass $REDIS_PASSWORD

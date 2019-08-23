@@ -3,7 +3,9 @@
 one:
   key: MyString
   profile: one
+  client_side_validator: one
 
 two:
   key: MyString
   profile: two
+  client_side_validator: two

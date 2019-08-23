@@ -1,0 +1,25 @@
+<!-- ############################################################################ -->
+<!-- # Universidad Nacional Arturo Jauretche                                    # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática           # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018   # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                # -->
+<!-- # Tutores:                                                                 # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                      # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                             # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                      # -->
+<!-- #GIDAPPF/gidappf/app/views/campus_magnaments/_students_check_boxes.html.erb# -->
+<!-- ############################################################################ -->
+<% comms_period.each do |time_sheet| %>
+  <!-- redirecciona a la accion selected_commission con los parametros id y box_selected con valores dados por check_box_tag -->
+  <%= check_box_tag(nil,usercommissionrole.commission_id,time_sheet.commission.id == usercommissionrole.commission_id,
+      onclick: "$(document).ready(function() {
+          window.location.href='"+
+            campus_magnaments_set_campus_segmentation_path(
+              id: profile.id,box_selected: time_sheet.id.to_s,
+              def_period: period,profile_type: type,
+              ucr_id: usercommissionrole.id)+
+          "'});",
+      :disabled  => time_sheet.selectable?) %>
+  <%= label_tag(nil,time_sheet.commission_info, class: 'gidappf-small_label') %>
+<% end %>

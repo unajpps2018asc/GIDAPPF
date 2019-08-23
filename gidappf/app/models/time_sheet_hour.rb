@@ -13,6 +13,12 @@ class TimeSheetHour < ApplicationRecord
   #############################################################################
   belongs_to :time_sheet
 
+  #############################################################################
+  # Asociación uno a uno:soporta muchos TimeSheetHours pertenecientes         #
+  #                         a una Matter                                      #
+  #############################################################################
+  belongs_to :matter
+
   validates :from_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 24}
   validates :to_hour, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 24}
   validates :from_min, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 60}
@@ -45,6 +51,22 @@ class TimeSheetHour < ApplicationRecord
     week << self.sunday
     week
   end
+
+  ######################################################################
+  # Metodo privado para definir el grupo de segmentacion.              #
+  # Devuelve: true si profile_key_24 pertenece a trayect y time_categ  #
+  #            sino false.                                             #
+  ######################################################################
+  def include_in_time_category?(profile)
+    out = false
+    if !profile.profile_keys.find_by(key:ProfileKey.find(24).key).nil? && !profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? then
+      profile_key_24 = profile.profile_keys.find_by(key:ProfileKey.find(24).key).profile_values.first.value.to_i
+      profile_key_25 = profile.profile_keys.find_by(key:ProfileKey.find(25).key).profile_values.first.value.to_i
+      out = profile_key_24*60 <= self.from_min*60+self.from_hour && profile_key_25*60 >= self.to_min*60+self.to_hour
+    end
+    out
+  end
+
   private
 
   #######################################################################

@@ -14,17 +14,17 @@
   <%= form.hidden_field :commission_id, value: params[:commission_id] %>
 
   <div class="field">
-    <%= form.label :start_date %>
-    <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+    <%= form.label t('body.gidappf_entity.time_sheet.attributes.start_date') %>
+    <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :end_date %>
-    <%= form.date_field :end_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+    <%= form.label t('body.gidappf_entity.time_sheet.attributes.end_date') %>
+    <%= form.date_field :end_date, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :enabled %>
+    <%= form.label t('body.gidappf_entity.time_sheet.attributes.enabled') %>
     <%= form.check_box :enabled %>
   </div>
 

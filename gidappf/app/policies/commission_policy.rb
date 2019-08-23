@@ -28,7 +28,7 @@ class CommissionPolicy < ApplicationPolicy
   def index?
     self.set_is_sysadmin
     self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>10.0
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>=10.0
   end
 
   ##############################################################################

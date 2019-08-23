@@ -1,0 +1,54 @@
+<!-- ########################################################################## -->
+<!-- # Universidad Nacional Arturo Jauretche                                  # -->
+<!-- # Instituto de Ingeniería y Agronomía -Ingeniería en Informática         # -->
+<!-- # Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018 # -->
+<!-- #    <<Gestión Integral de Alumnos Para el Proyecto Fines>>              # -->
+<!-- # Tutores:                                                               # -->
+<!-- #    - UNAJ: Dr. Ing. Morales, Martín                                    # -->
+<!-- #    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                           # -->
+<!-- #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                              # -->
+<!-- # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                    # -->
+<!-- # Archivo GIDAPPF/gidappf/app/views/campus_magnaments/_table1.html.erb   # -->
+<!-- ########################################################################## -->
+<h3><strong><%= title %></strong></h3>
+<table class='gidappf-table'>
+  <thead>
+     <tr>
+        <% if params[:profile_type].eql?(LockEmail::LIST[4]) then  %>
+          <th><%= t('body.gidappf_entity.profile.action.index.student') %></th>
+          <th colspan=".<%= comms_period.count.to_s %>." ><%= t('body.gidappf_entity.commission.model')  %></th>
+        <% elsif params[:profile_type].eql?(LockEmail::LIST[3]) then  %>
+          <th><%= t('body.gidappf_entity.profile.action.index.docent') %></th>
+          <th colspan=".<%= comms_period.count.to_s %>." ><%= t('body.gidappf_entity.commission.models')  %></th>
+        <% end %>
+     </tr>
+  </thead>
+
+  <tbody remote="true">
+    <% profiles_period.each do |p| %>
+      <tr>
+        <td>
+          <% if "#{p.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value} #{p.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value}".eql?(" ") %>
+          <%= link_to "#{p.name}", profile_path(id: p.id) %>
+          <% else %>
+          <%= link_to "#{p.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value} #{p.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value}", profile_path(id: p.id) %>
+          <% end %>
+        </td>
+        <td>
+          <% p.documents.first.user.usercommissionroles.each do |ucr| %>
+            <div class="field">
+              <p><%= "#{p.documents.first.user.usercommissionroles.index(ucr)+1}. #{ucr.role.name} #{t('body.gidappf_entity.campus_magnament.action.get_campus_segmentation.current')} #{ucr.commission.name}" %></p>
+            </div>
+            <div class="field">
+              <% if params[:profile_type].eql?(LockEmail::LIST[4]) then  %>
+                <%= render 'students_check_boxes', comms_period: comms_period, usercommissionrole: ucr, profile: p, period: params[:def_period], type: params[:profile_type] %>
+              <% elsif params[:profile_type].eql?(LockEmail::LIST[3]) then  %>
+                <%= render 'docents_check_boxes', comms_period: comms_period, usercommissionrole: ucr, profile: p, period: params[:def_period], type: params[:profile_type] %>
+              <% end %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

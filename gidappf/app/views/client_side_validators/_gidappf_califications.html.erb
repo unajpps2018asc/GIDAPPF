@@ -1,0 +1,28 @@
+<!--######################################################################################-->
+<!--# Universidad Nacional Arturo Jauretche                                              #-->
+<!--# Instituto de Ingeniería y Agronomía -Ingeniería en Informática                     #-->
+<!--# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018             #-->
+<!--#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>                          #-->
+<!--# Tutores:                                                                           #-->
+<!--#    - UNAJ: Dr. Ing. Morales, Martín                                                #-->
+<!--#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                                       #-->
+<!--#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                                          #-->
+<!--#    - TAPTA: Dra. Ferrari, Mariela                                                  #-->
+<!--# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                                #-->
+<!--# Archivo:                                                                           #-->
+<!--#  GIDAPPF/gidappf/app/views/client_side_validators/_giddappf_califications.html.erb #-->
+<!--######################################################################################-->
+
+<!--definicion de la estrategia basada en el match de la expresion regular de event.target-->
+<% target_reg_exp_strategy = "$(document).ready(function() {
+      str=String($(event.target).val());
+      if(Number.isNaN(parseFloat(str)) || parseFloat(str) > 10 || parseFloat(str) < 1) {
+          $(event.target).val('');
+          $( \"<p class='validation-error'>#{t('body.gidappf_entity.client_side_validator.error.calification_error')}</p>\" ).appendTo($(event.target).parent());
+        }
+      else {$(event.target).val(parseFloat(str).toPrecision(3));}
+      });"
+%>
+
+<!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
+<%= valuable_gidappf_field.text_field :value, onfocusout: target_reg_exp_strategy %>

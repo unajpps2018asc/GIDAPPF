@@ -9,20 +9,15 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/gidappf/app/policies/setsusersacces_policy.rb           #
+# Archivo GIDAPPF/gidappf/config/locales/pundit.en.yml                    #
 ###########################################################################
-
+es:
 ###########################################################################
-# Políticas de acceso pundit para que los accesos sean creados solo por
-# los administradores y no vistas por los secretarios ni, docentes y ni estudiantes
-# que estén asignados por la relación usercommisionrole.
+# Mensajes de manejo de excepciones producidas por intentos de acceso     #
+# no autorizados en pundit                                                #
 ###########################################################################
-class SetsusersaccesPolicy < ApplicationPolicy
-  
-  def settings?
-    self.set_is_sysadmin
-    self.set_roleaccess
-    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
-  end
-
-end
+  pundit:
+   default: 'No podés realizar esta acción.'
+   post_policy:
+     update?: 'No podés editar esta publicación!'
+     create?: 'No podés crear esta publicación!'

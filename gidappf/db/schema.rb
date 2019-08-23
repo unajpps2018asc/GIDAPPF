@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_215813) do
+ActiveRecord::Schema.define(version: 2019_08_02_115559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "class_room_institutes", force: :cascade do |t|
     t.string "name"
@@ -36,10 +57,11 @@ ActiveRecord::Schema.define(version: 2019_03_13_215813) do
   end
 
   create_table "client_side_validators", force: :cascade do |t|
-    t.string "content_type"
-    t.text "script"
+    t.string "content_type", null: false
+    t.text "script", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["content_type"], name: "index_client_side_validators_on_content_type", unique: true
   end
 
   create_table "commissions", force: :cascade do |t|
@@ -58,16 +80,57 @@ ActiveRecord::Schema.define(version: 2019_03_13_215813) do
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "input_id"
+    t.index ["input_id"], name: "index_documents_on_input_id"
     t.index ["profile_id"], name: "index_documents_on_profile_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "info_keys", force: :cascade do |t|
+    t.string "key"
+    t.bigint "input_id"
+    t.bigint "attrib_id"
+    t.bigint "client_side_validator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_side_validator_id"], name: "index_info_keys_on_client_side_validator_id"
+    t.index ["input_id"], name: "index_info_keys_on_input_id"
+  end
+
+  create_table "info_values", force: :cascade do |t|
+    t.text "value"
+    t.bigint "info_key_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["info_key_id"], name: "index_info_values_on_info_key_id"
+  end
+
+  create_table "inputs", force: :cascade do |t|
+    t.string "title"
+    t.text "summary"
+    t.boolean "grouping"
+    t.boolean "enable"
+    t.bigint "author"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matters", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "trayect", null: false
+    t.boolean "enable"
   end
 
   create_table "profile_keys", force: :cascade do |t|
     t.string "key"
     t.bigint "profile_id"
+    t.bigint "attrib_id"
+    t.bigint "client_side_validator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "client_side_validator_id"
     t.index ["client_side_validator_id"], name: "index_profile_keys_on_client_side_validator_id"
     t.index ["profile_id"], name: "index_profile_keys_on_profile_id"
   end
@@ -114,6 +177,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_215813) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "vacancy_id"
+    t.bigint "matter_id"
+    t.index ["matter_id"], name: "index_time_sheet_hours_on_matter_id"
     t.index ["time_sheet_id"], name: "index_time_sheet_hours_on_time_sheet_id"
     t.index ["vacancy_id"], name: "index_time_sheet_hours_on_vacancy_id"
   end
@@ -153,21 +218,25 @@ ActiveRecord::Schema.define(version: 2019_03_13_215813) do
 
   create_table "vacancies", force: :cascade do |t|
     t.bigint "class_room_institute_id"
-    t.bigint "user_id"
     t.integer "occupant"
     t.boolean "enabled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["class_room_institute_id"], name: "index_vacancies_on_class_room_institute_id"
-    t.index ["user_id"], name: "index_vacancies_on_user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "commissions", "users"
+  add_foreign_key "documents", "inputs"
   add_foreign_key "documents", "profiles"
   add_foreign_key "documents", "users"
+  add_foreign_key "info_keys", "client_side_validators"
+  add_foreign_key "info_keys", "inputs"
+  add_foreign_key "info_values", "info_keys"
   add_foreign_key "profile_keys", "client_side_validators"
-  add_foreign_key "profile_keys", "profiles", on_delete: :cascade
-  add_foreign_key "profile_values", "profile_keys", on_delete: :cascade
+  add_foreign_key "profile_keys", "profiles"
+  add_foreign_key "profile_values", "profile_keys"
+  add_foreign_key "time_sheet_hours", "matters"
   add_foreign_key "time_sheet_hours", "time_sheets"
   add_foreign_key "time_sheet_hours", "vacancies"
 end

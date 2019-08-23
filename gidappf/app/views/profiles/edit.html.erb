@@ -1,6 +1,6 @@
-<h1>Editing Profile</h1>
+<h1><%= "#{t('body.common_entity.action.edit')} #{t('body.gidappf_entity.profile.model')}"  %></h1>
 
 <%= render 'form', profile: @profile %>
 
-<%= link_to 'Show', @profile %> |
-<%= link_to 'Back', profiles_path %>
+<%= link_to t('body.common_entity.action.show'), @profile %> |
+<%= link_to t('body.common_entity.action.back'), profiles_path %>

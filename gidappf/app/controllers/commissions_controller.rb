@@ -29,6 +29,7 @@ class CommissionsController < ApplicationController
   # GET /commissions/new
   def new
     @commission = Commission.new
+    authorize @commission
   end
 
   # GET /commissions/1/edit
@@ -55,7 +56,7 @@ class CommissionsController < ApplicationController
       if @commission.save
         # format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
         # format.json { render :show, status: :created, location: @commission }
-        format.html { redirect_to time_sheets_associate_path commission_id: @commission.id.to_s, commission_name: @commission.name, notice: 'Commission was successfully created.' }
+        format.html { redirect_to time_sheets_associate_path commission_id: @commission.id.to_s, commission_name: @commission.name, notice: t('body.gidappf_entity.commission.action.new.notice') }
         format.json { head :no_content }
       else
         format.html { render :new }
@@ -69,7 +70,7 @@ class CommissionsController < ApplicationController
   def update
     respond_to do |format|
       if @commission.update(commission_params)
-        format.html { redirect_to @commission, notice: 'Commission was successfully updated.' }
+        format.html { redirect_to @commission, notice: t('body.gidappf_entity.commission.action.update.notice') }
         format.json { render :show, status: :ok, location: @commission }
       else
         format.html { render :edit }
@@ -88,7 +89,7 @@ class CommissionsController < ApplicationController
       @commission.destroy
     end
     respond_to do |format|
-      format.html { redirect_to commissions_url, notice: 'Commission was successfully destroyed.' }
+      format.html { redirect_to commissions_url, notice: t('body.gidappf_entity.commission.action.destroy.notice') }
       format.json { head :no_content }
     end
   end

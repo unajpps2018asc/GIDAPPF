@@ -33,18 +33,14 @@ class User::RegistrationsController < Devise::RegistrationsController
   def create
     super
     key="GIDAPPF_SYSADMIN"
-    value=User.last.email.to_s
     selEnv=ENV[key]
-    unless selEnv.eql?(value)
-      u = User.last
-      if u.id == LockEmail::LIST.count + 1 then
-        rid=Role.find_by(level: 40, enabled: true).id #Admin
+    unless selEnv.eql?(User.last.email.to_s)
+      if User.where.not(email: LockEmail::LIST).count == 1 then
+        r = Role.find_by(level: 40, enabled: true) #Admin
       else
-        rid=Role.find_by(level: 0, enabled: false).id #Autogestionado
+        r = Role.find_by(level: 0, enabled: true) #Autogestionado
       end
-      Usercommissionrole.new(
-        role_id: rid,user_id: u.id, commission_id: Commission.first.id
-      ).save
+      Usercommissionrole.new( role: r, user: User.last, commission: Commission.first ).save
     end
   end
 

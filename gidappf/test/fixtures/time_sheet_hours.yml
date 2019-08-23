@@ -2,6 +2,7 @@
 
 one:
   vacancy: one
+  matter: one
   time_sheet: one
   from_hour: 1
   from_min: 1
@@ -18,6 +19,7 @@ one:
 two:
   time_sheet: two
   vacancy: two
+  matter: two
   from_hour: 1
   from_min: 1
   to_hour: 1

@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Commission:</strong>
-  <%= @time_sheet.commission.name %>
+  <%= "#{t('body.gidappf_entity.commission.model')}:"  %>
+  <strong><%= @time_sheet.commission.name %></strong>
 </p>
 
 <p>
-  <strong>Start date:</strong>
-  <%= @time_sheet.start_date %>
+  <%= "#{t('body.gidappf_entity.time_sheet.attributes.start_date')}:"  %>
+  <strong><%= @time_sheet.start_date %></strong>
 </p>
 
 <p>
-  <strong>End date:</strong>
-  <%= @time_sheet.end_date %>
+  <%= "#{t('body.gidappf_entity.time_sheet.attributes.end_date')}:"  %>
+  <strong><%= @time_sheet.end_date %></strong>
 </p>
 
-<%= link_to 'Edit', edit_time_sheet_path(@time_sheet) %> |
-<%= link_to 'Back', time_sheets_path %>
+<%= link_to t('body.common_entity.action.edit'), edit_time_sheet_path(@time_sheet) %> |
+<%= link_to t('body.common_entity.action.back'), time_sheets_path %>

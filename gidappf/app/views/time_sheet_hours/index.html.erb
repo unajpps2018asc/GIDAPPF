@@ -1,105 +1,43 @@
 <p id="notice"><%= notice %></p>
+  <h1><%= t('body.gidappf_entity.time_sheet_hour.models')  %></h1>
 
-<h1>Time Sheet Hours</h1>
-
-<table>
+<table class='gidappf-table gidappf-index'>
   <thead>
     <tr>
-      <th>Commission</th>
-      <th>Vacancy</th>
-      <th>Hour occupied</th>
-      <th>Mon</th>
-      <th>Tue</th>
-      <th>Wed</th>
-      <th>Thu</th>
-      <th>Fri</th>
-      <th>Sat</th>
-      <th>Sun</th>
-      <th colspan="3"></th>
+      <th style="width: 38%;"><%= t('body.gidappf_entity.commission.model')  %></th>
+      <th style="width: 5%;"> pid </th>
+      <th style="width: 21%;"><%= t('body.gidappf_entity.time_sheet_hour.attributes.hour_occupied')  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_monday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_tuesday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_wednesday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_thursday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_friday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_saturday')).split(' ').last.first(3).capitalize  %></th>
+      <th style="width: 3%;"><%= (t('body.gidappf_entity.class_room_institute.attributes.available_sunday')).split(' ').last.first(3).capitalize  %></th>
+      <th colspan="1" style="width: 15%;"></th>
     </tr>
   </thead>
   <tbody>
     <% @time_sheet_hours.each do |time_sheet_hour| %>
       <tr>
-        <td><%= time_sheet_hour.time_sheet.commission.name %></td>
-        <td><%= time_sheet_hour.vacancy.occupant %></td>
-        <td><%= time_sheet_hour.occupied_hour_fmt %></td>
-        <td><%= if time_sheet_hour.monday then '✓' end %></td>
-        <td><%= if time_sheet_hour.tuesday then '✓' end %></td>
-        <td><%= if time_sheet_hour.wednesday then '✓' end %></td>
-        <td><%= if time_sheet_hour.thursday then '✓' end %></td>
-        <td><%= if time_sheet_hour.friday then '✓' end %></td>
-        <td><%= if time_sheet_hour.saturday then '✓' end %></td>
-        <td><%= if time_sheet_hour.sunday then '✓' end %></td>
-        <td><%= link_to 'Show', time_sheet_hour %></td>
-        <td><%= link_to 'Edit', edit_time_sheet_hour_path(time_sheet_hour) %></td>
-        <td><%= link_to 'Destroy', time_sheet_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="width: 38%;"><%= link_to "#{time_sheet_hour.vacancy_id}: #{time_sheet_hour.time_sheet.commission.name}, #{time_sheet_hour.matter.name}",time_sheet_hour %></td>
+        <td style="width: 5%;"><%= time_sheet_hour.vacancy.occupant %></td>
+        <td style="width: 21%;"><%= time_sheet_hour.occupied_hour_fmt %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.monday then ' ✓ ' else ' x ' end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.tuesday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.wednesday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.thursday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.friday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.saturday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 3%;"><%= if time_sheet_hour.sunday then ' ✓ ' else ' x '  end %></td>
+        <td style="width: 15%;"><%= link_to t('body.common_entity.action.destroy'), time_sheet_hour, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% if RoleAccess.get_role_access(current_user) > 39.0 then %>
+
+  <%= render 'modal_commissions', time_sheets: @time_sheets , class_room_institutes: @class_room_institutes %>
+
+<% end %>
 <br>
-<h2>Options</h2>
-<table>
-  <thead>
-    <tr>
-      <th>ClassRoomInstitute</th>
-      <th>Commission</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Monday</th>
-              <th>Tuesday</th>
-              <th>Wednesday</th>
-              <th>Thursday</th>
-              <th>Friday</th>
-              <th>Saturday</th>
-              <th>Sunday</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @class_room_institutes.each do |class_room_institute| %>
-              <tr>
-                <td><%= button_to( class_room_institute.to_list, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
-                <% 7.times do |i_day|%>
-                  <td><%= class_room_institute.free_time(i_day) %></td>
-                <% end %>
-                <td><%= link_to 'Show', class_room_institute %></td>
-                <td><%= link_to 'Edit', edit_class_room_institute_path(class_room_institute) %></td>
-                <td><%= link_to 'Destroy', class_room_institute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-      <td>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @time_sheets.each do |time_sheet| %>
-              <tr>
-                <td><%= button_to( time_sheet.commission.name, parametrize_time_sheet_path(time_sheet), :method => :get, :disabled => disable_ts(time_sheet.id) ) %></td>
-                <td><%= link_to 'Show', time_sheet %></td>
-                <td><%= link_to 'Edit', edit_time_sheet_path(time_sheet) %></td>
-                <td><%= link_to 'Destroy', time_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h2><%= link_to 'New Time Sheet Hour', time_sheet_hours_multiple_new_url %></h2>

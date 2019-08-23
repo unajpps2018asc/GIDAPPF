@@ -1,3 +1,5 @@
+require 'gidappf_templates_tools'
+
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,15 +15,30 @@
 ###########################################################################
 class TimeSheetHoursController < ApplicationController
   before_action :set_time_sheet_hour, only: [:show, :edit, :update, :destroy]
+  # after_action :post_multiple, only: [:multiple_new]
 
+  ###################################################################################
+  # Prerequisitos:                                                                  #
+  #           1) Modelo de datos inicializado.                                      #
+  #           2) ProfileKey numero 23 con valor key reprecentando trayecto.         #
+  #           3) ProfileKey numero 24 con valor key reprecentando turno desde.      #
+  #           4) ProfileKey numero 25 con valor key reprecentando turno hasta.      #
+  #           5) Profile numero 1 es una plantilla, no tiene valores, solo claves.  #
+  # Devolución: Accion que permite seleccionar comisiones dentro del periodo actual #
+  #      hasta periodos que finalizan en 3 anos por un lado. Por otro Aulas en forma#
+  #      agrupada con los perfiles que podrian ser asignadoss #
+  #        o ya estan asignados a estas comisiones. La vista proporciona el link a  #
+  #        la modificacion de la seleccion causada por el usuario.                  #
+  ###################################################################################
   # GET /time_sheet_hours
   # GET /time_sheet_hours.json
   def index
-    @time_sheet_hours = TimeSheetHour.all
+    # @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id, from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday, thursday, friday, saturday, sunday, matter_id) *').all
+    @time_sheet_hours = TimeSheetHour.all.order(:time_sheet_id,:matter_id,:vacancy_id)
     authorize @time_sheet_hours
     @time_sheet_hours -= @time_sheet_hours.where(from_hour: 0, from_min: 0, to_hour: 0, to_min: 0)
-    @time_sheets = TimeSheet.where(end_date: Date.today .. 15.month.after).where(enabled:true)
-    @class_room_institutes = ClassRoomInstitute.where(enabled:true)
+    @time_sheets = TimeSheet.where(end_date: Date.today .. 36.month.after).where(enabled:true).where.not(commission: Commission.first)
+    @class_room_institutes = ClassRoomInstitute.where(enabled:true).where.not(available_to: 24.month.after .. 36.month.after)
     if !params[:map_sel].nil? then
       params_to_hash
     elsif params[:map_sel].nil? then
@@ -49,12 +66,13 @@ class TimeSheetHoursController < ApplicationController
   # POST /time_sheet_hours.json
   def create
     authorize @time_sheet_hour = TimeSheetHour.new(time_sheet_hour_params)
+    @matters=Matter.where(enable: true)
     respond_to do |format|
       if @time_sheet_hour.save
-        format.html { redirect_to @time_sheet_hour, notice: 'Time sheet hour was successfully created.' }
+        format.html { redirect_to @time_sheet_hour, notice: t('body.gidappf_entity.time_sheet_hour.action.new.notice') }
         format.json { render :show, status: :created, location: @time_sheet_hour }
       else
-        format.html { render :new }
+        format.html { render :multiple_new_modal }
         format.json { render json: @time_sheet_hour.errors, status: :unprocessable_entity }
       end
     end
@@ -65,7 +83,7 @@ class TimeSheetHoursController < ApplicationController
   def update
     respond_to do |format|
       if @time_sheet_hour.update(time_sheet_hour_params)
-        format.html { redirect_to @time_sheet_hour, notice: 'Time sheet hour was successfully updated.' }
+        format.html { redirect_to @time_sheet_hour, notice: t('body.gidappf_entity.time_sheet_hour.action.update.notice') }
         format.json { render :show, status: :ok, location: @time_sheet_hour }
       else
         format.html { render :edit }
@@ -79,18 +97,22 @@ class TimeSheetHoursController < ApplicationController
   def destroy
     authorize @time_sheet_hour.destroy
     respond_to do |format|
-      format.html { redirect_to time_sheet_hours_url, notice: 'Time sheet hour was successfully destroyed.' }
+      format.html { redirect_to time_sheet_hours_url, notice:  t('body.gidappf_entity.time_sheet_hour.action.destroy.notice')  }
       format.json { head :no_content }
     end
   end#destroy
 
   # post /time_sheet_hours/multiple_new/params
+  # http://181.31.66.61:3000/es/time_sheet_hours?map_sel[]=id_ts35&map_sel[]=35&?map_sel[]=id_ts5&map_sel[]=5
   def multiple_new
+    @matters=Matter.where(enable: true)
+    authorize @matters
     arr=time_sheet_each_vacancy(get_ts_and_cri,"id_cri","id_ts")
     unless arr.nil? || arr.first.empty? || arr.last.empty? then
-      authorize @time_sheet_hour=TimeSheetHour.new(
+      @time_sheet_hour=TimeSheetHour.new(
           time_sheet_id: arr.last.first.id,
           vacancy_id: arr.first.first.vacancies.first.id,
+          matter_id: params[:matter_id].to_i,
           from_hour: params[:from_hour],
           from_min: params[:from_min],
           to_hour: params[:to_hour],
@@ -104,18 +126,18 @@ class TimeSheetHoursController < ApplicationController
           sunday: params[:sunday]
         )
       respond_to do |format|
-        unless !@time_sheet_hour.save
-          msg = "Created TSH{ ts_id=#{arr.last.first.id} vac_id=#{arr.first.first.vacancies.first.id} fh=#{@time_sheet_hour.from_hour} fm=#{@time_sheet_hour.from_min} th=#{@time_sheet_hour.to_hour} tm=#{@time_sheet_hour.to_min} mo=#{@time_sheet_hour.monday} tu=#{@time_sheet_hour.tuesday} we=#{@time_sheet_hour.wednesday} th=#{@time_sheet_hour.thursday} fr=#{@time_sheet_hour.friday} sa=#{@time_sheet_hour.saturday} su=#{@time_sheet_hour.sunday}}"
+        if @time_sheet_hour.save
           rest_tsh(arr,@time_sheet_hour)
-          format.html { redirect_to time_sheet_hours_path, notice: msg }
-          format.json { render :renew_all, status: :ok}
+          post_multiple
+          format.html { redirect_to time_sheet_hours_path, notice: t('body.gidappf_entity.time_sheet_hour.action.new.notice') }
+          format.json { render :index, status: :ok}
         else
           format.html { render :multiple_new}
           format.json { render json: @time_sheet_hour.errors, status: :unprocessable_entity }
         end
       end
     else
-      redirect_back fallback_location: '/', allow_other_host: false, notice: 'Unrelationable_entitys.'
+      redirect_back fallback_location: '/', allow_other_host: false, notice: t('body.gidappf_entity.time_sheet_hour.action.error.notice')
     end
   end
 
@@ -137,6 +159,28 @@ class TimeSheetHoursController < ApplicationController
   end
   helper_method :disable_ts
 
+  def current_commissions
+    acc=RoleAccess.get_role_access(current_user)
+    if acc > 29.0
+      @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id,
+        from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
+        thursday, friday, saturday, sunday, matter_id) *').
+        where(time_sheet: TimeSheet.where(commission: Commission.where(user: current_user)).
+          where('start_date <= ?',Date.today).where('end_date >= ?',Date.today))
+    elsif acc == 29.0
+      @time_sheet_hours = TimeSheetHour.select('DISTINCT ON (time_sheet_id,
+        from_hour, from_min, to_hour, to_min, monday, tuesday, wednesday,
+        thursday, friday, saturday, sunday, matter_id) *').
+        where(time_sheet: TimeSheet.where('start_date <= ?',Date.today).
+        where('end_date >= ?',Date.today).where(commission_id: current_user.
+          usercommissionroles.pluck(:commission_id).uniq))
+    else
+      @time_sheet_hours=TimeSheetHour.all
+    end
+    authorize @time_sheet_hours
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_time_sheet_hour
@@ -145,7 +189,12 @@ class TimeSheetHoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_sheet_hour_params
-      params.require(:time_sheet_hour).permit(:vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+      params.require(:time_sheet_hour).permit(:matter_id, :vacancy_id, :time_sheet_id, :from_hour, :from_min, :to_hour, :to_min, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+    end
+
+    def post_multiple
+      out = GidappfTemplatesTools.students_list_to_circulate_at_hour(@time_sheet_hour)
+      if out != true then flash[:error]="Nothing planified ..." end
     end
 
     def params_to_hash
@@ -196,6 +245,7 @@ class TimeSheetHoursController < ApplicationController
           group_vacancy.each do |v|
             unless !TimeSheetHour.find_by(
               time_sheet_id: time_sheet_of_commission.id,
+              matter_id: ref.matter_id,
               vacancy_id: v.id,
               from_min: ref.from_min,
               to_hour: ref.to_hour,
@@ -210,6 +260,7 @@ class TimeSheetHoursController < ApplicationController
             ).nil? then
               TimeSheetHour.new(
                 time_sheet_id: time_sheet_of_commission.id,
+                matter_id: ref.matter_id,
                 vacancy_id: v.id,
                 from_hour: ref.from_hour,
                 from_min: ref.from_min,

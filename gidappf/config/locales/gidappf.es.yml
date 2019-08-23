@@ -1,0 +1,352 @@
+###########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#    <<Gestión Integral de Alumnos Para el Proyecto Fines>>               #
+# Tutores:                                                                #
+#    - UNAJ: Dr. Ing. Morales, Martín                                     #
+#    - ORGANIZACIÓN: Ing. Cortes Bracho, Oscar                            #
+#    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
+#    - TAPTA: Dra. Ferrari, Mariela                                       #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+# Archivo GIDAPPF/gidappf/config/locales/gidappf.es.yml                   #
+###########################################################################
+es:
+  layout:
+    nav:
+      dropdown:
+        site: 'Instituto'
+        yours: 'A cargo de'
+      part:
+        link_40:
+          sets_u_acc: 'Accesos de usuarios'
+          campus_s: 'Campus de estudiantes'
+          campus_d: 'Campus de docentes'
+          stu_list: 'Estudiantes'
+          dcn_list: 'Docentes'
+          comm_list: 'Comisiones'
+          hr_list: 'Horarios'
+          ts_list: 'Temporadas'
+          cri_list: 'Aulas'
+          mt_list: 'Materias'
+          rl_list: 'Roles'
+          in_list: 'Entradas'
+        link_30:
+          campus_s: 'Campus de estudiantes'
+          campus_d: 'Campus de docentes'
+          stu_list: 'Estudiantes'
+          dcn_list: 'Docentes'
+          comm_list: 'Comisiones'
+          hr_list: 'Horarios'
+          ts_list: 'Temporadas'
+          cri_list: 'Aulas'
+          in_list: 'Entradas'
+        link_20:
+          stu_list: 'Estudiantes'
+          dcn_list: 'Docentes'
+          comm_list: 'Comisiones'
+          hr_list: 'Horarios'
+          cri_list: 'Aulas'
+          in_list: 'Entradas'
+        link_10:
+          comm_list: 'Comisiones'
+          hr_list: 'Horarios'
+          cri_list: 'Aulas'
+          in_list: 'Notificaciones'
+
+    home:
+      title: 'Bienvenido, ahora podés'
+      element1: 'Ver tu perfil'
+      element2: 'Generar tu perfil'
+
+  gidappf_catchs_exception:
+    disabled_cookies_detect:
+      title: 'Gidappf no puede distribuir la cookie...'
+      summary: 'Las cookies están deshabilitadas en tu navegador web, por favor activalas desde las preferencias:'
+      line1: 'En Firefox: Menu(&#9776;)&rarr;Preferences&rarr;Privacy & security(&#128274;)&rarr;Content Blocking: Clickeá en Strict o en Standard'
+      line2: 'En Chrome: tipeá'
+      line3: 'en la barra de navegación, luego click en switch lock'
+    first_password_detect:
+      title: 'Bienvenido, usuario del perfil:'
+      summary: 'Primer acceso detectado, cambie las credenciales por defecto para continuar... '
+      link1: 'Cambie las credenciales'
+    not_record_found_detect:
+      title: 'Perdón, registro no encontrado... '
+
+  body:
+
+    common_entity:
+      action:
+        new: 'Nuevo'
+        new_her: 'Nueva'
+        new_pl: 'Nuevos'
+        edit: 'Editar'
+        show: 'Ver'
+        destroy: 'Borrar'
+        back: 'Atrás'
+        log_out: 'Desconectar'
+        submint: 'Enviar'
+        confirm_msg: '¿Estás seguro?'
+
+    gidappf_entity:
+
+      campus_magnament:
+        model: 'Gestión del campus'
+        models: 'Gestiones del campus'
+        action:
+          get_campus_segmentation:
+            link: 'Segmentation del campus'
+            title: 'Asignación de comisiones'
+            subtitle: 'Su validez empieza desde 30 dias antes hasta 30 dias despues del seleccionado y su validez termina desde 30 dias antes hasta 30 dias despues del seleccionado'
+            notice:
+              msg1: 'Agrupados por'
+            current: 'en comisión:'
+          set_campus_segmentation:
+            notice:
+              msg1: 'Comisión de'
+              msg2: ' correctamente cambiado a '
+            error:
+              msg1: 'Perfil '
+              msg2: ' horario previamente asignado por '
+
+      class_room_institute:
+        model: 'Aula'
+        models: 'Aulas'
+        attributes:
+          name: 'Nombre'
+          ubication: 'Ubicación'
+          description: 'Descripción'
+          available_from: 'Desde'
+          available_to: 'Hasta'
+          available_monday: 'Utilizable lunes'
+          available_tuesday: 'Utilizable martes'
+          available_wednesday: 'Utilizable miércoles'
+          available_thursday: 'Utilizable jueves'
+          available_friday: 'Utilizable viernes'
+          available_saturday: 'Utilizable sábado'
+          available_sunday: 'Utilizable domingo'
+          hours_disp: 'Disponibilidad'
+          vacancies_disp: 'Capacidad'
+          enable: 'Habilitado'
+        action:
+          new:
+            notice: 'Aula creada correctamente.'
+          update:
+            notice: 'Aula actualizada correctamente.'
+          destroy:
+            notice: 'Aula borrada.'
+
+      commission:
+        model: 'Comisión'
+        models: 'Comisiones'
+        attributes:
+          name: 'Nombre'
+          ubication: 'Ubicación'
+          description: 'Descripción'
+          start_date: 'Desde'
+          end_date: 'Hasta'
+          validations:
+            check_date_interval: 'Debe ser una fecha válida'
+        action:
+          new:
+            notice: 'Comisión creada correctamente.'
+          update:
+            notice: 'Comisión actualizada correctamente.'
+          destroy:
+            notice: 'Comisión borrada.'
+
+      current_commission:
+        link: 'Comisiones actuales'
+
+      input:
+        model: 'Entrada'
+        models: 'Entradas'
+        attributes:
+          title: 'Título'
+          summary: 'Resumen'
+          enable: 'Habilitado'
+          author: 'Autor'
+        action:
+          new:
+            notice: 'Entrada creada correctamente.'
+          update:
+            notice: 'Entrada actualizada correctamente.'
+          destroy:
+            notice: 'Entrada borrada.'
+          commission_qualification_list_students:
+            link: 'Calificar'
+            title: 'Lista de calificación de estudiantes.'
+            alert: 'Por favor, genere su perfil antes...'
+          documents:
+            master_sync_error: 'No sincronizado'
+            master_sync_ok: 'Sincronizado'
+
+      matter:
+        model: 'Materia'
+        models: 'Materias'
+        attributes:
+          name: 'Nombre'
+          description: 'Descripción'
+          trayect: 'Trayecto'
+          enable: 'Habilitar'
+        action:
+          new:
+            notice: 'Materia creada exitosamente.'
+          update:
+            notice: 'Materia actualizada correctamente.'
+          destroy:
+            notice: 'Materia borrada.'
+
+      member:
+        model: 'Miembro'
+        models: 'Miembros'
+        action:
+          report:
+            link: 'Reporte'
+            title: 'Reportes'
+            student: 'Estudiante'
+            regular: 'Regular'
+            inst: 'Instancias'
+            act: 'Actas'
+            abs: 'Ausencias'
+
+      profile:
+        model: 'Perfil'
+        models: 'Perfiles'
+        attributes:
+          name: 'Perfil'
+          description: 'Descripción'
+          valid_from: 'Desde'
+          valid_to: 'Hasta'
+          validations:
+            check_date_interval: 'Debe ser una fecha válida'
+        action:
+          first:
+            msg1: 'Usuario creado, id='
+            msg2: ' Rol='
+            msg3: 'Email o '
+            msg4: 'está registrado y debe ser único.'
+          second:
+            alert: 'No se encuentra identificacion del usuario!'
+          new:
+            student: 'Nuevo Estudiante'
+            docent: 'Nuevo docente'
+            notice: 'Perfil creado exitosamente.'
+          index:
+            student: 'Estudiantes'
+            docent: 'Docentes'
+          update:
+            notice: 'Perfil actualizado correctamente.'
+          destroy:
+            notice: 'Perfil borrado.'
+          academic_history:
+            button: 'Ver historia académica de '
+            title: 'Historia académica de '
+            thead_calif: 'Instancias de calificaciones'
+            thead_abs: 'Ausencias'
+
+      role:
+        model: 'Rol'
+        models: 'Roles'
+        attributes:
+          name: 'Nombre'
+          description: 'Descripción'
+          enabled: 'Habilitado'
+          level: 'Nivel de acceso'
+          created_at: 'Desde'
+        action:
+          new:
+            notice: 'Rol creado exitosamente.'
+          update:
+            notice: 'Rol actualizado correctamente.'
+          destroy:
+            notice: 'Rol borrado.'
+
+      setsusersaccess:
+        model: 'Establecer accesos de usuarios'
+        models: 'Establecer accesos de usuarios'
+        action:
+          edit:
+            notice1: "El rol ha sido actualizado en "
+            notice2: "Mismo rol!"
+
+      time_sheet_hour:
+        model: 'Horario'
+        models: 'Horarios'
+        attributes:
+          from_min: 'Minutos desde'
+          from_hour: 'Hora desde'
+          to_min: 'Minutos hasta'
+          to_hour: 'Hora hasta'
+          monday: 'Lunes'
+          tuesday: 'Martes'
+          wednesday: 'Miércoles'
+          thursday: 'Jueves'
+          friday: 'Viernes'
+          saturday: 'Sábado'
+          sunday: 'Domingo'
+          matter: 'Materia'
+          hour_occupied: 'Banda horaria'
+        action:
+          new:
+            notice: 'Nuevo horario creado.'
+          update:
+            notice: 'Horario actualizado.'
+          destroy:
+            notice: 'Horario borrado.'
+          error:
+            notice: 'Entidades no relacionables.'
+          current_commission: 'Comisión actual'
+          multiple_new:
+            cri_modal:
+              title: 'Elegí una o varias aulas correspondientes'
+            comm_modal:
+              title: 'Elegí una o varias comisiones'
+              button: 'Asignación de aulas'
+
+      time_sheet:
+        model: 'Temporada'
+        models: 'Temporadas'
+        attributes:
+          start_date: 'Desde'
+          end_date: 'Hasta'
+          enabled: 'Habilitado'
+          validations:
+            check_date_interval: 'Debe ser una fecha válida'
+        action:
+          new:
+            notice: 'Nueva Temporada creada exitosamente.'
+          update:
+            notice: 'Temporada actualizada correctamente.'
+          destroy:
+            notice: 'Temporada borrada.'
+          associate:
+            title: 'Asociar temporada con la comisión '
+            obsevations: 'Temporadas que comenzaron hace 13 meses o menos y terminan en un mes o menos.'
+          renew:
+            link: 'Renovar todas'
+            title: 'Renovar todas las temporadas'
+          index:
+            expired: 'Temporadas que expiran'
+
+      client_side_validator:
+        error:
+          alphanumeric_error: 'Error de alfanumérico.'
+          calification_error: 'Error de calificación.'
+          check_error: 'Error de chequeo.'
+          date_error: 'Error de formato de días.'
+          matter_error: 'Error de materia.'
+          number_error: 'Error numérico.'
+          trayect_error: 'Elegir uno de'
+          words_error: 'Error de frase.'
+
+  home:
+    action:
+      search:
+        text: 'Perfiles'
+        button: 'Buscar'
+        result: 'Resultados de '
+        empty: 'No hay coincidencias'
+
+  footer:
+    mesg_foot: 'Está licenciado bajo la GNU Lesser General Public License v3.0'

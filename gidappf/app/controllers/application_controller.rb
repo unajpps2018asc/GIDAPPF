@@ -1,3 +1,4 @@
+require 'role_access'
 ###########################################################################
 # Universidad Nacional Arturo Jauretche                                   #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
@@ -13,16 +14,31 @@
 ###########################################################################
 class ApplicationController < ActionController::Base
 	include Pundit #requerimiento para establecer el control de acceso
+	include RoleAccess
+	###############################################
+	# :get_user_links, definido en RoleAccess     #
+	###############################################
+	helper_method :get_user_links
 	protect_from_forgery with: :exception
-	before_action :authenticate_user!
+	# protect_from_forgery  unless: -> { request.format.json? }
+	prepend_before_action :authenticate_user!
+	before_action :set_locale
 		##########################################################################
 		# Se  incluye el manejo de excepción provocado por intento de acceso     #
 		# si autorización segun las reglas de Pundit                             #
 		##########################################################################
 		rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-		if Rails.env.development?
-	    Rack::MiniProfiler.authorize_request
+	  rescue_from ActionController::InvalidAuthenticityToken, with: :unblock_cookies
+
+		rescue_from ActiveRecord::RecordNotFound, with: :not_record_found
+
+		def after_sign_out_path_for(*)
+	    new_user_session_path
+	  end
+
+		def set_locale
+			I18n.locale = extract_locale || I18n.default_locale
 		end
 
 		private
@@ -36,13 +52,28 @@ class ApplicationController < ActionController::Base
 	  #########################################################################################
 		def user_not_authorized(exception)
 			policy_name = exception.policy.class.to_s.underscore
-
 			flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
-			if current_user.usercommissionroles.first.role.id == Role.find_by(level: 10, enabled: false).id then
-				reset_session
-				redirect_to new_user_password_path, notice: "Enter email to change passsword..."
+			if !current_user.usercommissionroles.first.role.enabled then
+				redirect_to gidappf_catchs_exceptions_first_password_detect_path
 			else
 				redirect_to root_path
 		  end
+		end
+
+		def unblock_cookies
+			redirect_to gidappf_catchs_exceptions_disabled_cookies_detect_path
+		end
+
+		def not_record_found
+			redirect_to gidappf_catchs_exceptions_not_record_found_detect_path
+		end
+
+		def extract_locale
+		  parsed_locale = params[:locale]
+		  I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
+		end
+
+		def default_url_options
+		  { locale: I18n.locale }
 		end
 end

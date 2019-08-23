@@ -1,29 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @role.name %>
+  <%= "#{t('body.gidappf_entity.role.attributes.name')}:"  %>
+  <strong><%= @role.name %></strong>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @role.description %>
+  <%= "#{t('body.gidappf_entity.role.attributes.description')}:"  %>
+  <strong><%= @role.description %></strong>
 </p>
 
 <p>
-  <strong>Created at:</strong>
-  <%= @role.created_at %>
+  <%= "#{t('body.gidappf_entity.role.attributes.created_at')}:"  %>
+  <strong><%= @role.created_at %></strong>
 </p>
 
 <p>
-  <strong>Enabled:</strong>
-  <%= @role.enabled %>
+  <%= "#{t('body.gidappf_entity.role.attributes.enabled')}:"  %>
+  <strong><%= @role.enabled %></strong>
 </p>
 
 <p>
-  <strong>Level:</strong>
-  <%= @role.level %>
+  <%= "#{t('body.gidappf_entity.role.attributes.level')}:"  %>
+  <strong><%= @role.level %></strong>
 </p>
 
-<%= link_to 'Edit', edit_role_path(@role) %> |
-<%= link_to 'Back', roles_path %>
+<%= link_to t('body.common_entity.action.edit'), edit_role_path(@role) %> |
+<%= link_to t('body.common_entity.action.back'), roles_path %>

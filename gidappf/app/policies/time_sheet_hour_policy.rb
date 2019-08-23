@@ -25,16 +25,9 @@ class TimeSheetHourPolicy < ApplicationPolicy
   # Devolución: idem show                                             #
   #####################################################################
   def index?
-    show?
-  end
-
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción edit definida en TimeSheetHourController            #
-  # Devolución: delega el valor de update, para editar roles                #
-  ###########################################################################
-  def edit?
-    create?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>=10.0
   end
 
   ##############################################################################
@@ -57,16 +50,6 @@ class TimeSheetHourPolicy < ApplicationPolicy
     create?
   end
 
-  ###########################################################################
-  # Prerequisitos:                                                          #
-  #           1) Acción new definida en TimeSheetHourController             #
-  # Devolución: delega el valor de create, para nuevos roles                #
-  ###########################################################################
-  def multiple_new?
-    create?
-  end
-
-  ##############################################################################
   # Prerequisitos:                                                             #
   #           1) Acción show definida en RolesController                       #
   #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
@@ -85,17 +68,6 @@ class TimeSheetHourPolicy < ApplicationPolicy
   # Devolución: delega el valor de update, para editar roles                #
   ###########################################################################
   def edit?
-    create?
-  end
-
-  ##############################################################################
-  # Prerequisitos:                                                             #
-  #           1) Acción update definida en TimeSheetHourController             #
-  #           1) Setear el valorde GIDAPPF_SYSADMIN                            #
-  # Devolución: Crea una nueva comision si @user es el de testeo o @issadmin   #
-  #             es true o si @roleaccess es mayor a 20.0                       #
-  ##############################################################################
-  def update?
     create?
   end
 
@@ -119,6 +91,24 @@ class TimeSheetHourPolicy < ApplicationPolicy
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>30.0
+  end
+
+  def current_commissions?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>28.9
+  end
+
+  def report?
+    current_commissions?
+  end
+
+  def current?
+    current_commissions?
+  end
+
+  def commission_qualification_list_students?
+    current_commissions?
   end
 
 end

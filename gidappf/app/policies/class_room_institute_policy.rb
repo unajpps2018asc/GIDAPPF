@@ -18,7 +18,9 @@ class ClassRoomInstitutePolicy < ApplicationPolicy
   # Devolución: true, todos pueden listar aulas                             #
   ###########################################################################
   def index?
-    show?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>=0.0
   end
 
   ###########################################################################

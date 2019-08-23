@@ -1,4 +1,3 @@
-require 'role_access'
 ###############################################################################
 # Universidad Nacional Arturo Jauretche                                       #
 # Instituto de Ingeniería y Agronomía -Ingeniería en Informática              #
@@ -13,7 +12,6 @@ require 'role_access'
 # Archivo GIDAPPF/gidappf/app/controllers/class_room_institutes_controller.rb #
 ###############################################################################
 class ClassRoomInstitutesController < ApplicationController
-  include RoleAccess
   before_action :set_class_room_institute, only: [:show, :edit, :update, :destroy, :parametrize]
 
   # GET /class_room_institutes
@@ -22,7 +20,7 @@ class ClassRoomInstitutesController < ApplicationController
   # Acción diferenciada por get_role_access si es o no mayor a 30              #
   ##############################################################################
   def index
-    if get_role_access > 30.0
+    if RoleAccess.get_role_access(current_user) > 30.0
       @class_room_institutes = ClassRoomInstitute.all
     else
       @class_room_institutes = ClassRoomInstitute.where(enabled: true)
@@ -39,6 +37,7 @@ class ClassRoomInstitutesController < ApplicationController
   def new
     set_new
     @class_room_institute = ClassRoomInstitute.new
+    authorize @class_room_institute
     respond_to do |format|
       format.html { }
       format.json { head :no_content }
@@ -62,7 +61,7 @@ class ClassRoomInstitutesController < ApplicationController
 
     respond_to do |format|
       if @class_room_institute.save
-        format.html { redirect_to @class_room_institute, notice: 'Class room institute was successfully created.' }
+        format.html { redirect_to @class_room_institute, notice: t('body.gidappf_entity.class_room_institute.action.new.notice') }
         format.json { render :show, status: :created, location: @class_room_institute }
       else
         format.html { render :new }
@@ -76,7 +75,7 @@ class ClassRoomInstitutesController < ApplicationController
   def update
     respond_to do |format|
       if @class_room_institute.update(class_room_institute_params)
-        format.html { redirect_to @class_room_institute, notice: 'Class room institute was successfully updated.' }
+        format.html { redirect_to @class_room_institute, notice: t('body.gidappf_entity.class_room_institute.action.update.notice') }
         format.json { render :show, status: :ok, location: @class_room_institute }
       else
         format.html { render :edit }
@@ -96,7 +95,7 @@ class ClassRoomInstitutesController < ApplicationController
       @class_room_institute.destroy
     end
     respond_to do |format|
-      format.html { redirect_to class_room_institutes_url, notice: 'Class room institute was successfully destroyed.' }
+      format.html { redirect_to class_room_institutes_url, notice: t('body.gidappf_entity.class_room_institute.action.destroy.notice') }
       format.json { head :no_content }
     end
   end
@@ -211,8 +210,7 @@ class ClassRoomInstitutesController < ApplicationController
         flash.now[:alert] = "Vacancy error option: #{x.to_s}."
     end
     if y > 0 then y.times {|i|
-      Vacancy.new(class_room_institute: @class_room_institute,
-        user: current_user, enabled: @class_room_institute.enabled).save}
+      Vacancy.new(class_room_institute: @class_room_institute, enabled: @class_room_institute.enabled).save}
     elsif y < 0
       Vacancy.where(class_room_institute: @class_room_institute).limit(y.abs).destroy_all
     end

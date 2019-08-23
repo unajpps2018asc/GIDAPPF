@@ -13,7 +13,7 @@
 <!-- # GIDAPPF/gidappf/app/views/inputs/_table_for_info_keys.html.erb         # -->
 <!-- ########################################################################## -->
 <% unless input.errors.any? then %>
-  <table>
+  <table class='gidappf-table'>
     <thead>
       <tr>
         <% input.info_keys.order(:id).each do |s| %>
@@ -27,7 +27,7 @@
           <%= nested.hidden_field :key, :value => input.info_keys.order(:id)[nested.index].key %>
             <td>
               <%= nested.fields_for :info_values, input.info_keys.order(:id)[nested.index].info_values.order(:id) do |nested2| %>
-                <%= render "fields_for_info_values", form: nested2, input_id: input.id, nested_index: nested.index %>
+                <div><%= render "fields_for_info_values", form: nested2, input_id: input.id, nested_index: nested.index %></div>
               <% end %>
             </td>
           <% end %>

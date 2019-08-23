@@ -1,0 +1,60 @@
+<%
+##########################################################################
+# Universidad Nacional Arturo Jauretche                                   #
+# Instituto de Ingeniería y Agronomía -Ingeniería en Informática          #
+# Práctica Profesional Supervisada Nro 12 - Segundo cuatrimestre de 2018  #
+#       <<Gestión Integral de Alumnos Para el Proyecto Fines>>            #
+# Tutores:                                                                #
+#       - UNAJ: Dr. Ing. Morales, Martín                                  #
+#       - INSTITUCION: Ing. Cortes Bracho, Oscar                          #
+#       - TAPTA: Dra. Ferrari, Mariela                                    #
+# Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
+###########################################################################
+%>
+<h1><%="#{t('home.action.search.text')}"%></h1>
+<p><%= "#{t('home.action.search.result')} #{ @search.to_s }:"  %></p>
+<% if !@profiles.empty? then%>
+  <table class='gidappf-table gidappf-index'>
+    <thead>
+      <tr>
+        <th style="width: 16.6%;"><%= t('body.gidappf_entity.profile.attributes.name') %></th>
+        <th style="width: 29.8%;"><%= t('body.gidappf_entity.profile.attributes.description') %></th>
+        <th style="width: 16.6%;"><%= t('body.gidappf_entity.profile.attributes.valid_to') %></th>
+        <th style="width: 16.6%;"><%= t('body.gidappf_entity.profile.attributes.valid_from') %></th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @profiles.uniq.each do |profile| %>
+        <tr>
+          <td style="width: 16.6%;">
+            <% if !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 20.0).id.to_s) %>
+              <%= link_to "#{profile.name}", profile %>
+            <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && !profile.name_and_lastname.eql?('  ') %>
+              <%= link_to profile.name_and_lastname, profile %>
+            <% elsif !params[:role_ids].nil? && params[:role_ids].include?(Role.find_by(enabled: true, level: 29.0).id.to_s) && profile.name_and_lastname.eql?('  ') %>
+              <%= link_to "#{profile.name}", profile %>
+            <% else %>
+              <%= link_to "#{profile.id.to_s}", profile %>
+            <% end %>
+          </td>
+          <td style="width: 29.8%;">
+            <% if profile.description.length > 50 then %>
+              <%= profile.description.first(50)+"…" %>
+            <% else %>
+              <%= profile.description %>
+            <% end %>
+          </td>
+          <td style="width: 16.6%;"><%= profile.valid_to.strftime("%d/%m/%Y") %></td>
+          <td style="width: 16.6%;"><%= profile.valid_from.strftime("%d/%m/%Y") %></td>
+          <td style="width: 10%;"><%= link_to t('body.common_entity.action.edit'), edit_profile_path(profile) %></td>
+          <td style="width: 10%;"><%= link_to t('body.common_entity.action.destroy'), profile, method: :delete, data: { confirm: t('body.common_entity.action.confirm_msg') } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h2><%="#{t('home.action.search.empty')}"%></h2>
+<% end %>
+<%= link_to ' ', root_path, class: "gidappf-home-button gidappf-home-button--large" %>

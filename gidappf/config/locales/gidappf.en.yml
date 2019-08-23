@@ -90,6 +90,7 @@ en:
         confirm_msg: 'Are you sure?'
 
     gidappf_entity:
+
       campus_magnament:
         model: 'Campus magnament'
         models: 'Campus magnaments'
@@ -244,6 +245,11 @@ en:
             notice: 'Profile was successfully updated.'
           destroy:
             notice: 'Profile was successfully destroyed.'
+          academic_history:
+            button: 'Show academic history of '
+            title: 'Academic history of '
+            thead_calif: 'Calification instances'
+            thead_abs: 'Absences'
 
       role:
         model: 'Role'
@@ -340,8 +346,13 @@ en:
           trayect_error: 'Choose one of'
           words_error: 'Words error'
 
+  home:
+    action:
+      search:
+        text: 'Profiles'
+        button: 'Search'
+        result: 'Result of '
+        empty: 'Not found'
 
-  sidebar:
-    bar: 'bar'
   footer:
     mesg_foot: 'Is licensed under the GNU Lesser General Public License v3.0'

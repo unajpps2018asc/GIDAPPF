@@ -24,7 +24,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% @class_room_institutes.each do |class_room_institute| %>
+                <% class_room_institutes_2_modal.each do |class_room_institute| %>
                   <tr>
                     <td style="width: 35%;"><%= button_to( class_room_institute.to_list, parametrize_class_room_institute_path(class_room_institute), :method => :get, :disabled => disable_cri(class_room_institute.id)) %></td>
                     <td style="width: 35%;">

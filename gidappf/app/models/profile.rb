@@ -158,6 +158,28 @@ class Profile < ApplicationRecord
     mins
   end
 
+  def is_student
+    out = false
+    unless self.documents.nil? || self.documents.empty? then
+      out = !RoleAccess.get_inputs_emails(self.documents.first.user).include?("docent@gidappf.edu.ar")
+    end
+    out
+  end
+
+  def name_and_lastname
+    val = " "
+    unless self.profile_keys.nil? || self.profile_keys.empty? || !ProfileKey.first.id.eql?(1) then
+      unless self.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value.nil? then
+        val << self.profile_keys.find_by(key: Profile.first.profile_keys.find(1).key).profile_values.first.value.dup
+      end
+      val << " "
+      unless self.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value.nil? then
+        val << self.profile_keys.find_by(key: Profile.first.profile_keys.find(2).key).profile_values.first.value.dup
+      end
+    end
+    val
+  end
+
   private
   #######################################################################
   # Usado en la validacion.                                             #

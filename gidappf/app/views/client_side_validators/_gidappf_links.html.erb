@@ -17,4 +17,4 @@
 <!--############################################################################-->
 <!-- Datos inmodificables-->
 <!--Aplicacion de la estrategia en el formmulario elegido para el campo -->
-<strong><%= link_to valuable_gidappf_field.object.value.to_s.gsub(/[^0-9]/, ''),GlobalID::Locator.locate(valuable_gidappf_field.object.value)  %></strong>
+<strong class="client_side_validator-link"><%= link_to valuable_gidappf_field.object.value.to_s.gsub(/[^0-9]/, ''),GlobalID::Locator.locate(valuable_gidappf_field.object.value)  %></strong>

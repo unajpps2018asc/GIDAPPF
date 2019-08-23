@@ -6,10 +6,10 @@ Linux archlinux 5.1.16-arch1-1-ARCH #1 SMP PREEMPT Wed Jul 3 20:23:07 UTC
 2019 x86_64 GNU/Linux
 
 $ git --version
-git version 2.22.0
+git version 2.23.0
 
 $ docker --version
-Docker version 18.09.7-ce, build 2d0083d657
+Docker version 19.03.1-ce, build 74b1e89e8a
 
 $ docker-compose --version
 docker-compose version 1.24.1, build unknown
@@ -87,7 +87,7 @@ minitest-utils (0.4.4)
 mutex_m (default: 0.1.0)
 net-telnet (0.2.0)
 nio4r (2.3.1)
-nokogiri (1.10.3)
+nokogiri (1.10.4)
 openssl (default: 2.1.2)
 orm_adapter (0.5.0)
 ostruct (default: 0.1.0)

@@ -89,6 +89,7 @@ es:
         confirm_msg: '¿Estás seguro?'
 
     gidappf_entity:
+
       campus_magnament:
         model: 'Gestión del campus'
         models: 'Gestiones del campus'
@@ -238,6 +239,11 @@ es:
             notice: 'Perfil actualizado correctamente.'
           destroy:
             notice: 'Perfil borrado.'
+          academic_history:
+            button: 'Ver historia académica de '
+            title: 'Historia académica de '
+            thead_calif: 'Instancias de calificaciones'
+            thead_abs: 'Ausencias'
 
       role:
         model: 'Rol'
@@ -298,7 +304,6 @@ es:
               title: 'Elegí una o varias comisiones'
               button: 'Asignación de aulas'
 
-
       time_sheet:
         model: 'Temporada'
         models: 'Temporadas'
@@ -335,7 +340,13 @@ es:
           trayect_error: 'Elegir uno de'
           words_error: 'Error de frase.'
 
-  sidebar:
-    bar: 'barra '
+  home:
+    action:
+      search:
+        text: 'Perfiles'
+        button: 'Buscar'
+        result: 'Resultados de '
+        empty: 'No hay coincidencias'
+
   footer:
     mesg_foot: 'Está licenciado bajo la GNU Lesser General Public License v3.0'

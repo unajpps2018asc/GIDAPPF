@@ -153,6 +153,18 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
   color: $percent13;
 }
 
+#ModalAcademicHistory.modal.fade.in div.modal-dialog div.modal-content div.modal-header h4#exampleModalLabel.modal-title{
+    float: inline-start;
+}
+
+#ModalAcademicHistory.modal.fade.in div.modal-dialog div.modal-content div.modal-header button.close{
+    float: inline-end;
+}
+
+#ModalAcademicHistory.modal.fade.in div.modal-dialog div.modal-content div.modal-footer a.btn.btn-info{
+  color: $percent13;
+}
+
 .gidappf-table tbody tr td div.tablemodal{
   overflow-x:auto;
   width: 120px;
@@ -214,6 +226,49 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
 	font-size: 22px;
 }
 
+.gidappf-home-button {
+	border: 2px solid lightgrey;
+	background-color: #fff;
+	font-size: 16px;
+	height: 2.5em;
+	width: 2.5em;
+	border-radius: 999px;
+	position: relative;
+  float: right;
+  margin-right: 3%;
+  margin-bottom: 2%;
+  margin-top: -4%;
+
+	&:after,
+	&:before {
+		content: "\0023ee";
+		display: block;
+		// background-color: grey;
+		position: absolute;
+		top: 25%;
+		left: 30%;
+		// transform: translate(-50%, -50%);
+	}
+
+	&:before {
+		height: 1em;
+		width: 0.2em;
+	}
+
+	&:after {
+		height: 0.2em;
+		width: 1em;
+	}
+}
+
+.gidappf-home-button--small {
+	font-size: 12px;
+}
+
+.gidappf-home-button--large {
+	font-size: 28px;
+}
+
 .gidappf-background footer.gidappf-footer hr{
   margin-top: 0.5%;
   margin-bottom: 1%;
@@ -227,3 +282,10 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
   width: 130px;
   height: 130px;
 }
+
+// .client_side_validator-link{
+//   div div &{
+//     background: #ffff00;
+//   }
+// }
+// html body.gidappf-background main.container.gidappf-main form table tbody tr td div.field{ background-color: #F1F2F1; }

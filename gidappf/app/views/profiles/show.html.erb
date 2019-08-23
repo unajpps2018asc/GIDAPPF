@@ -33,6 +33,10 @@
   <strong><%= @profile.valid_from %></strong>
 </p>
 
+<% if @profile.is_student then %>
+  <%= render 'modal_academic_history', profile: @profile %>
+<% end %>
+
 <% @profile.profile_keys.order(:attrib_id).each do |s| %>
   <p>
     <%= s.key %>

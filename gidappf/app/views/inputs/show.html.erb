@@ -23,7 +23,7 @@
     <% end %></p>
   <% end %>
 <% else %>
-  <table>
+  <table class='gidappf-table'>
     <thead>
        <tr>
           <% @input.info_keys.order(:attrib_id).each do |s| %>
@@ -37,9 +37,9 @@
           <td>
             <% s.info_values.order(:id).each do |e| %>
               <% if e.value.to_s.first(6).eql?('gid://') then %>
-                <p><%= e.value.to_s.gsub(/[^0-9]/, '') %></p>
+                <div><%= e.value.to_s.gsub(/[^0-9]/, '') %></div>
               <% else %>
-                <p><%= e.value.to_s %></p>
+                <div><%= e.value.to_s %></div>
               <% end %>
             <% end %>
           </td>

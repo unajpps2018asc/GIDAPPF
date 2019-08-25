@@ -48,8 +48,8 @@ body.gidappf-background main.container.gidappf-main.container {
   }
 
 .gidappf-table thead tr th {
-    padding-left: 0.5%;
-    padding-right: 0.5%;
+    // padding-left: 0.5%;
+    // padding-right: 0.5%;
     padding-bottom: 0.5%;
     padding-top: 0.5%;
     text-align: center;
@@ -78,8 +78,8 @@ body.gidappf-background main.container.gidappf-main.container {
 }
 
 .gidappf-table tbody tr td {
-    padding-left: 0.5%;
-    padding-right: 0.5%;
+    // padding-left: 0.5%;
+    // padding-right: 0.5%;
     padding-bottom: 0.5%;
     padding-top: 0.5%;
     a:hover {
@@ -99,14 +99,14 @@ body.gidappf-background main.container.gidappf-main.container {
 .gidappf-table tbody tr td div:nth-child(even) {
     background: $percent40;
     color: black;
-    margin-left: -1.5%;
-    margin-right: -1.5%;
+    // margin-left: -1.5%;
+    // margin-right: -0.9%;
   }
 .gidappf-table tbody tr td div:nth-child(odd) {
     background: $percent27;
     color: black;
-    margin-left: -1.5%;
-    margin-right: -1.5%;
+    // margin-left: -1.5%;
+    // margin-right: -0.9%;
   }
 
 html body.gidappf-background main.container.gidappf-main table.gidappf-table.gidappf-index tbody tr td label{
@@ -193,6 +193,10 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
 .gidappf-table tbody tr td div.tablemodal table tbody tr td{
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.gidappf-background main.container.gidappf-main form div.actions{
+  margin-top: 1%;
 }
 
 .gidappf-plus-button {
@@ -294,8 +298,3 @@ html body.gidappf-background main.container.gidappf-main div.alert.alert-dismiss
   width: 130px;
   height: 130px;
 }
-
-.field:has(> .client_side_validator-link) {
-    background: #ffff00;
-}
-// html body.gidappf-background main.container.gidappf-main form table tbody tr td div.field{ background-color: #F1F2F1; }

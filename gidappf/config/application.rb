@@ -32,8 +32,8 @@ module Gidappf
       address:              ENV['SMTP_ADDRESS'],
       port:                 ENV['SMTP_PORT'].to_i,
       domain:               ENV['SMTP_DOMAIN'],
-      user_name:            ENV['SMTP_USERNAME'],
-      password:             ENV['SMTP_PASSWORD'],
+      user_name:            Rails.application.credentials.development[:smtp_username],
+      password:             Rails.application.credentials.development[:smtp_password],
       authentication:       ENV['SMTP_AUTH'],
       enable_starttls_auto: ENV['SMTP_ENABLE_STARTTLS_AUTO'] == 'true'
     }

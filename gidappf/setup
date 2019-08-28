@@ -1,9 +1,0 @@
-^C[1mTraceback[m (most recent call last):
-	6: from <internal:gem_prelude>:2:in `<internal:gem_prelude>'
-	5: from <internal:gem_prelude>:2:in `require'
-	4: from /usr/local/lib/ruby/site_ruby/2.5.0/rubygems.rb:117:in `<top (required)>'
-	3: from /usr/local/lib/ruby/site_ruby/2.5.0/rubygems.rb:1394:in `<module:Gem>'
-	2: from /usr/local/lib/ruby/site_ruby/2.5.0/rubygems.rb:1394:in `require'
-	1: from /usr/local/lib/ruby/site_ruby/2.5.0/rubygems/specification.rb:14:in `<top (required)>'
-/usr/local/lib/ruby/site_ruby/2.5.0/rubygems/specification.rb:14:in `require': [1m[1;4mInterrupt
-[m

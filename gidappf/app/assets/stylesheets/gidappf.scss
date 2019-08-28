@@ -9,6 +9,13 @@ $percent27: #d3d6db;
 $percent20: #415f9d;
 $percent13: #233b6e;
 
+header nav.navbar.navbar-default div.container div.navbar-header a.navbar-brand img.gidappf-img-nav{
+  margin-top: -14px;
+  max-width: 64px;
+  height: auto;
+  opacity: 0.7;
+}
+
 //layout nav
 header nav.navbar.navbar-default div.container div.navbar-header button.navbar-toggle{
   float: right;

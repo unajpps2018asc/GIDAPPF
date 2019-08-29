@@ -92,7 +92,7 @@ class ProfilePolicy < ApplicationPolicy
     self.set_is_sysadmin
     self.set_roleaccess
     @user.email.eql?( 'john@example.com')||
-    @issysadmin||is_my_profile?||@roleaccess>29.9
+    @issysadmin||is_my_profile?||@roleaccess>28
   end
 
   ##############################################################################

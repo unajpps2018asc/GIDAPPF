@@ -43,8 +43,13 @@ class UsercommissionrolePolicy < ApplicationPolicy
     @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>29.0
   end
 
+  #########################################################################
+  # Políticas de acceso para profiles_controller                          #
+  #########################################################################
   def generate?
-    set_campus_segmentation?
+    self.set_is_sysadmin
+    self.set_roleaccess
+    @user.email.eql?( 'john@example.com')||@issysadmin||@roleaccess>28.0
   end
 
 end

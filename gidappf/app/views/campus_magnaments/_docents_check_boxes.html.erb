@@ -23,7 +23,7 @@
             "'});",
         :disabled  => timme_sheet_hour.time_sheet.selectable?) %>
     <%= label_tag nil ,class: 'gidappf-small_label' do %>
-      <div><%="#{timme_sheet_hour.occupied_hour_fmt}#{timme_sheet_hour.matter.name}#{timme_sheet_hour.time_sheet.commission_info}"%></div>
+      <p><%="#{timme_sheet_hour.occupied_hour_fmt}#{timme_sheet_hour.matter.name}#{timme_sheet_hour.time_sheet.commission_info}"%></p>
     <%  end %>
   <% end %>
 <% end %>

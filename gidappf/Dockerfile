@@ -11,9 +11,9 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 # Archivo GIDAPPF/Dockerfile                                              #
 ###########################################################################
-FROM ruby:2.6.3-alpine3.9
+FROM ruby:2.5-alpine
 
-RUN apk update && apk upgrade && apk add build-base nodejs postgresql-dev nano tzdata && gem update --default
+RUN apk update && apk add build-base nodejs postgresql-dev
 
 RUN mkdir /app
 WORKDIR /app
@@ -24,7 +24,5 @@ RUN bundle install --binstubs
 COPY . .
 
 LABEL maintainer="Daniel Rosatto <danielrosatto@gmail.com>"
-
-EXPOSE 25/tcp 465/tcp 587/tcp
 
 CMD puma -C config/puma.rb

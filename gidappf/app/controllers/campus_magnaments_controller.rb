@@ -100,7 +100,8 @@ class CampusMagnamentsController < ApplicationController
       !profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key).nil? && #"Elección de turno hasta existente"
       profile_key_24.profile.profile_keys.find_by(key:ProfileKey.find(25).key). #'Elección de turno hasta[Hr]:'
         profile_values.first.value.to_i*60 >= time_categ[2]*60+time_categ[3] &&  # si es menor o igual a 'Elección de turno hasta[Hr]:'
-      Matter.find(profile_key_24.profile.profile_keys.find_by(key: ProfileKey.find(49).key).profile_values.first.value.to_i).trayect.upcase.eql?(trayect.upcase) &&
+      !profile_key_24.profile.profile_keys.find_by(key: ProfileKey.find(49).key).profile_values.first.value.empty? &&  # si tiene materia asignada
+      Matter.find(profile_key_24.profile.profile_keys.find_by(key: ProfileKey.find(49).key).profile_values.first.value.to_i).trayect.upcase.eql?(trayect.upcase) &&  # si es la materia del horario
       selected_period_profile(profile_key_24.profile)
     end
     out

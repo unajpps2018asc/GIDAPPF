@@ -167,7 +167,7 @@ class CampusMagnamentsController < ApplicationController
   # Devuelve: true si el perfíl está dentro del período.                             #
   ####################################################################################
     def selected_period_profile(profile)
-      start_period >= profile.valid_from && profile.valid_to >= end_period
+      start_period <= profile.valid_from && profile.valid_to <= end_period
     end
 
   ########################################################################################################

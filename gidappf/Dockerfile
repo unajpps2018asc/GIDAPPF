@@ -13,7 +13,7 @@
 ###########################################################################
 FROM ruby:2.5-alpine
 
-RUN apk update && apk add build-base nodejs postgresql-dev
+RUN apk update && apk add build-base nodejs postgresql-dev tzdata
 
 RUN mkdir /app
 WORKDIR /app
@@ -26,3 +26,5 @@ COPY . .
 LABEL maintainer="Daniel Rosatto <danielrosatto@gmail.com>"
 
 CMD puma -C config/puma.rb
+
+RUN echo "America/Argentina/Buenos_Aires" >> /etc/timezone

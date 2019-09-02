@@ -73,8 +73,8 @@ module GidappfTemplatesTools
   # Metodo privado usado en self.students_list_to_circulate_at_hour(time_sheet_hour).  #
   ######################################################################################
   def self.to_queue_sidekiq(current, time_sheet_hour)
-    time_until_in = Time.new(current.year.to_i,current.month.to_i,current.day.to_i, time_sheet_hour.from_hour.to_i, time_sheet_hour.from_min.to_i, 00)
-    time_until_out = Time.new(current.year.to_i,current.month.to_i,current.day.to_i, time_sheet_hour.to_hour.to_i, time_sheet_hour.to_min.to_i, 00)
+    time_until_in = Time.new(current.year.to_i,current.month.to_i,current.day.to_i, time_sheet_hour.from_hour.to_i, time_sheet_hour.from_min.to_i, 00).in_time_zone(ENV['TZ'])
+    time_until_out = Time.new(current.year.to_i,current.month.to_i,current.day.to_i, time_sheet_hour.to_hour.to_i, time_sheet_hour.to_min.to_i, 00).in_time_zone(ENV['TZ'])
     GidappfStudentsListDealerJob.set(wait_until: time_until_in).perform_later(time_sheet_hour.id)
     GidappfStudentsListAbsencesJob.set(wait_until: time_until_out).perform_later(time_sheet_hour.id)
   end

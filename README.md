@@ -36,7 +36,7 @@ PARA SUMARSE AL DESARROLLO DEL PROYECTO, Y EJECUTAR EL PROYECTO, DESDE UNA TERMI
 * https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing
 * Luego continuar con el comando de despliegue:
 ``` [bash]
-  $ docker-compose up --build -d && docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init && sudo rm -r storage/!(seeds)
+  $ docker-compose up --build -d && docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init && docker-compose exec website cp /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime && sudo rm -r storage/!
 ```
 
 * AHORA SE PUEDE VISITAR EL SITIO http://localhost:3000 y crear el primmer usuario admin.

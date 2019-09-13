@@ -106,6 +106,6 @@ gem 'tzinfo-data'
 ###########################################################################
 gem "pundit"
 gem "rack", ">= 2.0.6"
-gem 'devise'
+gem 'devise', ">= 4.7.1"
 gem "nokogiri", ">= 1.10.4"
 #gem 'devise-jwt'

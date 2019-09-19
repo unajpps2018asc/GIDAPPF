@@ -20,11 +20,13 @@ Además del proyecto de desarrollo de la aplicación web a medida del Plan Fines
 * git
 * docker
 * docker-compose
+* bash (para la ejecución del despliegue)
 
 **Ultimas versiones Testeadas de las dependencias indicadas**
 * git version 2.22.0
 * Docker version 18.09.7-ce, build 2d0083d657
 * docker-compose version 1.24.1, build unknown
+* GNU bash, versión 5.0.9(1)-release (x86_64-pc-linux-gnu)
 
 PARA SUMARSE AL DESARROLLO DEL PROYECTO, Y EJECUTAR EL PROYECTO, DESDE UNA TERMINAL:
 ``` [bash]
@@ -36,18 +38,18 @@ PARA SUMARSE AL DESARROLLO DEL PROYECTO, Y EJECUTAR EL PROYECTO, DESDE UNA TERMI
 * https://drive.google.com/file/d/11GeFXzpwyMSF0GsswrxIq0LwyVJU7_Gu/view?usp=sharing
 * Luego continuar con el comando de despliegue:
 ``` [bash]
-  $ docker-compose up --build -d && docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init && docker-compose exec website cp /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime && sudo rm -r storage/!
+  $ docker-compose up --build -d && docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init && docker-compose exec website cp /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime && sudo rm -R storage/!(seeds)
 ```
 
 * AHORA SE PUEDE VISITAR EL SITIO http://localhost:3000 y crear el primmer usuario admin.
 * En el caso de necesitar poblar la base de datos con valores de muestra, ingresar en la terminal:
 ``` [bash]
-  $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show && docker-compose exec --user "$(id -u):$(id -g)"  website rake documents_collector:schedule_init
+  $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
 ```
 
 * Si se apaga el servidor anfitrión y es necesario reiniciar el proyecto, en la terminal:
 ``` [bash]
-  $ docker-compose up -d && docker-compose exec --user "$(id -u):$(id -g)"  website rake documents_collector:schedule_init
+  $ docker-compose up -d && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
 ```
 
 En el caso en el que en el servidor anfitrión mantenga el servicio 'inode-tools', indicador de eventos de FileSystem los mensajes de este servicio se detendrán con:

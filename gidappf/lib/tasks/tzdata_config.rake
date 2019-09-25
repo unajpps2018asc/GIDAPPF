@@ -9,20 +9,17 @@
 #    - ORGANIZACIÓN: Mg. Ing. Diego Encinas                               #
 #    - TAPTA: Dra. Ferrari, Mariela                                       #
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
-# Archivo GIDAPPF/Dockerfile                                              #
+# Archivo GIDAPPF/gidappf/lib/tasks/tzdata_config.rake                    #
 ###########################################################################
-FROM ruby:2.5-alpine
-
-RUN apk update && apk add build-base nodejs postgresql-dev tzdata
-
-RUN mkdir /app
-WORKDIR /app
-
-COPY Gemfile Gemfile.lock ./
-RUN bundle install --binstubs
-
-COPY . .
-
-LABEL maintainer="Daniel Rosatto <danielrosatto@gmail.com>"
-
-CMD puma -C config/puma.rb
+namespace :configtzdata do
+  desc "[GIDAPPF]: Configuring tzdata..."
+  task call_sys: :environment do
+    system ("echo '#{ENV['TZ']}' >> /etc/timezone");
+    system ("cp /usr/share/zoneinfo/#{ENV['TZ']} /etc/localtime");
+    if File.exist?("/etc/timezone") && File.exist?("/etc/localtime") then
+      system ("echo '[GIDAPPF]: Configuring tzdata... complete!' ")
+    else
+      system ("echo '[GIDAPPF]: Configuring tzdata... ERROR' ")
+    end
+  end
+end

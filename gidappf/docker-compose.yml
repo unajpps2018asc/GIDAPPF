@@ -12,11 +12,13 @@
 # Archivo GIDAPPF/docker-compose.yml                                      #
 ###########################################################################
 # Deploy:
-# $ docker-compose up --build -d && docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
+# $ docker-compose up --build -d && \
+#     docker-compose exec --user "$(id -u):$(id -g)" website rails db:setup && \
+#     sudo rm -R storage/!(seeds)
 # Restart after poweroff:
-# $ docker-compose up -d && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
+# $ docker-compose up -d
 # Populate db:
-# $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show && docker-compose exec --user "$(id -u):$(id -g)" website rake documents_collector:schedule_init
+# $ docker-compose exec --user "$(id -u):$(id -g)" website rake db:seed:populate_show
 # Stop and clean all :
 # $ docker-compose down -v
 # Stop:
@@ -59,6 +61,28 @@ services:
 
     volumes:
       - '.:/app'
+    env_file:
+      - '.env'
+
+  config_tzdata:
+    build: .
+    command: bundle exec rake configtzdata:call_sys
+    volumes:
+      - .:/app
+    depends_on:
+      - 'website'
+      - 'sidekiq'
+      - 'postgres'
+    env_file:
+      - '.env'
+
+  schedule_init_job:
+    build: .
+    command: bundle exec rake documents_collector:schedule_init
+    volumes:
+      - .:/app
+    depends_on:
+      - 'config_tzdata'
     env_file:
       - '.env'
 

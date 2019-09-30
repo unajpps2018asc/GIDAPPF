@@ -1,0 +1,161 @@
+// Place all the styles related to the about controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+[class*="col-"] {
+    width: 100%;
+}
+
+/* Mobile first: */
+@media only screen and (max-width: 768px) {
+    html body header.col-12 div.col-9{
+
+    }
+}
+
+ /* Pantallas mayores o iguales a 768 pixeles*/
+@media only screen and (min-width: 767px) {
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+}
+
+.about-header{
+  padding-top: 0.5%;
+  padding-right: 1%;
+  padding-left: 1%;
+  width: 98%;
+}
+
+.header-iia{
+  background-color: lightgray;
+  margin-top: 0;
+  display: inline-block;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: black;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-width: 1px;
+}
+html body.gidappf-background main.container.gidappf-main div.about-header div.header-iia.col-12 a{
+  text-align: -moz-center;
+}
+
+.about-header div.header-iia.col-12 img.col-4{
+  margin: 1%;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.about-nav{
+  margin-top: -1%;
+  padding-bottom: 0;
+  padding-right: 1%;
+  padding-left: 1%;
+  width: 98%;
+}
+.nav-iia{
+  background-color: lightgray;
+  margin-bottom: 0;
+  text-align: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+}
+.about-nav h1{
+  margin: 0;
+  padding: 1%;
+}
+.content{
+  padding-top: 1%;
+  padding-right: 1%;
+  padding-left: 1%;
+  width: 98%;
+}
+.content div.content-iia{
+  background-color: lightgray;
+  margin-bottom: 1%;
+  text-align: center;
+  border-radius: 20px;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.content div.content-iia.col-12 ul{
+  margin: 0;
+  list-style-type: none;
+  text-align: -moz-center;
+  padding-bottom: 1%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+}
+.content div.content-iia.col-12 ul li div p{
+  margin: 0;
+}
+.content div.content-iia.col-12 ul li div{
+  padding-top: 1%;
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.content div.content-iia.col-12 ul li div.item.col-11 div.item-content.col-10 div.photo.col-1{
+  padding: 0;
+}
+
+.content div.content-iia.col-12 ul li div.item div.item-content{
+  background-color: white;
+  text-align: center;
+  border-radius: 20px;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.content div.content-iia.col-12 ul li div.item.col-11 div.item-content.col-10 div.photo.col-1{
+  display: inline-block;
+  margin-bottom: 1%;
+  background-color: lightblue;
+  border-radius: 50%;
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+  height: 8.33%;
+}
+
+.photo1{
+  border-radius: 50%;
+}
+
+html body div.content div.content-iia.col-12 ul li div.item.col-11 div.item-content.col-10 div.desc.col-8{
+  display: inline-block;
+  margin-bottom: 1%;
+}
+.about-footer{
+  padding-top: 0;
+  padding-right: 1%;
+  padding-left: 1%;
+  width: 98%;
+}
+.footer-iia{
+  /* background-color: #d3d6db; */
+  margin-bottom: 1%;
+  text-align: end;
+  border-radius: 20px;
+}

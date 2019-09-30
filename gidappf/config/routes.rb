@@ -14,6 +14,7 @@
 
 # require 'sidekiq/web'
 Rails.application.routes.draw do
+  get 'about/team'
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     # mount Sidekiq::Web => '/sidekiq'
     get 'members/current'

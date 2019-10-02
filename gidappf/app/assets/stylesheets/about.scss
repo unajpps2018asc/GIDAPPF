@@ -38,48 +38,24 @@
 .header-iia{
   background-color: lightgray;
   margin-top: 0;
-  display: inline-block;
-  text-align: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-radius: 20px;
   border: black;
-  border-top-style: solid;
-  border-right-style: solid;
-  border-left-style: solid;
+  border-style: solid;
   border-width: 1px;
+  display: flex;
+  justify-content: center;
 }
 html body.gidappf-background main.container.gidappf-main div.about-header div.header-iia.col-12 a{
   text-align: -moz-center;
 }
 
-.about-header div.header-iia.col-12 img.col-4{
+.about-header div.header-iia.col-12 img.col-5{
   margin: 1%;
   border: black;
   border-style: solid;
   border-width: 1px;
 }
 
-.about-nav{
-  margin-top: -1%;
-  padding-bottom: 0;
-  padding-right: 1%;
-  padding-left: 1%;
-  width: 98%;
-}
-.nav-iia{
-  background-color: lightgray;
-  margin-bottom: 0;
-  text-align: center;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border: black;
-  border-style: solid;
-  border-width: 1px;
-}
-.about-nav h1{
-  margin: 0;
-  padding: 1%;
-}
 .content{
   padding-top: 1%;
   padding-right: 1%;

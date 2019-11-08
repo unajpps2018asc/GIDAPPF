@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  commission: one
+  commission: incoming
   start_date: 2019-01-18 10:31:53
   end_date: 2019-01-18 10:31:53
 
 two:
-  commission: two
+  commission: students_one
   start_date: 2019-01-18 10:31:53
   end_date: 2019-01-18 10:31:53

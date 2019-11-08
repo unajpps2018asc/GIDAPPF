@@ -5,7 +5,7 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @commission = commissions(:one)
+    @commission = commissions(:incoming)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
     # @auth_h_commission = Devise::JWT::TestHelpers.auth_headers(headers, users(:user_test_full_access))
   end

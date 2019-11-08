@@ -3,9 +3,9 @@
 one:
   role: anyrole
   user: user_test_full_access
-  commission: one
+  commission: incoming
 
 two:
   role: ingress_disable
   user: anyuser
-  commission: two
+  commission: students_one

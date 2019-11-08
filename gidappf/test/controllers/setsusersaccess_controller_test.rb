@@ -7,7 +7,7 @@ class SetsusersaccessControllerTest < ActionDispatch::IntegrationTest
   setup do
     @usercommissionrole = usercommissionroles(:one)
     @role = roles(:anyrole)
-    @commission = commissions(:one)
+    @commission = commissions(:incoming)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
     # @auth_h_sets = Devise::JWT::TestHelpers.auth_headers(headers, users(:user_test_full_access))
   end

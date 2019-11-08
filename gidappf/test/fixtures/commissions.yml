@@ -1,14 +1,74 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+incoming:
   name: Ingresantes
-  description: Comision inicial de ingresantes
+  description: Comisión inicial de ingresantes
   start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
   end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
   user_id: 1
 
-two:
-  name: Commission two
-  description: A second commission
+students_one:
+  name: Estudiantes 1 TM
+  description: Estudiantes del primer trayecto turno mañana
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_two:
+  name: Estudiantes 2 TM
+  description: Estudiantes del segundo trayecto turno mañana
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_three:
+  name: Estudiantes 3 TM
+  description: Estudiantes del tercer trayecto turno mañana
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_one:
+  name: Estudiantes 1 TM
+  description: Estudiantes del primer trayecto turno mañana
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_two:
+  name: Estudiantes 2 TM
+  description: Estudiantes del segundo trayecto turno mañana
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_four:
+  name: Estudiantes 1 TT
+  description: Estudiantes del primer trayecto turno tarde
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_five:
+  name: Estudiantes 2 TT
+  description: Estudiantes del segundo trayecto turno tarde
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_six:
+  name: Estudiantes 3 TT
+  description: Estudiantes del tercer trayecto turno tarde
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_seven:
+  name: Estudiantes 1 TN
+  description: Estudiantes del primer trayecto turno noche
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_eight:
+  name: Estudiantes 2 TN
+  description: Estudiantes del segundo trayecto turno noche
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+
+students_nine:
+  name: Estudiantes 3 TN
+  description: Estudiantes del tercer trayecto turno noche
   start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
   end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>

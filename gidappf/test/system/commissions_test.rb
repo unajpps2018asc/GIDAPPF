@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class CommissionsTest < ApplicationSystemTestCase
   setup do
-    @commission = commissions(:one)
+    @commission = commissions(:incoming)
   end
 
   test "visiting the index" do

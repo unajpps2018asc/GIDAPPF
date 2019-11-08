@@ -1,13 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: Commission One
-  description: A first commission
-  start_date: <%= Time.rfc3339('2029-12-31T14:00:00-10:00') %>
-  end_date: <%= Time.rfc3339('2030-12-31T14:00:00-10:00') %>
+  name: Ingresantes
+  description: Comision inicial de ingresantes
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>
+  user_id: 1
 
 two:
   name: Commission two
   description: A second commission
-  start_date: <%= Time.rfc3339('2031-12-31T14:00:00-10:00') %>
-  end_date: <%= Time.rfc3339('2032-12-31T14:00:00-10:00') %>
+  start_date: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+  end_date: <%= Time.rfc3339('3000-12-31T14:00:00-10:00') %>

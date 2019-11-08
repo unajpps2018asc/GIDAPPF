@@ -1,15 +1,51 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+anyrole:
   name: MyString
   description: MyText
-  created_at: 2018-12-16 20:28:12
   enabled: false
   level: 1.5
-
-two:
-  name: MyString
-  description: MyText
-  created_at: 2018-12-16 20:28:12
+ingress_disable:
+  name: Ingresante
+  description: Comienza el tramite para participar del Plan Fines, se reserva el email. Cambio de clave, ya realizada
+  enabled: false
+  level: 10.0
+student_enable:
+  name: Estudiante
+  description: Usuario que participa de las cursadas y esta asignado al Plan Fines
   enabled: true
-  level: 45.5
+  level: 20.0
+secretary_enable:
+  name: Secretario
+  description: Usuario planificador de las cursadas del Plan Fines
+  enabled: true
+  level: 30.0
+admin_enable:
+  name: Administrador
+  description: Usuario diseñador de las cursadas del Plan Fines
+  enabled: true
+  level: 40.0
+auto_enable:
+  name: Autogestionado
+  description: Usuario que se registra sin intervención de la administración
+  enabled: true
+  level: 0
+ingress_enable:
+  name: Ingresante
+  description: Comienza el tramite para participar del Plan Fines, se reserva el email. Si trata de ingresar al sistema, accede al sistema de cambio de clave, ya que la clave es por defecto
+  enabled: true
+  level: 10.0
+docent_enable:
+  name: Docente
+  description: Responsable de la comisión asignada, ya sea luego de ser autogestionado o un perfil
+  enabled: true
+  level: 29.0
+docent_disable:
+  name: Docente
+  description: Responsable de la comisión asignada, ya sea luego de ser autogestionado o un perfil, con contraseña insegura
+  enabled: false
+  level: 29.0
+student_disable:
+  name: Estudiante
+  description: Usuario que participa de las cursadas y esta asignado al Plan Fines, pero con contraseña insegura
+  enabled: false
+  level: 20.0

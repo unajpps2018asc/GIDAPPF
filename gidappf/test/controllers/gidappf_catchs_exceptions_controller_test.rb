@@ -5,14 +5,14 @@ class GidappfCatchsExceptionsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   test "should get disabled_cookies_detect" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get gidappf_catchs_exceptions_disabled_cookies_detect_url
     assert_response :success
     sign_out :user
   end
 
   test "should get first_password_detect" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get gidappf_catchs_exceptions_first_password_detect_url
     assert_response :success
     sign_out :user

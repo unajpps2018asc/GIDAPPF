@@ -7,39 +7,39 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @commission = commissions(:one)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    # @auth_h_commission = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # @auth_h_commission = Devise::JWT::TestHelpers.auth_headers(headers, users(:user_test_full_access))
   end
 
   test "should get index" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get commissions_url#, headers: @auth_h_commission
     assert_response :success
     sign_out :user
   end
 
   test "should get index_unlogged" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get commissions_url
     assert_response :success
     sign_out :user
   end
 
   test "should get new" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get commissions_url#, headers: @auth_h_commission
     assert_response :success
     sign_out :user
   end
 
   test "should get new_unlogged" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get new_commission_url
     assert_response :success
     sign_out :user
   end
 
   test "should create commission" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     assert_difference('Commission.count') do
       post commissions_url,
         params: {
@@ -57,14 +57,14 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show commission" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get commission_url(@commission)#, headers: @auth_h_commission
     assert_response :success
     sign_out :user
   end
 
   test "should get edit" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     @commission.description="A second commission"
     @commission.end_date=Time.rfc3339('2032-12-31T14:00:00-10:00')
     @commission.name="Commission two"
@@ -78,7 +78,7 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update commission" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     patch commission_url(@commission),
       params: {
           commission: {
@@ -92,7 +92,7 @@ class CommissionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy commission" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     @commission.description="A second commission"
     @commission.end_date=Time.rfc3339('2032-12-31T14:00:00-10:00')
     @commission.name="Commission two"

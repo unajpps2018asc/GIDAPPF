@@ -4,12 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+user_test_full_access:
   email: john@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'One_passw0rd!') %>
   created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
 
-two:
+anyuser:
   email: johnTwo@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'Two_passw0rd!') %>
   created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>

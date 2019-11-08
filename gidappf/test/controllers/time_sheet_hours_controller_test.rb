@@ -7,25 +7,25 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
   setup do
     @time_sheet_hour = time_sheet_hours(:one)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    # @auth_h_tsh = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # @auth_h_tsh = Devise::JWT::TestHelpers.auth_headers(headers, users(:user_test_full_access))
   end
 
   test "should get index" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get time_sheet_hours_url#, headers: @auth_h_tsh
     assert_response :success
     sign_out :user
   end
 
   # test "should get new" do
-  #   sign_in users(:one)
+  #   sign_in users(:user_test_full_access)
   #   get new_time_sheet_hour_url, headers: @auth_h_tsh
   #   assert_response :success
   #   sign_out :user
   # end
 
   test "should create time_sheet_hour" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     assert_difference('TimeSheetHour.count') do
       post time_sheet_hours_url, params: {
         time_sheet_hour: {
@@ -50,21 +50,21 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show time_sheet_hour" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     assert_response :success
     sign_out :user
   end
 
   test "should get edit" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get edit_time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     assert_response :success
     sign_out :user
   end
 
   test "should update time_sheet_hour" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     patch time_sheet_hour_url(@time_sheet_hour),
     params: {
       time_sheet_hour: {
@@ -86,7 +86,7 @@ class TimeSheetHoursControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy time_sheet_hour" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     assert_difference('TimeSheetHour.count', -1) do
       delete time_sheet_hour_url(@time_sheet_hour)#, headers: @auth_h_tsh
     end

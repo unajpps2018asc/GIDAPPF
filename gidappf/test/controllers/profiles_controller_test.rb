@@ -7,18 +7,18 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @profile = profiles(:one)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    # @auth_h_profile = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # @auth_h_profile = Devise::JWT::TestHelpers.auth_headers(headers, users(:user_test_full_access))
   end
 
   test "should get index" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get profiles_path
     assert_response :success
     sign_out :user
   end
 
   test "should create profile" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     assert_difference('Profile.count') do
       post profiles_url, params: { profile: {
         description: "@profile.description",
@@ -32,14 +32,14 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show profile" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get profile_url(@profile)#, headers: @auth_h_profile
     assert_response :success
     sign_out :user
   end
 
   test "should get edit" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get edit_profile_url(@profile)#, headers: @auth_h_profile
     assert_response :success
     sign_out :user
@@ -47,7 +47,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
   # Pendiente hacer compatible `template_of_merge' por que los Profile con id 1 y 2 son templates y no figuran en fixtures
   # test "should update profile" do
-  #   sign_in users(:one)
+  #   sign_in users(:user_test_full_access)
   #   @profile = profiles(:two)
   #   patch profile_url(@profile), params: { profile: { description: @profile.description, name: @profile.name, valid_from: @profile.valid_from, valid_to: @profile.valid_to } }
   #   assert_redirected_to profile_url(@profile)
@@ -55,7 +55,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   # end
 
   test "should destroy profile" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     assert_difference('Profile.count', -1) do
       @profile.profile_keys.all.each do |e|
         e.profile_values.destroy_all

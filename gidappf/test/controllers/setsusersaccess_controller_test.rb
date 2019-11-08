@@ -6,14 +6,14 @@ class SetsusersaccessControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @usercommissionrole = usercommissionroles(:one)
-    @role = roles(:one)
+    @role = roles(:anyrole)
     @commission = commissions(:one)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-    # @auth_h_sets = Devise::JWT::TestHelpers.auth_headers(headers, users(:one))
+    # @auth_h_sets = Devise::JWT::TestHelpers.auth_headers(headers, users(:user_test_full_access))
   end
 
   test "should get settings" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get setsusersaccess_settings_url#, headers: @auth_h_sets
     assert_response :success
     sign_out :user

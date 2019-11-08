@@ -5,7 +5,7 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   test "should get current" do
-    sign_in users(:one)
+    sign_in users(:user_test_full_access)
     get members_current_url tsh_id: time_sheet_hours(:one).id
     assert_response :success
     sign_out :user

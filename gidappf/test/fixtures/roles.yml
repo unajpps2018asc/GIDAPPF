@@ -2,7 +2,7 @@
 anyrole:
   name: MyString
   description: MyText
-  enabled: false
+  enabled: true
   level: 1.5
 ingress_disable:
   name: Ingresante
@@ -49,3 +49,13 @@ student_disable:
   description: Usuario que participa de las cursadas y esta asignado al Plan Fines, pero con contraseña insegura
   enabled: false
   level: 20.0
+secretary_disable:
+  name: Secretario
+  description: Usuario planificador de las cursadas del Plan Fines
+  enabled: false
+  level: 30.0
+admin_disable:
+  name: Administrador
+  description: Usuario diseñador de las cursadas del Plan Fines
+  enabled: false
+  level: 40.0

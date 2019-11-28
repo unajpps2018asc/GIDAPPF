@@ -1,11 +1,1268 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+test:
   role: anyrole
   user: user_test_full_access
   commission: incoming
 
-two:
+ucr_ingress_disable:
   role: ingress_disable
   user: anyuser
   commission: students_one
+
+ucr_admin_one:
+  role: admin_enable
+  user: admin_one
+  commission: incoming
+
+ucr_admin_two:
+  role: admin_disable
+  user: admin_two
+  commission: incoming
+
+ucr_secretary_one:
+  role: secretary_enable
+  user: secretary_one
+  commission: incoming
+
+ucr_secretary_two:
+  role: secretary_disable
+  user: secretary_two
+  commission: incoming
+
+ucr1_docent_one:
+  role: docent_enable
+  user: docent_one
+  commission: incoming
+ucr2_docent_one:
+  role: docent_enable
+  user: docent_one
+  commission: incoming
+ucr3_docent_one:
+  role: docent_enable
+  user: docent_one
+  commission: incoming
+
+ucr1_docent_two:
+  role: docent_disable
+  user: docent_two
+  commission: incoming
+ucr2_docent_two:
+  role: docent_disable
+  user: docent_two
+  commission: incoming
+ucr3_docent_two:
+  role: docent_disable
+  user: docent_two
+  commission: incoming
+
+ucr1_docent_three:
+  role: docent_enable
+  user: docent_three
+  commission: incoming
+ucr2_docent_three:
+  role: docent_enable
+  user: docent_three
+  commission: incoming
+ucr3_docent_three:
+  role: docent_enable
+  user: docent_three
+  commission: incoming
+
+ucr1_docent_four:
+  role: docent_disable
+  user: docent_four
+  commission: incoming
+ucr2_docent_four:
+  role: docent_disable
+  user: docent_four
+  commission: incoming
+ucr3_docent_four:
+  role: docent_disable
+  user: docent_four
+  commission: incoming
+
+ucr1_docent_five:
+  role: docent_enable
+  user: docent_five
+  commission: incoming
+ucr2_docent_five:
+  role: docent_enable
+  user: docent_five
+  commission: incoming
+ucr3_docent_five:
+  role: docent_enable
+  user: docent_five
+  commission: incoming
+
+ucr1_docent_six:
+  role: docent_disable
+  user: docent_six
+  commission: incoming
+ucr2_docent_six:
+  role: docent_disable
+  user: docent_six
+  commission: incoming
+ucr3_docent_six:
+  role: docent_disable
+  user: docent_six
+  commission: incoming
+
+ucr1_docent_seven:
+  role: docent_enable
+  user: docent_seven
+  commission: incoming
+ucr2_docent_seven:
+  role: docent_enable
+  user: docent_seven
+  commission: incoming
+ucr3_docent_seven:
+  role: docent_enable
+  user: docent_seven
+  commission: incoming
+
+ucr1_docent_eight:
+  role: docent_disable
+  user: docent_eight
+  commission: incoming
+ucr2_docent_eight:
+  role: docent_disable
+  user: docent_eight
+  commission: incoming
+ucr3_docent_eight:
+  role: docent_disable
+  user: docent_eight
+  commission: incoming
+
+ucr1_docent_nine:
+  role: docent_enable
+  user: docent_nine
+  commission: incoming
+ucr2_docent_nine:
+  role: docent_enable
+  user: docent_nine
+  commission: incoming
+ucr3_docent_nine:
+  role: docent_enable
+  user: docent_nine
+  commission: incoming
+
+ucr1_docent_ten:
+  role: docent_disable
+  user: docent_ten
+  commission: incoming
+ucr2_docent_ten:
+  role: docent_disable
+  user: docent_ten
+  commission: incoming
+ucr3_docent_ten:
+  role: docent_disable
+  user: docent_ten
+  commission: incoming
+
+ucr1_docent_eleven:
+  role: docent_enable
+  user: docent_eleven
+  commission: incoming
+ucr2_docent_eleven:
+  role: docent_enable
+  user: docent_eleven
+  commission: incoming
+ucr3_docent_eleven:
+  role: docent_enable
+  user: docent_eleven
+  commission: incoming
+
+ucr1_docent_twelve:
+  role: docent_disable
+  user: docent_twelve
+  commission: incoming
+ucr2_docent_twelve:
+  role: docent_disable
+  user: docent_twelve
+  commission: incoming
+ucr3_docent_twelve:
+  role: docent_disable
+  user: docent_twelve
+  commission: incoming
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_one:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_two:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_three:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_four:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_five:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_six:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_seven:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_morning_eight:
+  role: student_enable
+  user: student_seasson_past_ftrayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_past_ftrayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_one:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_one
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_two:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_two
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_three:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_three
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_four:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_four
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_five:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_five
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_six:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_six
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_seven:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_past_ftrayect_night_eight:
+  role: student_enable
+  user: student_seasson_past_ftrayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_one:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_two:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_three:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_four:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_five:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_six:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_seven:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_past_strayect_morning_eight:
+  role: student_enable
+  user: student_seasson_past_strayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_past_strayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_past_strayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_one:
+  role: student_enable
+  user: student_seasson_past_strayect_night_one
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_two:
+  role: student_enable
+  user: student_seasson_past_strayect_night_two
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_three:
+  role: student_enable
+  user: student_seasson_past_strayect_night_three
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_four:
+  role: student_enable
+  user: student_seasson_past_strayect_night_four
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_five:
+  role: student_enable
+  user: student_seasson_past_strayect_night_five
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_six:
+  role: student_enable
+  user: student_seasson_past_strayect_night_six
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_seven:
+  role: student_enable
+  user: student_seasson_past_strayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_past_strayect_night_eight:
+  role: student_enable
+  user: student_seasson_past_strayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_one:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_two:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_three:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_four:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_five:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_six:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_seven:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_morning_eight:
+  role: student_enable
+  user: student_seasson_past_ttrayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_past_ttrayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_one:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_one
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_two:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_two
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_three:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_three
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_four:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_four
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_five:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_five
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_six:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_six
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_seven:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_past_ttrayect_night_eight:
+  role: student_enable
+  user: student_seasson_past_ttrayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_one:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_two:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_three:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_four:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_five:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_six:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_seven:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_morning_eight:
+  role: student_enable
+  user: student_seasson_present_ftrayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_present_ftrayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_one:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_one
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_two:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_two
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_three:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_three
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_four:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_four
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_five:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_five
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_six:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_six
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_seven:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_present_ftrayect_night_eight:
+  role: student_enable
+  user: student_seasson_present_ftrayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_one:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_two:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_three:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_four:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_five:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_six:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_seven:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_present_strayect_morning_eight:
+  role: student_enable
+  user: student_seasson_present_strayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_present_strayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_present_strayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_one:
+  role: student_enable
+  user: student_seasson_present_strayect_night_one
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_two:
+  role: student_enable
+  user: student_seasson_present_strayect_night_two
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_three:
+  role: student_enable
+  user: student_seasson_present_strayect_night_three
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_four:
+  role: student_enable
+  user: student_seasson_present_strayect_night_four
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_five:
+  role: student_enable
+  user: student_seasson_present_strayect_night_five
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_six:
+  role: student_enable
+  user: student_seasson_present_strayect_night_six
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_seven:
+  role: student_enable
+  user: student_seasson_present_strayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_present_strayect_night_eight:
+  role: student_enable
+  user: student_seasson_present_strayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_one:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_two:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_three:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_four:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_five:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_six:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_seven:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_morning_eight:
+  role: student_enable
+  user: student_seasson_present_ttrayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_present_ttrayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_one:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_one
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_two:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_two
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_three:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_three
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_four:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_four
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_five:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_five
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_six:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_six
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_seven:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_present_ttrayect_night_eight:
+  role: student_enable
+  user: student_seasson_present_ttrayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_one:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_two:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_three:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_four:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_five:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_six:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_seven:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_morning_eight:
+  role: student_enable
+  user: student_seasson_future_ftrayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_future_ftrayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_one:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_one
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_two:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_two
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_three:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_three
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_four:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_four
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_five:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_five
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_six:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_six
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_seven:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_future_ftrayect_night_eight:
+  role: student_enable
+  user: student_seasson_future_ftrayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_one:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_two:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_three:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_four:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_five:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_six:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_seven:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_future_strayect_morning_eight:
+  role: student_enable
+  user: student_seasson_future_strayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_future_strayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_future_strayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_one:
+  role: student_enable
+  user: student_seasson_future_strayect_night_one
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_two:
+  role: student_enable
+  user: student_seasson_future_strayect_night_two
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_three:
+  role: student_enable
+  user: student_seasson_future_strayect_night_three
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_four:
+  role: student_enable
+  user: student_seasson_future_strayect_night_four
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_five:
+  role: student_enable
+  user: student_seasson_future_strayect_night_five
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_six:
+  role: student_enable
+  user: student_seasson_future_strayect_night_six
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_seven:
+  role: student_enable
+  user: student_seasson_future_strayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_future_strayect_night_eight:
+  role: student_enable
+  user: student_seasson_future_strayect_night_eight
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_one:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_one
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_two:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_two
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_three:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_three
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_four:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_four
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_five:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_five
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_six:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_six
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_seven:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_seven
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_morning_eight:
+  role: student_enable
+  user: student_seasson_future_ttrayect_morning_eight
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_one:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_one
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_two:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_two
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_three:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_three
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_four:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_four
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_five:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_five
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_six:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_six
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_seven:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_seven
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_afternoon_eight:
+  role: student_enable
+  user: student_seasson_future_ttrayect_afternoon_eight
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_one:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_one
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_two:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_two
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_three:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_three
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_four:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_four
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_five:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_five
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_six:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_six
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_seven:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_seven
+  commission: incoming
+
+ucr_student_seasson_future_ttrayect_night_eight:
+  role: student_enable
+  user: student_seasson_future_ttrayect_night_eight
+  commission: incoming

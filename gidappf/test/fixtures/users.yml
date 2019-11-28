@@ -13,3 +13,1163 @@ anyuser:
   email: johnTwo@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'Two_passw0rd!') %>
   created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+admin_one:
+  email: admin@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '4Dm1n_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+admin_two:
+  email: admin2@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '4Dm2n_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+secretary_one:
+  email: secret@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '53cr3t_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+secretary_two:
+  email: secret2@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '53cr2t_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_one:
+  email: docent@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd0c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_two:
+  email: docent1@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd1c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_three:
+  email: docent2@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd0c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_four:
+  email: docent3@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd1c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_five:
+  email: docent4@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd0c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_six:
+  email: docent5@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd1c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_seven:
+  email: docent6@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd0c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_eight:
+  email: docent7@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd1c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_nine:
+  email: docent8@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd1c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_ten:
+  email: docent9@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd0c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_eleven:
+  email: docent10@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd1c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+docent_twelve:
+  email: docent11@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'd0c3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_one:
+  email: student@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_two:
+  email: student1@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_three:
+  email: student2@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_four:
+  email: student3@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_five:
+  email: student4@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_six:
+  email: student5@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_seven:
+  email: student6@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_morning_eight:
+  email: student7@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_one:
+  email: student8@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_two:
+  email: student9@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_three:
+  email: student10@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_four:
+  email: student11@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_five:
+  email: studen12@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_six:
+  email: student13@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_seven:
+  email: student14@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_afternoon_eight:
+  email: student15@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_one:
+  email: student16@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_two:
+  email: student17@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_three:
+  email: student18@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_four:
+  email: student19@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_five:
+  email: student20@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_six:
+  email: student21@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_seven:
+  email: student22@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ftrayect_night_eight:
+  email: student23@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_one:
+  email: student24@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_two:
+  email: student25@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_three:
+  email: student26@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_four:
+  email: student27@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_five:
+  email: student28@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_six:
+  email: student29@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_seven:
+  email: student30@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_morning_eight:
+  email: student31@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_one:
+  email: student32@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_two:
+  email: student33@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_three:
+  email: student34@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_four:
+  email: student35@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_five:
+  email: student36@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_six:
+  email: student37@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_seven:
+  email: student38@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_afternoon_eight:
+  email: student39@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_one:
+  email: student40@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_two:
+  email: student41@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_three:
+  email: student42@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_four:
+  email: student43@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_five:
+  email: student44@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_six:
+  email: student45@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_seven:
+  email: student46@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_strayect_night_eight:
+  email: student47@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_one:
+  email: student48@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_two:
+  email: student49@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_three:
+  email: student50@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_four:
+  email: student51@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_five:
+  email: student52@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_six:
+  email: student53@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_seven:
+  email: student54@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_morning_eight:
+  email: student55@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_one:
+  email: student56@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_two:
+  email: student57@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_three:
+  email: student58@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_four:
+  email: student59@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_five:
+  email: student60@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_six:
+  email: student61@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_seven:
+  email: student62@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_afternoon_eight:
+  email: student63@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_one:
+  email: student64@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_two:
+  email: student65@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_three:
+  email: student66@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_four:
+  email: student67@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_five:
+  email: student68@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_six:
+  email: student69@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_seven:
+  email: student70@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_past_ttrayect_night_eight:
+  email: student71@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_one:
+  email: student72@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_two:
+  email: student73@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_three:
+  email: student74@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_four:
+  email: student75@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_five:
+  email: student76@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_six:
+  email: student77@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_seven:
+  email: student78@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_morning_eight:
+  email: student79@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_one:
+  email: student80@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_two:
+  email: student81@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_three:
+  email: student82@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_four:
+  email: student83@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_five:
+  email: student84@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_six:
+  email: student85@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_seven:
+  email: student86@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_afternoon_eight:
+  email: student87@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_one:
+  email: student88@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_two:
+  email: student89@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_three:
+  email: student90@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_four:
+  email: student91@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_five:
+  email: student92@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_six:
+  email: student93@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_seven:
+  email: student94@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ftrayect_night_eight:
+  email: student95@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_one:
+  email: student96@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_two:
+  email: student97@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_three:
+  email: student98@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_four:
+  email: student99@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_five:
+  email: student100@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_six:
+  email: student101@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_seven:
+  email: student102@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_morning_eight:
+  email: student103@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_one:
+  email: student104@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_two:
+  email: student105@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_three:
+  email: student106@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_four:
+  email: student107@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_five:
+  email: student108@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_six:
+  email: student109@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_seven:
+  email: student110@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_afternoon_eight:
+  email: student111@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_one:
+  email: student112@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_two:
+  email: student113@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_three:
+  email: student114@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_four:
+  email: student115@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_five:
+  email: student116@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_six:
+  email: student117@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_seven:
+  email: student118@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_strayect_night_eight:
+  email: student119@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_one:
+  email: student120@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_two:
+  email: student121@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_three:
+  email: student122@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_four:
+  email: student123@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_five:
+  email: student124@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_six:
+  email: student125@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_seven:
+  email: student126@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_morning_eight:
+  email: student127@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_one:
+  email: student128@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_two:
+  email: student129@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_three:
+  email: student130@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_four:
+  email: student131@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_five:
+  email: student132@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_six:
+  email: student133@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_seven:
+  email: student134@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_afternoon_eight:
+  email: student135@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_one:
+  email: student136@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_two:
+  email: student137@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_three:
+  email: student138@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_four:
+  email: student139@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_five:
+  email: student140@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_six:
+  email: student141@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_seven:
+  email: student142@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_present_ttrayect_night_eight:
+  email: student143@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_one:
+  email: student144@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_two:
+  email: student145@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_three:
+  email: student146@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_four:
+  email: student147@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_five:
+  email: student148@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_six:
+  email: student149@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_seven:
+  email: student150@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_morning_eight:
+  email: student151@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_one:
+  email: student152@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_two:
+  email: student153@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_three:
+  email: student154@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_four:
+  email: student155@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_five:
+  email: student156@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_six:
+  email: student157@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_seven:
+  email: student158@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_afternoon_eight:
+  email: student159@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_one:
+  email: student160@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_two:
+  email: student161@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_three:
+  email: student162@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_four:
+  email: student163@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_five:
+  email: student164@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_six:
+  email: student165@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_seven:
+  email: student166@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ftrayect_night_eight:
+  email: student167@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_one:
+  email: student168@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_two:
+  email: student169@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_three:
+  email: student170@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_four:
+  email: student171@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_five:
+  email: student172@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_six:
+  email: student173@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_seven:
+  email: student174@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_morning_eight:
+  email: student175@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_one:
+  email: student176@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_two:
+  email: student177@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_three:
+  email: student178@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_four:
+  email: student179@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_five:
+  email: student180@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_six:
+  email: student181@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_seven:
+  email: student182@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_afternoon_eight:
+  email: student183@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_one:
+  email: student184@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_two:
+  email: student185@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_three:
+  email: student186@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_four:
+  email: student187@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_five:
+  email: student188@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_six:
+  email: student189@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_seven:
+  email: student190@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_strayect_night_eight:
+  email: student191@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_one:
+  email: student192@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_two:
+  email: student193@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_three:
+  email: student194@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_four:
+  email: student195@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_five:
+  email: student196@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_six:
+  email: student197@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_seven:
+  email: student198@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_morning_eight:
+  email: student199@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_one:
+  email: student200@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_two:
+  email: student201@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_three:
+  email: student202@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_four:
+  email: student203@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_five:
+  email: student204@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_six:
+  email: student205@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_seven:
+  email: student206@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_afternoon_eight:
+  email: student207@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_one:
+  email: student208@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_two:
+  email: student209@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_three:
+  email: student210@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_four:
+  email: student211@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_five:
+  email: student212@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_six:
+  email: student213@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_seven:
+  email: student214@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>
+
+student_seasson_future_ttrayect_night_eight:
+  email: student215@test
+  encrypted_password: <%= Devise::Encryptor.digest(User, '5tud3nt_passw0rd!') %>
+  created_at: <%= Time.rfc3339('1999-12-31T14:00:00-10:00') %>

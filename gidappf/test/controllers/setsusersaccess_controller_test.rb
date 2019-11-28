@@ -5,7 +5,7 @@ class SetsusersaccessControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @usercommissionrole = usercommissionroles(:one)
+    @usercommissionrole = usercommissionroles(:test)
     @role = roles(:anyrole)
     @commission = commissions(:incoming)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }

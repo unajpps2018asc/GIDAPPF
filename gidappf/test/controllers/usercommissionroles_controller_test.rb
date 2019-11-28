@@ -5,7 +5,7 @@ class UsercommissionrolesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @usercommissionrole = usercommissionroles(:two)
+    @usercommissionrole = usercommissionroles(:ucr_ingress_disable)
     # headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
     # @auth_h_ucr = Devise::JWT::TestHelpers.auth_headers(headers, users(:user_test_full_access))
   end

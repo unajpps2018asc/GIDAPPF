@@ -11,11 +11,17 @@ class GidappfCatchsExceptionsControllerTest < ActionDispatch::IntegrationTest
     sign_out :user
   end
 
-  test "should get first_password_detect" do
+  test "should get first_password_undetect" do
     sign_in users(:user_test_full_access)
+    get gidappf_catchs_exceptions_first_password_detect_url
+    assert_response :found #no detecta first_password porque es user_test_full_access
+    sign_out :user
+  end
+
+  test "should get first_password_detect" do
+    sign_in users(:anyuser)
     get gidappf_catchs_exceptions_first_password_detect_url
     assert_response :success
     sign_out :user
   end
-
 end

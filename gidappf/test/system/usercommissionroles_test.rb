@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class UsercommissionrolesTest < ApplicationSystemTestCase
   setup do
-    @usercommissionrole = usercommissionroles(:one)
+    @usercommissionrole = usercommissionroles(:test)
   end
 
   test "visiting the index" do

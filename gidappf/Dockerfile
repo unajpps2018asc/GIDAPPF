@@ -11,7 +11,10 @@
 # Autor: Ap. Daniel Rosatto <danielrosatto@gmail.com>                     #
 # Archivo GIDAPPF/Dockerfile                                              #
 ###########################################################################
-FROM ruby:2.5-alpine
+FROM ruby:alpine
+
+# throw errors if Gemfile has been modified since Gemfile.lock
+# RUN bundle config --global frozen 1
 
 RUN apk update && apk add build-base nodejs postgresql-dev tzdata
 
@@ -19,7 +22,8 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --binstubs
+RUN bundle install
+RUN bundle update --bundler
 
 COPY . .
 

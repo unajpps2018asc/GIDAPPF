@@ -28,14 +28,14 @@ version: '3'
 
 services:
   postgres:
-    image: 'postgres:11.3-alpine'
+    image: 'postgres:alpine'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
     env_file:
       - '.env'
 
   redis:
-    image: 'redis:5.0-alpine'
+    image: 'redis:alpine'
     env_file:
       - '.env'
     command: redis-server --requirepass $REDIS_PASSWORD

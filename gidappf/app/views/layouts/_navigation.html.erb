@@ -21,11 +21,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%
-        gidappf_img_nav=ProfileValue.new
-        gidappf_img_nav.active_stored.attach(io: File.open(Rails.root.join("storage/seeds/images/icons/icon64x48px.png")), filename: 'noimg')
-      %>
-      <%= link_to (image_tag(gidappf_img_nav.active_stored, class: "gidappf-img-nav")), root_path, class: 'navbar-brand' %>
+      <%= link_to (image_tag("icons/icon64x48px.png", class: "gidappf-img-nav")), root_path, class: 'navbar-brand' %>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">

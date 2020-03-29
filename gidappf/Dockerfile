@@ -14,16 +14,15 @@
 FROM ruby:alpine
 
 # throw errors if Gemfile has been modified since Gemfile.lock
-# RUN bundle config --global frozen 1
+RUN bundle config --global frozen 1
 
-RUN apk update && apk add build-base nodejs postgresql-dev tzdata
+RUN apk update && apk add build-base nodejs postgresql-dev tzdata imagemagick
 
 RUN mkdir /app
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
-RUN bundle update --bundler
 
 COPY . .
 

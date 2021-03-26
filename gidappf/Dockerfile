@@ -24,6 +24,10 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
+RUN bundle config unset frozen
+
+RUN bundle update
+
 COPY . .
 
 LABEL maintainer="Daniel Rosatto <danielrosatto@gmail.com>"
